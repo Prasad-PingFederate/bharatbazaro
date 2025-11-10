@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B4iBorn — Bargain Marketplace</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f0;
+      text-align: center;
+      color: #333;
+      padding: 40px;
+    }
+    h1 {
+      color: #b35a00;
+      font-size: 2.5em;
+    }
+    h3 {
+      color: #555;
+      font-weight: normal;
+    }
+    button {
+      background-color: #b35a00;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #8c4600;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to B4iBorn</h1>
+  <h3>India’s First Online Bargain Marketplace</h3>
+  <p>Negotiate directly with sellers, make your best offer, and grab exciting deals every day!</p>
+  <button>Bargain Now</button>
+  <p style="margin-top:30px;">This site is hosted freely on GitHub Pages</p>
+</body>
+</html>

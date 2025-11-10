@@ -1,45 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B4iBorn — Bargain Marketplace</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>B4iBorn - Bargain Marketplace</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fff8f0;
-      text-align: center;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
       color: #333;
-      padding: 40px;
     }
-    h1 {
-      color: #b35a00;
-      font-size: 2.5em;
-    }
-    h3 {
-      color: #555;
-      font-weight: normal;
-    }
-    button {
-      background-color: #b35a00;
+
+    header {
+      background: linear-gradient(90deg, #0078d7, #00c4cc);
       color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1em;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    button:hover {
-      background-color: #8c4600;
+
+    header h1 {
+      font-size: 2.2em;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1em;
+      opacity: 0.9;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: url('https://images.unsplash.com/photo-1515162305281-9f1b34a5a4a5?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
+      color: white;
+      background-attachment: fixed;
+    }
+
+    .hero h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 10px auto 30px;
+    }
+
+    .hero button {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border: none;
+      background: #ffb300;
+      color: #222;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hero button:hover {
+      background: #ffd54f;
+      transform: scale(1.05);
+    }
+
+    .section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .section h2 {
+      font-size: 2em;
+      color: #0078d7;
+      margin-bottom: 30px;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .product {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .product:hover {
+      transform: translateY(-8px);
+    }
+
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product h3 {
+      margin: 15px;
+      font-size: 1.2em;
+    }
+
+    .product p {
+      margin: 0 15px 15px;
+      color: #666;
+      font-size: 0.95em;
+    }
+
+    .product button {
+      margin: 0 0 20px;
+      background: #0078d7;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .product button:hover {
+      background: #005fa3;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #00c4cc;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to B4iBorn</h1>
-  <h3>India’s First Online Bargain Marketplace</h3>
-  <p>Negotiate directly with sellers, make your best offer, and grab exciting deals every day!</p>
-  <button>Bargain Now</button>
-  <p style="margin-top:30px;">This site is hosted freely on GitHub Pages</p>
-</body>
-</html>
+  <header>
+    <h1>B4iBorn</h1>
+    <p>India’s First Bargain Marketplace – Negotiate. Save. Smile.</p>
+  </header>
+
+  <section class="hero">
+    <h2>Let’s Make Shopping Fun Again 🎉</h2>
+    <p>At B4iBorn, you don’t just buy – you bargain! Negotiate prices directly and get the best deals instantly.</p>
+    <button onclick="scrollToProducts()">Start Bargaining Now</button>
+  </section>
+
+  <section class="section" id="products">
+    <h2>Popular Deals 🔥</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1606813902784-8b74da9b9493?auto=format&fit=crop&w=500&q=60" alt="Phone">
+        <h3>Smartphone XZ</h3>
+        <p>Listed Price: ₹29,999<br><b>Offer your price!</b></p>
+        <button onclick="bargain('Smartphone XZ')">Negotiate</button>
+      </div>
+      <div class="product">

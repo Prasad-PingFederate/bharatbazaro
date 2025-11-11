@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>B4iBorn — Negotiate. Save. Smile.</title>
+  <title>About Us | B4iBorn — Negotiate. Save. Smile.</title>
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -11,9 +11,9 @@
   <style>
     :root {
       --bg: #f7f8fb;
-      --accent-1: #0674f1; /* deep blue */
-      --accent-2: #00c0b5; /* teal */
-      --cta: #ffb400; /* yellow */
+      --accent-1: #0674f1;
+      --accent-2: #00c0b5;
+      --cta: #ffb400;
       --muted: #8b95a1;
       --radius: 16px;
       --container: 1100px;
@@ -112,27 +112,13 @@
       margin: 0;
     }
 
-    .cta-row {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .btn {
-      background: var(--cta);
-      border: none;
-      padding: 16px 28px;
-      border-radius: 12px;
-      font-weight: 600;
-      box-shadow: 0 8px 20px rgba(255,180,0,0.18);
-      cursor: pointer;
-      font-size: 15px;
-    }
-
     .btn.secondary {
       background: transparent;
       border: 1px solid rgba(11,23,32,0.1);
       padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     /* Features section */
@@ -165,7 +151,6 @@
       font-size: 14px;
     }
 
-    /* Enhanced Feature Cards */
     .feature-card {
       position: relative;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -198,7 +183,6 @@
       margin: 20px 0;
     }
 
-    /* Responsive tweaks */
     @media (max-width:900px) {
       .hero-top h2 { font-size: 28px; }
       .headline { font-size: 34px; }
@@ -209,14 +193,12 @@
     @media (max-width:420px) {
       .hero-top h2 { font-size: 22px; }
       .headline { font-size: 28px; }
-      .btn { padding: 12px 18px; }
       .brand h1 { font-size: 16px; }
       .nav { padding: 0 12px; }
     }
 
     .confetti { font-size: 36px; margin-left: 6px; }
 
-    /* Popup animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
@@ -225,6 +207,7 @@
 </head>
 
 <body>
+  <!-- Navbar -->
   <nav class="nav" role="navigation">
     <div class="brand">
       <div class="logo">B4i</div>
@@ -235,24 +218,22 @@
     </div>
     <div style="display:flex;gap:12px;align-items:center">
       <a href="#features" style="text-decoration:none;color:var(--muted);font-weight:600">How it works</a>
-      <button class="btn" onclick="scrollToSection()">Start Bargaining</button>
     </div>
   </nav>
 
+  <!-- About Section -->
   <main class="hero" role="main" aria-labelledby="hero-title">
     <section class="hero-top">
-      <h2 id="hero-title">B4iBorn</h2>
+      <h2 id="hero-title">About B4iBorn</h2>
       <p>India’s First Bargain Marketplace — Negotiate. Save. Smile.</p>
     </section>
 
     <section class="hero-body">
       <h3 class="headline">Let’s Make Shopping Fun Again <span class="confetti">🎉</span></h3>
-      <p class="sub">At B4iBorn, you don't just buy — you bargain. Negotiate prices directly and get the best deals instantly. Works beautifully on both mobile and desktop browsers.</p>
+      <p class="sub">At B4iBorn, you don’t just buy — you bargain. Negotiate prices directly and get the best deals instantly. Works beautifully on both mobile and desktop browsers.</p>
 
-      <div class="cta-row">
-        <button class="btn" onclick="scrollToSection()">Start Bargaining Now</button>
-        <button class="btn secondary" onclick="openHow()">Learn How</button>
-      </div>
+      <!-- Removed Start Bargaining button -->
+      <button class="btn secondary" onclick="openHow()">Learn How</button>
 
       <!-- Features Section -->
       <div class="features" id="features">
@@ -280,11 +261,7 @@
   </main>
 
   <script>
-    function scrollToSection() {
-      document.getElementById('features').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    // Custom popup modal for Learn How
+    // Popup modal for Learn How
     function openHow() {
       const modal = document.createElement('div');
       modal.innerHTML = `
@@ -310,9 +287,8 @@
           ">
             <h3 style="margin-top:0;color:#0674f1;">🛍️ How to Bargain on B4iBorn</h3>
             <p style="color:#555;font-size:15px;line-height:1.6;margin:16px 0;">
-              1️⃣ Click <b>Start Bargaining</b><br>
-              2️⃣ Choose your favorite item<br>
-              3️⃣ Start chat & make your offer<br><br>
+              1️⃣ Choose your favorite item<br>
+              2️⃣ Start chat & make your offer<br><br>
               💬 Negotiate directly. Save smart. Smile big!
             </p>
             <button onclick="closeHow()" style="

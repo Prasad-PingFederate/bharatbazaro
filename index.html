@@ -1,72 +1,229 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>B4iBorn — Responsive Landing</title>
+  <title>B4iBorn — Negotiate. Save. Smile.</title>
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#f7f8fb;
-      --accent-1:#0674f1; /* deep blue */
-      --accent-2:#00c0b5; /* teal */
-      --cta:#ffb400; /* warm yellow */
-      --muted:#8b95a1;
-      --radius:16px;
-      --container:1100px;
+    :root {
+      --bg: #f7f8fb;
+      --accent-1: #0674f1; /* deep blue */
+      --accent-2: #00c0b5; /* teal */
+      --cta: #ffb400; /* yellow */
+      --muted: #8b95a1;
+      --radius: 16px;
+      --container: 1100px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#0b1720;background:var(--bg)}/* Top header / navbar */
-.nav{max-width:var(--container);margin:18px auto;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:0 6px 18px rgba(7,50,120,0.18)}
-.brand h1{margin:0;font-size:20px}
-.brand p{margin:0;font-size:12px;color:var(--muted)}
 
-/* Hero */
-.hero{max-width:var(--container);margin:0 auto;background:linear-gradient(180deg,rgba(255,255,255,0.6),transparent);padding:28px;border-radius:20px;display:flex;flex-direction:column;align-items:stretch}
-.hero-top{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));padding:28px;border-radius:14px;color:white;display:flex;flex-direction:column;align-items:center;gap:8px}
-.hero-top h2{margin:0;font-size:36px;letter-spacing:0.6px}
-.hero-top p{margin:0;opacity:0.95}
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      color: #0b1720;
+      background: var(--bg);
+    }
 
-.hero-body{padding:48px 28px;display:flex;flex-direction:column;align-items:center;gap:28px}
-.headline{font-size:44px;font-weight:700;color:#0b1720;text-align:center;margin:0;line-height:1.02}
-.sub{max-width:760px;text-align:center;color:var(--muted);font-size:16px;margin:0}
+    /* Navbar */
+    .nav {
+      max-width: var(--container);
+      margin: 18px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+    }
 
-.cta-row{display:flex;gap:14px;align-items:center}
-.btn{background:var(--cta);border:none;padding:16px 28px;border-radius:12px;font-weight:600;box-shadow:0 8px 20px rgba(255,180,0,0.18);cursor:pointer}
-.btn.secondary{background:transparent;border:1px solid rgba(11,23,32,0.06);padding:14px 22px}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-/* feature card */
-.features{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-.card{background:white;border-radius:12px;padding:16px;min-width:220px;box-shadow:0 6px 18px rgba(11,23,32,0.06);text-align:center}
-.card h4{margin:0 0 6px 0}
-.card p{margin:0;color:var(--muted);font-size:14px}
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 6px 18px rgba(7, 50, 120, 0.18);
+    }
 
-/* footer small */
-.tiny{font-size:12px;color:var(--muted);text-align:center;margin:20px 0}
+    .brand h1 { margin: 0; font-size: 20px; }
+    .brand p { margin: 0; font-size: 12px; color: var(--muted); }
 
-/* Responsive tweaks */
-@media (max-width:900px){
-  .hero-top h2{font-size:28px}
-  .headline{font-size:34px}
-  .hero-body{padding:28px 18px}
-  .logo{width:48px;height:48px}
-}
-@media (max-width:420px){
-  .hero-top h2{font-size:22px}
-  .headline{font-size:28px}
-  .btn{padding:12px 18px}
-  .brand h1{font-size:16px}
-  .nav{padding:0 12px}
-}
+    /* Hero */
+    .hero {
+      max-width: var(--container);
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), transparent);
+      padding: 28px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
 
-/* subtle animated confetti next to headline */
-.confetti{font-size:36px;margin-left:6px}
+    .hero-top {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      padding: 28px;
+      border-radius: 14px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
 
+    .hero-top h2 { margin: 0; font-size: 36px; letter-spacing: 0.6px; }
+    .hero-top p { margin: 0; opacity: 0.95; }
+
+    .hero-body {
+      padding: 48px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .headline {
+      font-size: 44px;
+      font-weight: 700;
+      color: #0b1720;
+      text-align: center;
+      margin: 0;
+      line-height: 1.02;
+    }
+
+    .sub {
+      max-width: 760px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      background: var(--cta);
+      border: none;
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(255,180,0,0.18);
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(11,23,32,0.1);
+      padding: 14px 22px;
+    }
+
+    /* Features section */
+    .features {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      min-width: 220px;
+      max-width: 300px;
+      box-shadow: 0 6px 18px rgba(11,23,32,0.06);
+      text-align: center;
+    }
+
+    .card h4 {
+      margin: 0 0 6px 0;
+      color: #0b1720;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Enhanced Feature Cards */
+    .feature-card {
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .icon-wrap {
+      font-size: 34px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: white;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-inline: auto;
+      box-shadow: 0 6px 18px rgba(6, 116, 241, 0.3);
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width:900px) {
+      .hero-top h2 { font-size: 28px; }
+      .headline { font-size: 34px; }
+      .hero-body { padding: 28px 18px; }
+      .logo { width: 48px; height: 48px; }
+    }
+
+    @media (max-width:420px) {
+      .hero-top h2 { font-size: 22px; }
+      .headline { font-size: 28px; }
+      .btn { padding: 12px 18px; }
+      .brand h1 { font-size: 16px; }
+      .nav { padding: 0 12px; }
+    }
+
+    .confetti { font-size: 36px; margin-left: 6px; }
+
+    /* Popup animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
+
 <body>
   <nav class="nav" role="navigation">
     <div class="brand">
@@ -80,49 +237,54 @@
       <a href="#features" style="text-decoration:none;color:var(--muted);font-weight:600">How it works</a>
       <button class="btn" onclick="scrollToSection()">Start Bargaining</button>
     </div>
-  </nav>  <main class="hero" role="main" aria-labelledby="hero-title">
+  </nav>
+
+  <main class="hero" role="main" aria-labelledby="hero-title">
     <section class="hero-top">
       <h2 id="hero-title">B4iBorn</h2>
       <p>India’s First Bargain Marketplace — Negotiate. Save. Smile.</p>
-    </section><section class="hero-body">
-  <h3 class="headline">Let’s Make Shopping Fun Again <span class="confetti">🎉</span></h3>
-  <p class="sub">At B4iBorn, you don't just buy — you bargain. Negotiate prices directly and get the best deals instantly. Works beautifully on both mobile and desktop browsers.</p>
+    </section>
 
-  <div class="cta-row">
-    <button class="btn" onclick="scrollToSection()">Start Bargaining Now</button>
-    <button class="btn secondary" onclick="openHow()">Learn How</button>
-  </div>
+    <section class="hero-body">
+      <h3 class="headline">Let’s Make Shopping Fun Again <span class="confetti">🎉</span></h3>
+      <p class="sub">At B4iBorn, you don't just buy — you bargain. Negotiate prices directly and get the best deals instantly. Works beautifully on both mobile and desktop browsers.</p>
 
-  <div class="features" id="features">
-    <div class="card">
-      <h4>Real Negotiation</h4>
-      <p>Chat with sellers & close deals in minutes.</p>
-    </div>
-    <div class="card">
-      <h4>Safe Payments</h4>
-      <p>Protected checkout for your peace of mind.</p>
-    </div>
-    <div class="card">
-      <h4>Mobile-first</h4>
-      <p>Designed to feel native on phones and tablets.</p>
-    </div>
-  </div>
+      <div class="cta-row">
+        <button class="btn" onclick="scrollToSection()">Start Bargaining Now</button>
+        <button class="btn secondary" onclick="openHow()">Learn How</button>
+      </div>
 
-  <p class="tiny">Tip: Replace the logo with your SVG or PNG for better crispness. Use your brand colors in the CSS variables at the top.</p>
-</section>
+      <!-- Features Section -->
+      <div class="features" id="features">
+        <div class="card feature-card">
+          <div class="icon-wrap">💬</div>
+          <h4>Real Negotiation</h4>
+          <p>Chat directly with sellers and close deals in minutes. Experience the thrill of smart bargaining like never before!</p>
+        </div>
 
-  </main>  
+        <div class="card feature-card">
+          <div class="icon-wrap">🔒</div>
+          <h4>Safe Payments</h4>
+          <p>Enjoy secure and protected checkout, ensuring peace of mind for every transaction you make.</p>
+        </div>
 
-<script>
-    // Smooth scroll to features section
+        <div class="card feature-card">
+          <div class="icon-wrap">📱</div>
+          <h4>Mobile-first</h4>
+          <p>Designed to look and feel native on all mobile and tablet devices for a seamless shopping experience.</p>
+        </div>
+      </div>
+
+      <p class="tiny">Tip: Replace the logo with your SVG or PNG for better crispness. Use your brand colors in the CSS variables at the top.</p>
+    </section>
+  </main>
+
+  <script>
     function scrollToSection() {
-      document.getElementById('features').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
+      document.getElementById('features').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // Function to show custom Learn How popup
+    // Custom popup modal for Learn How
     function openHow() {
       const modal = document.createElement('div');
       modal.innerHTML = `
@@ -168,21 +330,10 @@
       document.body.appendChild(modal);
     }
 
-    // Function to close popup
     function closeHow() {
       const modal = document.getElementById('guide-modal');
       if (modal) modal.remove();
     }
-
-    // Add animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeIn {
-        from {opacity: 0; transform: scale(0.95);}
-        to {opacity: 1; transform: scale(1);}
-      }
-    `;
-    document.head.appendChild(style);
   </script>
 </body>
 </html>

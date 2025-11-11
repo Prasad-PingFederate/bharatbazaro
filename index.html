@@ -1,102 +1,111 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>B4iBorn — Negotiate. Save. Smile.</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <!-- ======== HEADER / NAVIGATION ======== -->
-  <header class="navbar">
-    <div class="brand">
-      <div class="logo">B4i</div>
-      <div>
-        <h1>B4iBorn</h1>
-        <p>India’s First Bargain Marketplace</p>
-      </div>
-    </div>
-    <nav class="nav-links">
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">B4iBorn</div>
+    <nav class="nav">
       <a href="index.html">Home</a>
-      <a href="about_us.html">About Us</a>
-      <a href="#products">Products</a>
-      <a href="#contact">Contact</a>
+      <a href="about_us.html">About</a>
+      <a href="#">Products</a>
+      <a href="#">Deals</a>
+      <a href="#">Contact</a>
+
     </nav>
+    <div class="actions">
+      <input type="text" placeholder="Search products..." />
+      <button>Search</button>
+    </div>
   </header>
 
-  <!-- ======== HERO SECTION ======== -->
+  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h2>Negotiate. Save. Smile.</h2>
-      <p>Welcome to <strong>B4iBorn</strong> — India’s first e-commerce platform where you can bargain online just like in real life! Get amazing deals directly from sellers and enjoy the thrill of negotiation with full transparency and trust.</p>
-      <a href="#products" class="btn-primary">Start Bargaining</a>
+      <h1>India’s First Bargain Marketplace</h1>
+      <p>Negotiate directly with sellers, get instant deals, and save smart!</p>
+      <a href="#" class="btn-primary">Start Bargaining</a>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/shopping-1866581_1280.jpg" alt="Shopping" />
+  </section>
+
+  <!-- Featured Categories -->
+  <section class="categories">
+    <h2>Shop by Category</h2>
+    <div class="category-grid">
+      <div class="category-card">
+        <img src="https://cdn.pixabay.com/photo/2016/03/27/07/08/ecommerce-1281296_1280.jpg" alt="Electronics">
+        <h3>Electronics</h3>
+      </div>
+      <div class="category-card">
+        <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Fashion">
+        <h3>Fashion</h3>
+      </div>
+      <div class="category-card">
+        <img src="https://cdn.pixabay.com/photo/2015/08/24/12/53/interior-906796_1280.jpg" alt="Home & Living">
+        <h3>Home & Living</h3>
+      </div>
+      <div class="category-card">
+        <img src="https://cdn.pixabay.com/photo/2017/06/06/12/30/groceries-2378728_1280.jpg" alt="Groceries">
+        <h3>Groceries</h3>
+      </div>
     </div>
   </section>
 
-  <!-- ======== FEATURE HIGHLIGHTS ======== -->
-  <section class="features">
-    <h2>Why Shop With B4iBorn?</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="icon">💬</div>
-        <h3>Live Bargaining</h3>
-        <p>Negotiate with sellers in real-time and decide your own price.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🔒</div>
-        <h3>Secure Payments</h3>
-        <p>All transactions are safe and encrypted for your peace of mind.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🚚</div>
-        <h3>Fast Delivery</h3>
-        <p>Enjoy quick and reliable delivery right to your doorstep.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======== PRODUCT SECTION ======== -->
-  <section id="products" class="products">
-    <h2>Hot Deals for You 🔥</h2>
+  <!-- Featured Products -->
+  <section class="featured">
+    <h2>Top Bargain Picks</h2>
     <div class="product-grid">
       <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=60" alt="Wireless Earbuds">
-        <h3>Wireless Earbuds</h3>
-        <p class="price">₹1,499</p>
-        <button class="btn-primary">Bargain Now</button>
+        <img src="https://cdn.pixabay.com/photo/2014/04/02/10/56/shoes-303898_1280.png" alt="Product 1">
+        <h3>Casual Shoes</h3>
+        <p>₹999 <span class="strike">₹1499</span></p>
+        <button>Bargain Now</button>
       </div>
       <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=60" alt="Smart Watch">
+        <img src="https://cdn.pixabay.com/photo/2015/01/09/11/09/smart-watch-593012_1280.jpg" alt="Product 2">
         <h3>Smart Watch</h3>
-        <p class="price">₹2,299</p>
-        <button class="btn-primary">Bargain Now</button>
+        <p>₹1899 <span class="strike">₹2499</span></p>
+        <button>Bargain Now</button>
       </div>
       <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1585386959984-a415522d2ec5?auto=format&fit=crop&w=800&q=60" alt="Bluetooth Speaker">
-        <h3>Bluetooth Speaker</h3>
-        <p class="price">₹1,199</p>
-        <button class="btn-primary">Bargain Now</button>
+        <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Product 3">
+        <h3>Designer Jacket</h3>
+        <p>₹1599 <span class="strike">₹1999</span></p>
+        <button>Bargain Now</button>
       </div>
     </div>
   </section>
 
-  <!-- ======== HOW IT WORKS ======== -->
-  <section class="how-it-works">
-    <h2>How It Works</h2>
-    <ol>
-      <li><strong>Browse:</strong> Explore thousands of products listed by sellers.</li>
-      <li><strong>Bargain:</strong> Click “Bargain Now” to chat and negotiate your price.</li>
-      <li><strong>Save:</strong> Once agreed, complete your purchase securely.</li>
-    </ol>
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2>What Our Shoppers Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p>"Best site for deals! I saved ₹500 on my first purchase. Love the bargain feature!"</p>
+        <h4>— Priya Sharma</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"Finally, an e-commerce site where I can negotiate like a pro. B4iBorn rocks!"</p>
+        <h4>— Rohan Mehta</h4>
+      </div>
+    </div>
   </section>
 
-  <!-- ======== CONTACT / FOOTER ======== -->
-  <footer id="contact" class="footer">
-    <p>📩 Contact us at <a href="mailto:support@b4iborn.com">support@b4iborn.com</a></p>
-    <p>© 2025 B4iBorn — Negotiate. Save. Smile.</p>
-    <p><a href="about.html" style="color:#fff;text-decoration:underline;">Learn more about us</a></p>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 B4iBorn. All Rights Reserved.</p>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+    </div>
   </footer>
 </body>
 </html>

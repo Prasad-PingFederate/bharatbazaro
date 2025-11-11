@@ -111,12 +111,78 @@
   <p class="tiny">Tip: Replace the logo with your SVG or PNG for better crispness. Use your brand colors in the CSS variables at the top.</p>
 </section>
 
-  </main>  <script>
-    function scrollToSection(){
-      document.getElementById('features').scrollIntoView({behavior:'smooth',block:'center'});
+  </main>  
+
+<script>
+    // Smooth scroll to features section
+    function scrollToSection() {
+      document.getElementById('features').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
     }
-    function openHow(){
-      alert('Short guide: 1) Click Start -> 2) Choose item -> 3) Start chat & make offer.');
+
+    // Function to show custom Learn How popup
+    function openHow() {
+      const modal = document.createElement('div');
+      modal.innerHTML = `
+        <div id="guide-modal" style="
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          backdrop-filter: blur(2px);
+        ">
+          <div style="
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            animation: fadeIn 0.3s ease-out;
+          ">
+            <h3 style="margin-top:0;color:#0674f1;">🛍️ How to Bargain on B4iBorn</h3>
+            <p style="color:#555;font-size:15px;line-height:1.6;margin:16px 0;">
+              1️⃣ Click <b>Start Bargaining</b><br>
+              2️⃣ Choose your favorite item<br>
+              3️⃣ Start chat & make your offer<br><br>
+              💬 Negotiate directly. Save smart. Smile big!
+            </p>
+            <button onclick="closeHow()" style="
+              background: #ffb400;
+              border: none;
+              border-radius: 10px;
+              padding: 10px 20px;
+              font-weight: 600;
+              cursor: pointer;
+              box-shadow: 0 4px 10px rgba(255,180,0,0.3);
+            ">Got it!</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
     }
-  </script></body>
+
+    // Function to close popup
+    function closeHow() {
+      const modal = document.getElementById('guide-modal');
+      if (modal) modal.remove();
+    }
+
+    // Add animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from {opacity: 0; transform: scale(0.95);}
+        to {opacity: 1; transform: scale(1);}
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
 </html>

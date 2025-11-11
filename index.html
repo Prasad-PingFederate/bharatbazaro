@@ -1,169 +1,122 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>B4iBorn - Bargain Marketplace</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>B4iBorn — Responsive Landing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
+    :root{
+      --bg:#f7f8fb;
+      --accent-1:#0674f1; /* deep blue */
+      --accent-2:#00c0b5; /* teal */
+      --cta:#ffb400; /* warm yellow */
+      --muted:#8b95a1;
+      --radius:16px;
+      --container:1100px;
     }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#0b1720;background:var(--bg)}/* Top header / navbar */
+.nav{max-width:var(--container);margin:18px auto;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:0 6px 18px rgba(7,50,120,0.18)}
+.brand h1{margin:0;font-size:20px}
+.brand p{margin:0;font-size:12px;color:var(--muted)}
 
-    header {
-      background: linear-gradient(90deg, #0078d7, #00c4cc);
-      color: white;
-      padding: 25px 0;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+/* Hero */
+.hero{max-width:var(--container);margin:0 auto;background:linear-gradient(180deg,rgba(255,255,255,0.6),transparent);padding:28px;border-radius:20px;display:flex;flex-direction:column;align-items:stretch}
+.hero-top{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));padding:28px;border-radius:14px;color:white;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero-top h2{margin:0;font-size:36px;letter-spacing:0.6px}
+.hero-top p{margin:0;opacity:0.95}
 
-    header h1 {
-      font-size: 2.2em;
-      margin: 0;
-    }
+.hero-body{padding:48px 28px;display:flex;flex-direction:column;align-items:center;gap:28px}
+.headline{font-size:44px;font-weight:700;color:#0b1720;text-align:center;margin:0;line-height:1.02}
+.sub{max-width:760px;text-align:center;color:var(--muted);font-size:16px;margin:0}
 
-    header p {
-      font-size: 1em;
-      opacity: 0.9;
-    }
+.cta-row{display:flex;gap:14px;align-items:center}
+.btn{background:var(--cta);border:none;padding:16px 28px;border-radius:12px;font-weight:600;box-shadow:0 8px 20px rgba(255,180,0,0.18);cursor:pointer}
+.btn.secondary{background:transparent;border:1px solid rgba(11,23,32,0.06);padding:14px 22px}
 
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-      background: url('https://images.unsplash.com/photo-1515162305281-9f1b34a5a4a5?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
-      color: white;
-      background-attachment: fixed;
-    }
+/* feature card */
+.features{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.card{background:white;border-radius:12px;padding:16px;min-width:220px;box-shadow:0 6px 18px rgba(11,23,32,0.06);text-align:center}
+.card h4{margin:0 0 6px 0}
+.card p{margin:0;color:var(--muted);font-size:14px}
 
-    .hero h2 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
+/* footer small */
+.tiny{font-size:12px;color:var(--muted);text-align:center;margin:20px 0}
 
-    .hero p {
-      font-size: 1.2em;
-      max-width: 600px;
-      margin: 10px auto 30px;
-    }
+/* Responsive tweaks */
+@media (max-width:900px){
+  .hero-top h2{font-size:28px}
+  .headline{font-size:34px}
+  .hero-body{padding:28px 18px}
+  .logo{width:48px;height:48px}
+}
+@media (max-width:420px){
+  .hero-top h2{font-size:22px}
+  .headline{font-size:28px}
+  .btn{padding:12px 18px}
+  .brand h1{font-size:16px}
+  .nav{padding:0 12px}
+}
 
-    .hero button {
-      padding: 15px 30px;
-      font-size: 1.1em;
-      border: none;
-      background: #ffb300;
-      color: #222;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
+/* subtle animated confetti next to headline */
+.confetti{font-size:36px;margin-left:6px}
 
-    .hero button:hover {
-      background: #ffd54f;
-      transform: scale(1.05);
-    }
-
-    .section {
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .section h2 {
-      font-size: 2em;
-      color: #0078d7;
-      margin-bottom: 30px;
-    }
-
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .product {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      width: 280px;
-      transition: transform 0.3s ease;
-      overflow: hidden;
-    }
-
-    .product:hover {
-      transform: translateY(-8px);
-    }
-
-    .product img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .product h3 {
-      margin: 15px;
-      font-size: 1.2em;
-    }
-
-    .product p {
-      margin: 0 15px 15px;
-      color: #666;
-      font-size: 0.95em;
-    }
-
-    .product button {
-      margin: 0 0 20px;
-      background: #0078d7;
-      border: none;
-      padding: 10px 20px;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .product button:hover {
-      background: #005fa3;
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    footer a {
-      color: #00c4cc;
-      text-decoration: none;
-    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>B4iBorn</h1>
-    <p>India’s First Bargain Marketplace – Negotiate. Save. Smile.</p>
-  </header>
-
-  <section class="hero">
-    <h2>Let’s Make Shopping Fun Again 🎉</h2>
-    <p>At B4iBorn, you don’t just buy – you bargain! Negotiate prices directly and get the best deals instantly.</p>
-    <button onclick="scrollToProducts()">Start Bargaining Now</button>
-  </section>
-
-  <section class="section" id="products">
-    <h2>Popular Deals 🔥</h2>
-    <div class="products">
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1606813902784-8b74da9b9493?auto=format&fit=crop&w=500&q=60" alt="Phone">
-        <h3>Smartphone XZ</h3>
-        <p>Listed Price: ₹29,999<br><b>Offer your price!</b></p>
-        <button onclick="bargain('Smartphone XZ')">Negotiate</button>
+  <nav class="nav" role="navigation">
+    <div class="brand">
+      <div class="logo">B4i</div>
+      <div>
+        <h1>B4iBorn</h1>
+        <p>India's First Bargain Marketplace</p>
       </div>
-      <div class="product">
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#features" style="text-decoration:none;color:var(--muted);font-weight:600">How it works</a>
+      <button class="btn" onclick="scrollToSection()">Start Bargaining</button>
+    </div>
+  </nav>  <main class="hero" role="main" aria-labelledby="hero-title">
+    <section class="hero-top">
+      <h2 id="hero-title">B4iBorn</h2>
+      <p>India’s First Bargain Marketplace — Negotiate. Save. Smile.</p>
+    </section><section class="hero-body">
+  <h3 class="headline">Let’s Make Shopping Fun Again <span class="confetti">🎉</span></h3>
+  <p class="sub">At B4iBorn, you don't just buy — you bargain. Negotiate prices directly and get the best deals instantly. Works beautifully on both mobile and desktop browsers.</p>
+
+  <div class="cta-row">
+    <button class="btn" onclick="scrollToSection()">Start Bargaining Now</button>
+    <button class="btn secondary" onclick="openHow()">Learn How</button>
+  </div>
+
+  <div class="features" id="features">
+    <div class="card">
+      <h4>Real Negotiation</h4>
+      <p>Chat with sellers & close deals in minutes.</p>
+    </div>
+    <div class="card">
+      <h4>Safe Payments</h4>
+      <p>Protected checkout for your peace of mind.</p>
+    </div>
+    <div class="card">
+      <h4>Mobile-first</h4>
+      <p>Designed to feel native on phones and tablets.</p>
+    </div>
+  </div>
+
+  <p class="tiny">Tip: Replace the logo with your SVG or PNG for better crispness. Use your brand colors in the CSS variables at the top.</p>
+</section>
+
+  </main>  <script>
+    function scrollToSection(){
+      document.getElementById('features').scrollIntoView({behavior:'smooth',block:'center'});
+    }
+    function openHow(){
+      alert('Short guide: 1) Click Start -> 2) Choose item -> 3) Start chat & make offer.');
+    }
+  </script></body>
+</html>

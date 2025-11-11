@@ -1,17 +1,102 @@
+
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>B4iBorn — Negotiate. Save. Smile.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B4iBorn — Negotiate. Save. Smile.</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About Us</a>
-</nav>
 
-<div id="root"></div>
-<script type="module" src="/src/main.jsx"></script>
+<body>
+  <!-- ======== HEADER / NAVIGATION ======== -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="logo">B4i</div>
+      <div>
+        <h1>B4iBorn</h1>
+        <p>India’s First Bargain Marketplace</p>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about_us.html">About Us</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ======== HERO SECTION ======== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Negotiate. Save. Smile.</h2>
+      <p>Welcome to <strong>B4iBorn</strong> — India’s first e-commerce platform where you can bargain online just like in real life! Get amazing deals directly from sellers and enjoy the thrill of negotiation with full transparency and trust.</p>
+      <a href="#products" class="btn-primary">Start Bargaining</a>
+    </div>
+  </section>
+
+  <!-- ======== FEATURE HIGHLIGHTS ======== -->
+  <section class="features">
+    <h2>Why Shop With B4iBorn?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">💬</div>
+        <h3>Live Bargaining</h3>
+        <p>Negotiate with sellers in real-time and decide your own price.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔒</div>
+        <h3>Secure Payments</h3>
+        <p>All transactions are safe and encrypted for your peace of mind.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🚚</div>
+        <h3>Fast Delivery</h3>
+        <p>Enjoy quick and reliable delivery right to your doorstep.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PRODUCT SECTION ======== -->
+  <section id="products" class="products">
+    <h2>Hot Deals for You 🔥</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=60" alt="Wireless Earbuds">
+        <h3>Wireless Earbuds</h3>
+        <p class="price">₹1,499</p>
+        <button class="btn-primary">Bargain Now</button>
+      </div>
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=60" alt="Smart Watch">
+        <h3>Smart Watch</h3>
+        <p class="price">₹2,299</p>
+        <button class="btn-primary">Bargain Now</button>
+      </div>
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1585386959984-a415522d2ec5?auto=format&fit=crop&w=800&q=60" alt="Bluetooth Speaker">
+        <h3>Bluetooth Speaker</h3>
+        <p class="price">₹1,199</p>
+        <button class="btn-primary">Bargain Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== HOW IT WORKS ======== -->
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <ol>
+      <li><strong>Browse:</strong> Explore thousands of products listed by sellers.</li>
+      <li><strong>Bargain:</strong> Click “Bargain Now” to chat and negotiate your price.</li>
+      <li><strong>Save:</strong> Once agreed, complete your purchase securely.</li>
+    </ol>
+  </section>
+
+  <!-- ======== CONTACT / FOOTER ======== -->
+  <footer id="contact" class="footer">
+    <p>📩 Contact us at <a href="mailto:support@b4iborn.com">support@b4iborn.com</a></p>
+    <p>© 2025 B4iBorn — Negotiate. Save. Smile.</p>
+    <p><a href="about.html" style="color:#fff;text-decoration:underline;">Learn more about us</a></p>
+  </footer>
 </body>
 </html>

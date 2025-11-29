@@ -1,87 +1,64 @@
-<section class="amazon-deals">
-  <h2>Trending Amazon Deals <span>(Affiliate Offers)</span></h2>
+/* -------- PRODUCT PAGE / AMAZON DEALS CSS -------- */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #fff8e1;
+}
 
-  <div class="affiliate-grid">
+.amazon-deals {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 25px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,#ffe082,#ffca28,#ff8a65);
+  color: #222;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
 
-    <!-- 1) Havells Geyser -->
-    <div class="affiliate-card">
-      <a href="https://amzn.to/4okixFl" target="_blank" rel="nofollow sponsored">
-        <img
-          src="https://m.media-amazon.com/images/I/31xZVbqNuIL._SY300_SX300_QL70_ML2_.jpg"
-          alt="Havells Instanio Prime 25L Storage Water Heater Geyser"
-        />
-      </a>
-      <h3>Havells Instanio Prime 25L Geyser</h3>
-      <p>Fast heating, hard-water friendly, energy-saving water heater.</p>
-      <a href="https://amzn.to/4okixFl" target="_blank" rel="nofollow sponsored" class="affiliate-btn">
-        View on Amazon
-      </a>
-    </div>
+.amazon-deals h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
 
-    <!-- 2) Whirlpool Washing Machine -->
-    <div class="affiliate-card">
-      <a href="https://amzn.to/4okizgr" target="_blank" rel="nofollow sponsored">
-        <img
-          src="https://m.media-amazon.com/images/I/41nR350XriL._SX342_SY445_QL70_ML2_.jpg"
-          alt="Whirlpool 6.5 Kg 5 Star Magic Clean Pro Top Load Washing Machine"
-        />
-      </a>
-      <h3>Whirlpool 6.5 Kg Magic Clean Pro</h3>
-      <p>5-Star top-load washer with in-built heater and stain wash.</p>
-      <a href="https://amzn.to/4okizgr" target="_blank" rel="nofollow sponsored" class="affiliate-btn">
-        View on Amazon
-      </a>
-    </div>
+.affiliate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+  gap: 18px;
+}
 
-    <!-- 3) Your Product for https://amzn.to/4pvlDas -->
-    <div class="affiliate-card">
-      <a href="https://amzn.to/4pvlDas" target="_blank" rel="nofollow sponsored">
-        <!-- TODO: replace IMAGE_URL_FROM_SITESTRIPE_4pvlDas with real image URL from Amazon SiteStripe -->
-        <img
-          src="IMAGE_URL_FROM_SITESTRIPE_4pvlDas"
-          alt="Amazon Deal 3"
-        />
-      </a>
-      <h3>Amazon Deal 3</h3>
-      <p>Hot trending product – perfect for daily use.</p>
-      <a href="https://amzn.to/4pvlDas" target="_blank" rel="nofollow sponsored" class="affiliate-btn">
-        View on Amazon
-      </a>
-    </div>
+.affiliate-card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
-    <!-- 4) Your Product for https://amzn.to/3Kwztuv -->
-    <div class="affiliate-card">
-      <a href="https://amzn.to/3Kwztuv" target="_blank" rel="nofollow sponsored">
-        <!-- TODO: replace IMAGE_URL_FROM_SITESTRIPE_3Kwztuv with real image URL from Amazon SiteStripe -->
-        <img
-          src="IMAGE_URL_FROM_SITESTRIPE_3Kwztuv"
-          alt="Amazon Deal 4"
-        />
-      </a>
-      <h3>Amazon Deal 4</h3>
-      <p>Limited-time offer – check latest price.</p>
-      <a href="https://amzn.to/3Kwztuv" target="_blank" rel="nofollow sponsored" class="affiliate-btn">
-        View on Amazon
-      </a>
-    </div>
+.affiliate-card img {
+  max-width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin: 0 auto 12px;
+}
 
-    <!-- 5) Your Product for https://amzn.to/4p9bsZJ -->
-    <div class="affiliate-card">
-      <a href="https://amzn.to/4p9bsZJ" target="_blank" rel="nofollow sponsored">
-        <!-- TODO: replace IMAGE_URL_FROM_SITESTRIPE_4p9bsZJ with real image URL from Amazon SiteStripe -->
-        <img
-          src="IMAGE_URL_FROM_SITESTRIPE_4p9bsZJ"
-          alt="Amazon Deal 5"
-        />
-      </a>
-      <h3>Amazon Deal 5</h3>
-      <p>Great savings on this Amazon special deal.</p>
-      <a href="https://amzn.to/4p9bsZJ" target="_blank" rel="nofollow sponsored" class="affiliate-btn">
-        View on Amazon
-      </a>
-    </div>
+.affiliate-btn {
+  padding: 8px 18px;
+  background: #ffca28;
+  border-radius: 20px;
+  display: inline-block;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  margin-top: 10px;
+}
 
-  </div>
-</section>
+/* Mobile */
+@media (max-width: 600px) {
+  .affiliate-card img {
+    height: 150px;
+  }
+}
+
 
 

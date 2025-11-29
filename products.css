@@ -1,0 +1,59 @@
+/* -------- PRODUCT PAGE CSS ONLY -------- */
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #fff8e1;
+}
+
+.amazon-deals {
+  margin: 32px auto;
+  padding: 24px 16px 28px;
+  max-width: 1200px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,#ffe082,#ffca28,#ff8a65);
+  color: #222;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.amazon-deals h2 {
+  font-size: 26px;
+  text-align: center;
+}
+
+.affiliate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.affiliate-card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.affiliate-card img {
+  width: 100%;
+  max-width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.affiliate-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #ffca28;
+  color: black;
+  border-radius: 20px;
+  text-decoration: none;
+  margin-top: 12px;
+}
+
+/* Mobile */
+@media (max-width:600px) {
+  .affiliate-card img { height: 150px; }
+}

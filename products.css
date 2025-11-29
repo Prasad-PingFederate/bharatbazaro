@@ -1,59 +1,235 @@
-/* -------- PRODUCT PAGE CSS ONLY -------- */
-
+/* ------------------------------------------
+   GLOBAL
+------------------------------------------- */
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #fff8e1;
-}
-
-.amazon-deals {
-  margin: 32px auto;
-  padding: 24px 16px 28px;
-  max-width: 1200px;
-  border-radius: 18px;
-  background: linear-gradient(135deg,#ffe082,#ffca28,#ff8a65);
+  font-family: "Inter", sans-serif;
+  background: #f1f3f6;
   color: #222;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+img {
+  max-width: 100%;
+  display: block;
 }
 
-.amazon-deals h2 {
-  font-size: 26px;
-  text-align: center;
+/* ------------------------------------------
+   TOP NAVIGATION (Flipkart Style)
+------------------------------------------- */
+.top-nav {
+  background: #2874f0;
+  padding: 14px 30px;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-.affiliate-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
-  gap: 18px;
-  margin-top: 18px;
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.affiliate-card {
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.main-menu {
+  display: flex;
+  gap: 20px;
+}
+.main-menu a {
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.main-menu a:hover {
+  opacity: 0.8;
+}
+
+.signup-btn {
+  background: #ffe500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: black !important;
+  font-weight: 600;
+}
+
+/* ------------------------------------------
+   SEARCH BAR (Amazon Style)
+------------------------------------------- */
+.search-strip {
+  background: #fff;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.search-bar {
+  display: flex;
+  max-width: 600px;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.search-bar button {
+  padding: 10px 18px;
+  background: #ff9f00;
+  color: white;
+  border-radius: 4px;
+  border: none;
+}
+
+/* ------------------------------------------
+   CATEGORIES (Flipkart Style Icons)
+------------------------------------------- */
+.category-bar {
   background: white;
-  border-radius: 14px;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.cat-item {
+  text-align: center;
+  font-size: 14px;
+}
+.cat-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+
+/* ------------------------------------------
+   HERO BANNER (Amazon Style)
+------------------------------------------- */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 30px;
+  background: linear-gradient(to right, #ffe5cc, #ffd4aa);
+}
+
+.hero-content h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.hero-content p {
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #ff5f00;
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* ------------------------------------------
+   CATEGORIES GRID
+------------------------------------------- */
+.categories {
+  padding: 40px 30px;
+}
+.categories h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 20px;
+}
+
+.category-card {
+  background: white;
   padding: 16px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-.affiliate-card img {
-  width: 100%;
-  max-width: 180px;
-  height: 180px;
+/* ------------------------------------------
+   TOP DEALS (Flipkart Cards)
+------------------------------------------- */
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  padding: 20px 30px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 20px;
+  padding: 0 30px 30px;
+}
+
+.product-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  height: 150px;
   object-fit: contain;
+  margin: 0 auto;
 }
 
-.affiliate-btn {
-  display: inline-block;
-  padding: 8px 18px;
-  background: #ffca28;
-  color: black;
-  border-radius: 20px;
-  text-decoration: none;
-  margin-top: 12px;
+/* ------------------------------------------
+   TESTIMONIALS
+------------------------------------------- */
+.testimonials {
+  background: white;
+  padding: 40px 30px;
 }
 
-/* Mobile */
-@media (max-width:600px) {
-  .affiliate-card img { height: 150px; }
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 20px;
 }
+
+.testimonial-card {
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ------------------------------------------
+   FOOTER
+------------------------------------------- */
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+.social a {
+  color: white;
+  margin-right: 15px;
+}
+

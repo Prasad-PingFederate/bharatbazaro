@@ -1,90 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B4iBorn – Sign Up</title>
 
-    <!-- Link to your global style.css -->
-    <link rel="stylesheet" href="style.css">
 
-    <style>
-        /* Signup Page Specific Styles (optional) */
-        .signup-container {
-            max-width: 420px;
-            margin: 60px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
+<div class="signup-form">
 
-        .signup-container h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-        }
+    <div class="input-row">
+        <div class="input-group">
+            <label>First Name *</label>
+            <input type="text" placeholder="First Name" required>
+        </div>
 
-        .signup-container input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        .signup-btn {
-            width: 100%;
-            padding: 12px;
-            background: #0077ff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 16px;
-        }
-
-        .signup-btn:hover {
-            background: #005fcc;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .login-link a {
-            color: #0077ff;
-            text-decoration: none;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="signup-container">
-        <h2>Create Your Account</h2>
-
-        <form action="#" method="POST">
-
-            <input type="text" name="fullname" placeholder="Full Name" required>
-
-            <input type="email" name="email" placeholder="Email Address" required>
-
-            <input type="password" name="password" placeholder="Password" required>
-
-            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-
-            <button type="submit" class="signup-btn">Sign Up</button>
-
-        </form>
-
-        <p class="login-link">
-            Already have an account? <a href="login.html">Login</a>
-        </p>
+        <div class="input-group">
+            <label>Last Name *</label>
+            <input type="text" placeholder="Last Name" required>
+        </div>
     </div>
 
-</body>
-</html>
+    <div class="input-row">
+        <div class="input-group">
+            <label>Gender</label>
+            <select>
+                <option>Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
 
+        <div class="input-group">
+            <label>Date of Birth</label>
+            <input type="date">
+        </div>
+    </div>
+
+    <div class="input-row">
+        <div class="input-group">
+            <label>Email ID *</label>
+            <input type="email" placeholder="Email ID" required>
+        </div>
+
+        <div class="input-group">
+            <label>Nationality</label>
+            <select>
+                <option>Select Nationality</option>
+                <option>Indian</option>
+                <option>American</option>
+                <option>Other</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- REMOVED ID TYPE + ID NUMBER -->
+
+    <div class="check-row">
+        <label>
+            <input type="checkbox">
+            I confirm that I am above 18 years of age
+        </label>
+    </div>
+
+    <div class="check-row">
+        <label>
+            <input type="checkbox">
+            I accept <a href="#">Terms and Conditions</a>
+        </label>
+    </div>
+
+    <button class="submit-btn">Create Account</button>
+</div>

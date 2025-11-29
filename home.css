@@ -1,0 +1,137 @@
+/* ----------- HOME PAGE CSS ONLY ---------- */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f1f3f6;
+}
+
+img { max-width: 100%; display: block; }
+
+/* NAVBAR */
+.top-nav {
+  background: #2874f0;
+  color: white;
+  padding: 14px 30px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+}
+
+.main-menu {
+  display: flex;
+  gap: 18px;
+}
+.main-menu a {
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+/* SEARCH BAR */
+.search-strip {
+  background: white;
+  padding: 14px 30px;
+}
+.search-bar {
+  max-width: 600px;
+  display: flex;
+  gap: 10px;
+}
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+}
+.search-bar button {
+  background: #2874f0;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+}
+
+/* CATEGORY BAR */
+.category-bar {
+  background: white;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-around;
+}
+.cat-item { text-align: center; }
+.cat-item img {
+  width: 70px;
+  height: 70px;
+}
+
+/* HERO SECTION */
+.hero {
+  padding: 40px 30px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+}
+.hero-content h1 { font-size: 32px; }
+
+/* CATEGORY GRID */
+.categories { padding: 40px 30px; text-align: center; }
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+}
+.category-card {
+  background: white;
+  padding: 14px;
+  border-radius: 10px;
+}
+
+/* TOP DEALS */
+.section-title {
+  padding: 20px 30px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 20px;
+  padding: 0 30px 30px;
+}
+.product-card {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  background: white;
+  padding: 40px 30px;
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 20px;
+}
+
+/* FOOTER */
+.footer {
+  background: #2874f0;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}

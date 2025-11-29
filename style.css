@@ -232,5 +232,107 @@ body {
   background: #fff;
   padding: 15px;
   border-radius: 12px;
-  text-align: cen
+  text-align: cen/* ABOUT PAGE STYLES */
+.about-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* HERO / TITLE */
+.about-hero {
+  text-align: center;
+  padding: 40px 10px;
+}
+
+.about-hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.about-hero h1 span {
+  color: #ff9f00;
+}
+
+.about-hero p {
+  font-size: 18px;
+  color: #555;
+}
+
+/* SECTION */
+.about-section {
+  margin: 40px 0;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.about-section h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.about-section ul {
+  margin-left: 20px;
+}
+
+.about-section ul li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* HIGHLIGHT SECTION (SPECIAL YELLOW STRIP) */
+.about-section.highlight {
+  background: #fff8e6;
+  border-left: 6px solid #ff9f00;
+}
+
+/* CTA BUTTONS */
+.about-cta {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.about-cta h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #ff9f00;
+  color: #000;
+  border-radius: 8px;
+  margin: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cta-btn:hover {
+  background: #ffb733;
+}
+
+.cta-outline {
+  background: transparent;
+  border: 2px solid #ff9f00;
+  color: #ff9f00;
+}
+
+.cta-outline:hover {
+  background: #ff9f00;
+  color: #000;
+}
+
+   
 

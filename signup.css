@@ -117,23 +117,28 @@ body {
 }
 
 /* -------------------- BUTTON -------------------- */
-.signup-btn {
-  width: 100%;
-  padding: 16px;
-  background: #2563eb;
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 25px;
-  transition: 0.3s;
-}
 
 .signup-btn:hover {
   background: #1d4ed8;
 }
+.signup-btn {
+  background: linear-gradient(135deg, #5b8cff, #7b4bff);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.signup-btn:hover {
+  background: linear-gradient(135deg, #4a7aff, #6a3dff);
+}
+
+
+
+
+
 
 /* -------------------- MOBILE -------------------- */
 @media (max-width: 900px) {

@@ -334,5 +334,85 @@ body {
   color: #000;
 }
 
+   /* AMAZON AFFILIATE DEALS SECTION */
+.amazon-deals {
+  margin: 40px 20px;
+  padding: 30px 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ffe082, #ffca28, #ff8a65);
+  color: #222;
+}
+
+.amazon-deals h2 {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.amazon-deals h2 span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* GRID OF CARDS */
+.affiliate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* INDIVIDUAL CARD */
+.affiliate-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.affiliate-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.affiliate-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.affiliate-card p {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.affiliate-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+/* COLORFUL BUTTON */
+.affiliate-btn {
+  display: inline-block;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #ff6f00, #ffca28);
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+.affiliate-btn:hover {
+  filter: brightness(1.1);
+}
+
+
    
 

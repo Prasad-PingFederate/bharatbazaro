@@ -4,113 +4,176 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>B4iBorn — Negotiate. Save. Smile.</title>
+
+  <!-- Your stylesheet -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Fonts (you can use either or both in CSS) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- Top Navigation Bar -->
-<header class="top-nav">
-    <div class="nav-container">
-        <div class="menu-left">
-            <span class="menu-icon">☰</span>
-            <a href="index.html" class="logo-text">B4iBorn</a>
-        </div>
 
-        <nav class="main-menu">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="products.html">Products</a>
-            <a href="deals.html">Deals</a>
-            <a href="contact.html">Contact</a>
-            <a href="bargain.html">Bargain</a>
-            <a href="signup.html" class="signup-btn">Sign Up</a>
-        </nav>
+<!-- Top Navigation Bar (from code2) -->
+<header class="top-nav">
+  <div class="nav-container">
+    <div class="menu-left">
+      <span class="menu-icon">☰</span>
+      <a href="index.html" class="logo-text">B4iBorn</a>
     </div>
+
+    <nav class="main-menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="deals.html">Deals</a>
+      <a href="contact.html">Contact</a>
+      <a href="bargain.html">Bargain</a>
+      <a href="signup.html" class="signup-btn">Sign Up</a>
+    </nav>
+  </div>
 </header>
 
+<!-- SEARCH BAR from code1 (below top nav, Amazon style) -->
+<section class="search-strip">
+  <div class="search-bar">
+    <input type="text" placeholder="Search for products, brands and more">
+    <button>Search</button>
+  </div>
+</section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>India’s First Bargain Marketplace</h1>
-      <p>Negotiate directly with sellers, get instant deals, and save smart!</p>
-      <a href="#" class="btn-primary">Start Bargaining</a>
+<!-- CATEGORY BAR from code1 (Flipkart style) -->
+<div class="category-bar">
+  <div class="cat-item">
+    <img src="https://cdn-icons-png.flaticon.com/128/3081/3081559.png" alt="Mobiles">
+    <p>Mobiles</p>
+  </div>
+
+  <div class="cat-item">
+    <img src="https://cdn-icons-png.flaticon.com/128/1165/1165674.png" alt="Fashion">
+    <p>Fashion</p>
+  </div>
+
+  <div class="cat-item">
+    <img src="https://cdn-icons-png.flaticon.com/128/1040/1040230.png" alt="Electronics">
+    <p>Electronics</p>
+  </div>
+
+  <div class="cat-item">
+    <img src="https://cdn-icons-png.flaticon.com/128/1046/1046857.png" alt="Home">
+    <p>Home</p>
+  </div>
+
+  <div class="cat-item">
+    <img src="https://cdn-icons-png.flaticon.com/128/135/135620.png" alt="Grocery">
+    <p>Grocery</p>
+  </div>
+</div>
+
+<!-- HERO SECTION (from code2, you can style like Amazon banner in CSS) -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>India’s First Bargain Marketplace</h1>
+    <p>Negotiate directly with sellers, get instant deals, and save smart!</p>
+    <a href="#" class="btn-primary">Start Bargaining</a>
+  </div>
+  <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/shopping-1866581_1280.jpg" alt="Shopping" />
+</section>
+
+<!-- FEATURED CATEGORIES (from code2) -->
+<section class="categories">
+  <h2>Shop by Category</h2>
+  <div class="category-grid">
+    <div class="category-card">
+      <img src="https://cdn.pixabay.com/photo/2016/03/27/07/08/ecommerce-1281296_1280.jpg" alt="Electronics">
+      <h3>Electronics</h3>
     </div>
-    <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/shopping-1866581_1280.jpg" alt="Shopping" />
-  </section>
-
-  <!-- Featured Categories -->
-  <section class="categories">
-    <h2>Shop by Category</h2>
-    <div class="category-grid">
-      <div class="category-card">
-        <img src="https://cdn.pixabay.com/photo/2016/03/27/07/08/ecommerce-1281296_1280.jpg" alt="Electronics">
-        <h3>Electronics</h3>
-      </div>
-      <div class="category-card">
-        <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Fashion">
-        <h3>Fashion</h3>
-      </div>
-      <div class="category-card">
-        <img src="https://cdn.pixabay.com/photo/2015/08/24/12/53/interior-906796_1280.jpg" alt="Home & Living">
-        <h3>Home & Living</h3>
-      </div>
-      <div class="category-card">
-        <img src="https://cdn.pixabay.com/photo/2017/06/06/12/30/groceries-2378728_1280.jpg" alt="Groceries">
-        <h3>Groceries</h3>
-      </div>
+    <div class="category-card">
+      <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Fashion">
+      <h3>Fashion</h3>
     </div>
-  </section>
-
-
-  <!-- Featured Products -->
-  <section class="featured">
-    <h2>Top Bargain Picks</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="https://cdn.pixabay.com/photo/2014/04/02/10/56/shoes-303898_1280.png" alt="Product 1">
-        <h3>Casual Shoes</h3>
-        <p>₹999 <span class="strike">₹1499</span></p>
-        <button>Bargain Now</button>
-      </div>
-      <div class="product-card">
-        <img src="https://cdn.pixabay.com/photo/2015/01/09/11/09/smart-watch-593012_1280.jpg" alt="Product 2">
-        <h3>Smart Watch</h3>
-        <p>₹1899 <span class="strike">₹2499</span></p>
-        <button>Bargain Now</button>
-      </div>
-      <div class="product-card">
-        <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Product 3">
-        <h3>Designer Jacket</h3>
-        <p>₹1599 <span class="strike">₹1999</span></p>
-        <button>Bargain Now</button>
-      </div>
+    <div class="category-card">
+      <img src="https://cdn.pixabay.com/photo/2015/08/24/12/53/interior-906796_1280.jpg" alt="Home & Living">
+      <h3>Home & Living</h3>
     </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <h2>What Our Shoppers Say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <p>"Best site for deals! I saved ₹500 on my first purchase. Love the bargain feature!"</p>
-        <h4>— Priya Sharma</h4>
-      </div>
-      <div class="testimonial-card">
-        <p>"Finally, an e-commerce site where I can negotiate like a pro. B4iBorn rocks!"</p>
-        <h4>— Rohan Mehta</h4>
-      </div>
+    <div class="category-card">
+      <img src="https://cdn.pixabay.com/photo/2017/06/06/12/30/groceries-2378728_1280.jpg" alt="Groceries">
+      <h3>Groceries</h3>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2025 B4iBorn. All Rights Reserved.</p>
-    <div class="social">
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
+<!-- TOP DEALS SECTION (from code1, renamed to fit your theme) -->
+<section class="section-title">Top Deals</section>
+<div class="product-grid top-deals-grid">
+  <div class="product-card">
+    <img src="https://m.media-amazon.com/images/I/71i2XhHU3pL._SL1500_.jpg" alt="Smart Watch">
+    <h3>Smart Watch</h3>
+    <p>₹999</p>
+  </div>
+
+  <div class="product-card">
+    <img src="https://m.media-amazon.com/images/I/81PjNQ6vHGL._SL1500_.jpg" alt="Wireless Earbuds">
+    <h3>Wireless Earbuds</h3>
+    <p>₹799</p>
+  </div>
+
+  <div class="product-card">
+    <img src="https://m.media-amazon.com/images/I/71xb2xkN5qL._SL1500_.jpg" alt="Bluetooth Speaker">
+    <h3>Bluetooth Speaker</h3>
+    <p>₹599</p>
+  </div>
+</div>
+
+<!-- FEATURED PRODUCTS (from code2) -->
+<section class="featured">
+  <h2>Top Bargain Picks</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="https://cdn.pixabay.com/photo/2014/04/02/10/56/shoes-303898_1280.png" alt="Product 1">
+      <h3>Casual Shoes</h3>
+      <p>₹999 <span class="strike">₹1499</span></p>
+      <button>Bargain Now</button>
     </div>
-  </footer>
+    <div class="product-card">
+      <img src="https://cdn.pixabay.com/photo/2015/01/09/11/09/smart-watch-593012_1280.jpg" alt="Product 2">
+      <h3>Smart Watch</h3>
+      <p>₹1899 <span class="strike">₹2499</span></p>
+      <button>Bargain Now</button>
+    </div>
+    <div class="product-card">
+      <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Product 3">
+      <h3>Designer Jacket</h3>
+      <p>₹1599 <span class="strike">₹1999</span></p>
+      <button>Bargain Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS (from code2) -->
+<section class="testimonials">
+  <h2>What Our Shoppers Say</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <p>"Best site for deals! I saved ₹500 on my first purchase. Love the bargain feature!"</p>
+      <h4>— Priya Sharma</h4>
+    </div>
+    <div class="testimonial-card">
+      <p>"Finally, an e-commerce site where I can negotiate like a pro. B4iBorn rocks!"</p>
+      <h4>— Rohan Mehta</h4>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER (from code2) -->
+<footer class="footer">
+  <p>© 2025 B4iBorn. All Rights Reserved.</p>
+  <div class="social">
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
 </body>
 </html>

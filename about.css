@@ -1,0 +1,91 @@
+.about-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.back-btn:hover {
+  color: #000;
+}
+
+/* Hero Section */
+.about-hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.about-hero h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+.about-hero span {
+  color: #ff5722;
+}
+.about-hero p {
+  font-size: 18px;
+  color: #555;
+}
+
+/* Sections */
+.about-section {
+  margin: 40px 0;
+}
+.about-section h2 {
+  font-size: 28px;
+  color: #ff5722;
+  margin-bottom: 10px;
+}
+.about-section p, 
+.about-section ul li {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Highlight Section */
+.highlight {
+  background: #fff6f2;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* CTA */
+.about-cta {
+  text-align: center;
+  margin-top: 50px;
+}
+.cta-btn {
+  padding: 12px 25px;
+  background: #ff5722;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  margin: 10px;
+  display: inline-block;
+  font-size: 18px;
+  transition: 0.2s;
+}
+.cta-outline {
+  background: transparent;
+  border: 2px solid #ff5722;
+  color: #ff5722;
+}
+.cta-btn:hover {
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .about-hero h1 { font-size: 32px; }
+  .cta-btn { width: 100%; }
+}

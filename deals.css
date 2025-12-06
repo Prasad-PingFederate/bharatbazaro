@@ -1,53 +1,89 @@
 /* Deals Specific Styles */
-.deals-container {
+/* Layout Grid */
+.deals-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
     min-height: calc(100vh - 140px);
+    align-items: start;
+}
+
+/* Sidebar Styling */
+.deals-sidebar {
+    position: sticky;
+    top: 2rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.deals-sidebar h3 {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.sidebar-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.filter-side-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.filter-side-btn i {
+    width: 20px;
+    text-align: center;
+}
+
+.filter-side-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+}
+
+.filter-side-btn.active {
+    background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), transparent);
+    color: var(--primary);
+    border-left: 3px solid var(--primary);
+}
+
+/* Main Content Area */
+.deals-main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.deals-header {
-    text-align: center;
+.deals-header-left {
+    text-align: left;
     margin-bottom: 1rem;
 }
 
-.deals-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
+.deals-header-left h1 {
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
     background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    /* Amazon-ish Gold/Orange */
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-.deals-header p {
-    color: var(--text-muted);
-}
-
-.filter-bar {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-}
-
-.filter-btn {
-    background: transparent;
-    border: 1px solid var(--glass-border);
-    color: var(--text-muted);
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-color: var(--primary);
 }
 
 /* Grid Layout */
@@ -93,7 +129,8 @@
 .card-image {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
+    /* Ensure full product is visible */
     background: white;
     /* Products usually have white bg */
     padding: 20px;
@@ -160,42 +197,4 @@
 
 .deal-btn:hover {
     filter: brightness(110%);
-}
-
-.loading-deals {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.1);
-    border-left-color: var(--primary);
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@media (max-width: 768px) {
-    .deals-header h1 {
-        font-size: 2rem;
-    }
-
-    .filter-bar {
-        flex-wrap: wrap;
-    }
-
-    .deals-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-        padding: 0 1rem;
-    }
 }

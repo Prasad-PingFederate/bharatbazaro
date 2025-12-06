@@ -62,7 +62,7 @@
 .filter-side-btn.active {
     background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), transparent);
     color: var(--primary);
-    border-left: 3px solid var(--primary);
+    font-weight: 700;
 }
 
 /* Main Content Area */

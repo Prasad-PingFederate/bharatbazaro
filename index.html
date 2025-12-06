@@ -1,190 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>bharatbazaro — Negotiate. Save. Smile.</title>
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="products.css" />
-      <link rel="stylesheet" href="signup.css" />
-
-
-  <!-- Google Fonts (Inter + Poppins) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatBazaro | The Future of Shopping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Shared Core Styles -->
+    <link rel="stylesheet" href="home.css"> <!-- Landing Page Specifics -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 
 <body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <div class="logo">BharatBazaro</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="bargain.html">Bargain Zone</a>
+                <a href="deals.html">Hot Deals</a>
+                <a href="signup.html" class="btn-signup">Sign Up</a>
+            </div>
+        </nav>
 
-<!-- Top Navigation Bar (from code2) -->
-<header class="top-nav">
-  <div class="nav-container">
-    <div class="menu-left">
-      <span class="menu-icon">☰</span>
-      <a href="index.html" class="logo-text">bharatbazaro</a>
+        <!-- Top Category Bar (Flipkart Style) -->
+        <!-- Top Category Bar (Flipkart Style) -->
+        <section class="top-category-bar">
+            <a href="mobiles.html" class="top-cat-item">
+                <div class="top-icon-img">
+                    <img src="https://m.media-amazon.com/images/I/71657TiFeHL._SX679_.jpg" alt="Mobiles">
+                </div>
+                <span>Mobiles</span>
+            </a>
+            <a href="fashion.html" class="top-cat-item">
+                <div class="top-icon-img">
+                    <img src="https://m.media-amazon.com/images/I/61hv7K72bZL._AC_UL480_FMwebp_QL65_.jpg" alt="Fashion">
+                </div>
+                <span>Fashion</span>
+            </a>
+            <a href="electronics.html" class="top-cat-item">
+                <div class="top-icon-img">
+                    <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_UY327_FMwebp_QL65_.jpg"
+                        alt="Electronics">
+                </div>
+                <span>Electronics</span>
+            </a>
+            <a href="home.html" class="top-cat-item">
+                <div class="top-icon-img">
+                    <img src="https://m.media-amazon.com/images/I/71y7B0qPLXL._AC_UY327_FMwebp_QL65_.jpg" alt="Home">
+                </div>
+                <span>Home</span>
+            </a>
+            <a href="grocery.html" class="top-cat-item">
+                <div class="top-icon-img">
+                    <img src="https://m.media-amazon.com/images/I/71Zt-n+eK+L._AC_UL480_FMwebp_QL65_.jpg" alt="Grocery">
+                </div>
+                <span>Grocery</span>
+            </a>
+        </section>
+
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Shop Smart.<br> <span class="highlight">Bargain Hard.</span></h1>
+                <p class="hero-subtitle">Experience India's first AI-powered marketplace where YOU set the price.
+                    Explore exclusive deals or negotiate live with our bot.</p>
+                <div class="cta-group">
+                    <a href="bargain.html" class="primary-btn glow-effect">Start Bargaining <i
+                            class="fas fa-robot"></i></a>
+                    <a href="deals.html" class="secondary-btn">View Today's Deals <i class="fas fa-fire"></i></a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="floating-card c1">
+                    <img src="https://m.media-amazon.com/images/I/71657TiFeHL._SX679_.jpg" alt="iPhone 15">
+                    <div class="card-badge">-15%</div>
+                </div>
+                <div class="floating-card c2">
+                    <img src="https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_UF1000,1000_QL80_.jpg"
+                        alt="Headphones">
+                    <div class="card-badge">Bot Ready</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Featured Collections -->
+        <section class="featured-section glass-panel">
+            <div class="section-header">
+                <h3>Trending Right Now</h3>
+                <a href="deals.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="featured-grid">
+                <!-- Static Affiliates for Demo -->
+                <a href="https://www.amazon.in/dp/B09XS7JWHH?tag=YOUR_TAG_HERE" target="_blank" class="mini-card">
+                    <img src="https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_UF1000,1000_QL80_.jpg" alt="Product">
+                    <div class="info">
+                        <h4>Sony XM5</h4>
+                        <span class="price">₹24,990</span>
+                    </div>
+                </a>
+                <a href="https://www.amazon.in/dp/B0BDK62PDX?tag=YOUR_TAG_HERE" target="_blank" class="mini-card">
+                    <img src="https://m.media-amazon.com/images/I/71657TiFeHL._SX679_.jpg" alt="Product">
+                    <div class="info">
+                        <h4>iPhone 15</h4>
+                        <span class="price">₹72,999</span>
+                    </div>
+                </a>
+                <a href="https://www.amazon.in/dp/B09B8VFJ65?tag=YOUR_TAG_HERE" target="_blank" class="mini-card">
+                    <img src="https://m.media-amazon.com/images/I/61WR+9t3OoL._AC_UY327_FMwebp_QL65_.jpg" alt="Product">
+                    <div class="info">
+                        <h4>Echo Dot 5</h4>
+                        <span class="price">₹4,999</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2025 BharatBazaro. All rights reserved.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <nav class="main-menu">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="products.html">Products</a>
-      <a href="deals.html">Deals</a>
-      <a href="contact.html">Contact</a>
-      <a href="bargain.html">Bargain</a>
-      <a href="signup.html" class="signup-btn">Sign Up</a>
-  
-    </nav>
-  </div>
-</header>
+    <script>
+        // Simple GSAP Animation for Hero
+        gsap.from(".hero-title", { duration: 1, y: 50, opacity: 0, ease: "power3.out" });
+        gsap.from(".hero-subtitle", { duration: 1, y: 30, opacity: 0, delay: 0.3, ease: "power3.out" });
+        gsap.from(".cta-group", { duration: 1, y: 30, opacity: 0, delay: 0.6, ease: "power3.out" });
+        gsap.from(".floating-card", { duration: 1.5, y: 100, opacity: 0, stagger: 0.2, delay: 0.5, ease: "elastic.out(1, 0.5)" });
 
-<!-- SEARCH BAR from code1 (below top nav, Amazon style) -->
-<section class="search-strip">
-  <div class="search-bar">
-    <input type="text" placeholder="Search for products, brands and more">
-    <button>Search</button>
-  </div>
-</section>
-
-<!-- CATEGORY BAR from code1 (Flipkart style) -->
-<div class="category-bar">
-  <div class="cat-item">
-    <img src="https://cdn-icons-png.flaticon.com/128/3081/3081559.png" alt="Mobiles">
-    <p>Mobiles</p>
-  </div>
-
-  <div class="cat-item">
-    <img src="https://cdn-icons-png.flaticon.com/128/1165/1165674.png" alt="Fashion">
-    <p>Fashion</p>
-  </div>
-
-  <div class="cat-item">
-    <img src="https://cdn-icons-png.flaticon.com/128/1040/1040230.png" alt="Electronics">
-    <p>Electronics</p>
-  </div>
-
-  <div class="cat-item">
-    <img src="https://cdn-icons-png.flaticon.com/128/1046/1046857.png" alt="Home">
-    <p>Home</p>
-  </div>
-
-  <div class="cat-item">
-    <img src="https://cdn-icons-png.flaticon.com/128/135/135620.png" alt="Grocery">
-    <p>Grocery</p>
-  </div>
-</div>
-
-<!-- HERO SECTION (from code2, you can style like Amazon banner in CSS) -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>India’s First Bargain Marketplace</h1>
-    <p>Negotiate directly with sellers, get instant deals, and save smart!</p>
-    <a href="#" class="btn-primary">Start Bargaining</a>
-  </div>
-  <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/shopping-1866581_1280.jpg" alt="Shopping" />
-</section>
-
-<!-- FEATURED CATEGORIES (from code2) -->
-<section class="categories">
-  <h2>Shop by Category</h2>
-  <div class="category-grid">
-    <div class="category-card">
-      <img src="https://cdn.pixabay.com/photo/2016/03/27/07/08/ecommerce-1281296_1280.jpg" alt="Electronics">
-      <h3>Electronics</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Fashion">
-      <h3>Fashion</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn.pixabay.com/photo/2015/08/24/12/53/interior-906796_1280.jpg" alt="Home & Living">
-      <h3>Home & Living</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn.pixabay.com/photo/2017/06/06/12/30/groceries-2378728_1280.jpg" alt="Groceries">
-      <h3>Groceries</h3>
-    </div>
-  </div>
-</section>
-
-<!-- TOP DEALS SECTION (from code1, renamed to fit your theme) -->
-<section class="section-title">Top Deals</section>
-<div class="product-grid top-deals-grid">
-  <div class="product-card">
-    <img src="https://m.media-amazon.com/images/I/71i2XhHU3pL._SL1500_.jpg" alt="Smart Watch">
-    <h3>Smart Watch</h3>
-    <p>₹999</p>
-  </div>
-
-  <div class="product-card">
-    <img src="https://m.media-amazon.com/images/I/81PjNQ6vHGL._SL1500_.jpg" alt="Wireless Earbuds">
-    <h3>Wireless Earbuds</h3>
-    <p>₹799</p>
-  </div>
-
-  <div class="product-card">
-    <img src="https://m.media-amazon.com/images/I/71xb2xkN5qL._SL1500_.jpg" alt="Bluetooth Speaker">
-    <h3>Bluetooth Speaker</h3>
-    <p>₹599</p>
-  </div>
-</div>
-
-<!-- FEATURED PRODUCTS (from code2) -->
-<section class="featured">
-  <h2>Top Bargain Picks</h2>
-  <div class="product-grid">
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2014/04/02/10/56/shoes-303898_1280.png" alt="Product 1">
-      <h3>Casual Shoes</h3>
-      <p>₹999 <span class="strike">₹1499</span></p>
-      <button>Bargain Now</button>
-    </div>
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2015/01/09/11/09/smart-watch-593012_1280.jpg" alt="Product 2">
-      <h3>Smart Watch</h3>
-      <p>₹1899 <span class="strike">₹2499</span></p>
-      <button>Bargain Now</button>
-    </div>
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2017/08/06/06/24/fashion-2596105_1280.jpg" alt="Product 3">
-      <h3>Designer Jacket</h3>
-      <p>₹1599 <span class="strike">₹1999</span></p>
-      <button>Bargain Now</button>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS (from code2) -->
-<section class="testimonials">
-  <h2>What Our Shoppers Say</h2>
-  <div class="testimonial-grid">
-    <div class="testimonial-card">
-      <p>"Best site for deals! I saved ₹500 on my first purchase. Love the bargain feature!"</p>
-      <h4>— Priya Sharma</h4>
-    </div>
-    <div class="testimonial-card">
-      <p>"Finally, an e-commerce site where I can negotiate like a pro. B4iBorn rocks!"</p>
-      <h4>— Rohan Mehta</h4>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER (from code2) -->
-<footer class="footer">
-  <p>© 2025 B4iBorn. All Rights Reserved.</p>
-  <div class="social">
-    <a href="#">Facebook</a>
-    <a href="#">Instagram</a>
-    <a href="#">LinkedIn</a>
-  </div>
-</footer>
-
+        // Continuous Float
+        gsap.to(".floating-card", { y: -20, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    </script>
 </body>
+
 </html>

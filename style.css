@@ -1,0 +1,305 @@
+:root {
+    --bg-dark: #0f172a;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --primary: #8b5cf6;
+    /* Violet */
+    --accent: #06b6d4;
+    /* Cyan */
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --bot-msg-bg: rgba(255, 255, 255, 0.1);
+    --user-msg-bg: #8b5cf6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 20%);
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation */
+.glass-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 2rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text-main);
+}
+
+/* Main Layout */
+.bargain-arena {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    height: calc(100vh - 140px);
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Product Card */
+.product-card {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.live-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ff4d4d;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    backdrop-filter: blur(5px);
+}
+
+.product-details h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(180deg, #fff, #ccc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.product-details .description {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.price-tag {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.price-tag .label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+
+.price-tag .amount {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.specs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: var(--text-muted);
+}
+
+/* Bargain Console */
+.bargain-console {
+    display: flex;
+    flex-direction: column;
+}
+
+.console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 1rem;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    box-shadow: 0 0 10px #22c55e;
+}
+
+.chat-window {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.message {
+    max-width: 80%;
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    line-height: 1.5;
+    font-size: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: var(--bot-msg-bg);
+    border-bottom-left-radius: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: var(--user-msg-bg);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.input-area {
+    display: flex;
+    gap: 1rem;
+}
+
+input {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 1rem;
+    border-radius: 12px;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--primary);
+}
+
+button {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border: none;
+    padding: 0 2rem;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 900px) {
+    .bargain-arena {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .chat-window {
+        min-height: 400px;
+    }
+}

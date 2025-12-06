@@ -1,8 +1,21 @@
 const dealsGrid = document.getElementById('dealsGrid');
-const filterBtns = document.querySelectorAll('.filter-btn');
+const filterBtns = document.querySelectorAll('.filter-side-btn');
 
 // Initial Load
-document.addEventListener('DOMContentLoaded', fetchDeals);
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = window.defaultCategory || urlParams.get('category') || 'all';
+
+    // Update active button state
+    filterBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.category === category) {
+            btn.classList.add('active');
+        }
+    });
+
+    fetchDeals(category);
+});
 
 // Filter Logic
 filterBtns.forEach(btn => {

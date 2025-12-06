@@ -29,28 +29,43 @@
             </div>
         </nav>
 
-        <!-- Main Content -->
-        <main class="deals-container">
-            <header class="deals-header">
-                <h1>Today's Top Picks</h1>
-                <p>Curated affiliate deals just for you. Prices update daily!</p>
-            </header>
-
-            <div class="filter-bar glass-panel">
-                <button class="filter-btn active" data-category="all">All</button>
-                <button class="filter-btn" data-category="tech">Tech</button>
-                <button class="filter-btn" data-category="fashion">Fashion</button>
-                <button class="filter-btn" data-category="home">Home</button>
-            </div>
-
-            <div class="deals-grid" id="dealsGrid">
-                <!-- Deals will be injected here via JS -->
-                <div class="loading-deals">
-                    <div class="spinner"></div>
-                    <p>Fetching latest offers...</p>
+        <!-- Main Content with Sidebar Layout -->
+        <div class="deals-layout">
+            <!-- Sidebar Filters -->
+            <aside class="deals-sidebar glass-panel">
+                <h3>Categories</h3>
+                <div class="sidebar-filters">
+                    <button class="filter-side-btn active" data-category="all"><i class="fas fa-th-large"></i> All
+                        Deals</button>
+                    <button class="filter-side-btn" data-category="mobiles"><i class="fas fa-mobile-alt"></i>
+                        Mobiles</button>
+                    <button class="filter-side-btn" data-category="electronics"><i class="fas fa-laptop"></i> Tech &
+                        Gadgets</button>
+                    <button class="filter-side-btn" data-category="fashion"><i class="fas fa-tshirt"></i>
+                        Fashion</button>
+                    <button class="filter-side-btn" data-category="home"><i class="fas fa-couch"></i> Home &
+                        Living</button>
+                    <button class="filter-side-btn" data-category="grocery"><i class="fas fa-apple-alt"></i>
+                        Grocery</button>
                 </div>
-            </div>
-        </main>
+            </aside>
+
+            <!-- Deals Grid Area -->
+            <main class="deals-main">
+                <header class="deals-header-left">
+                    <h1>Today's Top Picks</h1>
+                    <p>Curated affiliate deals just for you. Prices update daily!</p>
+                </header>
+
+                <div class="deals-grid" id="dealsGrid">
+                    <!-- Deals will be injected here via JS -->
+                    <div class="loading-deals">
+                        <div class="spinner"></div>
+                        <p>Fetching latest offers...</p>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
 
     <script src="deals.js"></script>

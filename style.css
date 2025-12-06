@@ -71,10 +71,205 @@ body {
 
 /* Main Layout */
 .bargain-arena {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    height: calc(100vh - 140px);
+    min-height: calc(100vh - 140px);
+}
+
+.p-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.p-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding-bottom: 4rem;
+}
+
+.bargain-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.bargain-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.card-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: white;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    transition: transform 0.5s;
+}
+
+.bargain-card:hover img {
+    transform: scale(1.05);
+}
+
+.badge-live,
+.badge-fixed {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-live {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+}
+
+.badge-fixed {
+    background: rgba(34, 197, 94, 0.9);
+    color: white;
+}
+
+.card-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    min-height: 2.8em;
+}
+
+.card-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.bargain-btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+}
+
+.amazon-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    color: white;
+}
+
+.amazon-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 500px;
+    height: 80vh;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    background: #1e293b;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.modal-product-info {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.modal-product-info img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: white;
+}
+
+.bargain-console {
+    height: calc(100% - 100px);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .glass-panel {
@@ -302,4 +497,34 @@ button:hover {
     .chat-window {
         min-height: 400px;
     }
+}
+
+/* Footer Styling */
+footer {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.socials a {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: var(--primary);
 }

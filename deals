@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatBazaro | Exclusive Deals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="deals.css"> <!-- New styles for deals -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <div class="logo">BharatBazaro</div>
+            <div class="nav-links">
+                <a href="index.html">Bargain Zone</a>
+                <a href="deals.html" class="active">Hot Deals</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="deals-container">
+            <header class="deals-header">
+                <h1>Today's Top Picks</h1>
+                <p>Curated affiliate deals just for you. Prices update daily!</p>
+            </header>
+
+            <div class="filter-bar glass-panel">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="tech">Tech</button>
+                <button class="filter-btn" data-category="fashion">Fashion</button>
+                <button class="filter-btn" data-category="home">Home</button>
+            </div>
+
+            <div class="deals-grid" id="dealsGrid">
+                <!-- Deals will be injected here via JS -->
+                <div class="loading-deals">
+                    <div class="spinner"></div>
+                    <p>Fetching latest offers...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="deals.js"></script>
+</body>
+
+</html>

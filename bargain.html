@@ -1,191 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bharatbazaro|Bargain Zone</title>
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      background: #f8fafc;
-      color: #1e293b;
-    }
-
-    /* Navigation Bar */
-    nav {
-      background: #1e3a8a;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-    }
-
-    nav h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      margin: 0;
-    }
-
-    nav li {
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    nav li:hover {
-      color: #a5b4fc;
-    }
-
-    section {
-      display: none;
-      padding: 50px 20px;
-      text-align: center;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      width: 350px;
-      margin: 40px auto;
-      padding: 30px;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .product-card:hover {
-      transform: scale(1.03);
-    }
-
-    .product-card img {
-      width: 100%;
-      border-radius: 15px;
-    }
-
-    .price {
-      font-size: 26px;
-      font-weight: bold;
-      margin: 10px;
-      color: #2563eb;
-    }
-
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    .bargainers {
-      background: #f1f5f9;
-      border-radius: 10px;
-      padding: 15px;
-      margin-top: 20px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #1e3a8a;
-      color: white;
-      margin-top: 50px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatBazaro | Premium Bargain Zone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Optional for icons -->
 </head>
+
 <body>
-  <nav>
-    <h1>Before I Born</h1>
-    <ul>
-      
-      <li onclick="showSection('bargain')">Bargain</li>
-    </ul>
-  </nav>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <div class="logo">BharatBazaro</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="bargain.html" class="active">Bargain Zone</a>
+                <a href="deals.html">Hot Deals</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+        </nav>
 
-  <section id="home" class="active">
-    <h2>Welcome to Before I Born!</h2>
-    <p>Your trusted place for smart deals and baby products.</p>
-  </section>
+        <!-- Main Content -->
+        <main class="bargain-arena">
+            <header class="p-header">
+                <h1>Bargain Arena 🤖</h1>
+                <p>Negotiate prices with our AI. Spot the deals where you can win!</p>
+            </header>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>We help families find the best deals through innovative bargaining features.</p>
-  </section>
-
-  <section id="bargain">
-    <h2>🎯 Real-Time Bargain Zone</h2>
-    <p>Negotiate live and grab your favorite product at the best price!</p>
-
-    <div class="product-card">
-      <img src="https://via.placeholder.com/350x200.png?text=Baby+Cradle" alt="Product Image">
-      <h3>Baby Cradle ComfortPro</h3>
-      <p class="price" id="price">₹1000</p>
-      <p id="status">Available for bargain!</p>
-
-      <button onclick="bargain()">💬 Bargain Now (-10%)</button>
-      <button onclick="checkBargainers()">👥 Show Bargainers</button>
-
-      <div class="bargainers" id="bargainers">No one is waiting yet...</div>
+            <div class="products-grid" id="bargainGrid">
+                <!-- Products injected by JS -->
+            </div>
+        </main>
     </div>
-  </section>
 
-  <footer>
-    © 2025 Before I Born | All rights reserved.
-  </footer>
+    <!-- Bargain Modal -->
+    <div id="bargainModal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <button class="close-modal" id="closeModal">&times;</button>
 
-  <script>
-    let currentPrice = 1000;
-    let bargainersWaiting = 0;
-    let buyers = 0;
+            <div class="modal-product-info">
+                <img id="modalImg" src="" alt="Product">
+                <div>
+                    <h3 id="modalTitle">Product Title</h3>
+                    <p>Asking Price: <span id="modalPrice">₹0</span></p>
+                </div>
+            </div>
 
-    function showSection(sectionId) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-    }
+            <!-- Bargain Console -->
+            <section class="bargain-console">
+                <div class="console-header">
+                    <h2>Negotiation Bot</h2>
+                    <div class="status-indicator online"></div>
+                </div>
 
-    function bargain() {
-      if (buyers === 0) {
-        currentPrice = currentPrice * 0.9; // 10% off
-        document.getElementById("price").innerText = "₹" + currentPrice.toFixed(2);
-        document.getElementById("status").innerText = "Price reduced by 10%! Waiting for buyers...";
-        bargainersWaiting++;
-      } else {
-        document.getElementById("status").innerText = "Price is now fixed. Product already has buyers.";
-      }
-    }
+                <div class="chat-window" id="chatWindow">
+                    <!-- Chat messages -->
+                </div>
 
-    function checkBargainers() {
-      const bargainerBox = document.getElementById("bargainers");
-      if (bargainersWaiting === 0) {
-        bargainerBox.innerText = "No one is waiting yet...";
-      } else if (bargainersWaiting < 5) {
-        bargainerBox.innerText = bargainersWaiting + " users are waiting for this product.";
-      } else {
-        // auto lower price if many are waiting but no buyers
-        currentPrice = currentPrice * 0.95;
-        document.getElementById("price").innerText = "₹" + currentPrice.toFixed(2);
-        bargainerBox.innerText = bargainersWaiting + " users waiting! Price dropped by extra 5%.";
-      }
-    }
-  </script>
+                <div class="input-area">
+                    <input type="number" id="offerInput" placeholder="Enter your offer (₹)..." />
+                    <button id="sendOfferBtn">Make Offer</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
+
 </html>

@@ -92,19 +92,9 @@ function renderDeals(deals) {
 }
 
 function renderFallbackDeals(category) {
-    // Hardcoded list for when server is unreachable
+    // Extensive list of Hot Deals mimicking a real sale event
     let fallbackDeals = [
-        {
-            title: "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
-            image: "https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_UF1000,1000_QL80_.jpg",
-            price: 24990,
-            originalPrice: 29990,
-            discount: 17,
-            rating: 4.5,
-            reviews: 1205,
-            category: "tech",
-            affiliateLink: "https://www.amazon.in/dp/B09XS7JWHH?tag=YOUR_TAG_HERE"
-        },
+        // Mobiles
         {
             title: "Apple iPhone 15 (128 GB) - Black",
             image: "https://m.media-amazon.com/images/I/71657TiFeHL._SX679_.jpg",
@@ -113,61 +103,71 @@ function renderFallbackDeals(category) {
             discount: 9,
             rating: 4.8,
             reviews: 5043,
-            category: "tech",
-            affiliateLink: "https://www.amazon.in/dp/B0BDK62PDX?tag=YOUR_TAG_HERE"
+            category: "mobiles",
+            affiliateLink: "https://www.amazon.in/dp/B0BDK62PDX?tag=dammaiprasad-21"
         },
         {
-            title: "Echo Dot (5th Gen) | Smart speaker with Alexa",
+            title: "OnePlus 12R (Cool Blue, 8GB RAM, 128GB Storage)",
+            image: "https://m.media-amazon.com/images/I/717Qo4MH97L._SX679_.jpg",
+            price: 39999,
+            originalPrice: 42999,
+            discount: 7,
+            rating: 4.5,
+            reviews: 3200,
+            category: "mobiles",
+            affiliateLink: "https://www.amazon.in/dp/B0BSNP4668?tag=dammaiprasad-21"
+        },
+        {
+            title: "Samsung Galaxy M34 5G",
+            image: "https://m.media-amazon.com/images/I/91ItZJh1FDL._SX679_.jpg",
+            price: 15999,
+            originalPrice: 24499,
+            discount: 35,
+            rating: 4.2,
+            reviews: 15000,
+            category: "mobiles",
+            affiliateLink: "https://www.amazon.in/dp/B0C788D792?tag=dammaiprasad-21"
+        },
+
+        // Electronics
+        {
+            title: "Sony WH-1000XM5 Noise Cancelling Headphones",
+            image: "https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_UF1000,1000_QL80_.jpg",
+            price: 24990,
+            originalPrice: 29990,
+            discount: 17,
+            rating: 4.5,
+            reviews: 1205,
+            category: "electronics",
+            affiliateLink: "https://www.amazon.in/dp/B09XS7JWHH?tag=dammaiprasad-21"
+        },
+        {
+            title: "Dell 15 Laptop, Intel Core i5",
+            image: "https://m.media-amazon.com/images/I/51jPUwqqt6L._SX679_.jpg",
+            price: 46990,
+            originalPrice: 66000,
+            discount: 29,
+            rating: 4.1,
+            reviews: 500,
+            category: "electronics",
+            affiliateLink: "https://www.amazon.in/dp/B0HBWK9B31?tag=dammaiprasad-21"
+        },
+        {
+            title: "Echo Dot (5th Gen) | Smart speaker",
             image: "https://m.media-amazon.com/images/I/61WR+9t3OoL._AC_UY327_FMwebp_QL65_.jpg",
             price: 4999,
             originalPrice: 5499,
             discount: 10,
-            rating: 4.3,
-            reviews: 890,
-            category: "tech",
-            affiliateLink: "https://www.amazon.in/dp/B09B8VFJ65?tag=YOUR_TAG_HERE"
+            rating: 4.4,
+            reviews: 8090,
+            category: "electronics",
+            affiliateLink: "https://www.amazon.in/dp/B09B8VFJ65?tag=dammaiprasad-21"
         },
+
+        // Fashion
         {
             title: "Men's Slim Fit Casual Shirt",
             image: "https://m.media-amazon.com/images/I/61hv7K72bZL._AC_UL480_FMwebp_QL65_.jpg",
             price: 699,
             originalPrice: 1499,
             discount: 53,
-            rating: 4.0,
-            reviews: 230,
-            category: "fashion",
-            affiliateLink: "https://amazon.in/your-affiliate-link"
-        },
-        {
-            title: "Philips Air Fryer HD9200/90",
-            image: "https://m.media-amazon.com/images/I/71y7B0qPLXL._AC_UY327_FMwebp_QL65_.jpg",
-            price: 6499,
-            originalPrice: 9999,
-            discount: 35,
-            rating: 4.6,
-            reviews: 3400,
-            category: "home",
-            affiliateLink: "https://amazon.in/your-affiliate-link"
-        }
-    ];
-
-    if (category && category !== 'all') {
-        fallbackDeals = fallbackDeals.filter(d => d.category === category);
-    }
-
-    renderDeals(fallbackDeals);
-}
-
-function renderStars(rating) {
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        if (i <= rating) {
-            stars += '<i class="fas fa-star"></i>';
-        } else if (i - 0.5 <= rating) {
-            stars += '<i class="fas fa-star-half-alt"></i>';
-        } else {
-            stars += '<i class="far fa-star"></i>';
-        }
-    }
-    return stars;
-}

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatBazaro | Bus Watcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="bus-monitor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .bus-container {
+            padding: 100px 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: 10% auto;
+            padding: 2.5rem;
+            border: 1px solid #333;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: white;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 6px 12px;
+            color: #ef4444;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .btn-danger:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .refresh-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 12px 25px;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: var(--glass-bg);
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .refresh-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <div class="logo">BharatBazaro</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="bargain.html">Bargain Zone</a>
+                <a href="deals.html">Hot Deals</a>
+                <a href="bus-monitor.html" class="active">Bus Watcher</a>
+            </div>
+        </nav>
+
+        <div class="bus-container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h1 class="hero-title">Live Bus <span class="highlight">Watcher</span></h1>
+                <p class="hero-subtitle">Real-time alerts for price drops & seat availability across major routes.</p>
+
+                <div class="toolbar">
+                    <button class="refresh-btn active" onclick="openModal('routeModal')">
+                        <i class="fas fa-plus"></i> Add Route
+                    </button>
+                    <button class="refresh-btn" onclick="triggerCheck()">
+                        <i class="fas fa-sync-alt" id="spinIcon"></i> Scan All Now
+                    </button>
+                    <button class="refresh-btn" onclick="openSettings()">
+                        <i class="fas fa-cog"></i> Notification Settings
+                    </button>
+                </div>
+            </div>
+
+            <div class="bus-monitor-grid">
+                <!-- Activity Log -->
+                <aside class="notification-sidebar">
+                    <div class="log-title">
+                        <i class="fas fa-bell text-accent"></i> Activity Alerts
+                    </div>
+                    <div id="log-container" class="log-container">
+                        <!-- Logs will be loaded here -->
+                        <div style="text-align:center; color:rgba(255,255,255,0.3); padding:20px;">No recent alerts.
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Routes List -->
+                <main id="routes-container">
+                    <!-- Routes will be loaded here -->
+                    <div style="text-align: center; color: rgba(255,255,255,0.5); padding: 50px;">
+                        <i class="fas fa-circle-notch fa-spin fa-3x mb-3"></i>
+                        <p>Syncing with bus servers...</p>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Add Route Modal -->
+        <div id="routeModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Monitor New Route</h2>
+                    <span class="close" onclick="closeModal('routeModal')">&times;</span>
+                </div>
+                <div class="form-group">
+                    <label>Route Name</label>
+                    <input type="text" id="routeName" placeholder="e.g. Hyderabad to Vijayawada">
+                </div>
+                <div class="form-group">
+                    <label>RedBus Results URL</label>
+                    <input type="text" id="routeUrl" placeholder="Paste the RedBus search results URL">
+                </div>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 20px;">We'll use Playwright to periodically
+                    scan this URL for changes.</p>
+                <button class="btn-primary" onclick="addRoute()">Add to Watchlist</button>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Notification Configuration</h2>
+                    <span class="close" onclick="closeModal('settingsModal')">&times;</span>
+                </div>
+                <div class="form-group">
+                    <label>Recipient Email</label>
+                    <input type="email" id="notificationEmail" placeholder="your.email@example.com">
+                </div>
+
+                <details style="margin-top: 20px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                    <summary style="cursor: pointer; color: #888; font-size: 0.85rem;">Sender Account (Admin Only)
+                    </summary>
+                    <div style="margin-top: 15px;">
+                        <div class="form-group">
+                            <label>Sender Gmail Account</label>
+                            <input type="email" id="senderEmail" placeholder="app.bot@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Gmail App Password</label>
+                            <input type="password" id="senderPassword" placeholder="16-digit app password">
+                        </div>
+                    </div>
+                </details>
+
+                <button class="btn-primary" onclick="saveSettings()" style="margin-top: 25px;">Update Notification
+                    Bridge</button>
+            </div>
+        </div>
+
+        <footer style="margin-top: 100px;">
+            <div class="footer-content">
+                <p>&copy; 2025 BharatBazaro. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const API_BASE = '/api';
+
+        async function loadData() {
+            await loadRoutes();
+            await loadLogs();
+        }
+
+        async function loadRoutes() {
+            try {
+                const response = await fetch(`${API_BASE}/bus-monitor/routes`);
+                const result = await response.json();
+                if (result.success) renderRoutes(result.data);
+            } catch (error) {
+                document.getElementById('routes-container').innerHTML = '<p style="text-align:center; color:red;">Connection to monitoring service failed.</p>';
+            }
+        }
+
+        async function loadLogs() {
+            try {
+                const response = await fetch(`${API_BASE}/bus-monitor/logs`);
+                const result = await response.json();
+                if (result.success) renderLogs(result.logs);
+            } catch (error) {
+                console.error("Failed to load logs");
+            }
+        }
+
+        function renderLogs(logs) {
+            const container = document.getElementById('log-container');
+            if (!logs || logs.length === 0) {
+                container.innerHTML = '<div style="text-align:center; color:rgba(255,255,255,0.3); padding:20px;">Waiting for first scan...</div>';
+                return;
+            }
+
+            container.innerHTML = logs.map(log => `
+                <div class="log-item ${log.type}">
+                    <div style="font-size: 0.75rem; color: #666; margin-bottom: 5px;">${new Date(log.timestamp).toLocaleTimeString()}</div>
+                    ${log.message}
+                </div>
+            `).join('');
+        }
+
+        function renderRoutes(routes) {
+            const container = document.getElementById('routes-container');
+            container.innerHTML = '';
+
+            if (routes.length === 0) {
+                container.innerHTML = '<div class="glass-panel" style="text-align:center; padding: 60px;"><h3>Watcher is Empty</h3><p>Assign a RedBus route to start monitoring for price drops.</p></div>';
+                return;
+            }
+
+            routes.forEach(route => {
+                let busHtml = '';
+                if (route.lastCheck && route.lastCheck.length > 0) {
+                    busHtml = route.lastCheck.map(bus => {
+                        const isSoldOut = bus.seats.toLowerCase().includes('0') || bus.seats.toLowerCase().includes('sold');
+                        return `
+                        <div class="bus-item">
+                            <span class="bus-name">${bus.name}</span>
+                            <div class="bus-meta">
+                                <div class="bus-price">₹${bus.price}</div>
+                                <span class="bus-seats"><i class="fas fa-chair"></i> ${bus.seats}</span>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <span class="badge ${isSoldOut ? 'badge-sold' : 'badge-available'}">${isSoldOut ? 'Sold Out' : 'Available'}</span>
+                            </div>
+                        </div>
+                        `;
+                    }).join('');
+                } else {
+                    busHtml = '<div style="grid-column: 1/-1; padding: 30px; text-align: center; color: rgba(255,255,255,0.2);">Scan pending for this route...</div>';
+                }
+
+                const card = `
+                <div class="route-card">
+                    <div class="route-header">
+                        <div class="route-title">
+                            <h2 style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px;">${route.name}</h2>
+                            <a href="${route.url}" target="_blank" style="color:var(--accent); text-decoration:none; font-size:0.85rem; font-weight:600;">View Live Source <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <button class="btn-danger" onclick="deleteRoute('${route.id}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="bus-list">
+                        ${busHtml}
+                    </div>
+                </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        async function triggerCheck() {
+            const icon = document.getElementById('spinIcon');
+            icon.classList.add('fa-spin');
+
+            try {
+                const res = await fetch(`${API_BASE}/bus-monitor/check`, { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    const btn = event.target.closest('button');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-satellite-dish fa-spin"></i> Scraping in progress...';
+
+                    setTimeout(() => {
+                        loadData();
+                        btn.innerHTML = originalText;
+                        icon.classList.remove('fa-spin');
+                    }, 15000);
+                }
+            } catch (error) {
+                alert('Scraper offline. Please start the backend.');
+                icon.classList.remove('fa-spin');
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        async function addRoute() {
+            const name = document.getElementById('routeName').value;
+            const url = document.getElementById('routeUrl').value;
+            if (!name || !url) return alert("All fields required");
+
+            const res = await fetch(`${API_BASE}/bus-monitor/routes`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, url })
+            });
+            const data = await res.json();
+            if (data.success) {
+                closeModal('routeModal');
+                loadRoutes();
+                document.getElementById('routeName').value = '';
+                document.getElementById('routeUrl').value = '';
+            }
+        }
+
+        async function deleteRoute(id) {
+            if (!confirm("Remove this route?")) return;
+            await fetch(`${API_BASE}/bus-monitor/routes/${id}`, { method: 'DELETE' });
+            loadRoutes();
+        }
+
+        async function openSettings() {
+            openModal('settingsModal');
+            const res = await fetch(`${API_BASE}/bus-monitor/config`);
+            const data = await res.json();
+            if (data.success && data.config) {
+                document.getElementById('senderEmail').value = data.config.senderEmail || '';
+                document.getElementById('notificationEmail').value = data.config.notificationEmail || '';
+            }
+        }
+
+        async function saveSettings() {
+            const payload = {
+                senderEmail: document.getElementById('senderEmail').value,
+                senderPassword: document.getElementById('senderPassword').value,
+                notificationEmail: document.getElementById('notificationEmail').value
+            };
+            const res = await fetch(`${API_BASE}/bus-monitor/config`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("Smart Alerts configured! We'll notify you soon.");
+                closeModal('settingsModal');
+            }
+        }
+
+        loadData();
+        setInterval(loadData, 30000); // Auto-refresh UI every 30s
+    </script>
+</body>
+
+</html>

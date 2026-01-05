@@ -1,4 +1,6 @@
-// Bargain Zone Logic
+// Product Data is handled by the server in production typically, 
+// for now we keep the static list but point to relative API
+const API_BASE = '/api';
 
 // Combined Product Data (Bargainable & Non-Bargainable)
 const products = [
@@ -145,7 +147,7 @@ function handleOffer() {
     offerInput.value = '';
 
     // Backend Request
-    fetch('http://localhost:3001/api/negotiate', {
+    fetch('/api/negotiate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId: currentProductId, offerAmount: offer })

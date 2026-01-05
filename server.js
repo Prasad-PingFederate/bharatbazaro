@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 3001; // Use Render's port if available
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname)); // Serve frontend from current root directory
+
+// 🧪 CRITICAL: Move Static Middleware to BOTTOM later to ensure API routes are checked FIRST
+// This prevents "Unexpected Token <" errors by ensuring /api routes aren't handled by the static server.
 
 const { checkAndNotify } = require('./services/busMonitor');
 
@@ -45,6 +47,9 @@ app.get('/api/bus-monitor/routes', (req, res) => {
 
     try {
         if (!fs.existsSync(routesPath)) {
+            if (!fs.existsSync(path.join(__dirname, 'data'))) {
+                fs.mkdirSync(path.join(__dirname, 'data'));
+            }
             fs.writeFileSync(routesPath, '[]');
         }
         const routes = JSON.parse(fs.readFileSync(routesPath, 'utf8'));
@@ -162,9 +167,14 @@ app.get('/api/bus-monitor/logs', (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Serving static files (Move to the end to prioritize API)
+app.use(express.static(__dirname));
+
+// Fallback for SPA-like behavior: Serve index.html for unknown routes (optional)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-
-
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

@@ -2,10 +2,10 @@
     "name": "bharatbazaro",
     "version": "1.0.0",
     "description": "AI-Powered Bargain Marketplace & Bus Watcher",
-    "main": "backend/server.js",
+    "main": "server.js",
     "scripts": {
-        "start": "node backend/server.js",
-        "render-build": "npm install && cd backend && npm install && npx playwright install --with-deps chromium"
+        "start": "node server.js",
+        "render-build": "npm install && npx playwright install chromium"
     },
     "dependencies": {
         "body-parser": "^1.20.2",

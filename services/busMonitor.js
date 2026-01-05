@@ -2,6 +2,7 @@ const { chromium } = require('playwright');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
+const { scrapeRedBusLight } = require('./lightScraper');
 
 const HISTORY_FILE = path.join(__dirname, '../data/bus_history.json');
 const ROUTES_FILE = path.join(__dirname, '../data/bus_routes.json');
@@ -243,7 +244,15 @@ async function checkAndNotify() {
     for (const route of routesToProcess) {
         try {
             console.log(`Processing: ${route.name}`);
-            const currentBuses = await scrapeRedBus(route.url);
+
+            // Try lightweight scraper first (uses ~20MB vs Chromium's ~300MB)
+            let currentBuses = await scrapeRedBusLight(route.url);
+
+            // If light scraper fails or returns no results, fallback to Chromium
+            if (!currentBuses || currentBuses.length === 0) {
+                console.log(`Light scraper found no data, trying Chromium...`);
+                currentBuses = await scrapeRedBus(route.url);
+            }
 
             if (!currentBuses || currentBuses.length === 0) {
                 console.log(`No data for ${route.name}.`);

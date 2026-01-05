@@ -192,6 +192,8 @@ async function checkAndNotify() {
             const lastRunBuses = history[route.id] || [];
             updates[route.id] = currentBuses;
 
+            const routeNotifications = [];
+
             // Compare logic
             for (const bus of currentBuses) {
                 const oldBus = lastRunBuses.find(b => b.name === bus.name);
@@ -199,17 +201,26 @@ async function checkAndNotify() {
                 if (oldBus) {
                     // Check Price Drop
                     if (bus.price < oldBus.price) {
-                        notifications.push(`PRICE DROP: ${bus.name} on route ${route.name} is now ₹${bus.price} (was ₹${oldBus.price})`);
+                        routeNotifications.push(`PRICE DROP: ${bus.name} on route ${route.name} is now ₹${bus.price} (was ₹${oldBus.price})`);
                     }
                     // Check New Seats
                     if ((!oldBus.seats || oldBus.seats.includes('0') || oldBus.seats.toLowerCase().includes('sold')) &&
                         (bus.seats && !bus.seats.includes('0') && !bus.seats.toLowerCase().includes('sold'))) {
-                        notifications.push(`SEATS AVAILABLE: ${bus.name} on route ${route.name} now has ${bus.seats}`);
+                        routeNotifications.push(`SEATS AVAILABLE: ${bus.name} on route ${route.name} now has ${bus.seats}`);
                     }
                 } else {
                     // New Bus found
-                    notifications.push(`NEW BUS: ${bus.name} found on route ${route.name} for ₹${bus.price}`);
+                    routeNotifications.push(`NEW BUS: ${bus.name} found on route ${route.name} for ₹${bus.price}`);
                 }
+            }
+
+            if (routeNotifications.length > 0) {
+                // Send specific notification to the route's owner email
+                if (route.email) {
+                    console.log(`Sending alerts to ${route.email} for route ${route.name}`);
+                    await sendEmail(route.email, `Bus Alert: ${route.name}`, routeNotifications.join('\n'));
+                }
+                notifications = [...notifications, ...routeNotifications];
             }
         } catch (routeError) {
             console.error(`Failed to process route ${route.id}:`, routeError.message);

@@ -231,8 +231,12 @@
                     <label>RedBus Results URL</label>
                     <input type="text" id="routeUrl" placeholder="Paste the RedBus search results URL">
                 </div>
-                <p style="font-size: 0.8rem; color: #666; margin-bottom: 20px;">We'll use Playwright to periodically
-                    scan this URL for changes.</p>
+                <div class="form-group">
+                    <label>Your Email (for Price Alerts)</label>
+                    <input type="email" id="routeEmail" placeholder="where.to.send@alerts.com">
+                </div>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 20px;">We'll email you immediately if the price
+                    drops or seats become available.</p>
                 <button class="btn-primary" onclick="addRoute()">Add to Watchlist</button>
             </div>
         </div>
@@ -398,12 +402,13 @@
         async function addRoute() {
             const name = document.getElementById('routeName').value;
             const url = document.getElementById('routeUrl').value;
-            if (!name || !url) return alert("All fields required");
+            const email = document.getElementById('routeEmail').value;
+            if (!name || !url || !email) return alert("All fields required (Name, URL, and Email)");
 
             const res = await fetch(`${API_BASE}/bus-monitor/routes`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, url })
+                body: JSON.stringify({ name, url, email })
             });
             const data = await res.json();
             if (data.success) {

@@ -65,8 +65,10 @@ app.get('/api/bus-monitor/routes', (req, res) => {
 
 // Add a new route
 app.post('/api/bus-monitor/routes', (req, res) => {
-    const { name, url } = req.body;
-    if (!name || !url) return res.status(400).json({ success: false, message: "Name and URL required" });
+    const { name, url, email } = req.body;
+    if (!name || !url || !email) {
+        return res.status(400).json({ success: false, message: "Name, URL, and Email are all required" });
+    }
 
     const routesPath = path.join(__dirname, 'data', 'bus_routes.json');
     try {
@@ -78,7 +80,9 @@ app.post('/api/bus-monitor/routes', (req, res) => {
         const newRoute = {
             id: Date.now().toString(),
             name,
-            url
+            url,
+            email: email || '', // Store individual notification email, default to empty string
+            lastCheck: [] // Initialize lastCheck for new routes
         };
         routes.push(newRoute);
         fs.writeFileSync(routesPath, JSON.stringify(routes, null, 2));

@@ -1,0 +1,274 @@
+/* Top Category Bar (Flipkart Style) */
+.top-category-bar {
+    display: flex;
+    justify-content: center;
+    /* Center initially, or flex-start if scrollable */
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background: white;
+    /* Flipkart-like white strip */
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.top-category-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.top-cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #333;
+    /* Dark text for contrast on white */
+    transition: transform 0.2s;
+    min-width: 80px;
+}
+
+.top-cat-item:hover {
+    transform: translateY(-5px);
+    color: var(--primary);
+    /* Brand color on hover */
+}
+
+.top-icon-img {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    /* inner image clipped to circle */
+    background: white;
+    /* optional, behind transparent images */
+}
+
+.top-icon-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Changed from cover to contain to prevent cropping */
+    padding: 5px;
+    /* Add padding so it doesn't touch the edges */
+}
+
+/* Specific colors now applied to the container border/shadow on hover, not the image background */
+.top-cat-item:hover .top-icon-img {
+    box-shadow: 0 0 0 2px var(--primary);
+    transform: scale(1.05);
+    transition: all 0.3s;
+}
+
+.top-cat-item span {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    min-height: 450px;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: visible;
+}
+
+.hero-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+}
+
+.hero-title .highlight {
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.primary-btn {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-effect:hover {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+    transform: translateY(-3px);
+}
+
+.secondary-btn {
+    padding: 1rem 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.hero-visual {
+    flex: 1;
+    position: relative;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.floating-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.floating-card img {
+    border-radius: 15px;
+    display: block;
+}
+
+.c1 {
+    transform: rotate(-10deg) translateX(-50px);
+    z-index: 1;
+    width: 250px;
+}
+
+.c1 img {
+    width: 100%;
+}
+
+.c2 {
+    transform: rotate(10deg) translateX(50px) translateY(50px);
+    z-index: 2;
+    width: 220px;
+}
+
+.c2 img {
+    width: 100%;
+}
+
+.card-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ef4444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Featured Mini Grid */
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.mini-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mini-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mini-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.mini-card .info h4 {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.mini-card .info .price {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .top-category-bar {
+        justify-content: flex-start;
+        /* Ensure scroll on mobile */
+    }
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    .hero-content {
+        margin-bottom: 3rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .cta-group {
+        justify-content: center;
+    }
+}

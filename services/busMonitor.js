@@ -235,10 +235,10 @@ async function checkAndNotify() {
     const updates = {};
     let notifications = [];
 
-    // Limit to 3 routes per scan to avoid memory issues on Render's free tier
-    const routesToProcess = routes.slice(0, 3);
-    if (routes.length > 3) {
-        console.log(`Processing first 3 of ${routes.length} routes to conserve memory`);
+    // Process only 1 route per scan to avoid memory issues on Render's free tier
+    const routesToProcess = routes.slice(0, 1);
+    if (routes.length > 1) {
+        console.log(`Processing first 1 of ${routes.length} routes to conserve memory`);
     }
 
     for (const route of routesToProcess) {

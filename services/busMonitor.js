@@ -88,7 +88,31 @@ async function scrapeRedBus(url) {
         console.log("Launching Chromium...");
         browser = await chromium.launch({
             headless: true,
-            args: ['--disable-http2', '--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--disable-dev-shm-usage']
+            args: [
+                '--disable-http2',
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-gpu',
+                '--disable-dev-shm-usage',
+                '--disable-software-rasterizer',
+                '--disable-extensions',
+                '--disable-background-networking',
+                '--disable-background-timer-throttling',
+                '--disable-backgrounding-occluded-windows',
+                '--disable-breakpad',
+                '--disable-component-extensions-with-background-pages',
+                '--disable-features=TranslateUI,BlinkGenPropertyTrees',
+                '--disable-ipc-flooding-protection',
+                '--disable-renderer-backgrounding',
+                '--enable-features=NetworkService,NetworkServiceInProcess',
+                '--force-color-profile=srgb',
+                '--hide-scrollbars',
+                '--metrics-recording-only',
+                '--mute-audio',
+                '--no-first-run',
+                '--disable-blink-features=AutomationControlled',
+                '--single-process' // Critical for low memory
+            ]
         });
 
         // Emulate mobile device for a lighter page version
@@ -210,7 +234,13 @@ async function checkAndNotify() {
     const updates = {};
     let notifications = [];
 
-    for (const route of routes) {
+    // Limit to 3 routes per scan to avoid memory issues on Render's free tier
+    const routesToProcess = routes.slice(0, 3);
+    if (routes.length > 3) {
+        console.log(`Processing first 3 of ${routes.length} routes to conserve memory`);
+    }
+
+    for (const route of routesToProcess) {
         try {
             console.log(`Processing: ${route.name}`);
             const currentBuses = await scrapeRedBus(route.url);

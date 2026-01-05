@@ -282,7 +282,10 @@
     </div>
 
     <script>
-        const isLocal = window.location.protocol === 'file:' || window.location.hostname === 'localhost';
+        const isLocal = window.location.protocol === 'file:' ||
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1' ||
+            window.location.hostname === '::1';
         const API_BASE = isLocal ? 'http://localhost:3001/api' : '/api';
 
         async function loadData() {

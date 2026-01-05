@@ -65,8 +65,11 @@ app.get('/api/bus-monitor/routes', (req, res) => {
 
 // Add a new route
 app.post('/api/bus-monitor/routes', (req, res) => {
+    console.log("Received new route request:", req.body);
     const { name, url, email } = req.body;
+
     if (!name || !url || !email) {
+        console.warn("Missing required fields for new route");
         return res.status(400).json({ success: false, message: "Name, URL, and Email are all required" });
     }
 
@@ -79,16 +82,19 @@ app.post('/api/bus-monitor/routes', (req, res) => {
 
         const newRoute = {
             id: Date.now().toString(),
-            name,
-            url,
-            email: email || '', // Store individual notification email, default to empty string
-            lastCheck: [] // Initialize lastCheck for new routes
+            name: name,
+            url: url,
+            email: email,
+            lastCheck: []
         };
+
         routes.push(newRoute);
         fs.writeFileSync(routesPath, JSON.stringify(routes, null, 2));
+        console.log("Success: Route saved to database.");
         res.json({ success: true, message: "Route added successfully" });
     } catch (e) {
-        res.status(500).json({ success: false, message: "Failed to save route" });
+        console.error("Failed to save route:", e);
+        res.status(500).json({ success: false, message: "Internal Server Error: Failed to save route" });
     }
 });
 

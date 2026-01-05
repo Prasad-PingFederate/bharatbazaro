@@ -408,18 +408,29 @@
             const email = document.getElementById('routeEmail').value;
             if (!name || !url || !email) return alert("All fields required (Name, URL, and Email)");
 
-            const res = await fetch(`${API_BASE}/bus-monitor/routes`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, url, email })
-            });
-            const data = await res.json();
-            if (data.success) {
-                closeModal('routeModal');
-                loadData(); // Reload both routes and logs
-                document.getElementById('routeName').value = '';
-                document.getElementById('routeUrl').value = '';
-                document.getElementById('routeEmail').value = '';
+            try {
+                const res = await fetch(`${API_BASE}/bus-monitor/routes`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, url, email })
+                });
+
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.message || "Server Error");
+                }
+
+                const data = await res.json();
+                if (data.success) {
+                    closeModal('routeModal');
+                    loadData();
+                    document.getElementById('routeName').value = '';
+                    document.getElementById('routeUrl').value = '';
+                    document.getElementById('routeEmail').value = '';
+                }
+            } catch (error) {
+                console.error("Add Route Error:", error);
+                alert("❌ Error: " + error.message);
             }
         }
 

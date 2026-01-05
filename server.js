@@ -156,7 +156,10 @@ app.post('/api/bus-monitor/config', (req, res) => {
     }
 });
 
-// Get Activity Logs
+// Health Check
+app.get('/api/health', (req, res) => res.json({ status: "ok", message: "Bus Monitor API is online" }));
+
+// Activity Logs
 app.get('/api/bus-monitor/logs', (req, res) => {
     const logsPath = path.join(__dirname, 'data', 'bus_logs.json');
     if (fs.existsSync(logsPath)) {
@@ -167,12 +170,17 @@ app.get('/api/bus-monitor/logs', (req, res) => {
     }
 });
 
-// Serving static files (Move to the end to prioritize API)
+// Serving static files (Move to the end)
 app.use(express.static(__dirname));
 
-// Fallback for SPA-like behavior: Serve index.html for unknown routes (optional)
-app.get('*', (req, res) => {
+// Fallback for SPA-like behavior: Serve index.html for unknown routes (EXCEPT API)
+app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Explicit 404 for missing API routes (to prevent HTML leakage)
+app.all('/api/*', (req, res) => {
+    res.status(404).json({ success: false, message: `API Route ${req.url} Not Found` });
 });
 
 app.listen(PORT, () => {

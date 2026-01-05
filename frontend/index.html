@@ -4,56 +4,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO Meta Tags -->
-    <title>BharatBazaro | India's First AI-Powered Bargain Marketplace</title>
-    <meta name="description"
-        content="Shop smart at BharatBazaro. Experience the future of online shopping with AI bargaining, exclusive Amazon deals, and best prices on mobiles, fashion, and electronics.">
-    <meta name="keywords"
-        content="BharatBazaro, AI shopping, online shopping India, bargain bot, Amazon deals, price negotiation, best mobile prices, discount fashion">
-    <meta name="author" content="BharatBazaro">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bharatbazaro.com/">
-    <meta property="og:title" content="BharatBazaro | Shop Smart. Bargain Hard.">
-    <meta property="og:description"
-        content="India's first AI-powered marketplace where YOU set the price. Explore exclusive deals.">
-    <meta property="og:image"
-        content="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=1200&q=80">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://bharatbazaro.com/">
-    <meta property="twitter:title" content="BharatBazaro | AI Bargain Marketplace">
-    <meta property="twitter:description" content="Don't just shop. Bargain. Get the best deals on Amazon products now.">
-    <meta property="twitter:image"
-        content="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=1200&q=80">
-
-    <!-- Styles & Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>BharatBazaro | Bus Watcher</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <!-- Shared Core Styles -->
-    <link rel="stylesheet" href="home.css"> <!-- Landing Page Specifics -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        .bus-container {
+            padding: 120px 20px 40px;
+            /* Top padding for fixed nav */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    <!-- Structured Data (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "BharatBazaro",
-      "url": "https://bharatbazaro.com/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://bharatbazaro.com/deals.html?search={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: 10% auto;
+            padding: 2rem;
+            border: 1px solid #333;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .route-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .route-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .route-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .route-title h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            border: none;
+            padding: 10px 25px;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .bus-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .bus-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .bus-item.sold-out {
+            border-left-color: #f44336;
+            opacity: 0.7;
+        }
+
+        .bus-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .bus-price {
+            font-size: 1.25rem;
+            color: #FFEB3B;
+            font-weight: bold;
+        }
+
+        .bus-seats {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+            display: block;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+    </style>
+</head>
 
 <body>
     <div class="app-container">
@@ -61,128 +219,280 @@
         <nav class="glass-nav">
             <div class="logo">BharatBazaro</div>
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
+                <a href="index.html">Home</a>
                 <a href="bargain.html">Bargain Zone</a>
                 <a href="deals.html">Hot Deals</a>
-                <a href="bus-monitor.html">Bus Watcher</a>
-                <a href="signup.html" class="btn-signup">Sign Up</a>
+                <a href="bus-monitor.html" class="active">Bus Watcher</a>
             </div>
         </nav>
 
-        <!-- Top Category Bar (Flipkart Style) -->
-        <section class="top-category-bar">
-            <a href="mobiles.html" class="top-cat-item">
-                <div class="top-icon-img">
-                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&q=80" alt="Mobiles">
-                </div>
-                <span>Mobiles</span>
-            </a>
-            <a href="fashion.html" class="top-cat-item">
-                <div class="top-icon-img">
-                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=100&q=80" alt="Fashion">
-                </div>
-                <span>Fashion</span>
-            </a>
-            <a href="electronics.html" class="top-cat-item">
-                <div class="top-icon-img">
-                    <img src="https://images.unsplash.com/photo-1498049860654-af1a5c5668ba?w=100&q=80"
-                        alt="Electronics">
-                </div>
-                <span>Electronics</span>
-            </a>
-            <a href="home.html" class="top-cat-item">
-                <div class="top-icon-img">
-                    <img src="https://images.unsplash.com/photo-1583847661884-3883d81a6157?w=100&q=80" alt="Home">
-                </div>
-                <span>Home</span>
-            </a>
-            <a href="grocery.html" class="top-cat-item">
-                <div class="top-icon-img">
-                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=100&q=80" alt="Grocery">
-                </div>
-                <span>Grocery</span>
-            </a>
-        </section>
+        <div class="bus-container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h1 class="hero-title" style="font-size: 3rem;">Live Bus <span class="highlight">Monitor</span></h1>
+                <p class="hero-subtitle">Track prices & seat availability in real-time across major routes.</p>
 
-        <!-- Hero Section -->
-        <header class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Shop Smart.<br> <span class="highlight">Bargain Hard.</span></h1>
-                <p class="hero-subtitle">Experience India's first AI-powered marketplace where YOU set the price.
-                    Explore exclusive deals or negotiate live with our bot.</p>
-                <div class="cta-group">
-                    <a href="bargain.html" class="primary-btn glow-effect">Start Bargaining <i
-                            class="fas fa-robot"></i></a>
-                    <a href="deals.html" class="secondary-btn">View Today's Deals <i class="fas fa-fire"></i></a>
+                <div class="toolbar">
+                    <button class="refresh-btn" onclick="openModal('routeModal')">
+                        <i class="fas fa-plus"></i> Add Route
+                    </button>
+                    <button class="refresh-btn" onclick="triggerCheck()">
+                        <i class="fas fa-sync-alt" id="spinIcon"></i> Check Now
+                    </button>
+                    <button class="refresh-btn" onclick="openSettings()" style="background: #333;">
+                        <i class="fas fa-cog"></i> Settings
+                    </button>
                 </div>
             </div>
 
-            <div class="hero-visual">
-                <div class="floating-card c1">
-                    <img src="https://m.media-amazon.com/images/I/71657TiFeHL._SX679_.jpg" alt="iPhone 15">
-                    <div class="card-badge">-15%</div>
-                </div>
-                <div class="floating-card c2">
-                    <img src="https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_UF1000,1000_QL80_.jpg"
-                        alt="Headphones">
-                    <div class="card-badge">Bot Ready</div>
-                </div>
+            <div id="routes-container">
+                <!-- Routes will be loaded here -->
+                <div style="text-align: center; color: rgba(255,255,255,0.5);">Loading route data...</div>
             </div>
-        </header>
+        </div>
 
-        <!-- Featured Collections -->
-        <section class="featured-section glass-panel">
-            <div class="section-header">
-                <h3>Trending Right Now</h3>
-                <a href="deals.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        <!-- Add Route Modal -->
+        <div id="routeModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add New Route</h2>
+                    <span class="close" onclick="closeModal('routeModal')">&times;</span>
+                </div>
+                <div class="form-group">
+                    <label>Route Name (e.g. Bangalore to Chennai)</label>
+                    <input type="text" id="routeName" placeholder="Enter a descriptive name">
+                </div>
+                <div class="form-group">
+                    <label>RedBus URL</label>
+                    <input type="text" id="routeUrl" placeholder="https://www.redbus.in/bus-tickets/...">
+                </div>
+                <button class="btn-primary" onclick="addRoute()">Add Route</button>
             </div>
-            <div class="featured-grid">
-                <!-- Static Affiliates for Demo -->
-                <a href="https://www.amazon.in/dp/B09XS7JWHH?tag=YOUR_TAG_HERE" target="_blank" class="mini-card">
-                    <img src="https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_UF1000,1000_QL80_.jpg" alt="Product">
-                    <div class="info">
-                        <h4>Sony XM5</h4>
-                        <span class="price">₹24,990</span>
-                    </div>
-                </a>
-                <a href="https://www.amazon.in/dp/B0BDK62PDX?tag=YOUR_TAG_HERE" target="_blank" class="mini-card">
-                    <img src="https://m.media-amazon.com/images/I/71657TiFeHL._SX679_.jpg" alt="Product">
-                    <div class="info">
-                        <h4>iPhone 15</h4>
-                        <span class="price">₹72,999</span>
-                    </div>
-                </a>
-                <a href="https://www.amazon.in/dp/B09B8VFJ65?tag=YOUR_TAG_HERE" target="_blank" class="mini-card">
-                    <img src="https://m.media-amazon.com/images/I/61WR+9t3OoL._AC_UY327_FMwebp_QL65_.jpg" alt="Product">
-                    <div class="info">
-                        <h4>Echo Dot 5</h4>
-                        <span class="price">₹4,999</span>
-                    </div>
-                </a>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Settings</h2>
+                    <span class="close" onclick="closeModal('settingsModal')">&times;</span>
+                </div>
+                <p style="font-size: 0.9rem; color: #888; margin-bottom: 15px;">Configure your email to receive price
+                    drop alerts. Using an App Password is recommended for Gmail.</p>
+
+                <div class="form-group">
+                    <label>Your Email (Reciever)</label>
+                    <input type="email" id="notificationEmail" placeholder="where.to.send@example.com">
+                </div>
+
+                <hr style="border-color: #333; margin: 15px 0;">
+                <h3 style="font-size: 1rem; margin-bottom: 10px;">Sender Configuration (Advanced)</h3>
+
+                <div class="form-group">
+                    <label>Sender Email (Gmail)</label>
+                    <input type="email" id="senderEmail" placeholder="bot.sender@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>App Password</label>
+                    <input type="password" id="senderPassword" placeholder="Your 16-digit App Password">
+                </div>
+
+                <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
             </div>
-        </section>
+        </div>
 
         <footer>
             <div class="footer-content">
                 <p>&copy; 2025 BharatBazaro. All rights reserved.</p>
-                <div class="socials">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                </div>
             </div>
         </footer>
     </div>
 
     <script>
-        // Simple GSAP Animation for Hero
-        gsap.from(".hero-title", { duration: 1, y: 50, opacity: 0, ease: "power3.out" });
-        gsap.from(".hero-subtitle", { duration: 1, y: 30, opacity: 0, delay: 0.3, ease: "power3.out" });
-        gsap.from(".cta-group", { duration: 1, y: 30, opacity: 0, delay: 0.6, ease: "power3.out" });
-        gsap.from(".floating-card", { duration: 1.5, y: 100, opacity: 0, stagger: 0.2, delay: 0.5, ease: "elastic.out(1, 0.5)" });
+        const API_BASE = 'http://localhost:3001/api';
 
-        // Continuous Float
-        gsap.to(".floating-card", { y: -20, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        async function loadRoutes() {
+            try {
+                const response = await fetch(`${API_BASE}/bus-monitor/routes`);
+                const result = await response.json();
+
+                if (result.success) {
+                    renderRoutes(result.data);
+                }
+            } catch (error) {
+                console.error("Failed to load routes", error);
+                document.getElementById('routes-container').innerHTML = '<p style="text-align:center; color:red;">Failed to connect to backend.</p>';
+            }
+        }
+
+        function renderRoutes(routes) {
+            const container = document.getElementById('routes-container');
+            container.innerHTML = '';
+
+            if (routes.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 10px;"><h3>No Routes Added</h3><p>Click "Add Route" to start monitoring.</p></div>';
+                return;
+            }
+
+            routes.forEach(route => {
+                let busHtml = '';
+                if (route.lastCheck && route.lastCheck.length > 0) {
+                    busHtml = route.lastCheck.map(bus => {
+                        const isSoldOut = bus.seats.toLowerCase().includes('0') || bus.seats.toLowerCase().includes('sold');
+                        return `
+                        <div class="bus-item ${isSoldOut ? 'sold-out' : ''}">
+                            <span class="bus-name">${bus.name}</span>
+                            <div class="bus-price">₹${bus.price}</div>
+                            <span class="bus-seats"><i class="fas fa-chair"></i> ${bus.seats}</span>
+                            ${!isSoldOut ? '<span class="status-badge">Available</span>' : ''}
+                        </div>
+                        `;
+                    }).join('');
+                } else {
+                    busHtml = '<p style="color: rgba(255,255,255,0.5);">No data yet. Click "Check Now" to scan.</p>';
+                }
+
+                const card = `
+                <div class="route-card">
+                    <div class="route-header">
+                        <div class="route-title">
+                            <h2>${route.name}</h2>
+                            <a href="${route.url}" target="_blank" style="color:#29B6F6; text-decoration:none; font-size:0.9rem;">View on Site <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <button class="btn-danger" onclick="deleteRoute('${route.id}')">Delete</button>
+                    </div>
+                    <div class="bus-list">
+                        ${busHtml}
+                    </div>
+                </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        async function triggerCheck() {
+            const icon = document.getElementById('spinIcon');
+            icon.classList.add('fa-spin');
+
+            try {
+                const res = await fetch(`${API_BASE}/bus-monitor/check`, { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    alert('Scraping job started! This might take a minute. The page will reload shortly.');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 10000);
+                } else {
+                    alert('Failed to start check: ' + data.message);
+                }
+            } catch (error) {
+                alert('Error starting check.');
+            } finally {
+                icon.classList.remove('fa-spin');
+            }
+        }
+
+        // --- Modal & Form Logic ---
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+
+        async function addRoute() {
+            const name = document.getElementById('routeName').value;
+            const url = document.getElementById('routeUrl').value;
+
+            if (!name || !url) {
+                alert("Please enter both name and URL");
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/bus-monitor/routes`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, url })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    closeModal('routeModal');
+                    loadRoutes();
+                    document.getElementById('routeName').value = '';
+                    document.getElementById('routeUrl').value = '';
+                } else {
+                    alert(data.message);
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Failed to add route");
+            }
+        }
+
+        async function deleteRoute(id) {
+            if (!confirm("Are you sure you want to delete this route?")) return;
+
+            try {
+                await fetch(`${API_BASE}/bus-monitor/routes/${id}`, { method: 'DELETE' });
+                loadRoutes();
+            } catch (e) {
+                alert("Failed to delete route");
+            }
+        }
+
+        async function openSettings() {
+            openModal('settingsModal');
+            // Load current settings
+            try {
+                const res = await fetch(`${API_BASE}/bus-monitor/config`);
+                const data = await res.json();
+                if (data.success && data.config) {
+                    document.getElementById('senderEmail').value = data.config.senderEmail || '';
+                    document.getElementById('notificationEmail').value = data.config.notificationEmail || '';
+                    // Password is not pulled for security
+                }
+            } catch (e) {
+                console.error("Failed to load configs");
+            }
+        }
+
+        async function saveSettings() {
+            const senderEmail = document.getElementById('senderEmail').value;
+            const senderPassword = document.getElementById('senderPassword').value;
+            const notificationEmail = document.getElementById('notificationEmail').value;
+
+            const payload = { senderEmail, notificationEmail };
+            if (senderPassword) payload.senderPassword = senderPassword;
+
+            try {
+                const res = await fetch(`${API_BASE}/bus-monitor/config`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert("Settings saved successfully!");
+                    closeModal('settingsModal');
+                } else {
+                    alert("Failed to save settings.");
+                }
+            } catch (e) {
+                alert("Error saving settings");
+            }
+        }
+
+        // Initial Load
+        loadRoutes();
     </script>
 </body>
 

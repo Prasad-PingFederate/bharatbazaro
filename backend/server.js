@@ -11,201 +11,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('../frontend')); // Serve frontend files
 
-// Mock Database of Products
-const products = {
-    "p1": {
-        id: "p1",
-        name: "Vintage Smart Chronograph",
-        basePrice: 5000,
-        minPrice: 4200, // The absolute specific minimum price
-        stock: 5
-    }
-};
-
-// Bargaining Logic Endpoint
-app.post('/api/negotiate', (req, res) => {
-    const { productId, offerAmount } = req.body;
-
-    const product = products[productId];
-
-    if (!product) {
-        return res.status(404).json({ message: "Product not found" });
-    }
-
-    const offer = parseFloat(offerAmount);
-
-    if (isNaN(offer)) {
-        return res.status(400).json({ message: "Invalid offer amount" });
-    }
-
-    // Business Logic for Bargaining
-    // 1. Instant Acceptance
-    if (offer >= product.basePrice * 0.95) {
-        return res.json({
-            status: 'accepted',
-            message: "Deal! Your offer has been accepted.",
-            finalPrice: offer
-        });
-    }
-
-    // 2. Reject if too low (below 70%)
-    if (offer < product.basePrice * 0.7) {
-        return res.json({
-            status: 'rejected',
-            message: "That's a bit too low for us. Can you improve your offer?",
-            counterOffer: null
-        });
-    }
-
-    // 3. Counter Offer logic
-    // If between 70% and 95%, we counter.
-    // Calculate a counter offer that is the average of their offer and our base/target.
-    // Ideally, we want to gently bring them up.
-
-    // Check if offer is acceptable (above minPrice)
-    if (offer >= product.minPrice) {
-        return res.json({
-            status: 'accepted',
-            message: "You drive a hard bargain! We accept your offer.",
-            finalPrice: offer
-        });
-    }
-
-    // Counter offer strategy: halfway between their offer and the base price, but not lower than minPrice + margin
-    let proposedCounter = Math.floor((product.basePrice + offer) / 2);
-
-    // Ensure counter is reasonable
-    if (proposedCounter < product.minPrice) {
-        proposedCounter = product.minPrice + 100; // Markup slightly
-    }
-
-    return res.json({
-        status: 'counter',
-        message: `We can't do ${offer}, but how about this?`,
-        counterOffer: proposedCounter
-    });
-});
-
-// Signup Endpoint
-// Signup Endpoint
-app.post('/api/signup', (req, res) => {
-    const { firstName, lastName, email, password, gender, dob, nationality, isOver18, acceptedTerms } = req.body;
-
-    // Validate Required Fields
-    if (!firstName || !lastName || !email || !password) {
-        return res.status(400).json({
-            success: false,
-            message: "Missing required fields (First Name, Last Name, Email, Password)."
-        });
-    }
-
-    if (!isOver18) {
-        return res.status(400).json({
-            success: false,
-            message: "You must be 18+ to sign up."
-        });
-    }
-
-    if (!acceptedTerms) {
-        return res.status(400).json({
-            success: false,
-            message: "You must accept the Terms & Conditions."
-        });
-    }
-
-    // Basic email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return res.status(400).json({
-            success: false,
-            message: "Please enter a valid email address."
-        });
-    }
-
-    // Persistent Storage using JSON File
-    const usersPath = path.join(__dirname, 'data', 'users.json');
-
-    fs.readFile(usersPath, 'utf8', (err, data) => {
-        let users = [];
-        if (!err && data) {
-            try {
-                users = JSON.parse(data);
-            } catch (e) {
-                console.error("Error parsing users file:", e);
-                users = [];
-            }
-        }
-
-        // Check for existing user
-        if (users.find(u => u.email === email)) {
-            return res.status(409).json({
-                success: false,
-                message: "User already exists with this email."
-            });
-        }
-
-        const newUser = {
-            id: Date.now().toString(),
-            firstName,
-            lastName,
-            email,
-            password, // NOTE: In production, HASH this password!
-            gender,
-            dob,
-            nationality,
-            createdAt: new Date().toISOString()
-        };
-
-        users.push(newUser);
-
-        fs.writeFile(usersPath, JSON.stringify(users, null, 2), (writeErr) => {
-            if (writeErr) {
-                console.error("Error saving user:", writeErr);
-                return res.status(500).json({
-                    success: false,
-                    message: "Failed to save user data."
-                });
-            }
-
-            console.log("New User Signed Up:", email);
-
-            return res.json({
-                success: true,
-                message: `Welcome to BharatBazaro, ${firstName}! Your account has been created successfully.`
-            });
-        });
-    });
-});
-
-// Mock Deals Endpoint
-app.get('/api/deals', (req, res) => {
-    const { category } = req.query;
-    const dealsPath = path.join(__dirname, 'data', 'deals.json');
-
-    fs.readFile(dealsPath, 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ success: false, message: "Error loading deals" });
-        }
-
-        try {
-            let deals = JSON.parse(data);
-
-            if (category && category !== 'all') {
-                deals = deals.filter(d => d.category === category);
-            }
-
-            res.json({
-                success: true,
-                deals: deals
-            });
-        } catch (parseErr) {
-            console.error(parseErr);
-            res.status(500).json({ success: false, message: "Error parsing deals data" });
-        }
-    });
-});
-
 const { checkAndNotify } = require('./services/busMonitor');
 
 // Manual Trigger for Bus Check (for testing/demo)
@@ -239,6 +44,9 @@ app.get('/api/bus-monitor/routes', (req, res) => {
     const historyPath = path.join(__dirname, 'data', 'bus_history.json');
 
     try {
+        if (!fs.existsSync(routesPath)) {
+            fs.writeFileSync(routesPath, '[]');
+        }
         const routes = JSON.parse(fs.readFileSync(routesPath, 'utf8'));
         const history = fs.existsSync(historyPath) ? JSON.parse(fs.readFileSync(historyPath, 'utf8')) : {};
 
@@ -255,8 +63,6 @@ app.get('/api/bus-monitor/routes', (req, res) => {
     }
 });
 
-// ... (existing GET routes)
-
 // Add a new route
 app.post('/api/bus-monitor/routes', (req, res) => {
     const { name, url } = req.body;
@@ -264,7 +70,11 @@ app.post('/api/bus-monitor/routes', (req, res) => {
 
     const routesPath = path.join(__dirname, 'data', 'bus_routes.json');
     try {
-        const routes = JSON.parse(fs.readFileSync(routesPath, 'utf8'));
+        let routes = [];
+        if (fs.existsSync(routesPath)) {
+            routes = JSON.parse(fs.readFileSync(routesPath, 'utf8'));
+        }
+
         const newRoute = {
             id: Date.now().toString(),
             name,

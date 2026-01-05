@@ -1,0 +1,158 @@
+/* Bus Monitor Specific Styles */
+.bus-monitor-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1100px) {
+    .bus-monitor-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Notification Log Sidebar */
+.notification-sidebar {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid var(--glass-border);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.log-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.log-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.log-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px;
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    animation: slideIn 0.3s ease;
+}
+
+.log-item.price-drop {
+    border-left-color: #f59e0b;
+}
+
+.log-item.seats {
+    border-left-color: #10b981;
+}
+
+.log-item.new-bus {
+    border-left-color: #8b5cf6;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Route Cards Upgrade */
+.route-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.route-card:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.bus-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.bus-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s;
+}
+
+.bus-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+}
+
+.bus-name {
+    font-weight: 600;
+    color: var(--text-main);
+    display: block;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bus-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bus-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fbbf24;
+}
+
+.bus-seats {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Status Badges */
+.badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-available {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.badge-sold {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}

@@ -9,7 +9,7 @@ const PORT = 3001;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('../frontend')); // Serve frontend files
+app.use(express.static(path.join(__dirname, '../'))); // Serve frontend from root
 
 const { checkAndNotify } = require('./services/busMonitor');
 
@@ -138,6 +138,17 @@ app.post('/api/bus-monitor/config', (req, res) => {
         res.json({ success: true, message: "Configuration saved" });
     } catch (e) {
         res.status(500).json({ success: false, message: "Failed to save configuration" });
+    }
+});
+
+// Get Activity Logs
+app.get('/api/bus-monitor/logs', (req, res) => {
+    const logsPath = path.join(__dirname, 'data', 'bus_logs.json');
+    if (fs.existsSync(logsPath)) {
+        const logs = JSON.parse(fs.readFileSync(logsPath, 'utf8'));
+        res.json({ success: true, logs });
+    } else {
+        res.json({ success: true, logs: [] });
     }
 });
 

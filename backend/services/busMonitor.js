@@ -8,8 +8,21 @@ const ROUTES_FILE = path.join(__dirname, '../data/bus_routes.json');
 const CONFIG_FILE = path.join(__dirname, '../data/monitor_config.json');
 
 function loadConfig() {
-    if (!fs.existsSync(CONFIG_FILE)) return null;
-    return JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
+    // Priority: Environment Variables (Production) > Config File (Local)
+    const config = {
+        senderEmail: process.env.SENDER_EMAIL,
+        senderPassword: process.env.SENDER_PASSWORD,
+        notificationEmail: process.env.NOTIFICATION_EMAIL,
+        emailService: process.env.EMAIL_SERVICE || 'gmail'
+    };
+
+    // If environment variables aren't set, try the config file
+    if (!config.senderEmail && fs.existsSync(CONFIG_FILE)) {
+        const fileConfig = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
+        return { ...config, ...fileConfig };
+    }
+
+    return config;
 }
 
 async function sendEmail(to, subject, text) {
@@ -44,40 +57,84 @@ async function sendEmail(to, subject, text) {
 }
 
 async function scrapeRedBus(url) {
-    const browser = await chromium.launch({ headless: true });
-    const context = await browser.newContext({
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    const { devices } = require('playwright');
+    const iPhone = devices['iPhone 13 Pro Max'];
+
+    const browser = await chromium.launch({
+        headless: true,
+        args: ['--disable-http2', '--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu']
     });
+
+    // Emulate mobile device for a lighter page version
+    const context = await browser.newContext({
+        ...iPhone,
+        locale: 'en-IN',
+        geolocation: { longitude: 77.5946, latitude: 12.9716 }, // Bangalore
+        permissions: ['geolocation']
+    });
+
     const page = await context.newPage();
+
+    // Intercept network activity to block heavy resources (Images, Media, Ads)
+    await page.route('**/*', (route) => {
+        const type = route.request().resourceType();
+        const rUrl = route.request().url();
+
+        // Block images, fonts, media, and common trackers
+        if (['image', 'font', 'media'].includes(type) ||
+            rUrl.includes('google-analytics') ||
+            rUrl.includes('facebook') ||
+            rUrl.includes('doubleclick')) {
+            return route.abort();
+        }
+        return route.continue();
+    });
+
     const results = [];
 
     try {
-        console.log(`Checking URL: ${url}`);
-        await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+        console.log(`Checking URL (Advanced Playwright): ${url}`);
 
-        // Wait for bus items to appear using the new class structure or classic one
-        // RedBus classes change often, so we try a generic approach or specific known classes
-        // Common selector for bus item: .bus-item or .clearfix.bus-item
+        // Navigate with a generous timeout, but using domcontentloaded for speed
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
+
+        console.log("Initial load complete. Waiting for bus listings...");
+
+        // Auto-wait for the main results container
         try {
-            await page.waitForSelector('.bus-item, .bus-item-details', { timeout: 15000 });
+            await page.waitForSelector('li[class*="tupleWrapper"]', { timeout: 40000 });
         } catch (e) {
-            console.log("Timeout waiting for bus items. Might be no buses or different UI.");
+            console.log("Timeout waiting for bus listings. Attempting a small scroll...");
+            await page.mouse.wheel(0, 1000);
+            await page.waitForTimeout(5000);
+
+            const exists = await page.$('li[class*="tupleWrapper"]');
+            if (!exists) {
+                console.log("No buses found even after scroll. Title:", await page.title());
+                return [];
+            }
         }
 
-        const buses = await page.$$('.bus-item, .bus-item-details'); // Try to catch multiple variations
+        // Scroll a bit to trigger lazy loading if necessary
+        await page.mouse.wheel(0, 800);
+        await page.waitForTimeout(2000);
+
+        const buses = await page.$$('li[class*="tupleWrapper"]');
+        console.log(`Found ${buses.length} buses on page.`);
 
         for (const bus of buses) {
             try {
-                // Selectors might need adjustment based on specific RedBus regional versions
-                const travelNameEl = await bus.$('.travels');
-                const priceEl = await bus.$('.fare span, .f-19');
-                const seatsEl = await bus.$('.seat-left, .column- eight p');
+                // Multi-platform selectors for travels name, price, and seats
+                const travelNameEl = await bus.$('div[class*="travelsName"], div[class*="travels"], .travels');
+                const priceEl = await bus.$('div[class*="fareWrapper"] span, div[class*="fareWrapper"], p[class*="price"], .fare');
+                const seatsEl = await bus.$('div[class*="seatsWrap"], .seat-left, .column-eight p, div[class*="seats"]');
 
                 if (travelNameEl && priceEl) {
                     const name = await travelNameEl.innerText();
                     const priceText = await priceEl.innerText();
                     const seats = seatsEl ? await seatsEl.innerText() : 'Unknown';
 
+                    // Extract digits from price (handles symbols like ₹)
                     const price = parseInt(priceText.replace(/[^0-9]/g, ''));
 
                     results.push({
@@ -87,7 +144,7 @@ async function scrapeRedBus(url) {
                     });
                 }
             } catch (err) {
-                // Skip malformed bus items
+                // Skip individual items if they fail to parse
                 continue;
             }
         }
@@ -123,29 +180,39 @@ async function checkAndNotify() {
     let notifications = [];
 
     for (const route of routes) {
-        const currentBuses = await scrapeRedBus(route.url);
-        const lastRunBuses = history[route.id] || [];
+        try {
+            console.log(`Processing route: ${route.name}`);
+            const currentBuses = await scrapeRedBus(route.url);
 
-        updates[route.id] = currentBuses;
-
-        // Compare logic
-        for (const bus of currentBuses) {
-            const oldBus = lastRunBuses.find(b => b.name === bus.name);
-
-            if (oldBus) {
-                // Check Price Drop
-                if (bus.price < oldBus.price) {
-                    notifications.push(`PRICE DROP: ${bus.name} on route ${route.name} is now ₹${bus.price} (was ₹${oldBus.price})`);
-                }
-                // Check New Seats (simple logic: if it was sold out or 0 and now has seats)
-                if ((!oldBus.seats || oldBus.seats.includes('0') || oldBus.seats.toLowerCase().includes('sold')) &&
-                    (bus.seats && !bus.seats.includes('0') && !bus.seats.toLowerCase().includes('sold'))) {
-                    notifications.push(`SEATS AVAILABLE: ${bus.name} on route ${route.name} now has ${bus.seats}`);
-                }
-            } else {
-                // New Bus found
-                notifications.push(`NEW BUS: ${bus.name} found on route ${route.name} for ₹${bus.price}`);
+            if (!currentBuses || currentBuses.length === 0) {
+                console.log(`No data found for route ${route.name}. Skipping comparison.`);
+                continue;
             }
+
+            const lastRunBuses = history[route.id] || [];
+            updates[route.id] = currentBuses;
+
+            // Compare logic
+            for (const bus of currentBuses) {
+                const oldBus = lastRunBuses.find(b => b.name === bus.name);
+
+                if (oldBus) {
+                    // Check Price Drop
+                    if (bus.price < oldBus.price) {
+                        notifications.push(`PRICE DROP: ${bus.name} on route ${route.name} is now ₹${bus.price} (was ₹${oldBus.price})`);
+                    }
+                    // Check New Seats
+                    if ((!oldBus.seats || oldBus.seats.includes('0') || oldBus.seats.toLowerCase().includes('sold')) &&
+                        (bus.seats && !bus.seats.includes('0') && !bus.seats.toLowerCase().includes('sold'))) {
+                        notifications.push(`SEATS AVAILABLE: ${bus.name} on route ${route.name} now has ${bus.seats}`);
+                    }
+                } else {
+                    // New Bus found
+                    notifications.push(`NEW BUS: ${bus.name} found on route ${route.name} for ₹${bus.price}`);
+                }
+            }
+        } catch (routeError) {
+            console.error(`Failed to process route ${route.id}:`, routeError.message);
         }
     }
 
@@ -158,6 +225,22 @@ async function checkAndNotify() {
             "Bus Fare/Seat Alert!",
             notifications.join('\n')
         );
+
+        // Save to logs for Frontend
+        const logsPath = path.join(__dirname, '../data/bus_logs.json');
+        let logs = [];
+        if (fs.existsSync(logsPath)) {
+            logs = JSON.parse(fs.readFileSync(logsPath, 'utf8'));
+        }
+
+        const newEntries = notifications.map(text => ({
+            timestamp: new Date().toISOString(),
+            message: text,
+            type: text.includes('PRICE DROP') ? 'price' : (text.includes('SEATS') ? 'seats' : 'new')
+        }));
+
+        logs = [...newEntries, ...logs].slice(0, 50); // Keep last 50
+        fs.writeFileSync(logsPath, JSON.stringify(logs, null, 2));
     } else {
         console.log("No significant changes found.");
     }

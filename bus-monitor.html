@@ -155,6 +155,7 @@
 
         .highlight {
             background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -281,7 +282,9 @@
     </div>
 
     <script>
-        const API_BASE = '/api';
+        // SMART DETECT: Use localhost:3001 if running locally, otherwise use relative path for production
+        const isLocal = window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = isLocal ? 'http://localhost:3001/api' : '/api';
 
         async function loadData() {
             await loadRoutes();
@@ -413,9 +416,10 @@
             const data = await res.json();
             if (data.success) {
                 closeModal('routeModal');
-                loadRoutes();
+                loadData(); // Reload both routes and logs
                 document.getElementById('routeName').value = '';
                 document.getElementById('routeUrl').value = '';
+                document.getElementById('routeEmail').value = '';
             }
         }
 

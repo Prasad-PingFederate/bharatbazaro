@@ -1,0 +1,5 @@
+node_modules
+.env
+.DS_Store
+backend/data/bus_history.json
+backend/data/monitor_config.json

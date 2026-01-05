@@ -5,11 +5,11 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001; // Use Render's port if available
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../'))); // Serve frontend from root
+app.use(express.static(__dirname)); // Serve frontend from current root directory
 
 const { checkAndNotify } = require('./services/busMonitor');
 

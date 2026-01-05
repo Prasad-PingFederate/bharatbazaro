@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 const { scrapeRedBusLight } = require('./lightScraper');
+const { scrapeRedBusAPI } = require('./apiScraper');
 
 const HISTORY_FILE = path.join(__dirname, '../data/bus_history.json');
 const ROUTES_FILE = path.join(__dirname, '../data/bus_routes.json');
@@ -245,17 +246,24 @@ async function checkAndNotify() {
         try {
             console.log(`Processing: ${route.name}`);
 
-            // Try lightweight scraper first (uses ~20MB vs Chromium's ~300MB)
-            let currentBuses = await scrapeRedBusLight(route.url);
+            // Strategy 1: Try API scraper first (most reliable, ~5MB RAM)
+            let currentBuses = await scrapeRedBusAPI(route.url);
 
-            // If light scraper fails or returns no results, fallback to Chromium
+            // Strategy 2: If API fails, try lightweight HTTP scraper (~20MB RAM)
             if (!currentBuses || currentBuses.length === 0) {
-                console.log(`Light scraper found no data, trying Chromium...`);
+                console.log(`API scraper found no data, trying HTTP scraper...`);
+                currentBuses = await scrapeRedBusLight(route.url);
+            }
+
+            // Strategy 3: Last resort - use Chromium (~300MB RAM)
+            if (!currentBuses || currentBuses.length === 0) {
+                console.log(`HTTP scraper found no data, trying Chromium (last resort)...`);
                 currentBuses = await scrapeRedBus(route.url);
             }
 
             if (!currentBuses || currentBuses.length === 0) {
-                console.log(`No data for ${route.name}.`);
+                console.log(`No data for ${route.name} - all 3 methods failed.`);
+                await logActivity(`Failed to get data for ${route.name} - all scraping methods failed`, 'error');
                 continue;
             }
 

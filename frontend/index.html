@@ -284,17 +284,21 @@
                     <input type="email" id="notificationEmail" placeholder="where.to.send@example.com">
                 </div>
 
-                <hr style="border-color: #333; margin: 15px 0;">
-                <h3 style="font-size: 1rem; margin-bottom: 10px;">Sender Configuration (Advanced)</h3>
-
-                <div class="form-group">
-                    <label>Sender Email (Gmail)</label>
-                    <input type="email" id="senderEmail" placeholder="bot.sender@gmail.com">
-                </div>
-                <div class="form-group">
-                    <label>App Password</label>
-                    <input type="password" id="senderPassword" placeholder="Your 16-digit App Password">
-                </div>
+                <!-- Admin Only: Sender Configuration -->
+                <details style="margin-top: 20px; border-top: 1px solid #333; padding-top: 10px;">
+                    <summary style="cursor: pointer; color: #888; font-size: 0.8rem;">Advanced: Sender Configuration
+                        (Admin)</summary>
+                    <div style="margin-top: 15px;">
+                        <div class="form-group">
+                            <label>Sender Email (Gmail)</label>
+                            <input type="email" id="senderEmail" placeholder="bot.sender@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>App Password</label>
+                            <input type="password" id="senderPassword" placeholder="Your 16-digit App Password">
+                        </div>
+                    </div>
+                </details>
 
                 <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
             </div>

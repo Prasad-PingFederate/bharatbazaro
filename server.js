@@ -85,17 +85,30 @@ app.delete('/api/bus-monitor/routes/:id', (req, res) => {
     }
 });
 
+// Scan lock to prevent multiple simultaneous scans
+let isScanning = false;
+
 app.post('/api/bus-monitor/check', async (req, res) => {
-    if (checkAndNotify) {
-        // Trigger in background but catch errors to prevent crash
-        checkAndNotify().catch(err => {
-            console.error("Background Scraper Error:", err);
-            // Optionally log to file here too
-        });
-        res.json({ success: true, message: "Scraper started in background" });
-    } else {
-        res.status(500).json({ success: false, message: "Scraper service missing" });
+    if (!checkAndNotify) {
+        return res.status(500).json({ success: false, message: "Scraper service missing" });
     }
+
+    if (isScanning) {
+        return res.status(429).json({ success: false, message: "Scan already in progress. Please wait." });
+    }
+
+    isScanning = true;
+
+    // Trigger in background but catch errors to prevent crash
+    checkAndNotify()
+        .catch(err => {
+            console.error("Background Scraper Error:", err);
+        })
+        .finally(() => {
+            isScanning = false;
+        });
+
+    res.json({ success: true, message: "Scraper started in background" });
 });
 
 app.get('/api/bus-monitor/config', (req, res) => {

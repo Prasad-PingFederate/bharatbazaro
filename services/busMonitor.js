@@ -117,7 +117,10 @@ async function scrapeRedBus(url) {
         });
 
         console.log(`Checking URL: ${url}`);
-        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
+
+        // Set longer timeout for Render's slower network
+        page.setDefaultTimeout(180000); // 3 minutes
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 180000 });
 
         // Auto-wait for the main results container
         try {

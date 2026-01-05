@@ -87,10 +87,34 @@ app.delete('/api/bus-monitor/routes/:id', (req, res) => {
 
 app.post('/api/bus-monitor/check', async (req, res) => {
     if (checkAndNotify) {
-        checkAndNotify();
-        res.json({ success: true });
+        // Trigger in background but catch errors to prevent crash
+        checkAndNotify().catch(err => {
+            console.error("Background Scraper Error:", err);
+            // Optionally log to file here too
+        });
+        res.json({ success: true, message: "Scraper started in background" });
     } else {
         res.status(500).json({ success: false, message: "Scraper service missing" });
+    }
+});
+
+app.get('/api/bus-monitor/config', (req, res) => {
+    try {
+        const configPath = getDataPath('monitor_config.json');
+        const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : {};
+        res.json({ success: true, config });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+app.post('/api/bus-monitor/config', (req, res) => {
+    try {
+        const configPath = getDataPath('monitor_config.json');
+        fs.writeFileSync(configPath, JSON.stringify(req.body, null, 2));
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
 });
 

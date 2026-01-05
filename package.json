@@ -1,18 +1,18 @@
 {
-"name": "bharatbazaro",
-"version": "1.0.0",
-"private": true,
-"scripts": {
-"dev": "vite",
-"build": "vite build",
-"preview": "vite preview"
-},
-"dependencies": {
-"react": "^18.2.0",
-"react-dom": "^18.2.0",
-"react-router-dom": "^6.14.1"
-},
-"devDependencies": {
-"vite": "^5.0.0"
-}
+    "name": "bharatbazaro",
+    "version": "1.0.0",
+    "description": "AI-Powered Bargain Marketplace & Bus Watcher",
+    "main": "backend/server.js",
+    "scripts": {
+        "start": "node backend/server.js",
+        "install-backend": "cd backend && npm install",
+        "build": "npm run install-backend && npx playwright install --with-deps chromium"
+    },
+    "dependencies": {
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "nodemailer": "^7.0.12",
+        "playwright": "^1.57.0"
+    }
 }

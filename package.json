@@ -5,8 +5,7 @@
     "main": "backend/server.js",
     "scripts": {
         "start": "node backend/server.js",
-        "install-backend": "cd backend && npm install",
-        "build": "npm run install-backend && npx playwright install --with-deps chromium"
+        "render-build": "npm install && cd backend && npm install && npx playwright install --with-deps chromium"
     },
     "dependencies": {
         "body-parser": "^1.20.2",

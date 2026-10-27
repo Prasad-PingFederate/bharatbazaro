@@ -90,6 +90,9 @@
     modalVerdictPill: document.getElementById('modalVerdictPill'),
     modalVerdictText: document.getElementById('modalVerdictText'),
     modalInsight: document.getElementById('modalInsight'),
+    modalClaimBox: document.getElementById('modalClaimBox'),
+    modalClaimTitle: document.getElementById('modalClaimTitle'),
+    modalClaimStepsList: document.getElementById('modalClaimStepsList'),
     closeModalBtn: document.getElementById('closeModalBtn'),
     modalBuyBtn: document.getElementById('modalBuyBtn'),
     modalShareBtn: document.getElementById('modalShareBtn'),
@@ -540,6 +543,28 @@
       badgesHtml.push('<span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span>');
     }
 
+    // Coupon Claim Checklist Banner (Requirement 3)
+    let couponClaimBanner = '';
+    const couponLabel = d.coupon_text || (d.coupon_discount ? `Apply ₹${formatNumber(d.coupon_discount)} coupon` : '');
+    if (d.coupon_discount || d.coupon_text) {
+      couponClaimBanner = `
+        <div class="coupon-claim-banner" title="Tick this coupon on Amazon product page">
+          <span class="coupon-tick-icon">☑️</span>
+          <span class="coupon-claim-text">Tick <b>"${escapeHtml(couponLabel)}"</b> on Amazon page ${d.coupon_discount ? `<span class="coupon-discount-tag">(-₹${formatNumber(d.coupon_discount)})</span>` : ''}</span>
+        </div>
+      `;
+    }
+
+    // Extra Offers Chips (UPI Cashback, S&S, Combo Offers)
+    let extraOffersHtml = '';
+    if (d.extra_offers && d.extra_offers.length > 0) {
+      extraOffersHtml = `
+        <div class="extra-offers-row">
+          ${d.extra_offers.map(off => `<span class="extra-offer-chip">${escapeHtml(off)}</span>`).join('')}
+        </div>
+      `;
+    }
+
     // Callouts (Coupon, Bank, Promo)
     const calloutsHtml = [];
     if (d.coupon_discount && d.coupon_discount > 0) {
@@ -644,6 +669,9 @@
             ${cardPriceHtml}
           </div>
 
+          ${couponClaimBanner}
+          ${extraOffersHtml}
+
           <!-- Callouts -->
           ${calloutsHtml.length ? `<div class="callouts-list">${calloutsHtml.join('')}</div>` : ''}
 
@@ -694,6 +722,21 @@
 
     updateModalChart(asin, state.activeModalRange);
     renderModalAiVerdict(deal, effPrice);
+
+    // Populate How to Claim Checklist
+    if (el.modalClaimBox && el.modalClaimStepsList) {
+      const steps = deal.claim_steps && deal.claim_steps.length > 0 ? deal.claim_steps : [
+        "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+        `🎉 Complete checkout at the verified price of ₹${formatNumber(effPrice)}!`
+      ];
+      el.modalClaimStepsList.innerHTML = steps.map((step, idx) => `
+        <li class="claim-step-item">
+          <span class="step-num">${idx + 1}</span>
+          <span class="step-desc">${escapeHtml(step)}</span>
+        </li>
+      `).join('');
+      el.modalClaimBox.style.display = 'block';
+    }
 
     if (el.modalBuyBtn) el.modalBuyBtn.href = deal.affiliate_url;
 

@@ -1,5 +1,11 @@
 node_modules
 .env
 .DS_Store
-backend/data/bus_history.json
-backend/data/monitor_config.json
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.sqlite3-wal
+*.sqlite3-shm
+*.db-wal
+*.db-shm

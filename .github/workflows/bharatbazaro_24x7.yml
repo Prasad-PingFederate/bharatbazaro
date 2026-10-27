@@ -2,9 +2,9 @@ name: BharatBazaro 24/7 Deal Radar & Web Feed Engine
 
 on:
   schedule:
-    # 24/7 Hourly Trigger: runs at minute 37 of every hour UTC (24 times a day)
+    # 24/7 Trigger: runs every 30 minutes at minute 07 and 37 UTC (48 times a day)
     # Stays off the crowded :00 and :30 GitHub Actions queue spikes
-    - cron: '37 * * * *'
+    - cron: '7,37 * * * *'
 
   push:
     branches: [main]
@@ -25,7 +25,7 @@ permissions:
 jobs:
   run-radar-and-export-feed:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

@@ -14,7 +14,7 @@
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
+    "bank_offer": "Instant Bank Discount with ICICI CC",
     "discount_pct": 51,
     "effective_discount_pct": 51,
     "savings_inr": 4594,
@@ -22,7 +22,7 @@
     "review_count": null,
     "score": 90,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -32,8 +32,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0H2BYVZWM",
@@ -50,7 +50,7 @@
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
+    "bank_offer": "Instant Bank Discount with ICICI / AXIS CC EMI",
     "discount_pct": 49,
     "effective_discount_pct": 49,
     "savings_inr": 24250,
@@ -68,8 +68,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B00WUDU4FG",
@@ -94,18 +94,18 @@
     "review_count": null,
     "score": 88,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0DMS8VK96",
@@ -140,8 +140,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0CJLWDVD1",
@@ -176,8 +176,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0866B1P6B",
@@ -202,7 +202,7 @@
     "review_count": null,
     "score": 87,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -212,8 +212,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0H5CT3NR9",
@@ -238,7 +238,7 @@
     "review_count": null,
     "score": 87,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -248,8 +248,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0H6MJBCHN",
@@ -266,7 +266,7 @@
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
+    "bank_offer": "Instant Bank Discount with ICICI / AXIS CC",
     "discount_pct": 49,
     "effective_discount_pct": 49,
     "savings_inr": 17259,
@@ -284,8 +284,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0FN7WG5KB",
@@ -310,7 +310,7 @@
     "review_count": null,
     "score": 85,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -320,8 +320,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0DSJCF3C9",
@@ -356,8 +356,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0DMJRJMD6",
@@ -368,7 +368,7 @@
     "category": "Fashion & Footwear",
     "image_url": "https://m.media-amazon.com/images/P/B0DMJRJMD6.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0DMJRJMD6?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 4699,
+    "mrp": 3993,
     "list_price": 599,
     "effective_price": 599,
     "coupon_discount": null,
@@ -376,8 +376,8 @@
     "promo_code": null,
     "bank_offer": null,
     "discount_pct": 87,
-    "effective_discount_pct": 87,
-    "savings_inr": 4100,
+    "effective_discount_pct": 85,
+    "savings_inr": 3394,
     "rating": null,
     "review_count": null,
     "score": 85,
@@ -386,14 +386,14 @@
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0F2237QFM",
@@ -401,7 +401,7 @@
     "title": "Lifelong Toiletry Bag for Men &amp; Women | Vegan Leather Travel Pouch | Shaving Kit, Grooming &amp; Makeup Organizer | Toiletry Bag for Travel, Gym, Daily Use, Cosmetics, Toiletries &amp; Essentials (Tan)",
     "brand": "Lifelong",
     "brand_tier": "tier2",
-    "category": "Personal Care & Grocery",
+    "category": "Fashion & Footwear",
     "image_url": "https://m.media-amazon.com/images/P/B0F2237QFM.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0F2237QFM?tag=dammaiprasad-21&linkCode=ll1",
     "mrp": 1499,
@@ -418,18 +418,18 @@
     "review_count": null,
     "score": 84,
     "buy_confidence": 89,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0F24RW9D2",
@@ -440,16 +440,16 @@
     "category": "Fashion & Footwear",
     "image_url": "https://m.media-amazon.com/images/P/B0F24RW9D2.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0F24RW9D2?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 2999,
+    "mrp": 1993,
     "list_price": 299,
     "effective_price": 299,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 90,
-    "effective_discount_pct": 90,
-    "savings_inr": 2700,
+    "discount_pct": 85,
+    "effective_discount_pct": 85,
+    "savings_inr": 1694,
     "rating": null,
     "review_count": null,
     "score": 84,
@@ -458,14 +458,14 @@
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0FZVD8P6V",
@@ -494,14 +494,14 @@
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B096MSG7JX",
@@ -530,14 +530,14 @@
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0CM3K6H57",
@@ -554,7 +554,7 @@
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
+    "bank_offer": "Instant Bank Discount with ICICI CC",
     "discount_pct": 74,
     "effective_discount_pct": 74,
     "savings_inr": 6692,
@@ -562,7 +562,7 @@
     "review_count": null,
     "score": 82,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -572,8 +572,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0C85T9PXW",
@@ -598,7 +598,7 @@
     "review_count": null,
     "score": 82,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -608,8 +608,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0C82PJH3S",
@@ -634,7 +634,7 @@
     "review_count": null,
     "score": 82,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -644,8 +644,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0GGHXCQSR",
@@ -656,7 +656,7 @@
     "category": "Fashion & Footwear",
     "image_url": "https://m.media-amazon.com/images/P/B0GGHXCQSR.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0GGHXCQSR?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 19999,
+    "mrp": 8173,
     "list_price": 899,
     "effective_price": 899,
     "coupon_discount": null,
@@ -664,13 +664,13 @@
     "promo_code": null,
     "bank_offer": null,
     "discount_pct": 96,
-    "effective_discount_pct": 96,
-    "savings_inr": 19100,
+    "effective_discount_pct": 89,
+    "savings_inr": 7274,
     "rating": null,
     "review_count": null,
     "score": 82,
     "buy_confidence": 89,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -680,8 +680,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0FLYDHYY4",
@@ -706,7 +706,7 @@
     "review_count": null,
     "score": 82,
     "buy_confidence": 89,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -716,8 +716,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B08THV7ZKD",
@@ -746,14 +746,14 @@
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B08M1KMRLC",
@@ -782,14 +782,14 @@
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0H4GBJVW7",
@@ -800,16 +800,16 @@
     "category": "Home & Kitchen",
     "image_url": "https://m.media-amazon.com/images/P/B0H4GBJVW7.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0H4GBJVW7?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 19299,
+    "mrp": 4880,
     "list_price": 732,
     "effective_price": 732,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 96,
-    "effective_discount_pct": 96,
-    "savings_inr": 18567,
+    "discount_pct": 85,
+    "effective_discount_pct": 85,
+    "savings_inr": 4148,
     "rating": null,
     "review_count": null,
     "score": 81,
@@ -818,14 +818,14 @@
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": true,
+    "is_loot": false,
     "is_further_drop": false,
     "source_count": 1,
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0CJM2NST8",
@@ -842,7 +842,7 @@
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
+    "bank_offer": "Instant Bank Discount with AXIS/ICICI CC",
     "discount_pct": 86,
     "effective_discount_pct": 86,
     "savings_inr": 55999,
@@ -850,7 +850,7 @@
     "review_count": null,
     "score": 78,
     "buy_confidence": 89,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -860,8 +860,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B098ZPRGGZ",
@@ -878,7 +878,7 @@
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
+    "bank_offer": "Instant Bank Discount with ICICI CC",
     "discount_pct": 72,
     "effective_discount_pct": 72,
     "savings_inr": 12897,
@@ -896,8 +896,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B097PG9JPD",
@@ -922,7 +922,7 @@
     "review_count": null,
     "score": 77,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -932,8 +932,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0BDVBH82P",
@@ -958,7 +958,7 @@
     "review_count": null,
     "score": 77,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -968,8 +968,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0B4WJMRSY",
@@ -1004,14 +1004,14 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B07YWMQWWK",
     "asin": "B07YWMQWWK",
     "title": "Biotique Green Apple Shine &amp; Gloss Shampoo &amp; Conditioner| Promotes Healthy, Shiny and Glossy Hair | Nourishes Scalp | Makes Hair Soft &amp; Smooth |100% Botanical Extracts| All Skin Types | 650ml",
-    "brand": "Apple",
+    "brand": "Biotique",
     "brand_tier": "tier1",
     "category": "Personal Care & Grocery",
     "image_url": "https://m.media-amazon.com/images/P/B07YWMQWWK.jpg",
@@ -1030,7 +1030,7 @@
     "review_count": null,
     "score": 76,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1040,8 +1040,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0FJFN99PB",
@@ -1052,7 +1052,7 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0FJFN99PB.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0FJFN99PB?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 3999,
+    "mrp": 3627,
     "list_price": 399,
     "effective_price": 399,
     "coupon_discount": null,
@@ -1060,13 +1060,13 @@
     "promo_code": null,
     "bank_offer": null,
     "discount_pct": 90,
-    "effective_discount_pct": 90,
-    "savings_inr": 3600,
+    "effective_discount_pct": 89,
+    "savings_inr": 3228,
     "rating": null,
     "review_count": null,
     "score": 76,
     "buy_confidence": 89,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1076,8 +1076,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0BD43W4YP",
@@ -1102,7 +1102,7 @@
     "review_count": null,
     "score": 75,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1112,8 +1112,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0BD3ZPYP7",
@@ -1138,7 +1138,7 @@
     "review_count": null,
     "score": 75,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1148,8 +1148,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0HB9S9BDQ",
@@ -1166,7 +1166,7 @@
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
+    "bank_offer": "Instant Bank Discount with ICICI CC",
     "discount_pct": 81,
     "effective_discount_pct": 81,
     "savings_inr": 26699,
@@ -1184,8 +1184,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0D4DZ7WL2",
@@ -1196,7 +1196,7 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0D4DZ7WL2.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0D4DZ7WL2?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 4999,
+    "mrp": 4660,
     "list_price": 699,
     "effective_price": 699,
     "coupon_discount": null,
@@ -1204,8 +1204,8 @@
     "promo_code": null,
     "bank_offer": null,
     "discount_pct": 86,
-    "effective_discount_pct": 86,
-    "savings_inr": 4300,
+    "effective_discount_pct": 85,
+    "savings_inr": 3961,
     "rating": null,
     "review_count": null,
     "score": 74,
@@ -1220,8 +1220,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B09QYV9R61",
@@ -1256,8 +1256,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0DX3CBHHF",
@@ -1292,8 +1292,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B08HQL1DB2",
@@ -1304,16 +1304,16 @@
     "category": "Fashion & Footwear",
     "image_url": "https://m.media-amazon.com/images/P/B08HQL1DB2.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B08HQL1DB2?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 1499,
+    "mrp": 993,
     "list_price": 149,
     "effective_price": 149,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 90,
-    "effective_discount_pct": 90,
-    "savings_inr": 1350,
+    "discount_pct": 85,
+    "effective_discount_pct": 85,
+    "savings_inr": 844,
     "rating": null,
     "review_count": null,
     "score": 73,
@@ -1328,8 +1328,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B01M0GS016",
@@ -1354,7 +1354,7 @@
     "review_count": null,
     "score": 70,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1364,8 +1364,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0FCLPQG26",
@@ -1376,21 +1376,21 @@
     "category": "Audio & Headphones",
     "image_url": "https://m.media-amazon.com/images/P/B0FCLPQG26.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0FCLPQG26?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 12990,
+    "list_price": 4341,
+    "effective_price": 4341,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 67,
+    "effective_discount_pct": 67,
+    "savings_inr": 8649,
     "rating": null,
     "review_count": null,
     "score": 70,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1400,8 +1400,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0D41L64NR",
@@ -1412,21 +1412,21 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0D41L64NR.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0D41L64NR?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 60990,
+    "list_price": 27740,
+    "effective_price": 27740,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 55,
+    "effective_discount_pct": 55,
+    "savings_inr": 33250,
     "rating": null,
     "review_count": null,
     "score": 70,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1436,8 +1436,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0H7JQ7T7F",
@@ -1448,21 +1448,21 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0H7JQ7T7F.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0H7JQ7T7F?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 1099,
+    "list_price": 549,
+    "effective_price": 549,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 50,
+    "effective_discount_pct": 50,
+    "savings_inr": 550,
     "rating": null,
     "review_count": null,
     "score": 70,
     "buy_confidence": 91,
-    "price_context": "normal",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1472,8 +1472,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B08S7V8YTN",
@@ -1498,7 +1498,7 @@
     "review_count": null,
     "score": 70,
     "buy_confidence": 89,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1508,8 +1508,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0DZGZ472K",
@@ -1544,8 +1544,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0H8P1NCMN",
@@ -1556,16 +1556,16 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0H8P1NCMN.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0H8P1NCMN?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 86990,
+    "list_price": 46490,
+    "effective_price": 46490,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 47,
+    "effective_discount_pct": 47,
+    "savings_inr": 40500,
     "rating": null,
     "review_count": null,
     "score": 70,
@@ -1580,8 +1580,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0D3596YR4",
@@ -1592,16 +1592,16 @@
     "category": "Mobiles & Accessories",
     "image_url": "https://m.media-amazon.com/images/P/B0D3596YR4.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0D3596YR4?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 3499,
+    "list_price": 748,
+    "effective_price": 748,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 79,
+    "effective_discount_pct": 79,
+    "savings_inr": 2751,
     "rating": null,
     "review_count": null,
     "score": 70,
@@ -1616,8 +1616,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0BGT9TWL6",
@@ -1628,16 +1628,16 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0BGT9TWL6.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0BGT9TWL6?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 16400,
+    "list_price": 2930,
+    "effective_price": 2930,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 82,
+    "effective_discount_pct": 82,
+    "savings_inr": 13470,
     "rating": null,
     "review_count": null,
     "score": 70,
@@ -1652,8 +1652,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0FN4K4MPY",
@@ -1664,16 +1664,16 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0FN4K4MPY.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0FN4K4MPY?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 39999,
+    "list_price": 7380,
+    "effective_price": 7380,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 82,
+    "effective_discount_pct": 82,
+    "savings_inr": 32619,
     "rating": null,
     "review_count": null,
     "score": 70,
@@ -1688,8 +1688,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B08QN8JKPL",
@@ -1700,16 +1700,16 @@
     "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B08QN8JKPL.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B08QN8JKPL?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 1200,
+    "list_price": 226,
+    "effective_price": 226,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 81,
+    "effective_discount_pct": 81,
+    "savings_inr": 974,
     "rating": null,
     "review_count": null,
     "score": 70,
@@ -1724,8 +1724,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0DTJ1W6PN",
@@ -1736,16 +1736,16 @@
     "category": "Personal Care & Grocery",
     "image_url": "https://m.media-amazon.com/images/P/B0DTJ1W6PN.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0DTJ1W6PN?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": null,
-    "list_price": null,
-    "effective_price": 0,
+    "mrp": 597,
+    "list_price": 161,
+    "effective_price": 161,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": null,
-    "effective_discount_pct": null,
-    "savings_inr": 0,
+    "discount_pct": 73,
+    "effective_discount_pct": 73,
+    "savings_inr": 436,
     "rating": null,
     "review_count": null,
     "score": 70,
@@ -1760,8 +1760,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B07874GHW2",
@@ -1796,8 +1796,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0D6NF542S",
@@ -1832,8 +1832,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0CFFBZ23F",
@@ -1858,7 +1858,7 @@
     "review_count": null,
     "score": 67,
     "buy_confidence": 89,
-    "price_context": "normal",
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -1868,8 +1868,8 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   },
   {
     "id": "amazon:B0F1N1LBRD",
@@ -1904,7 +1904,7 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "updated_at": 1793094835,
-    "updated_at_ist": "2026-10-27 15:23 IST"
+    "updated_at": 1793097802,
+    "updated_at_ist": "2026-10-27 16:13 IST"
   }
 ]

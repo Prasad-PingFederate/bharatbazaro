@@ -14,6 +14,30 @@
   <meta property="og:title" content="BharatBazaro — 24/7 AI Deal & Price Drop Radar">
   <meta property="og:description" content="Live automated price drops, all-time lows, hidden coupons, and verified loot deals on Amazon India.">
   <meta property="og:image" content="https://bharatbazaro.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BharatBazaro — 24/7 AI Deal & Price Drop Radar">
+  <meta name="twitter:description" content="Live automated price drops, all-time lows, hidden coupons, and verified loot deals on Amazon India.">
+
+  <!-- PWA & Mobile Web App -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "BharatBazaro",
+    "url": "https://bharatbazaro.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://bharatbazaro.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 
   <!-- Favicon & Fonts -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%22100%22%20height=%22100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
@@ -53,6 +77,11 @@
           <span class="status-indicator live"></span>
           <span class="status-text" id="statusText">Live Radar: Active</span>
         </div>
+
+        <button id="alertsToggleBtn" class="btn-alerts-toggle active" title="Toggle Sound & Tab Loot Alerts" aria-label="Toggle Live Loot Alerts">
+          <span class="alert-bell-icon">🔔</span>
+          <span class="alert-status-label" id="alertsStatusText">Alerts: ON</span>
+        </button>
 
         <button id="themeToggleBtn" class="btn-icon" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
           <span class="theme-icon-dark">🌙</span>
@@ -150,8 +179,28 @@
             </div>
           </div>
           <div class="inspector-graph-container">
+            <div class="inspector-timeframes">
+              <span class="timeframe-label">History:</span>
+              <button class="timeframe-btn" data-range="30">30 Days</button>
+              <button class="timeframe-btn active" data-range="90">90 Days</button>
+              <button class="timeframe-btn" data-range="365">1 Year</button>
+            </div>
             <img id="inspectorGraphImg" src="" alt="Keepa Price History Chart" class="inspector-graph-img" loading="lazy">
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card Discount Mode Selector (Amazon Pay 5% Extra Off) -->
+    <section class="card-discount-section">
+      <div class="card-discount-toggle-wrap">
+        <span class="card-discount-label">💳 Card Offer:</span>
+        <div class="card-discount-buttons">
+          <button class="card-mode-btn active" id="btnPriceModeStd" data-mode="standard">Standard Price</button>
+          <button class="card-mode-btn" id="btnPriceModeCard" data-mode="card">
+            <span>💳 +Amazon Pay ICICI (Extra 5% Off)</span>
+            <span class="discount-pill-tag">5% Flat Cashback</span>
+          </button>
         </div>
       </div>
     </section>
@@ -297,9 +346,28 @@
           </div>
         </div>
 
+        <div class="modal-timeframes-bar">
+          <span class="timeframe-label">Keepa Timeframe:</span>
+          <div class="modal-timeframe-btns">
+            <button class="timeframe-btn" data-range="30">30 Days</button>
+            <button class="timeframe-btn active" data-range="90">90 Days (Default)</button>
+            <button class="timeframe-btn" data-range="365">1 Year</button>
+          </div>
+        </div>
+
         <div class="modal-chart-container">
           <div class="chart-loading" id="chartLoading">Loading live Keepa Price Chart...</div>
           <img id="modalChartImg" src="" alt="Keepa Price History Chart" class="modal-chart-img" loading="lazy">
+        </div>
+
+        <!-- Dynamic AI Buy Verdict Callout (Item 4) -->
+        <div class="modal-verdict-box" id="modalVerdictBox">
+          <div class="verdict-header">
+            <span class="verdict-icon">🤖</span>
+            <span class="verdict-title">Autonomous AI Buy Verdict</span>
+            <span class="verdict-pill" id="modalVerdictPill">HIGH CONFIDENCE</span>
+          </div>
+          <p class="verdict-text" id="modalVerdictText">Analyzing deal price dynamics...</p>
         </div>
 
         <div class="modal-insight" id="modalInsight">
@@ -309,7 +377,7 @@
 
       <div class="modal-footer">
         <button id="modalShareBtn" class="btn btn-outline">
-          <span>🔗 Share Deal</span>
+          <span>📤 Share Deal</span>
         </button>
         <a id="modalBuyBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
           <span>🛒 Grab Deal on Amazon.in ↗</span>
@@ -317,6 +385,30 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobile Sticky Bottom Navigation (Item 6) -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button class="mobile-nav-btn active" data-tab="all" id="mNavAll">
+      <span class="nav-icon">🔥</span>
+      <span class="nav-label">All</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="loot" id="mNavLoot">
+      <span class="nav-icon">🚨</span>
+      <span class="nav-label">Loots</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="coupons" id="mNavCoupons">
+      <span class="nav-icon">🎟️</span>
+      <span class="nav-label">Coupons</span>
+    </button>
+    <button class="mobile-nav-btn" id="mNavAsin">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-label">ASIN Check</span>
+    </button>
+    <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="mobile-nav-btn tg-btn" id="mNavTelegram">
+      <span class="nav-icon">📲</span>
+      <span class="nav-label">Telegram</span>
+    </a>
+  </nav>
 
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container" aria-live="polite"></div>

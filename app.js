@@ -1,6 +1,6 @@
 /**
  * BharatBazaro.com — 24/7 AI Deal & Price Drop Radar
- * Interactive Frontend Engine
+ * Interactive Frontend Engine (Phase 8 / Commit #159 Upgrade)
  */
 
 (function () {
@@ -18,11 +18,20 @@
       sort: 'score',
       hideExpired: true,
     },
+    cardDiscount: false, // Amazon Pay ICICI 5% Cashback Mode
+    alertsEnabled: JSON.parse(localStorage.getItem('bb_alerts') ?? 'true'),
+    activeModalRange: 90,
+    activeInspectorRange: 90,
+    lastSyncEpoch: Date.now(),
+    knownAsins: new Set(),
+    originalTitle: document.title,
+    titleFlashTimer: null,
     watchlist: new Set(JSON.parse(localStorage.getItem('bb_watchlist') || '[]')),
     activeModalDeal: null,
     refreshIntervalSeconds: 60,
     countdownSeconds: 60,
     countdownTimer: null,
+    syncTimerInterval: null,
   };
 
   const AMAZON_TAG = 'dammaiprasad-21';
@@ -42,6 +51,10 @@
     statLootCount: document.getElementById('statLootCount'),
     statMaxDiscount: document.getElementById('statMaxDiscount'),
     statTotalSavings: document.getElementById('statTotalSavings'),
+    alertsToggleBtn: document.getElementById('alertsToggleBtn'),
+    alertsStatusText: document.getElementById('alertsStatusText'),
+    btnPriceModeStd: document.getElementById('btnPriceModeStd'),
+    btnPriceModeCard: document.getElementById('btnPriceModeCard'),
     searchInput: document.getElementById('searchInput'),
     clearSearchBtn: document.getElementById('clearSearchBtn'),
     asinInspectorCard: document.getElementById('asinInspectorCard'),
@@ -72,6 +85,10 @@
     modalAvgPrice: document.getElementById('modalAvgPrice'),
     modalMrpPrice: document.getElementById('modalMrpPrice'),
     modalChartImg: document.getElementById('modalChartImg'),
+    chartLoading: document.getElementById('chartLoading'),
+    modalVerdictBox: document.getElementById('modalVerdictBox'),
+    modalVerdictPill: document.getElementById('modalVerdictPill'),
+    modalVerdictText: document.getElementById('modalVerdictText'),
     modalInsight: document.getElementById('modalInsight'),
     closeModalBtn: document.getElementById('closeModalBtn'),
     modalBuyBtn: document.getElementById('modalBuyBtn'),
@@ -84,14 +101,23 @@
     countTier1: document.getElementById('countTier1'),
     countWatchlist: document.getElementById('countWatchlist'),
     toastContainer: document.getElementById('toastContainer'),
+    // Mobile Navigation
+    mobileBottomNav: document.getElementById('mobileBottomNav'),
+    mNavAll: document.getElementById('mNavAll'),
+    mNavLoot: document.getElementById('mNavLoot'),
+    mNavCoupons: document.getElementById('mNavCoupons'),
+    mNavAsin: document.getElementById('mNavAsin'),
+    mNavTelegram: document.getElementById('mNavTelegram'),
   };
 
   // ── 3. INITIALIZATION ──────────────────────────────────────────────────────
   function init() {
     initTheme();
+    initAlertsUI();
     setupEventListeners();
     fetchData(true);
     startAutoRefreshTimer();
+    startLiveSyncTimer();
     handleUrlRouting();
   }
 
@@ -109,33 +135,127 @@
     showToast(`Switched to ${newTheme} mode`);
   }
 
-  // ── 5. DATA FETCHING ───────────────────────────────────────────────────────
+  // ── 5. AUDIO CHIME & LIVE LOOT ALERTS (Requirement 6) ──────────────────────
+  function initAlertsUI() {
+    if (el.alertsToggleBtn && el.alertsStatusText) {
+      el.alertsToggleBtn.classList.toggle('active', !!state.alertsEnabled);
+      el.alertsStatusText.textContent = state.alertsEnabled ? 'Alerts: ON' : 'Alerts: OFF';
+    }
+  }
+
+  function toggleAlerts() {
+    state.alertsEnabled = !state.alertsEnabled;
+    localStorage.setItem('bb_alerts', JSON.stringify(state.alertsEnabled));
+    initAlertsUI();
+    if (state.alertsEnabled) {
+      playLootChime();
+      showToast('🔔 Live Loot Audio & Tab alerts enabled!');
+    } else {
+      showToast('🔕 Live Loot alerts disabled.');
+    }
+  }
+
+  function playLootChime() {
+    if (!state.alertsEnabled) return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
+
+      // Tone 1: D5 (587.33 Hz)
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(587.33, now);
+      gain1.gain.setValueAtTime(0.12, now);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.22);
+
+      // Tone 2: A5 (880.00 Hz)
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(880.00, now + 0.10);
+      gain2.gain.setValueAtTime(0.15, now + 0.10);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(now + 0.10);
+      osc2.stop(now + 0.38);
+    } catch (e) {
+      // Audio context may be restricted before first user interaction
+    }
+  }
+
+  function notifyNewLoot(newCount) {
+    if (state.alertsEnabled) {
+      playLootChime();
+    }
+    showToast(`🚨 ${newCount} brand new live deal(s) detected!`);
+
+    if (document.hidden) {
+      if (state.titleFlashTimer) clearInterval(state.titleFlashTimer);
+      let flash = false;
+      state.titleFlashTimer = setInterval(() => {
+        document.title = flash ? `(🔥 ${newCount} New Loot!) BharatBazaro` : state.originalTitle;
+        flash = !flash;
+      }, 1200);
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && state.titleFlashTimer) {
+      clearInterval(state.titleFlashTimer);
+      state.titleFlashTimer = null;
+      document.title = state.originalTitle;
+    }
+  });
+
+  // ── 6. DATA FETCHING (Requirement 2: Cache-Busting & Relative Sync) ─────────
   async function fetchData(isInitial = false) {
     if (el.refreshBtn) el.refreshBtn.classList.add('spinning');
     try {
-      const cacheBust = `?_t=${Date.now()}`;
+      // 60-second cache busting query
+      const cacheBust = `?v=${Math.floor(Date.now() / 60000)}&_t=${Date.now()}`;
       const [dealsRes, statsRes] = await Promise.all([
         fetch(`data/live_deals.json${cacheBust}`).catch(() => null),
         fetch(`data/stats.json${cacheBust}`).catch(() => null),
       ]);
 
       if (dealsRes && dealsRes.ok) {
-        state.allDeals = await dealsRes.json();
+        const fetchedDeals = await dealsRes.json();
+        // Guard: strictly filter out non-positive prices
+        const validDeals = Array.isArray(fetchedDeals)
+          ? fetchedDeals.filter(d => (d.effective_price || d.list_price || 0) > 0)
+          : [];
+
+        // Check for new ASINs
+        if (state.knownAsins.size > 0) {
+          const freshDeals = validDeals.filter(d => !state.knownAsins.has(d.asin));
+          if (freshDeals.length > 0) {
+            notifyNewLoot(freshDeals.length);
+          }
+        }
+        validDeals.forEach(d => state.knownAsins.add(d.asin));
+        state.allDeals = validDeals;
       }
 
       if (statsRes && statsRes.ok) {
         state.stats = await statsRes.json();
       }
 
+      state.lastSyncEpoch = Date.now();
+      updateRadarStatusPill();
       updateStatsUI();
       updateTabCounts();
       updateTicker();
       renderDeals();
 
       state.countdownSeconds = state.refreshIntervalSeconds;
-      if (el.statusText) {
-        el.statusText.textContent = `Live Radar: Active (${state.allDeals.length} deals)`;
-      }
 
       if (!isInitial) {
         showToast(`Refreshed! ${state.allDeals.length} live verified deals loaded.`);
@@ -147,7 +267,25 @@
     }
   }
 
-  // ── 6. UI UPDATES (STATS, COUNTERS, TICKER) ────────────────────────────────
+  function updateRadarStatusPill() {
+    if (!el.statusText) return;
+    const diffSec = Math.max(0, Math.floor((Date.now() - state.lastSyncEpoch) / 1000));
+    let timeStr = 'just now';
+    if (diffSec >= 60) {
+      const m = Math.floor(diffSec / 60);
+      timeStr = `${m}m ago`;
+    }
+    el.statusText.textContent = `Live Radar • ${state.allDeals.length} Deals • Synced ${timeStr}`;
+  }
+
+  function startLiveSyncTimer() {
+    clearInterval(state.syncTimerInterval);
+    state.syncTimerInterval = setInterval(() => {
+      updateRadarStatusPill();
+    }, 30000);
+  }
+
+  // ── 7. UI UPDATES (STATS, COUNTERS, TICKER) ────────────────────────────────
   function updateStatsUI() {
     const totalDeals = state.allDeals.length;
     const lootCount = state.allDeals.filter(d => d.is_loot).length;
@@ -162,9 +300,9 @@
       el.statTotalSavings.textContent = formatCurrencyShort(savings);
     }
 
-    // Dynamic binding of real Telegram URL to all Telegram buttons and footer links
+    // Dynamic binding of real Telegram URL
     const tgUrl = state.stats.telegram_url || DEFAULT_TELEGRAM_URL;
-    document.querySelectorAll('a.btn-telegram, a.footer-link[href*="t.me"]').forEach(link => {
+    document.querySelectorAll('a.btn-telegram, a.footer-link[href*="t.me"], #mNavTelegram').forEach(link => {
       link.href = tgUrl;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
@@ -191,53 +329,32 @@
   function updateTicker() {
     if (!el.tickerContent || !state.allDeals.length) return;
     const topPicks = state.allDeals
-      .filter(d => d.is_loot || d.score >= 85 || d.price_context === 'all_time_low')
-      .slice(0, 7);
+      .filter(d => d.is_loot || (d.trending_score || d.score || 0) >= 80 || d.price_context === 'all_time_low')
+      .slice(0, 8);
 
     if (!topPicks.length) return;
 
     const html = topPicks.map(d => `
       <span class="ticker-item" data-asin="${escapeHtml(d.asin)}">
-        <span class="ticker-badge-loot">${d.is_loot ? '🚨 LOOT' : '📉 ALL-TIME LOW'}</span>
-        <b>${escapeHtml(d.title.substring(0, 55))}...</b> — 
-        <span style="color:#10b981;font-weight:700;">₹${formatNumber(d.effective_price)}</span>
-        <span style="color:#94a3b8;">(${d.effective_discount_pct || d.discount_pct}% OFF)</span>
+        <span class="ticker-fire">${d.is_loot ? '🚨' : '🔥'}</span>
+        <span class="ticker-brand">${escapeHtml(d.brand || 'Amazon')}:</span>
+        <span class="ticker-title-text">${escapeHtml(d.title.substring(0, 48))}...</span>
+        <span class="ticker-price">₹${formatNumber(d.effective_price || d.list_price)}</span>
+        <span class="ticker-drop">${d.effective_discount_pct || d.discount_pct}% OFF</span>
       </span>
-    `).join(' ');
+    `).join('');
 
     el.tickerContent.innerHTML = html;
   }
 
-  // ── 7. ASIN & AMAZON URL ANALYZER ──────────────────────────────────────────
-  function detectAsinFromQuery(query) {
-    if (!query) return null;
-    const trimmed = query.trim();
-    // 1. Direct ASIN (e.g. B0BS1QCFHX)
-    if (/^[A-Z0-9]{10}$/i.test(trimmed)) {
-      return trimmed.toUpperCase();
-    }
-    // 2. Full Amazon URL
-    const match = trimmed.match(/(?:dp|gp\/product|exec\/obidos\/ASIN|aw\/d|product)\/([A-Z0-9]{10})/i);
-    if (match) {
-      return match[1].toUpperCase();
-    }
-    // 3. Fallback search query parameter
-    const matchParam = trimmed.match(/[?&]asin=([A-Z0-9]{10})/i);
-    if (matchParam) {
-      return matchParam[1].toUpperCase();
-    }
-    return null;
-  }
+  // ── 8. SEARCH & ASIN INSPECTOR ─────────────────────────────────────────────
+  function handleSearchInput(query) {
+    const q = (query || '').trim();
+    state.filters.search = q;
 
-  function handleSearchInput(value) {
-    state.filters.search = value.trim();
-    if (el.clearSearchBtn) {
-      el.clearSearchBtn.classList.toggle('visible', Boolean(state.filters.search));
-    }
-
-    const detectedAsin = detectAsinFromQuery(value);
-    if (detectedAsin) {
-      showAsinInspector(detectedAsin);
+    const extractedAsin = extractAsinFromQuery(q);
+    if (extractedAsin) {
+      showAsinInspector(extractedAsin);
     } else {
       hideAsinInspector();
     }
@@ -245,40 +362,57 @@
     renderDeals();
   }
 
+  function extractAsinFromQuery(text) {
+    if (!text) return null;
+    const asinMatch = text.match(/\b([B0-9][A-Z0-9]{9})\b/i);
+    if (asinMatch) return asinMatch[1].toUpperCase();
+
+    const urlMatch = text.match(/(?:\/dp\/|\/gp\/product\/|\/asin\/)([A-Z0-9]{10})/i);
+    if (urlMatch) return urlMatch[1].toUpperCase();
+
+    return null;
+  }
+
   function showAsinInspector(asin) {
     if (!el.asinInspectorCard) return;
-    el.inspectorAsin.textContent = asin;
+    const deal = state.allDeals.find(d => d.asin === asin);
 
-    // Check if we have this deal in our live feed
-    const existing = state.allDeals.find(d => d.asin === asin);
-    if (existing) {
-      el.inspectorTitle.textContent = existing.title;
-    } else {
-      el.inspectorTitle.textContent = `Analyzing Amazon Product (ASIN: ${asin})`;
+    if (el.inspectorAsin) el.inspectorAsin.textContent = asin;
+    if (el.inspectorTitle) {
+      el.inspectorTitle.textContent = deal ? deal.title : `Analyzing Amazon India ASIN: ${asin}`;
     }
 
-    el.inspectorGraphImg.src = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1`;
-    el.inspectorBuyBtn.href = `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1`;
-    el.inspectorKeepaBtn.href = `https://keepa.com/#!product/10-${asin}`;
-    el.inspectorPhBtn.href = `https://pricehistoryapp.com/product/${asin}`;
+    updateInspectorChart(asin, state.activeInspectorRange);
+
+    const partnerUrl = `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1`;
+    if (el.inspectorBuyBtn) el.inspectorBuyBtn.href = deal ? deal.affiliate_url : partnerUrl;
+    if (el.inspectorKeepaBtn) el.inspectorKeepaBtn.href = `https://keepa.com/#!product/10-${asin}`;
+    if (el.inspectorPhBtn) el.inspectorPhBtn.href = `https://pricehistoryapp.com/product/${asin}`;
 
     el.asinInspectorCard.classList.remove('hidden');
   }
 
-  function hideAsinInspector() {
-    if (el.asinInspectorCard) {
-      el.asinInspectorCard.classList.add('hidden');
-    }
+  function updateInspectorChart(asin, range) {
+    if (!el.inspectorGraphImg) return;
+    state.activeInspectorRange = range;
+    el.inspectorGraphImg.src = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1&range=${range}&v=${Date.now()}`;
+    document.querySelectorAll('.inspector-timeframes .timeframe-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-range') === String(range));
+    });
   }
 
-  // ── 8. FILTER & SORT PIPELINE ──────────────────────────────────────────────
+  function hideAsinInspector() {
+    if (el.asinInspectorCard) el.asinInspectorCard.classList.add('hidden');
+  }
+
+  // ── 9. FILTERING & SORTING ENGINE ──────────────────────────────────────────
   function getFilteredDeals() {
     let result = [...state.allDeals];
 
-    // 0. Filter out any corrupt or zero-price deals
+    // 0. Filter non-positive deals
     result = result.filter(d => (d.effective_price || d.list_price || 0) > 0);
 
-    // 1. Hide expired / price spiked
+    // 1. Hide expired
     if (state.filters.hideExpired) {
       result = result.filter(d => !d.expired && !d.price_spiked);
     }
@@ -319,7 +453,7 @@
     }
 
     // 4. Category Filter
-    if (state.filters.category !== 'all') {
+    if (state.filters.category && state.filters.category !== 'all') {
       result = result.filter(d => d.category === state.filters.category);
     }
 
@@ -338,10 +472,10 @@
       });
     }
 
-    // 6. Sorting
+    // 6. Sorting (Default: Freshness Time-Decay Trending Score)
     switch (state.filters.sort) {
       case 'score':
-        result.sort((a, b) => (b.score || 0) - (a.score || 0) || (b.buy_confidence || 0) - (a.buy_confidence || 0));
+        result.sort((a, b) => (b.trending_score || b.score || 0) - (a.trending_score || a.score || 0) || (b.buy_confidence || 0) - (a.buy_confidence || 0));
         break;
       case 'newest':
         result.sort((a, b) => (b.updated_at || 0) - (a.updated_at || 0));
@@ -363,7 +497,7 @@
     return result;
   }
 
-  // ── 9. DEAL CARD RENDERING ─────────────────────────────────────────────────
+  // ── 10. DEAL CARD RENDERING ────────────────────────────────────────────────
   function renderDeals() {
     if (!el.dealsGrid) return;
     const deals = getFilteredDeals();
@@ -391,6 +525,9 @@
 
     // Badges
     const badgesHtml = [];
+    if (d.is_new || (d.age_hours !== undefined && d.age_hours <= 2.0)) {
+      badgesHtml.push('<span class="badge-tag badge-new">⚡ NEW</span>');
+    }
     if (d.is_loot) {
       badgesHtml.push('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>');
     }
@@ -427,6 +564,19 @@
           <span class="promo-copy-action">📋 Tap to Copy</span>
         </div>
       `);
+    }
+
+    // Card Cashback Mode (Requirement 3: Amazon Pay ICICI 5% Off)
+    let cardPriceHtml = '';
+    if (state.cardDiscount) {
+      const cardPrice = Math.round(effPrice * 0.95);
+      const extraSavings = effPrice - cardPrice;
+      cardPriceHtml = `
+        <div class="card-cashback-badge">
+          <span class="cashback-icon">💳</span>
+          <span class="cashback-text"><b>₹${formatNumber(cardPrice)}</b> with 5% Amazon Pay (Extra ₹${formatNumber(extraSavings)} saved)</span>
+        </div>
+      `;
     }
 
     // Buy Confidence Bar
@@ -491,6 +641,7 @@
               ${discPct ? `<span class="discount-badge">${discPct}% OFF</span>` : ''}
             </div>
             ${d.savings_inr > 0 ? `<div class="savings-line">You save ₹${formatNumber(d.savings_inr)}</div>` : ''}
+            ${cardPriceHtml}
           </div>
 
           <!-- Callouts -->
@@ -516,6 +667,9 @@
           <a href="${escapeHtml(d.affiliate_url)}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
             <span>🛒 Grab Deal on Amazon ↗</span>
           </a>
+          <button class="btn-card-share" data-asin="${escapeHtml(d.asin)}" title="Share Deal via WhatsApp / Copy Link">
+            <span>📤 Share</span>
+          </button>
           <button class="btn-chart-deal btn-open-modal" data-asin="${escapeHtml(d.asin)}" title="View Price History & Keepa Chart">
             <span>📈 Chart</span>
           </button>
@@ -524,7 +678,7 @@
     `;
   }
 
-  // ── 10. MODAL & CHART LOGIC ────────────────────────────────────────────────
+  // ── 11. MODAL & CHART LOGIC (Requirement 4: Timeframes & AI Buy Verdict) ───
   function openDealModal(asin) {
     const deal = state.allDeals.find(d => d.asin === asin);
     if (!deal) return;
@@ -538,28 +692,69 @@
     if (el.modalAvgPrice) el.modalAvgPrice.textContent = deal.historical_avg ? `₹${formatNumber(deal.historical_avg)}` : 'Tracking';
     if (el.modalMrpPrice) el.modalMrpPrice.textContent = deal.mrp ? `₹${formatNumber(deal.mrp)}` : 'N/A';
 
-    if (el.modalChartImg) {
-      el.modalChartImg.src = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1`;
-    }
-
-    if (el.modalInsight) {
-      const insightParts = [];
-      if (deal.buy_confidence) {
-        insightParts.push(`<b>Buy Confidence: ${deal.buy_confidence}%</b> (${deal.buy_confidence >= 90 ? 'Screaming Deal' : 'Solid Discount'}).`);
-      }
-      if (deal.historical_avg && deal.historical_avg > effPrice) {
-        insightParts.push(`Currently <b>₹${formatNumber(deal.historical_avg - effPrice)}</b> cheaper than its tracked running average.`);
-      }
-      if (deal.coupon_discount) {
-        insightParts.push(`Includes a stackable on-page coupon of <b>₹${formatNumber(deal.coupon_discount)}</b>.`);
-      }
-      el.modalInsight.innerHTML = insightParts.join(' ') || 'Price radar tracking actively.';
-    }
+    updateModalChart(asin, state.activeModalRange);
+    renderModalAiVerdict(deal, effPrice);
 
     if (el.modalBuyBtn) el.modalBuyBtn.href = deal.affiliate_url;
 
     if (el.chartModal) el.chartModal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+  }
+
+  function updateModalChart(asin, range) {
+    state.activeModalRange = range;
+    if (el.chartLoading) el.chartLoading.style.display = 'block';
+    if (el.modalChartImg) {
+      el.modalChartImg.style.opacity = '0.3';
+      el.modalChartImg.onload = () => {
+        if (el.chartLoading) el.chartLoading.style.display = 'none';
+        el.modalChartImg.style.opacity = '1';
+      };
+      el.modalChartImg.onerror = () => {
+        if (el.chartLoading) el.chartLoading.style.display = 'none';
+        el.modalChartImg.style.opacity = '1';
+      };
+      el.modalChartImg.src = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1&range=${range}&v=${Date.now()}`;
+    }
+
+    document.querySelectorAll('.modal-timeframe-btns .timeframe-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-range') === String(range));
+    });
+  }
+
+  function renderModalAiVerdict(deal, effPrice) {
+    if (!el.modalVerdictBox || !el.modalVerdictText) return;
+    const buyConf = deal.buy_confidence || 75;
+    const isAllTimeLow = deal.price_context === 'all_time_low' || (deal.historical_min && effPrice <= deal.historical_min);
+    const belowAvg = deal.historical_avg && effPrice < deal.historical_avg;
+
+    if (el.modalVerdictPill) {
+      if (isAllTimeLow || deal.is_loot) {
+        el.modalVerdictPill.textContent = 'ALL-TIME LOW (PRIME BUY)';
+        el.modalVerdictPill.style.color = '#10b981';
+      } else if (buyConf >= 85) {
+        el.modalVerdictPill.textContent = 'HIGH CONFIDENCE BUY';
+        el.modalVerdictPill.style.color = '#38bdf8';
+      } else {
+        el.modalVerdictPill.textContent = 'STRONG VALUE';
+        el.modalVerdictPill.style.color = '#f59e0b';
+      }
+    }
+
+    let verdictStr = '';
+    if (isAllTimeLow) {
+      verdictStr = `🎯 <b>UNMATCHED DEAL: ALL-TIME LOW!</b> Current price (₹${formatNumber(effPrice)}) matches or beats the lowest recorded price in tracking history. Buy confidence is rated at <b>${buyConf}%</b>.`;
+    } else if (belowAvg) {
+      const diff = deal.historical_avg - effPrice;
+      const pctDrop = Math.round((diff / deal.historical_avg) * 100);
+      verdictStr = `📉 <b>PRICED BELOW HISTORICAL AVERAGE:</b> Trading <b>₹${formatNumber(diff)}</b> below its tracked average of ₹${formatNumber(deal.historical_avg)} (${pctDrop}% extra discount). Strong buying window.`;
+    } else if (deal.coupon_discount) {
+      verdictStr = `🎟️ <b>STACKABLE COUPON SAVINGS:</b> Includes a ₹${formatNumber(deal.coupon_discount)} on-page discount bringing effective price to ₹${formatNumber(effPrice)} (${deal.effective_discount_pct || deal.discount_pct}% off MRP ₹${formatNumber(deal.mrp)}).`;
+    } else {
+      verdictStr = `✅ <b>VERIFIED VALUE:</b> Priced at ₹${formatNumber(effPrice)} with ${deal.effective_discount_pct || deal.discount_pct}% discount from MRP (₹${formatNumber(deal.mrp)}). AI value score rated at ${deal.score || 70}/100.`;
+    }
+
+    el.modalVerdictText.innerHTML = verdictStr;
   }
 
   function closeModal() {
@@ -568,7 +763,27 @@
     state.activeModalDeal = null;
   }
 
-  // ── 11. WATCHLIST & PROMO COPY ─────────────────────────────────────────────
+  // ── 12. VIRAL SHARE (Requirement 5: WhatsApp / Telegram / Clipboard) ───────
+  function shareDeal(deal) {
+    if (!deal) return;
+    const effPrice = deal.effective_price || deal.list_price || 0;
+    const discPct = deal.effective_discount_pct || deal.discount_pct || 0;
+    const shareUrl = `https://bharatbazaro.com/?asin=${deal.asin}`;
+    const shareText = `🔥 LOOT ALERT: ${deal.title} dropped to ₹${formatNumber(effPrice)} (${discPct}% OFF, ${deal.buy_confidence || 85}% Buy Confidence)! Verified on BharatBazaro 24/7 AI Radar:\n${shareUrl}`;
+
+    if (navigator.share) {
+      navigator.share({ title: deal.title, text: shareText, url: shareUrl }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(shareText).then(() => {
+        showToast('📋 Deal details copied! Opening WhatsApp...');
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+      }).catch(() => {
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+      });
+    }
+  }
+
+  // ── 13. WATCHLIST & PROMO COPY ─────────────────────────────────────────────
   function toggleWatchlist(asin) {
     if (state.watchlist.has(asin)) {
       state.watchlist.delete(asin);
@@ -591,35 +806,113 @@
     });
   }
 
-  function shareDeal(deal) {
-    if (!deal) return;
-    const shareUrl = `https://bharatbazaro.com/?asin=${deal.asin}`;
-    const shareText = `🔥 Check out this deal on BharatBazaro: ${deal.title} at ₹${formatNumber(deal.effective_price || deal.list_price)} (${deal.effective_discount_pct || deal.discount_pct}% OFF)!`;
-
-    if (navigator.share) {
-      navigator.share({ title: deal.title, text: shareText, url: shareUrl }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(shareUrl).then(() => {
-        showToast('🔗 Deal link copied to clipboard!');
-      });
-    }
-  }
-
   function scrollToDeals() {
-    const target = el.dealsGrid || document.getElementById('dealsGrid') || document.getElementById('deals-grid');
+    const target = el.dealsGrid || document.getElementById('dealsGrid');
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  // ── 12. EVENT LISTENERS ────────────────────────────────────────────────────
+  // ── 14. EVENT LISTENERS ────────────────────────────────────────────────────
   function setupEventListeners() {
     // Theme toggle
     if (el.themeToggleBtn) {
       el.themeToggleBtn.addEventListener('click', toggleTheme);
     }
 
-    // 1. Hero KPI Stat Cards & Live Radar Status Badge Click Handlers (Requirement 2)
+    // Alerts toggle
+    if (el.alertsToggleBtn) {
+      el.alertsToggleBtn.addEventListener('click', toggleAlerts);
+    }
+
+    // Card Discount Mode Selector (Amazon Pay 5% Off)
+    if (el.btnPriceModeStd) {
+      el.btnPriceModeStd.addEventListener('click', () => {
+        state.cardDiscount = false;
+        el.btnPriceModeStd.classList.add('active');
+        if (el.btnPriceModeCard) el.btnPriceModeCard.classList.remove('active');
+        renderDeals();
+      });
+    }
+    if (el.btnPriceModeCard) {
+      el.btnPriceModeCard.addEventListener('click', () => {
+        state.cardDiscount = true;
+        el.btnPriceModeCard.classList.add('active');
+        if (el.btnPriceModeStd) el.btnPriceModeStd.classList.remove('active');
+        renderDeals();
+        showToast('💳 Amazon Pay 5% Cashback applied to all deal prices!');
+      });
+    }
+
+    // Modal Timeframe Switcher
+    document.querySelectorAll('.modal-timeframe-btns .timeframe-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const range = parseInt(btn.getAttribute('data-range'), 10) || 90;
+        if (state.activeModalDeal) {
+          updateModalChart(state.activeModalDeal.asin, range);
+        }
+      });
+    });
+
+    // Inspector Timeframe Switcher
+    document.querySelectorAll('.inspector-timeframes .timeframe-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const range = parseInt(btn.getAttribute('data-range'), 10) || 90;
+        const asin = el.inspectorAsin ? el.inspectorAsin.textContent.trim() : '';
+        if (asin && asin !== 'B0XXXXXXXX') {
+          updateInspectorChart(asin, range);
+        }
+      });
+    });
+
+    // Mobile Bottom Navigation (Requirement 6)
+    if (el.mNavAll) {
+      el.mNavAll.addEventListener('click', () => {
+        updateActiveMobileNav('all');
+        state.filters.tab = 'all';
+        state.filters.priceBucket = 'all';
+        state.filters.category = 'all';
+        el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'all'));
+        renderDeals();
+        scrollToDeals();
+      });
+    }
+    if (el.mNavLoot) {
+      el.mNavLoot.addEventListener('click', () => {
+        updateActiveMobileNav('loot');
+        state.filters.tab = 'loot';
+        el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'loot'));
+        renderDeals();
+        scrollToDeals();
+      });
+    }
+    if (el.mNavCoupons) {
+      el.mNavCoupons.addEventListener('click', () => {
+        updateActiveMobileNav('coupons');
+        state.filters.tab = 'coupons';
+        el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'coupons'));
+        renderDeals();
+        scrollToDeals();
+      });
+    }
+    if (el.mNavAsin) {
+      el.mNavAsin.addEventListener('click', () => {
+        if (el.searchInput) {
+          el.searchInput.focus();
+          el.searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    function updateActiveMobileNav(tabName) {
+      document.querySelectorAll('.mobile-bottom-nav .mobile-nav-btn').forEach(b => {
+        if (b.getAttribute('data-tab')) {
+          b.classList.toggle('active', b.getAttribute('data-tab') === tabName);
+        }
+      });
+    }
+
+    // Hero KPI Stat Cards & Live Radar Status Badge Click Handlers
     function handleViewAllDeals() {
       state.filters.tab = 'all';
       state.filters.priceBucket = 'all';
@@ -700,6 +993,7 @@
         el.filterTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         state.filters.tab = tab.getAttribute('data-tab');
+        updateActiveMobileNav(state.filters.tab);
         renderDeals();
         scrollToDeals();
       });
@@ -759,6 +1053,7 @@
         el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'all'));
         el.pricePills.forEach(p => p.classList.toggle('active', p.getAttribute('data-price') === 'all'));
         el.catPills.forEach(c => c.classList.toggle('active', c.getAttribute('data-category') === 'all'));
+        updateActiveMobileNav('all');
         hideAsinInspector();
         renderDeals();
       });
@@ -795,6 +1090,16 @@
           e.preventDefault();
           const code = promoBtn.getAttribute('data-promo');
           copyPromoCode(code);
+          return;
+        }
+
+        // Share button click
+        const shareBtn = e.target.closest('.btn-card-share');
+        if (shareBtn) {
+          e.preventDefault();
+          const asin = shareBtn.getAttribute('data-asin');
+          const deal = state.allDeals.find(d => d.asin === asin);
+          if (deal) shareDeal(deal);
           return;
         }
 
@@ -835,7 +1140,7 @@
     });
   }
 
-  // ── 13. AUTO REFRESH COUNTDOWN ─────────────────────────────────────────────
+  // ── 15. AUTO REFRESH COUNTDOWN ─────────────────────────────────────────────
   function startAutoRefreshTimer() {
     clearInterval(state.countdownTimer);
     state.countdownTimer = setInterval(() => {
@@ -850,11 +1155,10 @@
     }, 1000);
   }
 
-  // ── 14. ROUTING & DEEP LINKING ─────────────────────────────────────────────
+  // ── 16. ROUTING & DEEP LINKING ─────────────────────────────────────────────
   function handleUrlRouting() {
     const params = new URLSearchParams(window.location.search);
 
-    // ?category=...
     const cat = params.get('category');
     if (cat) {
       state.filters.category = cat;
@@ -863,17 +1167,15 @@
       });
     }
 
-    // ?asin=...
     const asin = params.get('asin');
     if (asin) {
-      // Delay slightly to ensure deals are loaded
       setTimeout(() => {
         openDealModal(asin.toUpperCase());
       }, 600);
     }
   }
 
-  // ── 15. UTILITIES ──────────────────────────────────────────────────────────
+  // ── 17. UTILITIES ──────────────────────────────────────────────────────────
   function formatNumber(num) {
     if (num == null || isNaN(num)) return '0';
     return Number(num).toLocaleString('en-IN');
@@ -937,4 +1239,3 @@
     init();
   }
 })();
-

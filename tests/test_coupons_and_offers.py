@@ -112,3 +112,4 @@ def test_publisher_caption_includes_coupon_trick_and_bonus():
     assert "Apply ₹500 coupon" in caption
     assert "Bonus Offer:" in caption
     assert "₹50 Cashback on Amazon Pay UPI" in caption
+

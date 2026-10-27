@@ -1,24 +1,29 @@
 {
-    "version": 2,
-    "name": "bharatbazaro",
-    "builds": [
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/data/(.*).json",
+      "headers": [
         {
-            "src": "frontend/**",
-            "use": "@vercel/static"
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
         },
         {
-            "src": "backend/server.js",
-            "use": "@vercel/node"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
-    ],
-    "routes": [
+      ]
+    },
+    {
+      "source": "/(.*).(css|js)",
+      "headers": [
         {
-            "src": "/api/(.*)",
-            "dest": "backend/server.js"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "frontend/$1"
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
         }
-    ]
+      ]
+    }
+  ]
 }

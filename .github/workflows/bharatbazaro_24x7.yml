@@ -1,0 +1,99 @@
+name: BharatBazaro 24/7 Deal Radar & Web Feed Engine
+
+on:
+  schedule:
+    # 24/7 Hourly Trigger: runs at minute 37 of every hour UTC (24 times a day)
+    # Stays off the crowded :00 and :30 GitHub Actions queue spikes
+    - cron: '37 * * * *'
+
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'data/**'
+      - 'reports/**'
+      - '**.md'
+
+  workflow_dispatch:
+
+concurrency:
+  group: bharatbazaro-24x7-runner
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  run-radar-and-export-feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run 24/7 Deal Radar & Web Feed Exporter
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER || 'gemini' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          HERMES_API_KEY: ${{ secrets.HERMES_API_KEY || secrets.OPENROUTER_API_KEY || secrets.DEALS_AGENT_OPENROUTER }}
+          HERMES_MODEL: ${{ secrets.HERMES_MODEL || 'google/gemma-4-26b-a4b-it:free' }}
+          HERMES_ENDPOINT: https://openrouter.ai/api/v1/chat/completions
+          AI_TIMEOUT_SECONDS: '12'
+          AMAZON_PARTNER_TAG: ${{ secrets.AMAZON_PARTNER_TAG || 'dammaiprasad-21' }}
+          AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG || 'dammaiprasad-21' }}
+          DRY_RUN: 'false'
+          CONTINUOUS: 'false'
+          MAX_POSTS_PER_CYCLE: '3'
+          FEEDS_ENABLED: 'true'
+          MIN_DISCOUNT_PERCENT: '30'
+          ALLOWED_RETAILERS: 'Amazon'
+          AGENT_MODE: 'true'
+          AGENT_LLM: 'true'
+          ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
+          LISTEN_FOR_ENGAGEMENT: 'true'
+          MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "Starting BharatBazaro 24/7 Radar Cycle at $(date -u)"
+          python run_once.py || true
+          # Guarantee feed export even if Telegram publishing encountered network timeouts
+          python -c "from dealbot.publisher import StateStore; from dealbot.web_exporter import export_web_feed; s = StateStore('data/state.sqlite3'); export_web_feed(s, output_dir='data')" || true
+
+      - name: Persist SQLite Database & Web Feeds (data/live_deals.json)
+        if: always()
+        run: |
+          python -c "from dealbot.publisher import StateStore; StateStore('data/state.sqlite3').checkpoint()" || true
+          rm -f data/*.sqlite3-wal data/*.sqlite3-shm data/*.db-wal data/*.db-shm || true
+          mkdir -p /tmp/bb_data_bak
+          cp -f data/*.* /tmp/bb_data_bak/ 2>/dev/null || true
+          bash -c '
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git fetch origin main || true
+            git checkout -f -B main origin/main || true
+            mkdir -p data
+            cp -f /tmp/bb_data_bak/*.* data/ 2>/dev/null || true
+            rm -f data/*.sqlite3-wal data/*.sqlite3-shm data/*.db-wal data/*.db-shm || true
+            git add -f data/live_deals.json data/stats.json data/state.sqlite3 data/deals.db 2>/dev/null || true
+            if ! git diff --staged --quiet; then
+              git commit -m "chore(feed): sync 24/7 live_deals.json and sqlite state [skip ci]" || true
+              git push origin HEAD:main || true
+            else
+              echo "Feed data unchanged."
+            fi
+          '

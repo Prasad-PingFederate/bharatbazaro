@@ -38,11 +38,56 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793103637,
-    "age_hours": 1.1,
+    "age_hours": 1.2,
     "trending_score": 93.0,
     "is_new": true,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
+  },
+  {
+    "id": "amazon:B0GKDR88L4",
+    "asin": "B0GKDR88L4",
+    "title": "Amazon Deal (B0GKDR88L4)",
+    "brand": "Amazon",
+    "brand_tier": "unbranded",
+    "category": "Electronics & Audio",
+    "image_url": "https://m.media-amazon.com/images/P/B0GKDR88L4.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0GKDR88L4?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": null,
+    "list_price": 3060,
+    "effective_price": 3060,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 69,
+    "effective_discount_pct": 69,
+    "savings_inr": 0,
+    "rating": null,
+    "review_count": null,
+    "score": 84,
+    "buy_confidence": 87,
+    "price_context": "normal",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹3,060!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793107864,
+    "age_hours": 0.0,
+    "trending_score": 84.0,
+    "is_new": true,
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0G5Y7WSF4",
@@ -86,8 +131,53 @@
     "age_hours": 2.6,
     "trending_score": 83.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
+  },
+  {
+    "id": "amazon:B0BZZ5H8XG",
+    "asin": "B0BZZ5H8XG",
+    "title": "Amazon Deal (B0BZZ5H8XG)",
+    "brand": "Amazon",
+    "brand_tier": "unbranded",
+    "category": "Personal Care & Grocery",
+    "image_url": "https://m.media-amazon.com/images/P/B0BZZ5H8XG.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0BZZ5H8XG?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": null,
+    "list_price": 305,
+    "effective_price": 305,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 69,
+    "effective_discount_pct": 69,
+    "savings_inr": 0,
+    "rating": null,
+    "review_count": null,
+    "score": 83,
+    "buy_confidence": 87,
+    "price_context": "normal",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹305!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793107864,
+    "age_hours": 0.0,
+    "trending_score": 83.0,
+    "is_new": true,
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0G12SRPB9",
@@ -131,8 +221,8 @@
     "age_hours": 2.6,
     "trending_score": 80.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B00WUDU4FG",
@@ -173,11 +263,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793089249,
-    "age_hours": 5.1,
-    "trending_score": 80.2,
+    "age_hours": 5.2,
+    "trending_score": 80.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0866B1P6B",
@@ -218,11 +308,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793089252,
-    "age_hours": 5.1,
-    "trending_score": 79.2,
+    "age_hours": 5.2,
+    "trending_score": 79.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0HKMBDZ5Y",
@@ -263,11 +353,56 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793103637,
-    "age_hours": 1.1,
+    "age_hours": 1.2,
     "trending_score": 79.0,
     "is_new": true,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
+  },
+  {
+    "id": "amazon:B09P8K152F",
+    "asin": "B09P8K152F",
+    "title": "Amazon Deal (B09P8K152F)",
+    "brand": "Amazon",
+    "brand_tier": "unbranded",
+    "category": "Home & Kitchen",
+    "image_url": "https://m.media-amazon.com/images/P/B09P8K152F.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B09P8K152F?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": null,
+    "list_price": 399,
+    "effective_price": 399,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 67,
+    "effective_discount_pct": 67,
+    "savings_inr": 0,
+    "rating": null,
+    "review_count": null,
+    "score": 78,
+    "buy_confidence": 87,
+    "price_context": "normal",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹399!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793107864,
+    "age_hours": 0.0,
+    "trending_score": 78.0,
+    "is_new": true,
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0CM3K6H57",
@@ -312,8 +447,8 @@
     "age_hours": 4.4,
     "trending_score": 76.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0C85T9PXW",
@@ -354,11 +489,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793089255,
-    "age_hours": 5.1,
-    "trending_score": 74.2,
+    "age_hours": 5.2,
+    "trending_score": 74.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0F8HJZQVP",
@@ -399,11 +534,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793103637,
-    "age_hours": 1.1,
+    "age_hours": 1.2,
     "trending_score": 74.0,
     "is_new": true,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0CJM2NST8",
@@ -448,8 +583,8 @@
     "age_hours": 4.4,
     "trending_score": 72.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0C53S9X17",
@@ -493,8 +628,8 @@
     "age_hours": 2.6,
     "trending_score": 69.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0HB9S9BDQ",
@@ -539,8 +674,8 @@
     "age_hours": 4.4,
     "trending_score": 68.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B097PG9JPD",
@@ -581,11 +716,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793085648,
-    "age_hours": 6.1,
-    "trending_score": 66.8,
+    "age_hours": 6.2,
+    "trending_score": 66.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B08M1KMRLC",
@@ -629,8 +764,8 @@
     "age_hours": 8.0,
     "trending_score": 66.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B07YWMQWWK",
@@ -671,11 +806,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793085645,
-    "age_hours": 6.1,
-    "trending_score": 65.8,
+    "age_hours": 6.2,
+    "trending_score": 65.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0BD43W4YP",
@@ -716,11 +851,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793085642,
-    "age_hours": 6.1,
-    "trending_score": 64.8,
+    "age_hours": 6.2,
+    "trending_score": 64.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0C82PJH3S",
@@ -764,8 +899,8 @@
     "age_hours": 9.0,
     "trending_score": 64.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B08THV7ZKD",
@@ -809,8 +944,8 @@
     "age_hours": 9.0,
     "trending_score": 64.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0BDVBH82P",
@@ -854,8 +989,8 @@
     "age_hours": 8.0,
     "trending_score": 62.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B09QYV9R61",
@@ -899,8 +1034,8 @@
     "age_hours": 8.0,
     "trending_score": 58.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0DX3CBHHF",
@@ -944,8 +1079,8 @@
     "age_hours": 9.0,
     "trending_score": 55.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0DMS8VK96",
@@ -989,8 +1124,8 @@
     "age_hours": 22.3,
     "trending_score": 37.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B09K7RLCPL",
@@ -1035,8 +1170,8 @@
     "age_hours": 23.3,
     "trending_score": 36.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0GGHXCQSR",
@@ -1080,8 +1215,8 @@
     "age_hours": 20.3,
     "trending_score": 36.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0FLYDHYY4",
@@ -1125,8 +1260,8 @@
     "age_hours": 21.3,
     "trending_score": 33.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0FZVD8P6V",
@@ -1170,8 +1305,8 @@
     "age_hours": 22.3,
     "trending_score": 32.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0FN7WG5KB",
@@ -1215,8 +1350,8 @@
     "age_hours": 23.3,
     "trending_score": 31.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0H4GBJVW7",
@@ -1260,8 +1395,8 @@
     "age_hours": 23.3,
     "trending_score": 27.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B08HQL1DB2",
@@ -1305,8 +1440,8 @@
     "age_hours": 20.3,
     "trending_score": 27.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0H2BYVZWM",
@@ -1351,8 +1486,8 @@
     "age_hours": 27.2,
     "trending_score": 27.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0D4DZ7WL2",
@@ -1396,8 +1531,8 @@
     "age_hours": 21.3,
     "trending_score": 25.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B07874GHW2",
@@ -1441,8 +1576,8 @@
     "age_hours": 20.3,
     "trending_score": 23.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0DSJCF3C9",
@@ -1486,8 +1621,8 @@
     "age_hours": 27.2,
     "trending_score": 22.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B01M0GS016",
@@ -1531,8 +1666,8 @@
     "age_hours": 21.3,
     "trending_score": 21.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0DMJRJMD6",
@@ -1573,11 +1708,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793006171,
-    "age_hours": 28.2,
-    "trending_score": 19.5,
+    "age_hours": 28.3,
+    "trending_score": 19.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0H6MJBCHN",
@@ -1619,11 +1754,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792998934,
-    "age_hours": 30.2,
-    "trending_score": 16.5,
+    "age_hours": 30.3,
+    "trending_score": 16.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0CJLWDVD1",
@@ -1664,11 +1799,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792995306,
-    "age_hours": 31.2,
-    "trending_score": 15.0,
+    "age_hours": 31.3,
+    "trending_score": 14.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0H5CT3NR9",
@@ -1709,11 +1844,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792995310,
-    "age_hours": 31.2,
-    "trending_score": 14.0,
+    "age_hours": 31.3,
+    "trending_score": 13.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0FJFN99PB",
@@ -1757,8 +1892,8 @@
     "age_hours": 27.2,
     "trending_score": 13.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B096MSG7JX",
@@ -1799,11 +1934,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792998930,
-    "age_hours": 30.2,
-    "trending_score": 12.5,
+    "age_hours": 30.3,
+    "trending_score": 12.2,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0B4WJMRSY",
@@ -1847,8 +1982,8 @@
     "age_hours": 28.2,
     "trending_score": 11.5,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0F2237QFM",
@@ -1889,11 +2024,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792995315,
-    "age_hours": 31.2,
-    "trending_score": 11.0,
+    "age_hours": 31.3,
+    "trending_score": 10.8,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0BD3ZPYP7",
@@ -1934,11 +2069,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792998925,
-    "age_hours": 30.2,
+    "age_hours": 30.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0FCLPQG26",
@@ -1982,8 +2117,8 @@
     "age_hours": 41.8,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0D41L64NR",
@@ -2027,8 +2162,8 @@
     "age_hours": 44.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0CFFBZ23F",
@@ -2069,11 +2204,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793006165,
-    "age_hours": 28.2,
+    "age_hours": 28.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B08S7V8YTN",
@@ -2114,11 +2249,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793002554,
-    "age_hours": 29.2,
+    "age_hours": 29.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0DZGZ472K",
@@ -2159,11 +2294,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793002550,
-    "age_hours": 29.2,
+    "age_hours": 29.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B098ZPRGGZ",
@@ -2205,11 +2340,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793002546,
-    "age_hours": 29.2,
+    "age_hours": 29.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0F1N1LBRD",
@@ -2250,11 +2385,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792991693,
-    "age_hours": 32.2,
+    "age_hours": 32.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0D6NF542S",
@@ -2295,11 +2430,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792991688,
-    "age_hours": 32.2,
+    "age_hours": 32.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0F24RW9D2",
@@ -2340,11 +2475,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1792991685,
-    "age_hours": 32.2,
+    "age_hours": 32.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0H8P1NCMN",
@@ -2388,8 +2523,8 @@
     "age_hours": 41.8,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0D3596YR4",
@@ -2433,8 +2568,8 @@
     "age_hours": 41.8,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0BGT9TWL6",
@@ -2478,8 +2613,8 @@
     "age_hours": 44.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   },
   {
     "id": "amazon:B0FN4K4MPY",
@@ -2523,7 +2658,7 @@
     "age_hours": 44.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793107773,
-    "updated_at_ist": "2026-10-27 18:59 IST"
+    "updated_at": 1793107874,
+    "updated_at_ist": "2026-10-27 19:01 IST"
   }
 ]

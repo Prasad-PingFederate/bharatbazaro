@@ -390,7 +390,7 @@
     const partnerUrl = `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1`;
     if (el.inspectorBuyBtn) el.inspectorBuyBtn.href = deal ? deal.affiliate_url : partnerUrl;
     if (el.inspectorKeepaBtn) el.inspectorKeepaBtn.href = `https://keepa.com/#!product/10-${asin}`;
-    if (el.inspectorPhBtn) el.inspectorPhBtn.href = `https://pricehistoryapp.com/product/${asin}`;
+    if (el.inspectorPhBtn) el.inspectorPhBtn.href = `https://keepa.com/#!product/10-${asin}`;
 
     el.asinInspectorCard.classList.remove('hidden');
   }
@@ -708,8 +708,26 @@
 
   // ── 11. MODAL & CHART LOGIC (Requirement 4: Timeframes & AI Buy Verdict) ───
   function openDealModal(asin) {
-    const deal = state.allDeals.find(d => d.asin === asin);
-    if (!deal) return;
+    if (!asin) return;
+    asin = asin.toUpperCase();
+    let deal = state.allDeals.find(d => d.asin === asin);
+    if (!deal) {
+      deal = {
+        asin: asin,
+        title: `Amazon Verified Deal (${asin})`,
+        effective_price: null,
+        list_price: null,
+        mrp: null,
+        affiliate_url: `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1`,
+        image_url: `https://m.media-amazon.com/images/P/${asin}.jpg`,
+        price_context: 'normal',
+        buy_confidence: 85,
+        claim_steps: [
+          "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+          "🎉 Complete checkout at the verified price on Amazon!"
+        ]
+      };
+    }
 
     state.activeModalDeal = deal;
     const effPrice = deal.effective_price || deal.list_price || 0;

@@ -4,11 +4,11 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/data/(.*).json",
+      "source": "/data/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
+          "value": "public, max-age=60, must-revalidate"
         },
         {
           "key": "Access-Control-Allow-Origin",
@@ -17,11 +17,20 @@
       ]
     },
     {
+      "source": "/(index.html|app.js|style.css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/(.*).(css|js)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=300"
+          "value": "public, max-age=60, must-revalidate"
         }
       ]
     }

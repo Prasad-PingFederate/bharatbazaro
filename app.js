@@ -26,12 +26,18 @@
   };
 
   const AMAZON_TAG = 'dammaiprasad-21';
+  const DEFAULT_TELEGRAM_URL = 'https://t.me/Flash_Deals_Flipkart_Amazon';
 
   // ── 2. DOM ELEMENT REFERENCES ──────────────────────────────────────────────
   const el = {
     themeToggleBtn: document.getElementById('themeToggleBtn'),
     statusText: document.getElementById('statusText'),
+    radarStatusBadge: document.getElementById('radarStatusBadge'),
     tickerContent: document.getElementById('tickerContent'),
+    statCardLiveDeals: document.getElementById('statCardLiveDeals'),
+    statCardLoot: document.getElementById('statCardLoot'),
+    statCardMaxDiscount: document.getElementById('statCardMaxDiscount'),
+    statCardSavings: document.getElementById('statCardSavings'),
     statLiveDeals: document.getElementById('statLiveDeals'),
     statLootCount: document.getElementById('statLootCount'),
     statMaxDiscount: document.getElementById('statMaxDiscount'),
@@ -144,7 +150,7 @@
   // ── 6. UI UPDATES (STATS, COUNTERS, TICKER) ────────────────────────────────
   function updateStatsUI() {
     const totalDeals = state.allDeals.length;
-    const lootCount = state.allDeals.filter(d => d.is_loot || d.score >= 80).length;
+    const lootCount = state.allDeals.filter(d => d.is_loot).length;
     const maxDiscount = state.allDeals.reduce((max, d) => Math.max(max, d.effective_discount_pct || d.discount_pct || 0), 0);
     const totalSavings = state.allDeals.reduce((sum, d) => sum + (d.savings_inr || 0), 0);
 
@@ -155,14 +161,22 @@
       const savings = state.stats.total_savings_available || totalSavings;
       el.statTotalSavings.textContent = formatCurrencyShort(savings);
     }
+
+    // Dynamic binding of real Telegram URL to all Telegram buttons and footer links
+    const tgUrl = state.stats.telegram_url || DEFAULT_TELEGRAM_URL;
+    document.querySelectorAll('a.btn-telegram, a.footer-link[href*="t.me"]').forEach(link => {
+      link.href = tgUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    });
   }
 
   function updateTabCounts() {
     if (!state.allDeals) return;
     const all = state.allDeals.length;
-    const loot = state.allDeals.filter(d => d.is_loot || d.score >= 80).length;
+    const loot = state.allDeals.filter(d => d.is_loot).length;
     const drops = state.allDeals.filter(d => d.price_context === 'all_time_low' || d.price_context === 'real_drop' || d.is_further_drop).length;
-    const coupons = state.allDeals.filter(d => (d.coupon_discount && d.coupon_discount > 0) || d.promo_code).length;
+    const coupons = state.allDeals.filter(d => (d.coupon_discount && d.coupon_discount > 0) || d.coupon_text || d.promo_code || d.bank_offer).length;
     const tier1 = state.allDeals.filter(d => d.brand_tier === 'tier1').length;
     const watchlist = state.watchlist.size;
 
@@ -261,6 +275,9 @@
   function getFilteredDeals() {
     let result = [...state.allDeals];
 
+    // 0. Filter out any corrupt or zero-price deals
+    result = result.filter(d => (d.effective_price || d.list_price || 0) > 0);
+
     // 1. Hide expired / price spiked
     if (state.filters.hideExpired) {
       result = result.filter(d => !d.expired && !d.price_spiked);
@@ -269,13 +286,13 @@
     // 2. Tab Filter
     switch (state.filters.tab) {
       case 'loot':
-        result = result.filter(d => d.is_loot || d.score >= 80);
+        result = result.filter(d => d.is_loot);
         break;
       case 'drops':
         result = result.filter(d => d.price_context === 'all_time_low' || d.price_context === 'real_drop' || d.is_further_drop);
         break;
       case 'coupons':
-        result = result.filter(d => (d.coupon_discount && d.coupon_discount > 0) || d.promo_code);
+        result = result.filter(d => (d.coupon_discount && d.coupon_discount > 0) || d.coupon_text || d.promo_code || d.bank_offer);
         break;
       case 'tier1':
         result = result.filter(d => d.brand_tier === 'tier1');
@@ -368,12 +385,13 @@
   function createDealCardHtml(d) {
     const isSaved = state.watchlist.has(d.asin);
     const effPrice = d.effective_price || d.list_price || 0;
+    if (effPrice <= 0) return '';
     const discPct = d.effective_discount_pct || d.discount_pct || 0;
     const buyConf = d.buy_confidence || 75;
 
     // Badges
     const badgesHtml = [];
-    if (d.is_loot || d.score >= 82) {
+    if (d.is_loot) {
       badgesHtml.push('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>');
     }
     if (d.price_context === 'all_time_low') {
@@ -587,11 +605,76 @@
     }
   }
 
+  function scrollToDeals() {
+    const target = el.dealsGrid || document.getElementById('dealsGrid') || document.getElementById('deals-grid');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   // ── 12. EVENT LISTENERS ────────────────────────────────────────────────────
   function setupEventListeners() {
     // Theme toggle
     if (el.themeToggleBtn) {
       el.themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
+    // 1. Hero KPI Stat Cards & Live Radar Status Badge Click Handlers (Requirement 2)
+    function handleViewAllDeals() {
+      state.filters.tab = 'all';
+      state.filters.priceBucket = 'all';
+      state.filters.category = 'all';
+      el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'all'));
+      el.pricePills.forEach(p => p.classList.toggle('active', p.getAttribute('data-price') === 'all'));
+      el.catPills.forEach(c => c.classList.toggle('active', c.getAttribute('data-category') === 'all'));
+      renderDeals();
+      scrollToDeals();
+    }
+
+    if (el.statCardLiveDeals) {
+      el.statCardLiveDeals.addEventListener('click', handleViewAllDeals);
+      el.statCardLiveDeals.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') handleViewAllDeals(); });
+    }
+    if (el.radarStatusBadge) {
+      el.radarStatusBadge.addEventListener('click', handleViewAllDeals);
+      el.radarStatusBadge.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') handleViewAllDeals(); });
+    }
+
+    function handleViewLootDeals() {
+      state.filters.tab = 'loot';
+      el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'loot'));
+      renderDeals();
+      scrollToDeals();
+    }
+    if (el.statCardLoot) {
+      el.statCardLoot.addEventListener('click', handleViewLootDeals);
+      el.statCardLoot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') handleViewLootDeals(); });
+    }
+
+    function handleSortByDiscount() {
+      state.filters.tab = 'all';
+      state.filters.sort = 'discount';
+      if (el.sortSelect) el.sortSelect.value = 'discount';
+      el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'all'));
+      renderDeals();
+      scrollToDeals();
+    }
+    if (el.statCardMaxDiscount) {
+      el.statCardMaxDiscount.addEventListener('click', handleSortByDiscount);
+      el.statCardMaxDiscount.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') handleSortByDiscount(); });
+    }
+
+    function handleSortBySavings() {
+      state.filters.tab = 'all';
+      state.filters.sort = 'savings';
+      if (el.sortSelect) el.sortSelect.value = 'savings';
+      el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'all'));
+      renderDeals();
+      scrollToDeals();
+    }
+    if (el.statCardSavings) {
+      el.statCardSavings.addEventListener('click', handleSortBySavings);
+      el.statCardSavings.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') handleSortBySavings(); });
     }
 
     // Search input
@@ -618,6 +701,7 @@
         tab.classList.add('active');
         state.filters.tab = tab.getAttribute('data-tab');
         renderDeals();
+        scrollToDeals();
       });
     });
 
@@ -628,6 +712,7 @@
         pill.classList.add('active');
         state.filters.priceBucket = pill.getAttribute('data-price');
         renderDeals();
+        scrollToDeals();
       });
     });
 
@@ -638,6 +723,7 @@
         pill.classList.add('active');
         state.filters.category = pill.getAttribute('data-category');
         renderDeals();
+        scrollToDeals();
       });
     });
 
@@ -851,3 +937,4 @@
     init();
   }
 })();
+

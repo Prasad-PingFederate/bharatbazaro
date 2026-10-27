@@ -3,7 +3,7 @@
 > Autonomous, real-time Amazon India deal intelligence engine & price drop radar inspired by BuyHatke, Keepa, PriceHistory, and GrabOn.
 
 🌐 **Live Platform:** [https://bharatbazaro.com](https://bharatbazaro.com)  
-📲 **Telegram Radar:** [https://t.me/dealdash_ai](https://t.me/dealdash_ai)
+📲 **Telegram Radar:** [https://t.me/Flash_Deals_Flipkart_Amazon](https://t.me/Flash_Deals_Flipkart_Amazon)
 
 ---
 

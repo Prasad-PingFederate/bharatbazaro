@@ -418,6 +418,9 @@ def run_once() -> int:
     post_24x7 = os.getenv("TELEGRAM_24X7", "false").lower() == "true"
     is_daytime = post_24x7 or (510 <= ist_mins <= 1410)
 
+    token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+    telegram_enabled = bool(token and token != "replace_me" and chat_id)
+
     posted_count = 0
     for deal in queue:
         if posted_count >= max_posts:
@@ -425,6 +428,32 @@ def run_once() -> int:
         picked = reasons.get(deal.id)
         deal_score = picked.score if picked else (getattr(deal, "agent_score", None) or 50)
         is_loot = bool(getattr(deal, "is_loot", False) or (deal_score >= 85 and (getattr(deal, "effective_discount_pct", None) or deal.discount_percent or 0) >= 40))
+
+        # Check if Telegram publishing is configured
+        if not telegram_enabled:
+            logger.info(
+                f"Telegram publishing unconfigured/disabled. Recording {deal.id} "
+                f"(score={deal_score}, loot={is_loot}) for 24/7 web radar on BharatBazaro.com."
+            )
+            if not dry_run:
+                post_price = parse_rupees(deal.current_price)
+                eff_price = getattr(deal, "effective_price", None)
+                store.mark_posted(
+                    deal.id,
+                    deal.retailer,
+                    chat_id=None,
+                    message_id=None,
+                    caption=None,
+                    category=picked.category if picked else classify_category(deal),
+                    discount=deal.discount_percent,
+                    agent_score=deal_score,
+                    agent_reason=picked.reason if picked else None,
+                    canonical_product_id=getattr(deal, "canonical_product_id", None),
+                    price=post_price,
+                    effective_price=eff_price,
+                )
+                posted_count += 1
+            continue
 
         # Check if Telegram posting is allowed (daytime OR verified midnight loot alert)
         allow_telegram = is_daytime or is_loot

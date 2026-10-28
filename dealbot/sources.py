@@ -21,6 +21,30 @@ _AMAZON_TOKEN_CACHE = {"token": None, "expires_at": 0.0}
 def get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
+
+def extract_title_from_amazon_url_slug(url: Optional[str]) -> Optional[str]:
+    """
+    Extract readable product title from Amazon URL path slug before /dp/{ASIN}.
+    E.g. https://www.amazon.in/Havells-Ambrose-1200mm-Ceiling-Fan/dp/B0GK6PQ3W8 -> Havells Ambrose 1200mm Ceiling Fan
+    """
+    if not url or not isinstance(url, str):
+        return None
+    try:
+        import urllib.parse
+        m = re.search(r"/([a-zA-Z0-9%_-]{5,120})/(?:dp|d|gp/product)/[A-Z0-9]{10}", url)
+        if m:
+            slug = m.group(1)
+            if slug.lower() in ("gp", "dp", "product", "buy", "deals", "electronics", "offer"):
+                return None
+            slug = urllib.parse.unquote(slug)
+            clean_words = slug.replace("-", " ").replace("_", " ").split()
+            title = " ".join(w.capitalize() if not w.isupper() else w for w in clean_words)
+            if len(title) >= 10:
+                return title
+    except Exception:
+        pass
+    return None
+
 def clean_title(title: Optional[str]) -> str:
     """Clean promotional noise, coupons, and trailing price/retailer tags from titles."""
     if not title or not isinstance(title, str):
@@ -661,7 +685,7 @@ def fetch_amazon_movers_and_shakers(min_discount: int = 25) -> List[Deal]:
             deal = Deal(
                 id=deal_id,
                 retailer=retailer,
-                title=f"Trending Deal: Amazon Movers & Shakers ({asin})",
+                title=extract_title_from_amazon_url_slug(href) or f"Trending Amazon Deal ({asin})",
                 url=clean_url,
                 canonical_product_id=f"amazon:{asin}",
                 image_url=_amazon_image(asin),

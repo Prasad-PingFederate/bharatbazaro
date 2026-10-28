@@ -1251,15 +1251,21 @@
   function detectInitialRoute() {
     let cat = (typeof window !== 'undefined' && window.INITIAL_CATEGORY) || null;
     let filter = (typeof window !== 'undefined' && window.INITIAL_FILTER) || null;
+    let maxPrice = (typeof window !== 'undefined' && window.INITIAL_MAX_PRICE) ? String(window.INITIAL_MAX_PRICE) : null;
 
     const path = (typeof window !== 'undefined' && window.location.pathname ? window.location.pathname : '').toLowerCase();
-    if (!cat && !filter) {
+    if (!cat && !filter && !maxPrice) {
       if (path.includes('mobiles')) cat = 'mobiles';
       else if (path.includes('electronics')) cat = 'electronics';
       else if (path.includes('home')) cat = 'home';
       else if (path.includes('fashion')) cat = 'fashion';
       else if (path.includes('grocery')) cat = 'grocery';
       else if (path.includes('deals')) filter = 'loot';
+      else if (path.includes('coupons')) filter = 'coupons';
+      else if (path.includes('under-99')) maxPrice = '99';
+      else if (path.includes('under-299')) maxPrice = '299';
+      else if (path.includes('under-499')) maxPrice = '499';
+      else if (path.includes('under-999')) maxPrice = '999';
     }
 
     if (typeof window !== 'undefined' && window.location.search) {
@@ -1268,10 +1274,12 @@
       if (qCat) cat = qCat;
       const qTab = params.get('tab') || params.get('filter');
       if (qTab) filter = qTab;
-      return { category: cat, filter: filter, asin: params.get('asin') };
+      const qPrice = params.get('price') || params.get('max_price');
+      if (qPrice) maxPrice = qPrice;
+      return { category: cat, filter: filter, maxPrice: maxPrice, asin: params.get('asin') };
     }
 
-    return { category: cat, filter: filter, asin: null };
+    return { category: cat, filter: filter, maxPrice: maxPrice, asin: null };
   }
 
   function handleUrlRouting() {
@@ -1306,6 +1314,16 @@
       } else if (route.filter === 'coupons' && el.mNavCoupons && el.mNavAll) {
         el.mNavCoupons.classList.add('active');
         el.mNavAll.classList.remove('active');
+      }
+    }
+
+    if (route.maxPrice) {
+      state.filters.priceBucket = String(route.maxPrice);
+      if (el.pricePills) {
+        el.pricePills.forEach(p => {
+          const pPrice = p.getAttribute('data-price');
+          p.classList.toggle('active', pPrice === String(route.maxPrice));
+        });
       }
     }
 

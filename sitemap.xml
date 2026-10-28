@@ -5,39 +5,73 @@
     <lastmod>2026-10-28</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
+  </url>  <url>
     <loc>https://bharatbazaro.com/deals.html</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>hourly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
+    <priority>0.9</priority>
+  </url>  <url>
     <loc>https://bharatbazaro.com/mobiles.html</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
+    <priority>0.9</priority>
+  </url>  <url>
     <loc>https://bharatbazaro.com/electronics.html</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
+    <priority>0.9</priority>
+  </url>  <url>
     <loc>https://bharatbazaro.com/home.html</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
+    <priority>0.9</priority>
+  </url>  <url>
     <loc>https://bharatbazaro.com/fashion.html</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
+    <priority>0.9</priority>
+  </url>  <url>
     <loc>https://bharatbazaro.com/grocery.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/under-99.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/under-299.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/under-499.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/under-999.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/coupons.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/deal/B000000001.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/deal/B000000002.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>  <url>
+    <loc>https://bharatbazaro.com/deal/B000000003.html</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

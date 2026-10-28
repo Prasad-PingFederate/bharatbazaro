@@ -502,6 +502,91 @@ def sync_price_sightings_cache(conn: sqlite3.Connection) -> None:
         logger.debug(f"sync_price_sightings_cache error: {e}")
 
 
+
+def export_ai_briefing(
+    deals: List[Dict[str, Any]],
+    stats: Dict[str, Any],
+    output_dir: Path
+) -> Dict[str, Any]:
+    """Generate hourly AI market briefing at data/ai_briefing.json for BazarAI."""
+    now_ist = datetime.now(timezone(timedelta(hours=5, minutes=30)))
+
+    # 1. Top loot summary (top 5 loots)
+    loots = [d for d in deals if d.get("is_loot")]
+    top_loots = loots[:5] if loots else deals[:5]
+    top_loot_summary = [
+        {
+            "asin": d.get("asin"),
+            "title": d.get("title"),
+            "effective_price": d.get("effective_price") or d.get("list_price"),
+            "mrp": d.get("mrp"),
+            "discount_pct": d.get("effective_discount_pct") or d.get("discount_pct"),
+            "savings_inr": d.get("savings_inr"),
+            "brand": d.get("brand"),
+            "category": d.get("category"),
+            "affiliate_url": d.get("affiliate_url"),
+            "deal_url": f"https://bharatbazaro.com/deal/{d.get('asin')}.html",
+            "coupon_text": d.get("coupon_text"),
+        }
+        for d in top_loots
+    ]
+
+    # 2. Best coupon deal
+    coupon_deals = [
+        d for d in deals
+        if (d.get("coupon_discount") and d.get("coupon_discount") > 0)
+        or d.get("coupon_text")
+        or d.get("promo_code")
+    ]
+    best_coupon = coupon_deals[0] if coupon_deals else None
+
+    # 3. Best deal under ₹299
+    under_299_deals = [d for d in deals if (d.get("effective_price") or d.get("list_price") or 999999) <= 299]
+    best_under_299 = under_299_deals[0] if under_299_deals else None
+
+    # 4. Best Tier 1 brand deal
+    tier1_deals = [d for d in deals if d.get("brand_tier") == "tier1"]
+    best_tier1 = tier1_deals[0] if tier1_deals else None
+
+    # 5. Category highlights
+    category_highlights = {}
+    categories = ["mobiles", "electronics", "home", "fashion", "grocery"]
+    for cat in categories:
+        for d in deals:
+            d_cat = (d.get("category") or "").lower()
+            if cat in d_cat or (cat == "electronics" and ("audio" in d_cat or "laptop" in d_cat)):
+                category_highlights[cat] = {
+                    "asin": d.get("asin"),
+                    "title": d.get("title"),
+                    "effective_price": d.get("effective_price") or d.get("list_price"),
+                    "discount_pct": d.get("effective_discount_pct") or d.get("discount_pct"),
+                    "deal_url": f"https://bharatbazaro.com/deal/{d.get('asin')}.html",
+                }
+                break
+
+    briefing = {
+        "generated_at_ist": now_ist.strftime("%Y-%m-%d %H:%M IST"),
+        "generated_at_epoch": int(time.time()),
+        "top_loot_summary": top_loot_summary,
+        "best_coupon_deal": best_coupon,
+        "best_under_299": best_under_299,
+        "best_tier1_deal": best_tier1,
+        "category_highlights": category_highlights,
+        "market_stats": {
+            "total_deals": stats.get("total_live_deals", len(deals)),
+            "loot_count": stats.get("loot_count", 0),
+            "max_discount_pct": stats.get("max_discount_pct", 0),
+            "total_savings_inr": stats.get("total_savings_available", 0),
+        }
+    }
+
+    briefing_path = output_dir / "ai_briefing.json"
+    with open(briefing_path, "w", encoding="utf-8") as f:
+        json.dump(briefing, f, indent=2, ensure_ascii=False)
+    logger.info(f"Exported AI market briefing to {briefing_path}")
+    return briefing
+
+
 def export_web_feed(
     store,
     current_cycle_deals: Optional[List[Deal]] = None,
@@ -690,6 +775,12 @@ def export_web_feed(
         json.dump(stats, f, indent=2, ensure_ascii=False)
     logger.info(f"Exported stats to {stats_path}")
 
+    # Export hourly AI market briefing for BazarAI
+    try:
+        export_ai_briefing(final_deals, stats, output_dir=output_dir)
+    except Exception as e:
+        logger.error(f"Error exporting AI briefing: {e}", exc_info=True)
+
     # SSG Pre-rendering of index.html and all 6 standalone category landing pages
     root_dir = Path(__file__).resolve().parent.parent
     try:
@@ -731,6 +822,10 @@ def export_web_data(store=None, **kwargs):
         with open(stats_path, "r", encoding="utf-8") as f:
             stats = json.load(f)
 
+    try:
+        export_ai_briefing(deals, stats, output_dir=output_dir)
+    except Exception:
+        pass
     ensure_og_banner(root_dir)
     pre_render_all_pages(deals, stats, root_dir=root_dir)
     return {"deals_count": len(deals), "stats": stats}

@@ -383,7 +383,7 @@ def ensure_og_banner(root_dir: Path) -> Path:
     return banner_path
 
 
-def render_deal_card_html(d: Dict[str, Any]) -> str:
+def render_deal_card_html(d: Dict[str, Any], card_index: int = 0) -> str:
     """Render a semantic HTML article matching client-side createDealCardHtml in app.js."""
     asin = html_lib.escape(str(d.get("asin") or "B0UNKNOWN0"))
     title = html_lib.escape(str(d.get("title") or "Amazon Deal"))
@@ -395,7 +395,17 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
     savings_inr = d.get("savings_inr") or 0
     buy_conf = d.get("buy_confidence") or 75
     brand_chip = html_lib.escape(str(d.get("brand") or d.get("category") or "Amazon"))
-    affiliate_url = html_lib.escape(str(d.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1"))
+
+    raw_aff = str(d.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1")
+    if "ascsubtag=" not in raw_aff:
+        raw_aff += ("&" if "?" in raw_aff else "?") + "ascsubtag=bb-grid"
+
+    aff_btn_url = html_lib.escape(raw_aff)
+    aff_img_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-card-img", raw_aff))
+    aff_title_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-card-title", raw_aff))
+    aff_price_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-card-price", raw_aff))
+    aff_coupon_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-coupon-pill", raw_aff))
+
     image_url = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
     is_loot = bool(d.get("is_loot"))
     deal_page_url = f"/deal/{asin}.html"
@@ -411,6 +421,8 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
         badges.append('<span class="badge-tag badge-further">🔥 FURTHER DROP</span>')
     if d.get("brand_tier") == "tier1":
         badges.append('<span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span>')
+    if d.get("posted_to_telegram"):
+        badges.append('<span class="badge-tag badge-telegram">📲 Featured on Telegram</span>')
     badges_html = "".join(badges)
 
     updated_at = d.get("updated_at") or int(time.time())
@@ -423,6 +435,12 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
         time_ago = f"{diff_sec // 3600}h ago"
     else:
         time_ago = f"{diff_sec // 86400}d ago"
+
+    # HotUKDeals Degree Meter
+    score_val = d.get("score") or 70
+    c_disc_val = d.get("coupon_discount") or 0
+    base_degrees = round(score_val * 2.4 + (45 if is_loot else 0) + (25 if c_disc_val > 0 else 0))
+    hotness_btn = f'''<button class="btn-hotness-degree" data-asin="{asin}" data-base="{base_degrees}" title="Upvote deal hotness">🔥 <span class="degree-count">{base_degrees}°</span></button>'''
 
     rating = d.get("rating")
     review_count = d.get("review_count")
@@ -442,11 +460,12 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
     coupon_claim_banner = ""
     coupon_disc = d.get("coupon_discount")
     coupon_text = d.get("coupon_text")
+    promo_code = d.get("promo_code")
     if coupon_disc or coupon_text:
         c_label = coupon_text or f"Apply ₹{coupon_disc:,} coupon"
         c_tag = f'<span class="coupon-discount-tag">(-₹{coupon_disc:,})</span>' if coupon_disc else ""
         coupon_claim_banner = f'''
-          <div class="coupon-claim-banner" title="Tick this coupon on Amazon product page">
+          <div class="coupon-claim-banner clickable-coupon-pill" data-aff="{aff_coupon_url}" data-promo="{html_lib.escape(str(promo_code or ''))}" title="Click to copy promo code and open Amazon deal">
             <span class="coupon-tick-icon">☑️</span>
             <span class="coupon-claim-text">Tick <b>"{html_lib.escape(str(c_label))}"</b> on Amazon page {c_tag}</span>
           </div>'''
@@ -473,7 +492,6 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
           <div class="callout-pill callout-bank" title="{html_lib.escape(str(bank_offer))}">
             <span>💳 {html_lib.escape(str(bank_offer)[:48])}...</span>
           </div>''')
-    promo_code = d.get("promo_code")
     if promo_code:
         callouts.append(f'''
           <div class="callout-pill callout-promo btn-copy-promo" data-promo="{html_lib.escape(str(promo_code))}" title="Click to copy promo code">
@@ -501,7 +519,52 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
         drop_amt = hist_avg - eff_price
         trajectory_html = f'<div class="historical-trajectory-text">📉 <b>₹{drop_amt:,}</b> below tracked average (₹{hist_avg:,})</div>'
 
+    # BuyHatke-Style Price Range Slider Bar
+    low_ref = min(eff_price, d.get("historical_min") or eff_price)
+    high_ref = max(mrp, d.get("historical_max") or (mrp or int(eff_price * 1.35)))
+    if high_ref <= low_ref:
+        high_ref = int(low_ref * 1.3)
+    spread = max(1, high_ref - low_ref)
+    pos_pct = min(92, max(4, round(((eff_price - low_ref) / spread) * 100)))
+    price_range_html = f'''
+          <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
+            <div class="range-labels-row">
+              <span class="range-lbl range-low">Low: ₹{low_ref:,}</span>
+              <span class="range-lbl range-now">Now: ₹{eff_price:,} ✅</span>
+              <span class="range-lbl range-high">MRP: ₹{high_ref:,}</span>
+            </div>
+            <div class="range-track">
+              <div class="range-marker" style="left: {pos_pct}%;" title="Now: ₹{eff_price:,} ({pos_pct}% of range)">●</div>
+            </div>
+          </div>'''
+
+    # GrabOn-Style Trust Line
+    why_buy = "Lowest tracked price + verified seller"
+    if c_disc_val > 0 and savings_inr > 0:
+        why_buy = f"Save ₹{savings_inr:,} + Extra ₹{c_disc_val:,} Coupon"
+    elif savings_inr >= 1000:
+        why_buy = f"Save ₹{savings_inr:,} below MRP ({disc_pct}% OFF)"
+    elif d.get("brand_tier") == "tier1":
+        why_buy = f"Genuine Tier-1 {brand_chip} at verified low"
+    elif disc_pct >= 50:
+        why_buy = f"Steep {disc_pct}% verified drop"
+
+    grabon_trust_html = f'''
+          <div class="grabon-trust-line">
+            <span class="trust-check">✓ Verified Live on Amazon</span>
+            <span class="trust-sep">•</span>
+            <span class="trust-reason">💡 <b>Why Buy:</b> {why_buy}</span>
+          </div>'''
+
     loot_class = "is-loot" if is_loot else ""
+
+    svg_placeholder = "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>"
+    img_fallback = f"if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='{svg_placeholder}';}}"
+
+    if card_index < 3:
+        img_tag = f'<img src="{image_url}" alt="{title}" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="{img_fallback}" onerror="this.src=\'{svg_placeholder}\';">'
+    else:
+        img_tag = f'<img src="{image_url}" alt="{title}" class="card-img" loading="lazy" decoding="async" width="220" height="220" onload="{img_fallback}" onerror="this.src=\'{svg_placeholder}\';">'
 
     return f'''      <article class="deal-card {loot_class}" data-asin="{asin}">
         <div class="card-top">
@@ -509,6 +572,7 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
             {badges_html}
           </div>
           <div class="card-top-actions">
+            {hotness_btn}
             <span class="time-ago">{time_ago}</span>
             <button class="btn-watchlist" data-asin="{asin}" title="Save to Watchlist">
               🤍
@@ -518,8 +582,8 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <a href="{deal_page_url}" title="View Keepa Price History for {title}">
-              <img src="{image_url}" alt="{title}" class="card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';}}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';">
+            <a href="{aff_img_url}" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
+              {img_tag}
             </a>
           </div>
           <div class="card-meta-bar">
@@ -528,20 +592,21 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
         </div>
 
         <div class="card-content">
-          <a href="{deal_page_url}" class="card-title" title="{title}">
+          <a href="{aff_title_url}" target="_blank" rel="noopener noreferrer" class="card-title" title="{title}">
             {title}
           </a>
 
           <!-- Price Waterfall -->
           <div class="price-waterfall-box">
-            <div class="price-main-row">
+            <a href="{aff_price_url}" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
               <span class="effective-price">₹{eff_price:,}</span>
               {mrp_html}
               {disc_html}
-            </div>
+            </a>
             {savings_html}
           </div>
 
+          {price_range_html}
           {coupon_claim_banner}
           {extra_offers_html}
           {callouts_html}
@@ -560,10 +625,12 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
             </div>
             {trajectory_html}
           </div>
+
+          {grabon_trust_html}
         </div>
 
         <div class="card-footer">
-          <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+          <a href="{aff_btn_url}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
             <span>🛒 Grab Deal on Amazon ↗</span>
           </a>
           <button class="btn-card-share" data-asin="{asin}" title="Share Deal via WhatsApp / Copy Link">
@@ -806,6 +873,149 @@ def build_head_html(page_cfg: dict, page_deals: list) -> str:
 </head>'''
 
 
+def render_top5_quick_compare_table(deals: List[Dict[str, Any]]) -> str:
+    """Pre-render MySmartPrice-style Top 5 Quick-Compare HTML table for SEO & Featured Snippets."""
+    top5 = [d for d in deals if (d.get("effective_price") or d.get("list_price") or 0) > 0][:5]
+    if not top5:
+        return ""
+
+    rows = []
+    for rank, d in enumerate(top5, 1):
+        asin = d.get("asin")
+        title = html_lib.escape(str(d.get("title") or "Amazon Deal"))
+        eff_price = d.get("effective_price") or d.get("list_price") or 0
+        mrp = d.get("mrp") or 0
+        disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
+        conf = d.get("buy_confidence") or 80
+        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-table"
+        deal_url = f"/deal/{asin}.html"
+
+        rows.append(f"""          <tr style="border-bottom: 1px solid var(--border-card);">
+            <td style="padding: 10px; text-align:center; font-weight:800; color:#10b981;">#{rank}</td>
+            <td style="padding: 10px;">
+              <a href="{deal_url}" style="font-weight:600; color:var(--text-main); text-decoration:none;">{title}</a>
+            </td>
+            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹{eff_price:,}</td>
+            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">{disc}% OFF</td>
+            <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 {conf}%</span></td>
+            <td style="padding: 10px; text-align:center; white-space:nowrap;">
+              <a href="{aff_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
+            </td>
+          </tr>""")
+
+    rows_html = "\n".join(rows)
+    return f"""    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
+    <section class="quick-compare-section" id="top5CompareSection" style="margin-top: 36px; margin-bottom: 24px;">
+      <div class="section-header" style="margin-bottom: 16px;">
+        <h2 style="font-size: 1.35rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+          <span>📊 Today's Top 5 Verified Deals Quick-Compare List</span>
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 4px;">
+          Instant price drop comparison updated live every hour by BharatBazaro AI deal radar.
+        </p>
+      </div>
+      <div class="table-responsive" style="overflow-x: auto; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 12px;">
+        <table class="quick-compare-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border-card); color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase;">
+              <th style="padding: 10px; text-align: center;">Rank</th>
+              <th style="padding: 10px;">Product Name</th>
+              <th style="padding: 10px;">Best Effective Price</th>
+              <th style="padding: 10px;">Discount</th>
+              <th style="padding: 10px;">Buy Confidence</th>
+              <th style="padding: 10px; text-align: center;">Direct Deal Link</th>
+            </tr>
+          </thead>
+          <tbody>
+{rows_html}
+          </tbody>
+        </table>
+      </div>
+    </section>"""
+
+
+def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
+    """Render Wirecutter-style Top 3 Must-Buy Picks spotlight strip."""
+    if not deals or len(deals) < 3:
+        return ""
+
+    pick1_candidates = sorted(deals, key=lambda d: ((1 if d.get("brand_tier") == "tier1" else 0), d.get("trending_score") or d.get("score") or 0, d.get("effective_discount_pct") or 0), reverse=True)
+    pick1 = pick1_candidates[0] if pick1_candidates else deals[0]
+
+    under_300 = [d for d in deals if (d.get("effective_price") or 999999) <= 299 and d != pick1]
+    if under_300:
+        pick2 = sorted(under_300, key=lambda d: (d.get("effective_discount_pct") or 0, -(d.get("effective_price") or 0)), reverse=True)[0]
+    else:
+        rem = [d for d in deals if d != pick1]
+        pick2 = sorted(rem, key=lambda d: (d.get("effective_price") or 999999))[0] if rem else deals[0]
+
+    coupon_deals = [d for d in deals if ((d.get("coupon_discount") or 0) > 0 or d.get("coupon_text")) and d not in (pick1, pick2)]
+    if coupon_deals:
+        pick3 = coupon_deals[0]
+    else:
+        rem2 = [d for d in deals if d not in (pick1, pick2)]
+        pick3 = sorted(rem2, key=lambda d: (d.get("effective_discount_pct") or 0), reverse=True)[0] if rem2 else deals[0]
+
+    picks = [
+        ("🏆 #1 OVERALL SCREAMER", pick1),
+        ("🪙 #1 BUDGET COOKIE-DROPPER", pick2),
+        ("🎟️ #1 HIDDEN COUPON PICK", pick3),
+    ]
+
+    cards_html = []
+    svg_placeholder = "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'50%\' font-size=\'32\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text></svg>"
+
+    for ribbon, d in picks:
+        asin = d.get("asin") or ""
+        title = html_lib.escape(str(d.get("title") or "Amazon Deal"))
+        eff_price = d.get("effective_price") or d.get("list_price") or 0
+        mrp = d.get("mrp") or 0
+        disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
+        img = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
+        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-top3"
+        deal_url = f"/deal/{asin}.html"
+
+        mrp_str = f'<span style="font-size:0.78rem; text-decoration:line-through; color:var(--text-muted);">₹{mrp:,}</span>' if (mrp and mrp > eff_price) else ""
+        disc_str = f'<span style="font-size:0.75rem; font-weight:700; color:#ef4444; background:rgba(239,68,68,0.12); padding:2px 6px; border-radius:4px;">{disc}% OFF</span>' if disc > 0 else ""
+
+        cards_html.append(f'''        <div class="spotlight-mini-card">
+          <div class="spotlight-ribbon">{ribbon}</div>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:10px;">
+            <a href="{aff_url}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid var(--border-card);">
+              <img src="{img}" alt="{title}" style="max-height:60px; max-width:60px; object-fit:contain;" loading="lazy" onerror="this.src=\'{svg_placeholder}\';">
+            </a>
+            <div style="flex:1; min-width:0;">
+              <a href="{aff_url}" target="_blank" rel="noopener noreferrer" style="font-size:0.86rem; font-weight:700; color:var(--text-main); text-decoration:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3; margin-bottom:4px;">
+                {title}
+              </a>
+              <div style="display:flex; align-items:baseline; gap:6px; flex-wrap:wrap;">
+                <span style="font-size:1.1rem; font-weight:800; color:#10b981;">₹{eff_price:,}</span>
+                {mrp_str}
+                {disc_str}
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="{aff_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex:1; text-align:center; padding:7px 10px; font-size:0.82rem; font-weight:700; border-radius:var(--radius-full); text-decoration:none;">🛒 Grab Now ↗</a>
+            <a href="{deal_url}" style="padding:7px 10px; font-size:0.82rem; font-weight:600; border-radius:var(--radius-full); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-card); text-decoration:none;">📈</a>
+          </div>
+        </div>''')
+
+    cards_joined = "\n".join(cards_html)
+    return f'''    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
+    <section id="top3SpotlightStrip" class="top3-spotlight-strip" aria-label="Today's Top 3 Must-Buy Picks">
+      <div class="spotlight-header">
+        <h2 class="spotlight-title">
+          <span>⚡ TODAY'S TOP 3 MUST-BUY PICKS</span>
+        </h2>
+        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:600;">Updated Live from 24/7 AI Radar</span>
+      </div>
+      <div class="spotlight-cards-grid">
+{cards_joined}
+      </div>
+    </section>'''
+
+
 def generate_page_html(
     base_html: str,
     page_cfg: dict,
@@ -892,7 +1102,7 @@ def generate_page_html(
         html_out = html_out.replace(f'class="price-pill" data-price="{init_max_price}"', f'class="price-pill active" data-price="{init_max_price}"')
 
     # 6. Inject deals inside #dealsGrid
-    cards_html = "\n".join(render_deal_card_html(d) for d in page_deals)
+    cards_html = "\n".join(render_deal_card_html(d, idx) for idx, d in enumerate(page_deals))
     html_out = re.sub(
         r'(<div\s+id=["\']dealsGrid["\'][^>]*>).*?(</div>\s*<!--\s*Empty State)',
         rf'\g<1>\n{cards_html}\n    \g<2>',
@@ -900,6 +1110,49 @@ def generate_page_html(
         count=1,
         flags=re.DOTALL
     )
+
+    # Inject Wirecutter Top 3 Spotlight Strip above #dealsGrid on index.html
+    if page_cfg.get("filename") == "index.html" and page_deals:
+        top3_html = render_top3_spotlight_strip(all_deals or page_deals)
+        if '<section id="top3SpotlightStrip"' in html_out:
+            html_out = re.sub(
+                r'<section\s+id=["\']top3SpotlightStrip["\'][^>]*>.*?</section>',
+                top3_html.strip(),
+                html_out,
+                count=1,
+                flags=re.DOTALL
+            )
+        else:
+            html_out = html_out.replace(
+                '<div id="dealsGrid"',
+                f'{top3_html}\n    <div id="dealsGrid"'
+            )
+
+    # Inject MySmartPrice Top 5 Quick-Compare table above guides section or before </main>
+    top5_table = render_top5_quick_compare_table(page_deals)
+    if '<section class="quick-compare-section"' in html_out:
+        html_out = re.sub(
+            r'<section\s+class=["\']quick-compare-section["\'][^>]*>.*?</section>',
+            top5_table.strip(),
+            html_out,
+            count=1,
+            flags=re.DOTALL
+        )
+    elif '<!-- 📚 Latest AI Buying Guides & Deal Tricks -->' in html_out:
+        html_out = html_out.replace(
+            '<!-- 📚 Latest AI Buying Guides & Deal Tricks -->',
+            f'{top5_table}\n\n    <!-- 📚 Latest AI Buying Guides & Deal Tricks -->'
+        )
+    elif '<section class="guides-section"' in html_out:
+        html_out = html_out.replace(
+            '<section class="guides-section"',
+            f'{top5_table}\n\n    <section class="guides-section"'
+        )
+    elif '</main>' in html_out:
+        html_out = html_out.replace(
+            '</main>',
+            f'{top5_table}\n  </main>'
+        )
 
     # 7. Visible count
     html_out = re.sub(r'(<span\s+id=["\']visibleCount["\']\s+class=["\']font-bold["\']>)[^<]*(</span>)', f'\\g<1>{len(page_deals)}\\g<2>', html_out)
@@ -970,7 +1223,14 @@ def render_product_page_html(
     category = html_lib.escape(str(deal.get("category") or "Electronics & Audio"))
     rating = deal.get("rating") or 4.3
     review_count = deal.get("review_count") or 150
-    affiliate_url = html_lib.escape(str(deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1"))
+
+    raw_aff = str(deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1")
+    if "ascsubtag=" in raw_aff:
+        raw_aff = re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-seo", raw_aff)
+    else:
+        raw_aff += ("&" if "?" in raw_aff else "?") + "ascsubtag=bb-seo"
+    affiliate_url = html_lib.escape(raw_aff)
+
     image_url = html_lib.escape(str(deal.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
     canonical = f"https://bharatbazaro.com/deal/{asin}.html"
 
@@ -993,6 +1253,8 @@ def render_product_page_html(
         badges.append('<span class="badge-tag badge-further">🔥 FURTHER DROP</span>')
     if deal.get("brand_tier") == "tier1":
         badges.append('<span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span>')
+    if deal.get("posted_to_telegram"):
+        badges.append('<span class="badge-tag badge-telegram">📲 Featured on Telegram</span>')
     badges_html = " ".join(badges)
 
     # Coupon Claim HTML
@@ -1084,7 +1346,7 @@ def render_product_page_html(
     schema_json = json.dumps(schema_data, indent=2, ensure_ascii=False)
 
     # Related Deals Cards HTML
-    related_cards_html = "\n".join(render_deal_card_html(d) for d in related_deals[:6])
+    related_cards_html = "\n".join(render_deal_card_html(d, idx + 3) for idx, d in enumerate(related_deals[:6]))
 
     return f'''<!DOCTYPE html>
 <html lang="en" data-theme="dark">

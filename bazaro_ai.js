@@ -350,7 +350,12 @@
     const mrp = deal.mrp || 0;
     const discPct = deal.effective_discount_pct || deal.discount_pct || 0;
     const imgUrl = deal.image_url || `https://m.media-amazon.com/images/P/${asin}.jpg`;
-    const affUrl = deal.affiliate_url || `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}&linkCode=ll1`;
+    let affUrl = deal.affiliate_url || `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}&linkCode=ll1`;
+    if (affUrl.includes('ascsubtag=')) {
+      affUrl = affUrl.replace(/ascsubtag=[^&]+/, 'ascsubtag=bb-bazarai');
+    } else {
+      affUrl += (affUrl.includes('?') ? '&' : '?') + 'ascsubtag=bb-bazarai';
+    }
     const dealPageUrl = `/deal/${asin}.html`;
     const buyConf = deal.buy_confidence || 85;
 
@@ -358,11 +363,11 @@
     card.className = 'bazar-mini-card';
     card.innerHTML = `
       <div class="mini-card-top">
-        <a href="${dealPageUrl}" class="mini-card-img-link" title="View Keepa Price History">
-          <img src="${imgUrl}" alt="${escapeHtml(title)}" class="mini-card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';">
+        <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="mini-card-img-link" title="Open Deal on Amazon.in">
+          <img src="${imgUrl}" alt="${escapeHtml(title)}" class="mini-card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'200\\' viewBox=\\'0 0 200 200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23f1f5f9\\'/><text x=\\'50%\\' y=\\'45%\\' font-size=\\'48\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'>⚡</text><text x=\\'50%\\' y=\\'72%\\' font-size=\\'13\\' font-weight=\\'bold\\' fill=\\'%2364748b\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'200\\' viewBox=\\'0 0 200 200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23f1f5f9\\'/><text x=\\'50%\\' y=\\'45%\\' font-size=\\'48\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'>⚡</text><text x=\\'50%\\' y=\\'72%\\' font-size=\\'13\\' font-weight=\\'bold\\' fill=\\'%2364748b\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\'>Amazon Verified Deal</text></svg>';">
         </a>
         <div class="mini-card-details">
-          <a href="${dealPageUrl}" class="mini-card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</a>
+          <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="mini-card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</a>
           <div class="mini-card-price-row">
             <span class="mini-card-price">₹${effPrice.toLocaleString('en-IN')}</span>
             ${mrp > effPrice ? `<span class="mini-card-mrp">₹${mrp.toLocaleString('en-IN')}</span>` : ''}
@@ -419,7 +424,7 @@
     const card = document.createElement('div');
     card.className = 'bazar-keepa-card';
     const asin = keepaData.asin;
-    const affUrl = `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}&linkCode=ll1`;
+    const affUrl = `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}&linkCode=ll1&ascsubtag=bb-bazarai`;
     const chartUrl = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1&range=90`;
     const dealPageUrl = `/deal/${asin}.html`;
 
@@ -549,7 +554,7 @@
         await processUserIntent(rawInput);
       } catch (err) {
         console.error('BazarAI error:', err);
-        addBotMessage("⚠️ I encountered a temporary hiccup analyzing deals. Here's a direct Amazon search link tagged for deals:\n\n[🛒 Browse Amazon 4★+ Deals](https://www.amazon.in/s?k=" + encodeURIComponent(rawInput) + `&tag=${AFFILIATE_TAG}&linkCode=ll2)`);
+        addBotMessage("⚠️ I encountered a temporary hiccup analyzing deals. Here's a direct Amazon search link tagged for deals:\n\n[🛒 Browse Amazon 4★+ Deals](https://www.amazon.in/s?k=" + encodeURIComponent(rawInput) + `&tag=${AFFILIATE_TAG}&linkCode=ll2&ascsubtag=bb-bazarai)`);
       } finally {
         hideTyping();
       }
@@ -836,14 +841,14 @@
     }
     const rh = rhParts.join(',');
 
-    const amazonUrl = `${baseUrl}?k=${encodeURIComponent(cleanQuery)}&rh=${encodeURIComponent(rh)}&s=review-rank&tag=${AFFILIATE_TAG}&linkCode=ll2`;
+    const amazonUrl = `${baseUrl}?k=${encodeURIComponent(cleanQuery)}&rh=${encodeURIComponent(rh)}&s=review-rank&tag=${AFFILIATE_TAG}&linkCode=ll2&ascsubtag=bb-bazarai`;
 
     // 50%+ off URL
     const steepRhParts = ['p_72:1318476031', 'p_n_pct-off-with-tax:2665401031'];
     if (maxPrice && maxPrice > 0) {
       steepRhParts.push(`p_36:-${maxPrice * 100}`);
     }
-    const steepDiscountUrl = `${baseUrl}?k=${encodeURIComponent(cleanQuery)}&rh=${encodeURIComponent(steepRhParts.join(','))}&s=review-rank&tag=${AFFILIATE_TAG}&linkCode=ll2`;
+    const steepDiscountUrl = `${baseUrl}?k=${encodeURIComponent(cleanQuery)}&rh=${encodeURIComponent(steepRhParts.join(','))}&s=review-rank&tag=${AFFILIATE_TAG}&linkCode=ll2&ascsubtag=bb-bazarai`;
 
     return {
       query: cleanQuery,

@@ -206,24 +206,25 @@ def render_guide_html(spec: Dict[str, Any], deals: List[Dict[str, Any]], root_di
     deal_cards_html = []
     svg_placeholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>"
 
-    for d in display_deals:
+    for idx, d in enumerate(display_deals):
         asin = d.get("asin")
         title = d.get("title")
         img = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
         eff_p = d.get("effective_price") or d.get("list_price") or 0
         mrp = d.get("mrp") or d.get("original_price")
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
-        aff_url = f"https://www.amazon.in/dp/{asin}?tag={partner_tag}&linkCode=ll1"
+        aff_url = f"https://www.amazon.in/dp/{asin}?tag={partner_tag}&linkCode=ll1&ascsubtag=bb-seo"
+        img_attr = 'fetchpriority="high" decoding="async" width="220" height="220"' if idx < 3 else 'loading="lazy" decoding="async" width="220" height="220"'
 
         deal_cards_html.append(f"""
         <article class="deal-card" style="border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 14px; background: var(--bg-card); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="height: 180px; display: flex; align-items: center; justify-content: center; background: #ffffff; border-radius: var(--radius-sm); margin-bottom: 12px; overflow: hidden;">
-              <a href="/deal/{asin}.html" title="{title}">
-                <img src="{img}" alt="{title}" style="max-height: 160px; max-width: 100%; object-fit: contain;" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='{svg_placeholder}';}}" onerror="this.src='{svg_placeholder}';">
+              <a href="{aff_url}" target="_blank" rel="noopener noreferrer" title="{title}">
+                <img src="{img}" alt="{title}" style="max-height: 160px; max-width: 100%; object-fit: contain;" {img_attr} onload="if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='{svg_placeholder}';}}" onerror="this.src='{svg_placeholder}';">
               </a>
             </div>
-            <a href="/deal/{asin}.html" style="font-size: 0.92rem; font-weight: 700; color: var(--text-main); text-decoration: none; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;">
+            <a href="{aff_url}" target="_blank" rel="noopener noreferrer" style="font-size: 0.92rem; font-weight: 700; color: var(--text-main); text-decoration: none; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;">
               {title}
             </a>
             <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px;">

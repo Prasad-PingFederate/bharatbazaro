@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-28 21:52 IST",
-  "generated_at_epoch": 1793204572,
+  "generated_at_ist": "2026-10-29 02:02 IST",
+  "generated_at_epoch": 1793219554,
   "top_loot_summary": [
     {
       "asin": "B0CWGD6G4L",
@@ -55,16 +55,16 @@
       "coupon_text": null
     },
     {
-      "asin": "B0FJYJ8LVY",
-      "title": "[AXIS/ICICI CC] HP 15 Smartchoice, AMD Ryzen 3 7320U (8GB LPDDR5, 512GB SSD) FHD, Anti-Glare, Micro-Edge, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fc0500AU, FHD Camera w/Privacy Shutter Laptop",
-      "effective_price": 48490,
-      "mrp": 87179,
-      "discount_pct": 44,
-      "savings_inr": 38689,
-      "brand": "Hp",
+      "asin": "B09JWLHS4B",
+      "title": "[HDFC CC] ASUS 27” 1080P Eye Care Monitor (VY279HGR) - Full HD, IPS, 120Hz, 1ms, Adaptive Sync, for Working and Gaming, Eye Care Plus, Blue Light Filter, Flicker Free, SmoothMotion, Display Widget",
+      "effective_price": 6360,
+      "mrp": 57818,
+      "discount_pct": 89,
+      "savings_inr": 51458,
+      "brand": "Asus",
       "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0FJYJ8LVY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0FJYJ8LVY.html",
+      "affiliate_url": "https://www.amazon.in/dp/B09JWLHS4B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09JWLHS4B.html",
       "coupon_text": null
     }
   ],
@@ -108,11 +108,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793181629,
-    "age_hours": 6.4,
-    "trending_score": 56.0,
+    "age_hours": 10.5,
+    "trending_score": 45.8,
     "is_new": false,
-    "updated_at": 1793204549,
-    "updated_at_ist": "2026-10-28 21:52 IST"
+    "updated_at": 1793219533,
+    "updated_at_ist": "2026-10-29 02:02 IST"
   },
   "best_under_299": {
     "id": "amazon:B00WUDU4FG",
@@ -153,11 +153,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793089249,
-    "age_hours": 32.0,
-    "trending_score": 13.0,
+    "age_hours": 36.2,
+    "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793204549,
-    "updated_at_ist": "2026-10-28 21:52 IST"
+    "updated_at": 1793219533,
+    "updated_at_ist": "2026-10-29 02:02 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0FS17S4WK",
@@ -198,19 +198,19 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793113091,
-    "age_hours": 25.4,
-    "trending_score": 43.5,
+    "age_hours": 29.6,
+    "trending_score": 33.0,
     "is_new": false,
-    "updated_at": 1793204549,
-    "updated_at_ist": "2026-10-28 21:52 IST"
+    "updated_at": 1793219533,
+    "updated_at_ist": "2026-10-29 02:02 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0DGJHBX5Y",
-      "title": "[HDFC CC] Apple iPhone 16 128 GB: 5G Mobile Phone with Camera Control, A18 Chip and a Big Boost in Battery Life. Works with AirPods; Black",
-      "effective_price": 69999,
-      "discount_pct": 22,
-      "deal_url": "https://bharatbazaro.com/deal/B0DGJHBX5Y.html"
+      "asin": "B0BD43W4YP",
+      "title": "Crompton Galaxy Decoration Copper USB Powered String Fairy Lights with 100 Led Light (10 Meters / 32 Feet, Warm White, Pack of 1)",
+      "effective_price": 128,
+      "discount_pct": 82,
+      "deal_url": "https://bharatbazaro.com/deal/B0BD43W4YP.html"
     },
     "electronics": {
       "asin": "B0G61JSXWJ",
@@ -242,9 +242,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 95,
+    "total_deals": 98,
     "loot_count": 16,
     "max_discount_pct": 89,
-    "total_savings_inr": 459194
+    "total_savings_inr": 572483
   }
 }

@@ -1,20 +1,7 @@
 {
-  "generated_at_ist": "2026-10-28 20:36 IST",
-  "generated_at_epoch": 1793199976,
+  "generated_at_ist": "2026-10-28 20:55 IST",
+  "generated_at_epoch": 1793201151,
   "top_loot_summary": [
-    {
-      "asin": "B0DMS8VK96",
-      "title": "LG 27GS60QC 68.4cm (27 Inch) Ultragear Curved (1000R) QHD (2560x1440) Gaming Monitor, 180Hz, 1ms, 3-Side Virtually Borderless, Anti-Glare, DP, HDMI X 2, HP Out, AMD FreeSync™, Tilt Adjustment (Black)",
-      "effective_price": 13050,
-      "mrp": 21287,
-      "discount_pct": 39,
-      "savings_inr": 8237,
-      "brand": "Hp",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0DMS8VK96?tag=dammaiprasad-21&linkCode=ll1",
-      "deal_url": "https://bharatbazaro.com/deal/B0DMS8VK96.html",
-      "coupon_text": null
-    },
     {
       "asin": "B0866B1P6B",
       "title": "PHILIPS WiZ 10W E27 Wi-Fi &amp; Bluetooth LED Smart Bulb with Music Sync, Compatible with Amazon Alexa &amp; Google Assistant, 16 Million Colours &amp; Motion Sensing Technology | Pack of 1",
@@ -66,9 +53,67 @@
       "affiliate_url": "https://www.amazon.in/dp/B0C82PJH3S?tag=dammaiprasad-21&linkCode=ll1",
       "deal_url": "https://bharatbazaro.com/deal/B0C82PJH3S.html",
       "coupon_text": null
+    },
+    {
+      "asin": "B0GGHXCQSR",
+      "title": "Fire-Boltt Ninja Phantom Smart Watch 1.83” Display, Transparent Clear Body Design, Bluetooth Calling, 120+ Sports Modes, Voice Assistant, AI Outfit Watch Face Smartwatch for Men &amp; Women Black Smoke",
+      "effective_price": 899,
+      "mrp": 8173,
+      "discount_pct": 89,
+      "savings_inr": 7274,
+      "brand": "Fire-Boltt",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0GGHXCQSR?tag=dammaiprasad-21&linkCode=ll1",
+      "deal_url": "https://bharatbazaro.com/deal/B0GGHXCQSR.html",
+      "coupon_text": null
     }
   ],
-  "best_coupon_deal": null,
+  "best_coupon_deal": {
+    "id": "amazon:B0CKQX6THY",
+    "asin": "B0CKQX6THY",
+    "title": "Amazon Basics Cat Litter Box Tray with Free Scooper | Semi Closed Design and Durable Quality | Suitable for All Adult Cats & Kittens, Pink",
+    "brand": "Amazon Basics",
+    "brand_tier": "tier2",
+    "category": "Electronics & Audio",
+    "image_url": "https://m.media-amazon.com/images/P/B0CKQX6THY.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0CKQX6THY?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": 999,
+    "list_price": 284,
+    "effective_price": 284,
+    "coupon_discount": null,
+    "coupon_text": "Apply 5% coupon",
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 72,
+    "effective_discount_pct": 72,
+    "savings_inr": 715,
+    "rating": null,
+    "review_count": null,
+    "score": 75,
+    "buy_confidence": 89,
+    "price_context": "all_time_low",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "☑️ Look below the price on Amazon and check the 'Apply 5% coupon' box.",
+      "🎉 Complete checkout at the effective deal price of ₹284!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793201135,
+    "age_hours": 0.0,
+    "trending_score": 75.0,
+    "is_new": true,
+    "updated_at": 1793201135,
+    "updated_at_ist": "2026-10-28 20:55 IST"
+  },
   "best_under_299": {
     "id": "amazon:B00WUDU4FG",
     "asin": "B00WUDU4FG",
@@ -108,11 +153,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793089249,
-    "age_hours": 30.8,
-    "trending_score": 16.0,
+    "age_hours": 31.1,
+    "trending_score": 15.2,
     "is_new": false,
-    "updated_at": 1793199969,
-    "updated_at_ist": "2026-10-28 20:36 IST"
+    "updated_at": 1793201135,
+    "updated_at_ist": "2026-10-28 20:55 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B00WUDU4FG",
@@ -153,26 +198,26 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793089249,
-    "age_hours": 30.8,
-    "trending_score": 16.0,
+    "age_hours": 31.1,
+    "trending_score": 15.2,
     "is_new": false,
-    "updated_at": 1793199969,
-    "updated_at_ist": "2026-10-28 20:36 IST"
+    "updated_at": 1793201135,
+    "updated_at_ist": "2026-10-28 20:55 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0BD43W4YP",
-      "title": "Crompton Galaxy Decoration Copper USB Powered String Fairy Lights with 100 Led Light (10 Meters / 32 Feet, Warm White, Pack of 1)",
-      "effective_price": 128,
-      "discount_pct": 82,
-      "deal_url": "https://bharatbazaro.com/deal/B0BD43W4YP.html"
+      "asin": "B0H3BXLJ3T",
+      "title": "Noise New Launch ColorFit Pulse Air Smartwatch with BT Calling, 1.85\" TFT Display, Lightweight 45g Design, Heart Rate & Step Tracking, Multi-Sport Modes, Find My Phone, Water Resistant (Jet Black)",
+      "effective_price": 999,
+      "discount_pct": 80,
+      "deal_url": "https://bharatbazaro.com/deal/B0H3BXLJ3T.html"
     },
     "electronics": {
-      "asin": "B0G2GLPQ16",
-      "title": "Zebronics Wireless Keyboard, 2.4GHz, 104 Keys with 12 Multimedia Keys, UV-Coated Keycaps, Retractable Stand, On/Off Switch, Power Saving Mode, Plug & Play (Companion 116-K)",
-      "effective_price": 499,
-      "discount_pct": 67,
-      "deal_url": "https://bharatbazaro.com/deal/B0G2GLPQ16.html"
+      "asin": "B0G61JSXWJ",
+      "title": "Amazon Deal (B0G61JSXWJ)",
+      "effective_price": 999,
+      "discount_pct": 85,
+      "deal_url": "https://bharatbazaro.com/deal/B0G61JSXWJ.html"
     },
     "home": {
       "asin": "B0GTV7P6V9",
@@ -197,9 +242,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 62,
-    "loot_count": 7,
+    "total_deals": 63,
+    "loot_count": 6,
     "max_discount_pct": 89,
-    "total_savings_inr": 290533
+    "total_savings_inr": 182616
   }
 }

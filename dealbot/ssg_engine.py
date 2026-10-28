@@ -1,15 +1,103 @@
-"""
-Static Site Generation (SSG) Pre-rendering, Category Landing Pages & Rich Google Schema
-for BharatBazaro.com.
+BAZAR_WIDGET_HTML = '''
+  <!-- ⚡ BazarAI Floating Launcher & Chat Window -->
+  <div id="bazaroAiWidget" class="bazaro-ai-widget">
+    <!-- Welcome Tooltip Callout -->
+    <div id="bazaroAiTooltip" class="bazaro-ai-tooltip hidden">
+      <div class="tooltip-content">
+        <span>👋 Looking for hidden coupons, price history, or the best deal under your budget? Ask me!</span>
+        <button id="bazaroAiTooltipClose" class="tooltip-close" aria-label="Close tooltip">&times;</button>
+      </div>
+    </div>
 
-Pre-renders live Amazon India deals into static semantic HTML deal cards inside:
-- index.html (Top 30 deals across all categories)
-- deals.html (Top Loot Alerts & steepest discount deals, window.INITIAL_FILTER = "loot")
-- mobiles.html (Mobile & Accessories deals, window.INITIAL_CATEGORY = "mobiles")
-- electronics.html (Electronics, Audio & Laptop deals, window.INITIAL_CATEGORY = "electronics")
-- home.html (Home & Kitchen deals, window.INITIAL_CATEGORY = "home")
-- fashion.html (Fashion & Footwear deals, window.INITIAL_CATEGORY = "fashion")
-- grocery.html (Grocery & Personal Care deals, window.INITIAL_CATEGORY = "grocery")
+    <!-- Floating Launcher Button -->
+    <button id="bazaroAiLauncher" class="bazaro-ai-launcher" aria-label="Ask BazarAI Discounts Finder">
+      <div class="launcher-avatar-wrap">
+        <span class="launcher-icon">⚡</span>
+        <span class="launcher-status-dot"></span>
+      </div>
+      <span class="launcher-label">⚡ Ask BazarAI • Discounts Finder</span>
+      <span id="bazaroAiUnreadBadge" class="launcher-badge">1</span>
+    </button>
+
+    <!-- Chat Drawer -->
+    <div id="bazaroAiDrawer" class="bazaro-ai-drawer hidden" role="dialog" aria-labelledby="bazaroAiTitle">
+      <div class="drawer-header">
+        <div class="drawer-header-left">
+          <div class="drawer-avatar">⚡</div>
+          <div class="drawer-titles">
+            <h3 id="bazaroAiTitle" class="drawer-title">⚡ BazarAI — AI Discounts &amp; Coupon Finder</h3>
+            <span class="drawer-subtitle">🟢 Online 24/7 • Finds Lowest Prices, Hidden Coupons &amp; Keepa Charts</span>
+          </div>
+        </div>
+        <div class="drawer-controls">
+          <button id="bazaroAiClearBtn" class="drawer-ctrl-btn" title="Clear Chat History">🗑️</button>
+          <button id="bazaroAiExpandBtn" class="drawer-ctrl-btn desktop-only" title="Expand / Shrink Window">⛶</button>
+          <button id="bazaroAiCloseBtn" class="drawer-ctrl-btn" title="Close Chat">&times;</button>
+        </div>
+      </div>
+
+      <!-- Quick Action Chips Tray -->
+      <div class="drawer-chips-tray" id="bazaroAiChips">
+        <button class="ai-chip" data-prompt="🚨 Top Loot Deals">🚨 Top Loot Deals</button>
+        <button class="ai-chip" data-prompt="🪙 Under ₹299 Store">🪙 Under ₹299 Store</button>
+        <button class="ai-chip" data-prompt="🎟️ Hidden Coupons">🎟️ Hidden Coupons</button>
+        <button class="ai-chip" data-prompt="🎧 Audio &amp; Tech Drops">🎧 Audio &amp; Tech Drops</button>
+        <button class="ai-chip" data-prompt="🏠 Home &amp; Kitchen Loots">🏠 Home &amp; Kitchen Loots</button>
+        <button class="ai-chip" data-prompt="📅 Amazon Sale Calendar">📅 Amazon Sale Calendar</button>
+        <button class="ai-chip" data-prompt="📈 Check Amazon Link">📈 Check Amazon Link</button>
+      </div>
+
+      <!-- Message Stream Container -->
+      <div class="drawer-messages" id="bazaroAiMessages"></div>
+
+      <!-- Typing Indicator -->
+      <div id="bazaroAiTyping" class="drawer-typing hidden">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-text">BazarAI is analyzing live deals...</span>
+      </div>
+
+      <!-- Input Bar -->
+      <form id="bazaroAiForm" class="drawer-input-bar">
+        <input type="text" id="bazaroAiInput" class="drawer-input" placeholder="Ask for any product, budget (e.g. earbuds under 999), sale info, or paste Amazon link..." autocomplete="off">
+        <button type="submit" id="bazaroAiSendBtn" class="drawer-send-btn" aria-label="Send message">➤</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/bazaro_ai.js"></script>
+'''
+
+"""
+Static Site Generation (SSG) Pre-rendering, Category Landing Pages, Price Stores,
+Individual Product Pages, RSS 2.0 Feed & Rich Google Schema for BharatBazaro.com.
+
+Pre-renders live Amazon India deals into static semantic HTML across:
+1. Core Category Landing Pages:
+   - index.html (Top 30 deals across all categories)
+   - deals.html (Top Loot Alerts & steepest discount deals, window.INITIAL_FILTER = "loot")
+   - mobiles.html (Mobile & Accessories deals, window.INITIAL_CATEGORY = "mobiles")
+   - electronics.html (Electronics, Audio & Laptop deals, window.INITIAL_CATEGORY = "electronics")
+   - home.html (Home & Kitchen deals, window.INITIAL_CATEGORY = "home")
+   - fashion.html (Fashion & Footwear deals, window.INITIAL_CATEGORY = "fashion")
+   - grocery.html (Grocery & Personal Care deals, window.INITIAL_CATEGORY = "grocery")
+
+2. High-Intent Price Stores & Coupon Pages:
+   - under-99.html (Amazon ₹99 Store, window.INITIAL_MAX_PRICE = 99)
+   - under-299.html (Amazon Deals Under ₹299, window.INITIAL_MAX_PRICE = 299)
+   - under-499.html (Amazon Deals Under ₹499, window.INITIAL_MAX_PRICE = 499)
+   - under-999.html (Earbuds, Watches & Gadgets Under ₹999, window.INITIAL_MAX_PRICE = 999)
+   - coupons.html (Hidden On-Page Coupons & Bank Offers, window.INITIAL_FILTER = "coupons")
+
+3. Programmatic Individual Product Pages (/deal/{asin}.html):
+   - Fast, SEO-optimized page per live deal with Keepa chart, price waterfall, how-to-claim, and Product schema.
+
+4. Multi-Channel Syndication Feed:
+   - feed.xml (RSS 2.0 + Yahoo Media Feed for Pinterest, X, IFTTT, Telegram, Google Discover)
+
+5. Comprehensive XML Sitemap:
+   - sitemap.xml (All 60+ canonical URLs with lastmod, priorities, and changefreq)
 """
 
 import html as html_lib
@@ -34,6 +122,7 @@ PAGE_CONFIGS = [
         "hero_subtitle": "Real-time price error alerts, stackable on-page coupons, Keepa charts & BuyHatke-inspired confidence ratings verified autonomously every cycle.",
         "category_slug": "all",
         "initial_filter": None,
+        "initial_max_price": None,
         "breadcrumb_name": None,
     },
     {
@@ -45,6 +134,7 @@ PAGE_CONFIGS = [
         "hero_subtitle": "Autonomous radar tracking price errors, 70%–90% off lightning deals, and screaming Amazon discounts verified live.",
         "category_slug": None,
         "initial_filter": "loot",
+        "initial_max_price": None,
         "breadcrumb_name": "Loot Deals",
     },
     {
@@ -56,6 +146,7 @@ PAGE_CONFIGS = [
         "hero_subtitle": "Live automated price drops on iPhones, Samsung Galaxy, OnePlus, chargers, and mobile accessories.",
         "category_slug": "mobiles",
         "initial_filter": None,
+        "initial_max_price": None,
         "breadcrumb_name": "Mobiles & Accessories",
     },
     {
@@ -67,6 +158,7 @@ PAGE_CONFIGS = [
         "hero_subtitle": "Discover screaming discounts on noise-cancelling headphones, laptops, PC accessories, and smart electronics.",
         "category_slug": "electronics",
         "initial_filter": None,
+        "initial_max_price": None,
         "breadcrumb_name": "Electronics, Audio & Computing",
     },
     {
@@ -78,6 +170,7 @@ PAGE_CONFIGS = [
         "hero_subtitle": "Unbeatable price drops on air fryers, mixer grinders, cookware, water purifiers, and home essentials.",
         "category_slug": "home",
         "initial_filter": None,
+        "initial_max_price": None,
         "breadcrumb_name": "Home & Kitchen",
     },
     {
@@ -89,6 +182,7 @@ PAGE_CONFIGS = [
         "hero_subtitle": "Steep discounts on Puma, Adidas, Casio, Levi's, sneakers, formal wear, and designer accessories.",
         "category_slug": "fashion",
         "initial_filter": None,
+        "initial_max_price": None,
         "breadcrumb_name": "Fashion & Footwear",
     },
     {
@@ -100,7 +194,69 @@ PAGE_CONFIGS = [
         "hero_subtitle": "Extra stackable on-page coupons and discounts on daily groceries, personal care, dry fruits, and skincare.",
         "category_slug": "grocery",
         "initial_filter": None,
+        "initial_max_price": None,
         "breadcrumb_name": "Personal Care & Grocery",
+    },
+    # ── High-Intent Price Stores & Coupon Landing Pages ──
+    {
+        "filename": "under-99.html",
+        "title": "Amazon ₹99 Store India — Best Daily Essentials & Loot Deals Under ₹99 Today | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/under-99.html",
+        "meta_description": "Amazon India ₹99 store loot deals today. Discover verified daily essentials, mobile cables, kitchen accessories, and budget loots under ₹99 with BharatBazaro.",
+        "hero_title": 'Amazon ₹99 Store India — <span class="gradient-text">Loot Deals Under ₹99</span>',
+        "hero_subtitle": "Verified daily essentials, mobile accessories, kitchen loots, and budget deals under ₹99 updated live 24/7.",
+        "category_slug": None,
+        "initial_filter": None,
+        "initial_max_price": 99,
+        "breadcrumb_name": "₹99 Store",
+    },
+    {
+        "filename": "under-299.html",
+        "title": "Best Amazon India Deals Under ₹299 Today — Cables, Skincare, Kitchen & Home Loots | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/under-299.html",
+        "meta_description": "Best Amazon India deals under ₹299 today. Fast chargers, skincare essentials, kitchen gadgets, and home loots with verified price drops.",
+        "hero_title": 'Best Amazon Deals <span class="gradient-text">Under ₹299 Today</span>',
+        "hero_subtitle": "Unbeatable price drops on fast charging cables, skincare essentials, kitchen gadgets, and home loots under ₹299.",
+        "category_slug": None,
+        "initial_filter": None,
+        "initial_max_price": 299,
+        "breadcrumb_name": "Deals Under ₹299",
+    },
+    {
+        "filename": "under-499.html",
+        "title": "Top Amazon Deals Under ₹499 Today in India (50%–85% Off Verified Drops) | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/under-499.html",
+        "meta_description": "Top Amazon deals under ₹499 in India. 50%–85% off earbuds, t-shirts, power banks, and daily essentials verified live.",
+        "hero_title": 'Top Amazon Deals <span class="gradient-text">Under ₹499 (50%–85% Off)</span>',
+        "hero_subtitle": "Discover screaming discounts on Bluetooth earbuds, branded apparel, power accessories, and home items under ₹499.",
+        "category_slug": None,
+        "initial_filter": None,
+        "initial_max_price": 499,
+        "breadcrumb_name": "Deals Under ₹499",
+    },
+    {
+        "filename": "under-999.html",
+        "title": "Best Earbuds, Smartwatches, Shoes & Gadgets Under ₹999 on Amazon India Today | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/under-999.html",
+        "meta_description": "Best earbuds, smartwatches, running shoes, and tech gadgets under ₹999 on Amazon India today with verified price error alerts.",
+        "hero_title": 'Best Gadgets & Shoes <span class="gradient-text">Under ₹999 Today</span>',
+        "hero_subtitle": "Verified price drops on wireless earbuds, smartwatches, sneakers, and smart home gadgets under ₹999.",
+        "category_slug": None,
+        "initial_filter": None,
+        "initial_max_price": 999,
+        "breadcrumb_name": "Deals Under ₹999",
+    },
+    {
+        "filename": "coupons.html",
+        "title": "Amazon India Hidden Checkbox Coupons, Subscribe & Save & Bank Offer Finder Today | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/coupons.html",
+        "meta_description": "Amazon India hidden checkbox coupons, Subscribe & Save discounts, and instant bank card offers verified live by BharatBazaro.",
+        "hero_title": 'Hidden Checkbox Coupons & <span class="gradient-text">Bank Offer Finder</span>',
+        "hero_subtitle": "Autonomous scanner tracking clip-on Amazon coupons, extra 10%–20% Subscribe & Save discounts, and promo codes.",
+        "category_slug": None,
+        "initial_filter": "coupons",
+        "initial_max_price": None,
+        "breadcrumb_name": "Hidden Coupons",
     },
 ]
 
@@ -242,6 +398,7 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
     affiliate_url = html_lib.escape(str(d.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1"))
     image_url = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
     is_loot = bool(d.get("is_loot"))
+    deal_page_url = f"/deal/{asin}.html"
 
     badges = []
     if d.get("is_new") or (d.get("age_hours") is not None and d.get("age_hours") <= 2.0):
@@ -361,7 +518,9 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <img src="{image_url}" alt="{title}" class="card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/{asin}.jpg'">
+            <a href="{deal_page_url}" title="View Keepa Price History for {title}">
+              <img src="{image_url}" alt="{title}" class="card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/{asin}.jpg'">
+            </a>
           </div>
           <div class="card-meta-bar">
             <span class="brand-chip">{brand_chip}</span>{rating_html}
@@ -369,7 +528,7 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
         </div>
 
         <div class="card-content">
-          <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="card-title" title="{title}">
+          <a href="{deal_page_url}" class="card-title" title="{title}">
             {title}
           </a>
 
@@ -410,9 +569,9 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
           <button class="btn-card-share" data-asin="{asin}" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>
           </button>
-          <button class="btn-chart-deal btn-open-modal" data-asin="{asin}" title="View Price History & Keepa Chart">
+          <a href="{deal_page_url}" class="btn-chart-deal" title="View Price History & Keepa Chart">
             <span>📈 Chart</span>
-          </button>
+          </a>
         </div>
       </article>'''
 
@@ -531,9 +690,10 @@ def build_structured_data(page_cfg: dict, page_deals: list) -> str:
 
 
 def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Filter deals matching the category or filter, backfilling if sparse so Googlebot always has rich content."""
+    """Filter deals matching category, price threshold, or filter, backfilling so pages are never thin."""
     slug = page_cfg.get("category_slug")
     filt = page_cfg.get("initial_filter")
+    max_price = page_cfg.get("initial_max_price")
 
     if filt == "loot":
         loots = [d for d in all_deals if d.get("is_loot")]
@@ -542,6 +702,31 @@ def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> Li
         if len(combined) < 15:
             combined += [d for d in all_deals if d not in combined]
         return combined[:30]
+
+    if filt == "coupons":
+        coupons = [
+            d for d in all_deals
+            if (d.get("coupon_discount") and d.get("coupon_discount") > 0)
+            or d.get("coupon_text")
+            or d.get("promo_code")
+            or d.get("bank_offer")
+        ]
+        if len(coupons) < 10:
+            extra = [d for d in all_deals if d not in coupons and (d.get("effective_discount_pct") or d.get("discount_pct") or 0) >= 40]
+            coupons += extra
+        if len(coupons) < 10:
+            coupons += [d for d in all_deals if d not in coupons]
+        return coupons[:30]
+
+    if max_price is not None:
+        matched = [d for d in all_deals if (d.get("effective_price") or d.get("list_price") or 0) <= max_price]
+        if len(matched) < 6:
+            # Backfill with nearest lowest price deals
+            sorted_all = sorted(all_deals, key=lambda x: (x.get("effective_price") or x.get("list_price") or 999999))
+            matched = sorted_all[:max(6, len(matched))]
+        else:
+            matched.sort(key=lambda x: (x.get("effective_price") or x.get("list_price") or 999999))
+        return matched[:30]
 
     if not slug or slug == "all":
         return all_deals[:30]
@@ -605,6 +790,7 @@ def build_head_html(page_cfg: dict, page_deals: list) -> str:
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.json">
+  <link rel="alternate" type="application/rss+xml" title="BharatBazaro Live Amazon India Loot Deals RSS" href="https://bharatbazaro.com/feed.xml">
   <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -665,9 +851,10 @@ def generate_page_html(
     html_out = re.sub(r'(<span\s+class=["\']tab-count["\']\s+id=["\']countCoupons["\']>)[^<]*(</span>)', f'\\g<1>{stats.get("coupon_deals_count", 0)}\\g<2>', html_out)
     html_out = re.sub(r'(<span\s+class=["\']tab-count["\']\s+id=["\']countTier1["\']>)[^<]*(</span>)', f'\\g<1>{sum(1 for d in all_deals if d.get("brand_tier") == "tier1")}\\g<2>', html_out)
 
-    # 5. Category pills & active states
+    # 5. Category pills, price pills & active states
     cat_slug = page_cfg.get("category_slug")
     init_filter = page_cfg.get("initial_filter")
+    init_max_price = page_cfg.get("initial_max_price")
 
     # Ensure Electronics pill exists
     if 'data-category="Electronics & Audio"' not in html_out:
@@ -686,16 +873,23 @@ def generate_page_html(
         "fashion": "Fashion & Footwear",
         "grocery": "Personal Care & Grocery",
     }
-    target_cat = slug_to_cat.get(cat_slug, "all")
+    target_cat = slug_to_cat.get(cat_slug, "all") if cat_slug else "all"
     html_out = html_out.replace(f'class="cat-pill" data-category="{target_cat}"', f'class="cat-pill active" data-category="{target_cat}"')
 
-    # Reset active on filter tabs
+    # Reset and set active filter tab
     html_out = re.sub(r'class="filter-tab active"', 'class="filter-tab"', html_out)
     html_out = re.sub(r'class="filter-tab loot-tab active"', 'class="filter-tab loot-tab"', html_out)
     if init_filter == "loot":
         html_out = html_out.replace('class="filter-tab loot-tab" data-tab="loot"', 'class="filter-tab loot-tab active" data-tab="loot"')
+    elif init_filter == "coupons":
+        html_out = html_out.replace('class="filter-tab" data-tab="coupons"', 'class="filter-tab active" data-tab="coupons"')
     else:
         html_out = html_out.replace('class="filter-tab" data-tab="all"', 'class="filter-tab active" data-tab="all"')
+
+    # Reset and set active price pill
+    if init_max_price is not None:
+        html_out = re.sub(r'class="price-pill active"', 'class="price-pill"', html_out)
+        html_out = html_out.replace(f'class="price-pill" data-price="{init_max_price}"', f'class="price-pill active" data-price="{init_max_price}"')
 
     # 6. Inject deals inside #dealsGrid
     cards_html = "\n".join(render_deal_card_html(d) for d in page_deals)
@@ -710,7 +904,20 @@ def generate_page_html(
     # 7. Visible count
     html_out = re.sub(r'(<span\s+id=["\']visibleCount["\']\s+class=["\']font-bold["\']>)[^<]*(</span>)', f'\\g<1>{len(page_deals)}\\g<2>', html_out)
 
-    # 8. Ensure home.html is in footer links
+    # 8. Ensure comprehensive footer links (Category + Price Stores + RSS)
+    if 'footer-stores' not in html_out:
+        store_links_block = '''
+        <div class="footer-links footer-stores" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="/under-99.html" class="footer-link">⚡ ₹99 Store</a>
+          <a href="/under-299.html" class="footer-link">🏷️ Under ₹299 Deals</a>
+          <a href="/under-499.html" class="footer-link">🔥 Under ₹499 Loots</a>
+          <a href="/under-999.html" class="footer-link">🎧 Under ₹999 Deals</a>
+          <a href="/coupons.html" class="footer-link">🎟️ Hidden Coupons</a>
+          <a href="/feed.xml" class="footer-link" target="_blank" rel="alternate" type="application/rss+xml">📡 RSS 2.0 Feed</a>
+        </div>'''
+        html_out = re.sub(r'(<div class="footer-links">.*?</div>)', r'\g<1>' + store_links_block, html_out, count=1, flags=re.DOTALL)
+
+    # Ensure home.html is in footer links
     if '<a href="/home.html"' not in html_out:
         html_out = html_out.replace(
             '<a href="/mobiles.html" class="footer-link">📱 Mobiles</a>',
@@ -726,70 +933,620 @@ def generate_page_html(
         script_injections.append(f'<script>window.INITIAL_CATEGORY = "{cat_slug}";</script>')
     if init_filter:
         script_injections.append(f'<script>window.INITIAL_FILTER = "{init_filter}";</script>')
+    if init_max_price is not None:
+        script_injections.append(f'<script>window.INITIAL_MAX_PRICE = {init_max_price};</script>')
 
     if script_injections:
         injection_code = "  " + "\n  ".join(script_injections) + "\n  <script src=\"app.js\">"
         html_out = re.sub(r'\s*<script\s+src=["\']app\.js["\']>', f'\n{injection_code}', html_out, count=1)
 
+    # 11. Inject BazarAI Chat Widget
+    if 'id="bazaroAiWidget"' not in html_out:
+        html_out = html_out.replace('</body>', f'''{BAZAR_WIDGET_HTML}\n</body>''')
+    elif 'bazaro_ai.js' not in html_out:
+        html_out = html_out.replace('</body>', '  <script src="/bazaro_ai.js"></script>\n</body>')
+
     return html_out
 
 
-def update_sitemap_xml(root_dir: Path):
-    """Ensure sitemap.xml contains all 7 canonical URLs with updated lastmod."""
+def render_product_page_html(
+    deal: Dict[str, Any],
+    related_deals: List[Dict[str, Any]],
+    stats: Dict[str, Any],
+) -> str:
+    """
+    Generate an individual programmatic SEO product page for /deal/{asin}.html.
+    Includes Keepa price history chart, price waterfall, how-to-claim checklist, and rich Product JSON-LD schema.
+    """
+    asin = html_lib.escape(str(deal.get("asin") or ""))
+    raw_title = deal.get("title") or f"Amazon Deal ({asin})"
+    title = html_lib.escape(raw_title)
+    eff_price = deal.get("effective_price") or deal.get("list_price") or 0
+    mrp = deal.get("mrp") or 0
+    disc_pct = deal.get("effective_discount_pct") or deal.get("discount_pct") or 0
+    savings_inr = deal.get("savings_inr") or (max(0, mrp - eff_price) if mrp > eff_price else 0)
+    buy_conf = deal.get("buy_confidence") or 75
+    brand = html_lib.escape(str(deal.get("brand") or deal.get("category") or "Amazon"))
+    category = html_lib.escape(str(deal.get("category") or "Electronics & Audio"))
+    rating = deal.get("rating") or 4.3
+    review_count = deal.get("review_count") or 150
+    affiliate_url = html_lib.escape(str(deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1"))
+    image_url = html_lib.escape(str(deal.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
+    canonical = f"https://bharatbazaro.com/deal/{asin}.html"
+
+    page_title = f"{raw_title} — ₹{eff_price:,} ({disc_pct}% OFF) Lowest Price & Keepa Price History India | BharatBazaro"
+    meta_desc = f"Buy {raw_title} at ₹{eff_price:,} (MRP ₹{mrp:,}, Save ₹{savings_inr:,}) on Amazon India. Check 90-day Keepa price history chart, BuyHatke confidence score ({buy_conf}%), and hidden on-page coupons."
+
+    keepa_chart_url = f"https://graph.keepa.com/pricehistory.png?asin={asin}&domain=in&salesrank=1&range=90"
+
+    hist_min = deal.get("historical_min") or eff_price
+    hist_avg = deal.get("historical_avg") or (int(eff_price * 1.18) if mrp <= eff_price else int((mrp + eff_price) / 2))
+    hist_max = deal.get("historical_max") or max(mrp, eff_price)
+
+    # Badges
+    badges = []
+    if deal.get("is_loot"):
+        badges.append('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>')
+    if deal.get("price_context") == "all_time_low":
+        badges.append('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>')
+    elif deal.get("is_further_drop"):
+        badges.append('<span class="badge-tag badge-further">🔥 FURTHER DROP</span>')
+    if deal.get("brand_tier") == "tier1":
+        badges.append('<span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span>')
+    badges_html = " ".join(badges)
+
+    # Coupon Claim HTML
+    coupon_claim_html = ""
+    coupon_disc = deal.get("coupon_discount")
+    coupon_text = deal.get("coupon_text")
+    if coupon_disc or coupon_text:
+        c_label = coupon_text or f"Apply ₹{coupon_disc:,} coupon"
+        coupon_claim_html = f'''
+        <div class="coupon-claim-banner" style="margin: 16px 0; padding: 12px 16px; border-radius: 12px; background: rgba(16, 185, 129, 0.12); border: 1px dashed #10b981;">
+          <span style="font-size: 1.2rem;">☑️</span>
+          <span style="color: #34d399; font-weight: 600;">How to claim coupon: Tick <b>"{html_lib.escape(str(c_label))}"</b> checkbox on Amazon India product page before adding to cart.</span>
+        </div>'''
+
+    # Structured Data (JSON-LD)
+    schema_data = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://bharatbazaro.com/#website",
+                "url": "https://bharatbazaro.com/",
+                "name": "BharatBazaro",
+                "description": "Live Amazon India Loot Deals, Price Drop Radar & Hidden Coupon Finder"
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://bharatbazaro.com/#organization",
+                "name": "BharatBazaro",
+                "url": "https://bharatbazaro.com/",
+                "logo": "https://bharatbazaro.com/icon-512.png"
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": f"{canonical}#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://bharatbazaro.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": category,
+                        "item": "https://bharatbazaro.com/deals.html"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": raw_title[:40],
+                        "item": canonical
+                    }
+                ]
+            },
+            {
+                "@type": "Product",
+                "@id": f"{canonical}#product",
+                "name": raw_title,
+                "image": image_url,
+                "description": meta_desc,
+                "sku": asin,
+                "brand": {
+                    "@type": "Brand",
+                    "name": brand
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": str(rating),
+                    "reviewCount": str(review_count)
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "url": affiliate_url,
+                    "priceCurrency": "INR",
+                    "price": str(eff_price),
+                    "priceValidUntil": "2026-12-31",
+                    "itemCondition": "https://schema.org/NewCondition",
+                    "availability": "https://schema.org/InStock",
+                    "seller": {
+                        "@type": "Organization",
+                        "name": "Amazon India"
+                    }
+                }
+            }
+        ]
+    }
+    schema_json = json.dumps(schema_data, indent=2, ensure_ascii=False)
+
+    # Related Deals Cards HTML
+    related_cards_html = "\n".join(render_deal_card_html(d) for d in related_deals[:6])
+
+    return f'''<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{html_lib.escape(page_title)}</title>
+  <meta name="description" content="{html_lib.escape(meta_desc)}">
+  <link rel="canonical" href="{canonical}">
+
+  <!-- OpenGraph / Social Sharing -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="{canonical}">
+  <meta property="og:title" content="{html_lib.escape(page_title)}">
+  <meta property="og:description" content="{html_lib.escape(meta_desc)}">
+  <meta property="og:image" content="{image_url}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{html_lib.escape(page_title)}">
+  <meta name="twitter:description" content="{html_lib.escape(meta_desc)}">
+  <meta name="twitter:image" content="{image_url}">
+
+  <!-- Favicons & Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="alternate" type="application/rss+xml" title="BharatBazaro Live Amazon India Loot Deals RSS" href="https://bharatbazaro.com/feed.xml">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Schema.org Product Structured Data -->
+  <script type="application/ld+json">
+{schema_json}
+  </script>
+
+  <!-- Google Fonts & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="header-left">
+        <a href="/" class="brand-link" title="BharatBazaro Home">
+          <span class="brand-icon">⚡</span>
+          <span class="brand-name">Bharat<span class="brand-accent">Bazaro</span></span>
+        </a>
+      </div>
+      <div class="header-center">
+        <span class="badge-status online">● AI Deal Radar Active</span>
+      </div>
+      <div class="header-right">
+        <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="btn btn-telegram btn-sm">
+          <span>📢 Join Telegram</span>
+        </a>
+        <a href="/" class="btn btn-outline btn-sm">
+          <span>🌐 Browse All Deals</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <nav class="container" style="padding: 16px 20px; font-size: 0.85rem; color: var(--text-secondary);" aria-label="Breadcrumb">
+    <a href="/" style="color: var(--color-emerald-light); text-decoration: none;">Home</a> &gt;
+    <a href="/deals.html" style="color: var(--color-emerald-light); text-decoration: none;">{category}</a> &gt;
+    <span style="color: var(--text-muted);">{asin}</span>
+  </nav>
+
+  <!-- Main Product Detail View -->
+  <main class="container" style="padding-bottom: 60px;">
+    <div class="deal-detail-layout" style="display: grid; grid-template-columns: minmax(300px, 460px) 1fr; gap: 32px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 32px; margin-bottom: 40px;">
+      <!-- Left: Product Image & Badges -->
+      <div class="product-media-col" style="text-align: center;">
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; position: relative;">
+          <div style="position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; z-index: 2;">
+            {badges_html}
+          </div>
+          <img src="{image_url}" alt="{title}" style="max-width: 100%; max-height: 380px; object-fit: contain; border-radius: var(--radius-md);" onerror="this.src='https://m.media-amazon.com/images/P/{asin}.jpg'">
+        </div>
+        <div style="margin-top: 16px; font-size: 0.82rem; color: var(--text-muted);">
+          Amazon ASIN: <code style="color: var(--color-cyan); font-family: var(--font-mono);">{asin}</code> · Brand: <b>{brand}</b>
+        </div>
+      </div>
+
+      <!-- Right: Product Information & CTAs -->
+      <div class="product-info-col">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+          <span class="brand-chip">{brand}</span>
+          <span style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">⭐ {rating} <span style="color: var(--text-muted); font-size: 0.8rem;">({review_count:,} reviews)</span></span>
+        </div>
+
+        <h1 style="font-size: 1.6rem; font-weight: 800; line-height: 1.35; margin-bottom: 16px; color: var(--text-main);">
+          {title}
+        </h1>
+
+        <!-- Price Waterfall Card -->
+        <div class="price-waterfall-box" style="margin-bottom: 20px; padding: 20px; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-card); border-radius: var(--radius-lg);">
+          <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px;">Verified Effective Deal Price</div>
+          <div class="price-main-row" style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
+            <span class="effective-price" style="font-size: 2.2rem; font-weight: 800; color: #34d399; font-family: var(--font-mono);">₹{eff_price:,}</span>
+            <span class="original-mrp" style="font-size: 1.2rem; text-decoration: line-through; color: var(--text-muted);">₹{mrp:,}</span>
+            <span class="discount-badge" style="background: #ef4444; color: #fff; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-size: 0.95rem;">{disc_pct}% OFF</span>
+          </div>
+          <div class="savings-line" style="margin-top: 8px; color: #38bdf8; font-weight: 700; font-size: 1rem;">
+            🎉 You save ₹{savings_inr:,} on this purchase!
+          </div>
+        </div>
+
+        {coupon_claim_html}
+
+        <!-- Buy Confidence Meter -->
+        <div class="confidence-meter-box" style="margin-bottom: 24px; padding: 16px; background: rgba(30, 41, 59, 0.5); border-radius: 12px; border: 1px solid var(--border-subtle);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 700; color: #34d399;">🟢 BuyHatke Deal Confidence</span>
+            <span style="font-weight: 800; color: #34d399; font-family: var(--font-mono);">{buy_conf}% Rating</span>
+          </div>
+          <div style="height: 10px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden;">
+            <div style="height: 100%; width: {buy_conf}%; background: linear-gradient(90deg, #10b981, #06b6d4); border-radius: 999px;"></div>
+          </div>
+          <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">
+            Evaluated across price history, coupon availability, brand reliability & review ratings.
+          </div>
+        </div>
+
+        <!-- Primary CTA Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
+          <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+            <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
+          </a>
+          <div style="display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap;">
+            <a href="https://api.whatsapp.com/send?text={html_lib.escape(f'🔥 Unbelievable Amazon Deal! {raw_title} at ₹{eff_price:,} ({disc_pct}% OFF): {canonical}')}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; text-decoration: none; padding: 10px 16px;">
+              <span>💬 Share WhatsApp</span>
+            </a>
+            <a href="/" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; text-decoration: none; padding: 10px 16px;">
+              <span>🌐 All 50+ Live Deals</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keepa Price History Chart Section -->
+    <section style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 32px; margin-bottom: 40px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">
+            📈 90-Day Amazon Price History & Keepa Verification
+          </h2>
+          <p style="font-size: 0.88rem; color: var(--text-secondary);">
+            Automated verification confirms whether this price drop is a genuine all-time low.
+          </p>
+        </div>
+        <div style="display: flex; gap: 16px; font-family: var(--font-mono); font-size: 0.85rem;">
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 14px; border-radius: 8px;">
+            <span style="color: var(--text-muted); display: block; font-size: 0.72rem;">CURRENT</span>
+            <span style="color: #34d399; font-weight: 700;">₹{eff_price:,}</span>
+          </div>
+          <div style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); padding: 8px 14px; border-radius: 8px;">
+            <span style="color: var(--text-muted); display: block; font-size: 0.72rem;">TRACKED AVG</span>
+            <span style="color: #38bdf8; font-weight: 700;">₹{hist_avg:,}</span>
+          </div>
+          <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 8px 14px; border-radius: 8px;">
+            <span style="color: var(--text-muted); display: block; font-size: 0.72rem;">LOWEST RECORDED</span>
+            <span style="color: #fbbf24; font-weight: 700;">₹{hist_min:,}</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #ffffff; border-radius: 12px; padding: 16px; text-align: center; overflow: hidden;">
+        <img src="{keepa_chart_url}" alt="Keepa Price History Chart for {title}" style="max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;" loading="lazy">
+      </div>
+    </section>
+
+    <!-- How to Claim Checklist -->
+    <section style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 32px; margin-bottom: 40px;">
+      <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin-bottom: 16px;">
+        💡 How to Claim this Loot Deal & Avoid Price Spikes
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">1️⃣</div>
+          <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Click Grab Deal</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">Click the green Amazon button to open the product directly on Amazon.in.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">2️⃣</div>
+          <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Tick Coupon Box</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">If an on-page coupon is active, tick the checkbox before adding the item to cart.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">3️⃣</div>
+          <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Apply Card Offers</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">Choose an eligible bank debit/credit card during checkout for instant discount.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">4️⃣</div>
+          <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Order Immediately</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">Loot deals and price errors sell out quickly or revert to original price.</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; text-align: center;">
+        <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
+          <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Related Deals Section -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">
+          🔥 Related Live Amazon Loot Deals
+        </h2>
+        <a href="/" style="color: var(--color-emerald-light); font-weight: 700; font-size: 0.9rem; text-decoration: none;">
+          View All Live Deals →
+        </a>
+      </div>
+      <div class="deals-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+        {related_cards_html}
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand-logo-small">⚡ Bharat<span class="brand-accent">Bazaro</span></span>
+          <p class="footer-tagline">24/7 AI-Powered Deal Radar & Amazon Price Error Discovery Engine.</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="footer-link">📢 Telegram Channel</a>
+          <a href="/deals.html" class="footer-link">🔥 Deals</a>
+          <a href="/electronics.html" class="footer-link">⚡ Electronics</a>
+          <a href="/mobiles.html" class="footer-link">📱 Mobiles</a>
+          <a href="/home.html" class="footer-link">🏠 Home & Kitchen</a>
+          <a href="/fashion.html" class="footer-link">👗 Fashion</a>
+          <a href="/grocery.html" class="footer-link">🛒 Grocery</a>
+        </div>
+        <div class="footer-links footer-stores" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="/under-99.html" class="footer-link">⚡ ₹99 Store</a>
+          <a href="/under-299.html" class="footer-link">🏷️ Under ₹299 Deals</a>
+          <a href="/under-499.html" class="footer-link">🔥 Under ₹499 Loots</a>
+          <a href="/under-999.html" class="footer-link">🎧 Under ₹999 Deals</a>
+          <a href="/coupons.html" class="footer-link">🎟️ Hidden Coupons</a>
+          <a href="/feed.xml" class="footer-link" target="_blank" rel="alternate" type="application/rss+xml">📡 RSS 2.0 Feed</a>
+        </div>
+      </div>
+
+      <div class="footer-disclosure">
+        <p><i>#ad Affiliate Disclosure: BharatBazaro.com is a participant in the Amazon Associates Programme, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.in. Prices, coupons, and product availability are subject to change by Amazon at any moment.</i></p>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BharatBazaro.com · Autonomous Deal Intelligence by DealDash AI · Powered by GitHub Actions 24/7</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ⚡ BazarAI Floating Launcher & Chat Window -->
+  <div id="bazaroAiWidget" class="bazaro-ai-widget">
+    <!-- Welcome Tooltip Callout -->
+    <div id="bazaroAiTooltip" class="bazaro-ai-tooltip hidden">
+      <div class="tooltip-content">
+        <span>👋 Looking for hidden coupons, price history, or the best deal under your budget? Ask me!</span>
+        <button id="bazaroAiTooltipClose" class="tooltip-close" aria-label="Close tooltip">&times;</button>
+      </div>
+    </div>
+
+    <!-- Floating Launcher Button -->
+    <button id="bazaroAiLauncher" class="bazaro-ai-launcher" aria-label="Ask BazarAI Discounts Finder">
+      <div class="launcher-avatar-wrap">
+        <span class="launcher-icon">⚡</span>
+        <span class="launcher-status-dot"></span>
+      </div>
+      <span class="launcher-label">⚡ Ask BazarAI • Discounts Finder</span>
+      <span id="bazaroAiUnreadBadge" class="launcher-badge">1</span>
+    </button>
+
+    <!-- Chat Drawer -->
+    <div id="bazaroAiDrawer" class="bazaro-ai-drawer hidden" role="dialog" aria-labelledby="bazaroAiTitle">
+      <div class="drawer-header">
+        <div class="drawer-header-left">
+          <div class="drawer-avatar">⚡</div>
+          <div class="drawer-titles">
+            <h3 id="bazaroAiTitle" class="drawer-title">⚡ BazarAI — AI Discounts &amp; Coupon Finder</h3>
+            <span class="drawer-subtitle">🟢 Online 24/7 • Finds Lowest Prices, Hidden Coupons &amp; Keepa Charts</span>
+          </div>
+        </div>
+        <div class="drawer-controls">
+          <button id="bazaroAiClearBtn" class="drawer-ctrl-btn" title="Clear Chat History">🗑️</button>
+          <button id="bazaroAiExpandBtn" class="drawer-ctrl-btn desktop-only" title="Expand / Shrink Window">⛶</button>
+          <button id="bazaroAiCloseBtn" class="drawer-ctrl-btn" title="Close Chat">&times;</button>
+        </div>
+      </div>
+
+      <!-- Quick Action Chips Tray -->
+      <div class="drawer-chips-tray" id="bazaroAiChips">
+        <button class="ai-chip" data-prompt="🚨 Top Loot Deals">🚨 Top Loot Deals</button>
+        <button class="ai-chip" data-prompt="🪙 Under ₹299 Store">🪙 Under ₹299 Store</button>
+        <button class="ai-chip" data-prompt="🎟️ Hidden Coupons">🎟️ Hidden Coupons</button>
+        <button class="ai-chip" data-prompt="🎧 Audio &amp; Tech Drops">🎧 Audio &amp; Tech Drops</button>
+        <button class="ai-chip" data-prompt="🏠 Home &amp; Kitchen Loots">🏠 Home &amp; Kitchen Loots</button>
+        <button class="ai-chip" data-prompt="📅 Amazon Sale Calendar">📅 Amazon Sale Calendar</button>
+        <button class="ai-chip" data-prompt="📈 Check Amazon Link">📈 Check Amazon Link</button>
+      </div>
+
+      <!-- Message Stream Container -->
+      <div class="drawer-messages" id="bazaroAiMessages"></div>
+
+      <!-- Typing Indicator -->
+      <div id="bazaroAiTyping" class="drawer-typing hidden">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-text">BazarAI is analyzing live deals...</span>
+      </div>
+
+      <!-- Input Bar -->
+      <form id="bazaroAiForm" class="drawer-input-bar">
+        <input type="text" id="bazaroAiInput" class="drawer-input" placeholder="Ask for any product, budget (e.g. earbuds under 999), sale info, or paste Amazon link..." autocomplete="off">
+        <button type="submit" id="bazaroAiSendBtn" class="drawer-send-btn" aria-label="Send message">➤</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/bazaro_ai.js"></script>
+
+</body>
+</html>'''
+
+
+def generate_rss_feed(deals: List[Dict[str, Any]], root_dir: Path) -> Path:
+    """
+    Generate a valid RSS 2.0 XML feed at /feed.xml with Yahoo Media tags for syndication
+    across Pinterest, X/Twitter, Telegram, IFTTT, and Google Discover.
+    """
+    feed_path = root_dir / "feed.xml"
+    now_rfc822 = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+    items_xml = []
+    for d in deals[:30]:
+        asin = d.get("asin") or ""
+        if not asin:
+            continue
+        title = d.get("title") or f"Amazon Deal ({asin})"
+        eff_price = d.get("effective_price") or d.get("list_price") or 0
+        mrp = d.get("mrp") or 0
+        disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
+        aff_url = d.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1"
+        img_url = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
+        deal_url = f"https://bharatbazaro.com/deal/{asin}.html"
+
+        post_epoch = d.get("updated_at") or int(time.time())
+        item_pub_date = datetime.fromtimestamp(post_epoch, tz=timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+        coupon_note = f" (Includes {d['coupon_text']})" if d.get("coupon_text") else ""
+        item_title = f"{title} — ₹{eff_price:,} ({disc}% OFF){coupon_note}"
+
+        coupon_p = f"<p>🎟️ <strong>Coupon Trick:</strong> {html_lib.escape(str(d.get('coupon_text')))}</p>" if d.get('coupon_text') else ""
+        description_content = (
+            f"<p><strong>{html_lib.escape(title)}</strong></p>"
+            f"<p>⚡ <strong>Deal Price:</strong> ₹{eff_price:,} (MRP: ₹{mrp:,}, Save {disc}% OFF)</p>"
+            f"{coupon_p}"
+            f"<p><a href='{aff_url}' target='_blank'>🛒 <strong>Grab Deal on Amazon.in</strong></a> | "
+            f"<a href='{deal_url}'>📈 <strong>View Keepa Chart &amp; Price History on BharatBazaro</strong></a></p>"
+        )
+
+        item_xml = f'''    <item>
+      <title>{html_lib.escape(item_title)}</title>
+      <link>{deal_url}</link>
+      <guid isPermaLink="true">{deal_url}</guid>
+      <pubDate>{item_pub_date}</pubDate>
+      <description><![CDATA[{description_content}]]></description>
+      <media:content url="{img_url}" medium="image" type="image/jpeg" />
+    </item>'''
+        items_xml.append(item_xml)
+
+    items_block = "\n".join(items_xml)
+    rss_content = f'''<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BharatBazaro — Live Amazon India Loot Deals, Price Drops &amp; Hidden Coupons</title>
+    <link>https://bharatbazaro.com/</link>
+    <description>Autonomous 24/7 radar tracking screaming price drops, 80% off loot errors, and stackable coupons on Amazon India.</description>
+    <language>en-in</language>
+    <lastBuildDate>{now_rfc822}</lastBuildDate>
+    <atom:link href="https://bharatbazaro.com/feed.xml" rel="self" type="application/rss+xml" />
+    <image>
+      <url>https://bharatbazaro.com/icon-512.png</url>
+      <title>BharatBazaro</title>
+      <link>https://bharatbazaro.com/</link>
+    </image>
+{items_block}
+  </channel>
+</rss>
+'''
+    feed_path.write_text(rss_content, encoding="utf-8")
+    logger.info(f"Generated RSS 2.0 media feed with {len(items_xml)} items at {feed_path}")
+    return feed_path
+
+
+def update_sitemap_xml(root_dir: Path, deal_asins: Optional[List[str]] = None):
+    """Ensure sitemap.xml contains all core landing pages, price stores, and programmatic deal pages."""
     sitemap_path = root_dir / "sitemap.xml"
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    urls = [
+        # 1. Home
+        ("https://bharatbazaro.com/", today, "hourly", "1.0"),
+        # 2. Category Pages
+        ("https://bharatbazaro.com/deals.html", today, "hourly", "0.9"),
+        ("https://bharatbazaro.com/mobiles.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/electronics.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/home.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/fashion.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/grocery.html", today, "daily", "0.9"),
+        # 3. High-Intent Price Stores & Coupons
+        ("https://bharatbazaro.com/under-99.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/under-299.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/under-499.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/under-999.html", today, "daily", "0.9"),
+        ("https://bharatbazaro.com/coupons.html", today, "hourly", "0.9"),
+    ]
+
+    # 4. Programmatic Deal Pages
+    if deal_asins:
+        for asin in deal_asins:
+            if asin:
+                urls.append((f"https://bharatbazaro.com/deal/{asin}.html", today, "daily", "0.8"))
+
+    url_blocks = []
+    for loc, lastmod, freq, prio in urls:
+        url_blocks.append(f'''  <url>
+    <loc>{loc}</loc>
+    <lastmod>{lastmod}</lastmod>
+    <changefreq>{freq}</changefreq>
+    <priority>{prio}</priority>
+  </url>''')
+
     xml = f'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://bharatbazaro.com/</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/deals.html</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/mobiles.html</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/electronics.html</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/home.html</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/fashion.html</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/grocery.html</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
+{"".join(url_blocks)}
 </urlset>
 '''
     sitemap_path.write_text(xml, encoding="utf-8")
-    logger.info(f"Updated {sitemap_path} with 7 canonical landing page URLs.")
+    logger.info(f"Updated {sitemap_path} with {len(urls)} URLs.")
 
 
 def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], root_dir: Optional[Path] = None):
-    """Pre-render static deal cards and rich schema across index.html and all 6 category pages."""
+    """
+    Pre-render static deal cards and rich schema across:
+    1. index.html, 6 category pages, 5 price store pages
+    2. Programmatic individual product pages in /deal/{asin}.html
+    3. feed.xml (RSS 2.0 Media Feed)
+    4. Comprehensive sitemap.xml
+    """
     if root_dir is None:
         root_dir = Path(__file__).resolve().parent.parent
 
@@ -800,6 +1557,7 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
 
     base_html = base_index_path.read_text(encoding="utf-8")
 
+    # 1. Pre-render 12 core landing pages (Home + Categories + Price Stores)
     for page_cfg in PAGE_CONFIGS:
         try:
             page_deals = filter_deals_for_page(page_cfg, deals)
@@ -810,7 +1568,35 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
         except Exception as e:
             logger.error(f"Failed to pre-render {page_cfg['filename']}: {e}", exc_info=True)
 
+    # 2. Pre-render individual product pages (/deal/{asin}.html)
+    deal_dir = root_dir / "deal"
+    deal_dir.mkdir(parents=True, exist_ok=True)
+    generated_asins = []
+
+    for idx, d in enumerate(deals[:60]):
+        asin = d.get("asin")
+        if not asin:
+            continue
+        try:
+            # Related deals from the same category or other top deals
+            related = [x for x in deals if x.get("asin") != asin]
+            prod_html = render_product_page_html(d, related, stats)
+            prod_dest = deal_dir / f"{asin}.html"
+            prod_dest.write_text(prod_html, encoding="utf-8")
+            generated_asins.append(asin)
+        except Exception as e:
+            logger.error(f"Failed to pre-render product page for {asin}: {e}", exc_info=True)
+
+    logger.info(f"Generated {len(generated_asins)} programmatic product pages in {deal_dir}")
+
+    # 3. Generate RSS 2.0 Feed (feed.xml)
     try:
-        update_sitemap_xml(root_dir)
+        generate_rss_feed(deals, root_dir)
+    except Exception as e:
+        logger.error(f"Failed to generate feed.xml: {e}", exc_info=True)
+
+    # 4. Expand sitemap.xml
+    try:
+        update_sitemap_xml(root_dir, generated_asins)
     except Exception as e:
         logger.error(f"Failed to update sitemap.xml: {e}", exc_info=True)

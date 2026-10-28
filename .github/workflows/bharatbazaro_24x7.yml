@@ -89,9 +89,9 @@ jobs:
             mkdir -p data
             cp -f /tmp/bb_data_bak/*.* data/ 2>/dev/null || true
             rm -f data/*.sqlite3-wal data/*.sqlite3-shm data/*.db-wal data/*.db-shm || true
-            git add -f data/live_deals.json data/stats.json data/state.sqlite3 data/deals.db index.html deals.html mobiles.html electronics.html home.html fashion.html grocery.html sitemap.xml og-banner.png 2>/dev/null || true
+            git add -f data/live_deals.json data/stats.json data/ai_briefing.json data/state.sqlite3 data/deals.db *.html deal/*.html feed.xml sitemap.xml og-banner.png 2>/dev/null || true
             if ! git diff --staged --quiet; then
-              git commit -m "chore(feed): sync 24/7 live_deals, SSG HTML pages and sitemap [skip ci]" || true
+              git commit -m "chore(feed): sync 24/7 live_deals, ai_briefing, SSG pages, deal pages, feed.xml and sitemap [skip ci]" || true
               git push origin HEAD:main || true
             else
               echo "Feed data unchanged."

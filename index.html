@@ -3309,6 +3309,24 @@
     </div>
   </div>
 
+  <!-- Exit Intent / Spotlight Loot Modal -->
+  <div id="exitIntentModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="exitModalHeading">
+    <div class="modal-card exit-modal-card">
+      <div class="exit-modal-header">
+        <div class="exit-modal-badge">🚨 TODAY'S #1 VERIFIED PRICE DROP</div>
+        <button id="exitModalCloseBtn" class="btn-close-modal" aria-label="Close Spotlight Modal">✕</button>
+      </div>
+      <div class="exit-modal-body">
+        <h2 id="exitModalHeading" class="exit-modal-title">Wait! Don't Miss Today's Top Loot Deal</h2>
+        <p class="exit-modal-subtitle">Verified price error / flash drop confirmed by Keepa historical charts.</p>
+        <div id="exitModalDealContent" class="exit-deal-content">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Mobile Sticky Bottom Navigation (Item 6) -->
   <nav class="mobile-bottom-nav" id="mobileBottomNav">
     <button class="mobile-nav-btn active" data-tab="all" id="mNavAll">

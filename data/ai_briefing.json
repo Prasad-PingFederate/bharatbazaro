@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-10-28 20:55 IST",
-  "generated_at_epoch": 1793201151,
+  "generated_at_ist": "2026-10-28 20:53 IST",
+  "generated_at_epoch": 1793201021,
   "top_loot_summary": [
+    {
+      "asin": "B09K7RLCPL",
+      "title": "[ICICI CC] PHILIPS Essential Air Fryer (Slate Grey, HD9200/60, 4.1L, 0.80 kilograms), 1400 Watts",
+      "effective_price": 4401,
+      "mrp": 8995,
+      "discount_pct": 51,
+      "savings_inr": 4594,
+      "brand": "Philips",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B09K7RLCPL?tag=dammaiprasad-21&linkCode=ll1",
+      "deal_url": "https://bharatbazaro.com/deal/B09K7RLCPL.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0DMS8VK96",
+      "title": "LG 27GS60QC 68.4cm (27 Inch) Ultragear Curved (1000R) QHD (2560x1440) Gaming Monitor, 180Hz, 1ms, 3-Side Virtually Borderless, Anti-Glare, DP, HDMI X 2, HP Out, AMD FreeSync™, Tilt Adjustment (Black)",
+      "effective_price": 13050,
+      "mrp": 21287,
+      "discount_pct": 39,
+      "savings_inr": 8237,
+      "brand": "Hp",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0DMS8VK96?tag=dammaiprasad-21&linkCode=ll1",
+      "deal_url": "https://bharatbazaro.com/deal/B0DMS8VK96.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0866B1P6B",
       "title": "PHILIPS WiZ 10W E27 Wi-Fi &amp; Bluetooth LED Smart Bulb with Music Sync, Compatible with Amazon Alexa &amp; Google Assistant, 16 Million Colours &amp; Motion Sensing Technology | Pack of 1",
@@ -16,6 +42,19 @@
       "coupon_text": null
     },
     {
+      "asin": "B0FN7WG5KB",
+      "title": "adidas Unisex-Adult Aerosurgestride Running Shoes",
+      "effective_price": 1163,
+      "mrp": 4799,
+      "discount_pct": 76,
+      "savings_inr": 3636,
+      "brand": "Adidas",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0FN7WG5KB?tag=dammaiprasad-21&linkCode=ll1",
+      "deal_url": "https://bharatbazaro.com/deal/B0FN7WG5KB.html",
+      "coupon_text": null
+    },
+    {
       "asin": "B0CM3K6H57",
       "title": "[ICICI CC] Wonderchef Nutri Blend Smart CKM Automatic Mixer Grinder with Dual Pulse Function|22000 RPM|100% Full Copper Motor|4 Unbreakable Jars|500 W|2 Years Warranty|Recipe book by Chef Sanjeev Kapoor| Black",
       "effective_price": 2308,
@@ -26,45 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B0CM3K6H57?tag=dammaiprasad-21&linkCode=ll1",
       "deal_url": "https://bharatbazaro.com/deal/B0CM3K6H57.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0C85T9PXW",
-      "title": "MILTON Pro Lunch Box, 3 Microwave Safe Inner Steel Containers (180 ml, 320 ml, 450 ml), Plastic Chutney Dabba (100 ml), Steel Bottle (750 ml) with Durable Lunch Bag, Leak-Proof Tiffin for Office, Blue",
-      "effective_price": 799,
-      "mrp": 1999,
-      "discount_pct": 60,
-      "savings_inr": 1200,
-      "brand": "Milton",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0C85T9PXW?tag=dammaiprasad-21&linkCode=ll1",
-      "deal_url": "https://bharatbazaro.com/deal/B0C85T9PXW.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0C82PJH3S",
-      "title": "Orient Electric Aura Rapid Pro Geyser 5.9 Litre Instant Water Heater | 3000 W Powerful Heating | Suitable For Kitchen &amp; Bathroom | 5 Year Inner Tank Warranty by Orient | High-rise Compatible| White",
-      "effective_price": 2790,
-      "mrp": 7990,
-      "discount_pct": 65,
-      "savings_inr": 5200,
-      "brand": "Orient",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0C82PJH3S?tag=dammaiprasad-21&linkCode=ll1",
-      "deal_url": "https://bharatbazaro.com/deal/B0C82PJH3S.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0GGHXCQSR",
-      "title": "Fire-Boltt Ninja Phantom Smart Watch 1.83” Display, Transparent Clear Body Design, Bluetooth Calling, 120+ Sports Modes, Voice Assistant, AI Outfit Watch Face Smartwatch for Men &amp; Women Black Smoke",
-      "effective_price": 899,
-      "mrp": 8173,
-      "discount_pct": 89,
-      "savings_inr": 7274,
-      "brand": "Fire-Boltt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0GGHXCQSR?tag=dammaiprasad-21&linkCode=ll1",
-      "deal_url": "https://bharatbazaro.com/deal/B0GGHXCQSR.html",
       "coupon_text": null
     }
   ],
@@ -153,56 +153,57 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793089249,
-    "age_hours": 31.1,
-    "trending_score": 15.2,
+    "age_hours": 29.1,
+    "trending_score": 20.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793194134,
+    "updated_at_ist": "2026-10-28 18:58 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B00WUDU4FG",
-    "asin": "B00WUDU4FG",
-    "title": "Bata Men's Slip-on Sandal",
-    "brand": "Bata",
+    "id": "amazon:B09K7RLCPL",
+    "asin": "B09K7RLCPL",
+    "title": "[ICICI CC] PHILIPS Essential Air Fryer (Slate Grey, HD9200/60, 4.1L, 0.80 kilograms), 1400 Watts",
+    "brand": "Philips",
     "brand_tier": "tier1",
-    "category": "Fashion & Footwear",
-    "image_url": "https://m.media-amazon.com/images/P/B00WUDU4FG.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B00WUDU4FG?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 899,
-    "list_price": 299,
-    "effective_price": 299,
+    "category": "Home & Kitchen",
+    "image_url": "https://m.media-amazon.com/images/I/41iIZyfGhSL._SL1250_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B09K7RLCPL?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": 8995,
+    "list_price": 4401,
+    "effective_price": 4401,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
-    "discount_pct": 67,
-    "effective_discount_pct": 67,
-    "savings_inr": 600,
+    "bank_offer": "Instant Bank Discount with ICICI CC",
+    "discount_pct": 51,
+    "effective_discount_pct": 51,
+    "savings_inr": 4594,
     "rating": null,
     "review_count": null,
-    "score": 88,
+    "score": 90,
     "buy_confidence": 91,
-    "price_context": "all_time_low",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": false,
+    "is_loot": true,
     "is_further_drop": false,
     "source_count": 1,
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹299!"
+      "💳 Select eligible card/payment for instant bank discount: Instant Bank Discount with ICICI CC.",
+      "🎉 Complete checkout at the effective deal price of ₹4,401!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "posted_at_epoch": 1793089249,
-    "age_hours": 31.1,
-    "trending_score": 15.2,
+    "posted_at_epoch": 1793023819,
+    "age_hours": 47.3,
+    "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793194134,
+    "updated_at_ist": "2026-10-28 18:58 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -242,9 +243,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 63,
-    "loot_count": 6,
+    "total_deals": 59,
+    "loot_count": 9,
     "max_discount_pct": 89,
-    "total_savings_inr": 182616
+    "total_savings_inr": 188703
   }
 }

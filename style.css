@@ -3167,3 +3167,500 @@ body {
 [data-theme="light"] .toast-link {
   color: #0284c7;
 }
+
+
+/* ── AMAZON.IN CATALOG UNLOCKER (NEVER SHOW EMPTY SEARCH) ── */
+.amazon-catalog-unlocker {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(234, 179, 8, 0.03));
+  border: 2px dashed rgba(245, 158, 11, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin: 12px 0 24px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+[data-theme="light"] .amazon-catalog-unlocker {
+  background: #fffbeb;
+  border-color: #fcd34d;
+}
+
+.unlocker-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.unlocker-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.unlocker-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+[data-theme="light"] .unlocker-title {
+  color: #92400e;
+}
+
+.unlocker-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.unlocker-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.amazon-unlocker-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.unlocker-btn-all {
+  background: #f59e0b;
+  color: #090d16;
+  border: 1px solid #d97706;
+}
+.unlocker-btn-all:hover {
+  background: #d97706;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+}
+
+.unlocker-btn-499 {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+.unlocker-btn-499:hover {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.unlocker-btn-999 {
+  background: rgba(6, 182, 212, 0.15);
+  color: #06b6d4;
+  border: 1px solid rgba(6, 182, 212, 0.35);
+}
+.unlocker-btn-999:hover {
+  background: #06b6d4;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.unlocker-btn-50 {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+.unlocker-btn-50:hover {
+  background: #ef4444;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ── SPOTLIGHT / EXIT INTENT MODAL ── */
+.exit-modal-card {
+  max-width: 520px;
+  padding: 24px;
+  border: 2px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(239, 68, 68, 0.25);
+}
+
+.exit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.exit-modal-badge {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.exit-modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.exit-modal-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.exit-deal-card {
+  display: flex;
+  gap: 16px;
+  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
+}
+
+.exit-deal-media {
+  width: 110px;
+  height: 110px;
+  min-width: 110px;
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6px;
+}
+
+.exit-deal-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.exit-deal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.exit-deal-brand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.exit-deal-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 2px 0 6px;
+  line-height: 1.3;
+}
+
+.exit-deal-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.exit-deal-effective {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #10b981;
+}
+
+.exit-deal-mrp {
+  font-size: 0.85rem;
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.exit-deal-disc {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.exit-deal-coupon {
+  font-size: 0.78rem;
+  color: #f59e0b;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.exit-modal-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-exit-buy {
+  display: block;
+  text-align: center;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  transition: transform var(--transition-fast);
+}
+
+.btn-exit-buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.btn-exit-tg {
+  display: block;
+  text-align: center;
+  padding: 10px 16px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+
+.btn-exit-tg:hover {
+  background: rgba(56, 189, 248, 0.22);
+}
+
+
+/* ==========================================================================
+   POPUP & MODAL HIGH-VISIBILITY CONTRAST ENGINE (LIGHT & DARK THEMES)
+   ========================================================================== */
+
+/* 1. Floating Launcher Button: Always crisp, glowing, and high-contrast */
+.bazaro-ai-launcher {
+  background: linear-gradient(135deg, #090d16 0%, #1e293b 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #10b981 !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 16px rgba(16, 185, 129, 0.35) !important;
+}
+
+.bazaro-ai-launcher .launcher-label {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+}
+
+/* 2. Welcome Tooltip Callout: High-contrast legible bubble */
+.bazaro-ai-tooltip {
+  background: #1e293b !important;
+  border: 2px solid #10b981 !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.3) !important;
+}
+
+.bazaro-ai-tooltip .tooltip-content span {
+  color: #f8fafc !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+}
+
+.bazaro-ai-tooltip .tooltip-close {
+  color: #94a3b8 !important;
+  font-size: 1.3rem !important;
+  line-height: 1;
+}
+
+.bazaro-ai-tooltip::after {
+  background: #1e293b !important;
+  border-color: #10b981 !important;
+}
+
+/* 3. LIGHT THEME POPUP VISIBILITY OVERRIDES */
+[data-theme="light"] .bazaro-ai-launcher {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #10b981 !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 18px rgba(16, 185, 129, 0.35) !important;
+}
+
+[data-theme="light"] .bazaro-ai-launcher .launcher-label {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .bazaro-ai-tooltip {
+  background: #ffffff !important;
+  border: 2px solid #10b981 !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 0 20px rgba(16, 185, 129, 0.25) !important;
+}
+
+[data-theme="light"] .bazaro-ai-tooltip .tooltip-content span {
+  color: #0f172a !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .bazaro-ai-tooltip .tooltip-close {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .bazaro-ai-tooltip::after {
+  background: #ffffff !important;
+  border-color: #10b981 !important;
+}
+
+/* 4. LIGHT THEME CHAT DRAWER CONTRAST */
+[data-theme="light"] .bazaro-ai-drawer {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 30px rgba(16, 185, 129, 0.2) !important;
+}
+
+[data-theme="light"] .drawer-header {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .drawer-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .drawer-subtitle {
+  color: #059669 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .drawer-ctrl-btn {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+[data-theme="light"] .drawer-ctrl-btn:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .drawer-chips-tray {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .ai-chip {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .ai-chip:hover {
+  background: #ecfdf5 !important;
+  border-color: #10b981 !important;
+  color: #059669 !important;
+}
+
+[data-theme="light"] .bot-bubble {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .bot-bubble .bazar-bubble-header {
+  color: #059669 !important;
+}
+
+[data-theme="light"] .bazar-code {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .drawer-input-bar {
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .drawer-input {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .drawer-input:focus {
+  border-color: #10b981 !important;
+}
+
+[data-theme="light"] .bazar-mini-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .bazar-mini-title {
+  color: #0f172a !important;
+}
+
+/* 5. LIGHT THEME MODALS (PRICE INTELLIGENCE & EXIT-INTENT) */
+[data-theme="light"] .modal-card {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .modal-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .metric-card {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .metric-label {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .metric-value {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .exit-modal-card {
+  background: #ffffff !important;
+  border: 2px solid #ef4444 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 30px rgba(239, 68, 68, 0.25) !important;
+}
+
+[data-theme="light"] .exit-modal-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .exit-modal-subtitle {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .exit-deal-card {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .exit-deal-title {
+  color: #0f172a !important;
+}

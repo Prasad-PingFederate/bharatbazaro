@@ -498,3 +498,4 @@ def generate_all_guides(deals: List[Dict[str, Any]], root_dir: Optional[Path] = 
         generated.append(dest)
 
     return generated
+

@@ -122,6 +122,7 @@
     fetchData(true);
     startAutoRefreshTimer();
     startLiveSyncTimer();
+    setupExitIntentListeners();
   }
 
   // ── 4. THEME MANAGEMENT ────────────────────────────────────────────────────
@@ -523,26 +524,81 @@
         break;
     }
 
+    // High conversion rule: always keep genuine products with real names & images on top rows
+    result.sort((a, b) => {
+      const aGen = (!a.title || a.title.startsWith('Amazon Deal (') || a.title.length < 10) ? 1 : 0;
+      const bGen = (!b.title || b.title.startsWith('Amazon Deal (') || b.title.length < 10) ? 1 : 0;
+      return aGen - bGen;
+    });
+
     return result;
   }
 
-  // ── 10. DEAL CARD RENDERING ────────────────────────────────────────────────
+  // ── 10. DEAL CARD RENDERING & AMAZON CATALOG UNLOCKER ──────────────────────
+  function createAmazonUnlockerCard(query) {
+    const qEnc = encodeURIComponent(query);
+    const tag = 'dammaiprasad-21';
+    const allUrl = `https://www.amazon.in/s?k=${qEnc}&rh=p_72%3A1318476031%2Cp_n_pct-off-with-tax%3A2665399031&s=review-rank&tag=${tag}&linkCode=ll2`;
+    const u499Url = `https://www.amazon.in/s?k=${qEnc}&rh=p_36%3A-49900%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2`;
+    const u999Url = `https://www.amazon.in/s?k=${qEnc}&rh=p_36%3A-99900%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2`;
+    const halfOffUrl = `https://www.amazon.in/s?k=${qEnc}&rh=p_n_pct-off-with-tax%3A2665401031%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2`;
+
+    return `
+      <div class="amazon-catalog-unlocker">
+        <div class="unlocker-header">
+          <span class="unlocker-icon">🎯</span>
+          <div>
+            <h3 class="unlocker-title">Live Amazon.in 4★+ Deal Unlocker for "${escapeHtml(query)}"</h3>
+            <p class="unlocker-subtitle">Search entire 20-Crore+ Amazon catalog with verified 4★+ ratings & instant discount filters</p>
+          </div>
+        </div>
+        <div class="unlocker-actions">
+          <a href="${allUrl}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-all">
+            <span>🛒 All 4★+ "${escapeHtml(query)}" Deals ↗</span>
+          </a>
+          <a href="${u499Url}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-499">
+            <span>🪙 "${escapeHtml(query)}" Under ₹499 ↗</span>
+          </a>
+          <a href="${u999Url}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-999">
+            <span>💰 "${escapeHtml(query)}" Under ₹999 ↗</span>
+          </a>
+          <a href="${halfOffUrl}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-50">
+            <span>🔥 50%+ OFF "${escapeHtml(query)}" Loots ↗</span>
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
   function renderDeals() {
     if (!el.dealsGrid) return;
     const deals = getFilteredDeals();
+    const searchQuery = (state.filters.search || '').trim();
+    const hasSearch = searchQuery.length >= 2;
 
     if (el.visibleCount) el.visibleCount.textContent = deals.length;
 
     if (!deals.length) {
+      if (hasSearch) {
+        if (el.emptyState) el.emptyState.classList.add('hidden');
+        el.dealsGrid.innerHTML = createAmazonUnlockerCard(searchQuery);
+        updateWatchlistBanner();
+        return;
+      }
       el.dealsGrid.innerHTML = '';
       if (el.emptyState) el.emptyState.classList.remove('hidden');
+      updateWatchlistBanner();
       return;
     }
 
     if (el.emptyState) el.emptyState.classList.add('hidden');
 
-    const html = deals.map(deal => createDealCardHtml(deal)).join('');
+    let html = deals.map(deal => createDealCardHtml(deal)).join('');
+    if (hasSearch) {
+      html += createAmazonUnlockerCard(searchQuery);
+    }
     el.dealsGrid.innerHTML = html;
+    updateWatchlistBanner();
   }
 
   function createDealCardHtml(d) {
@@ -1396,6 +1452,99 @@
         openDealModal(route.asin.toUpperCase());
       }, 600);
     }
+  }
+
+
+  // ── 15. EXIT INTENT & SPOTLIGHT LOOT MODAL ────────────────────────────────
+  const sessionStartTime = Date.now();
+
+  function triggerExitModal() {
+    if (sessionStorage.getItem('bb_exit_offer_shown')) return;
+    if (sessionStorage.getItem('bb_clicked_deal')) return;
+    if (Date.now() - sessionStartTime < 15000) return;
+    if (!state.allDeals || !state.allDeals.length) return;
+
+    const validDeals = state.allDeals.filter(d => {
+      const t = d.title || '';
+      return !t.startsWith('Amazon Deal (') && t.length >= 10;
+    });
+
+    const under999 = validDeals.filter(d => (d.effective_price || d.list_price || 999999) <= 999);
+    const candidateList = under999.length ? under999 : (validDeals.length ? validDeals : state.allDeals);
+    candidateList.sort((a, b) => {
+      const aScore = (a.trending_score || a.score || 0) + (a.effective_discount_pct || 0);
+      const bScore = (b.trending_score || b.score || 0) + (b.effective_discount_pct || 0);
+      return bScore - aScore;
+    });
+
+    const topDeal = candidateList[0];
+    if (!topDeal) return;
+
+    const modal = document.getElementById('exitIntentModal');
+    const container = document.getElementById('exitModalDealContent');
+    if (!modal || !container) return;
+
+    const p = topDeal.effective_price || topDeal.list_price || 0;
+    const mrp = topDeal.mrp || topDeal.original_price;
+    const disc = topDeal.effective_discount_pct || topDeal.discount_pct || 0;
+    const tag = 'dammaiprasad-21';
+    const affUrl = `https://www.amazon.in/dp/${topDeal.asin}?tag=${tag}&linkCode=ll1`;
+    const svgPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>";
+
+    container.innerHTML = `
+      <div class="exit-deal-card">
+        <div class="exit-deal-media">
+          <img src="${escapeHtml(topDeal.image_url)}" alt="${escapeHtml(topDeal.title)}" class="exit-deal-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='${svgPlaceholder}';}" onerror="this.src='${svgPlaceholder}';">
+        </div>
+        <div class="exit-deal-info">
+          <div class="exit-deal-brand">${escapeHtml(topDeal.brand || 'Amazon')}</div>
+          <h4 class="exit-deal-title">${escapeHtml(topDeal.title)}</h4>
+          <div class="exit-deal-prices">
+            <span class="exit-deal-effective">₹${formatNumber(p)}</span>
+            ${mrp && mrp > p ? `<span class="exit-deal-mrp">₹${formatNumber(mrp)}</span>` : ''}
+            ${disc > 0 ? `<span class="exit-deal-disc">${disc}% OFF</span>` : ''}
+          </div>
+          ${topDeal.coupon_discount ? `<div class="exit-deal-coupon">🎟️ Includes ₹${formatNumber(topDeal.coupon_discount)} Amazon Checkbox Coupon</div>` : ''}
+        </div>
+      </div>
+      <div class="exit-modal-ctas">
+        <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="btn-exit-buy" id="exitModalBuyBtn">
+          <span>🛒 Grab This Deal on Amazon @ ₹${formatNumber(p)} ↗</span>
+        </a>
+        <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="btn-exit-tg">
+          <span>📲 Join Instant Telegram Loot Channel</span>
+        </a>
+      </div>
+    `;
+
+    modal.classList.remove('hidden');
+    sessionStorage.setItem('bb_exit_offer_shown', '1');
+  }
+
+  function setupExitIntentListeners() {
+    // Desktop mouseleave near top
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 25) {
+        triggerExitModal();
+      }
+    });
+
+    // Mobile / browsing timer (38 seconds)
+    setTimeout(() => {
+      triggerExitModal();
+    }, 38000);
+
+    // Modal controls and click tracker
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('#exitModalCloseBtn')) {
+        const modal = document.getElementById('exitIntentModal');
+        if (modal) modal.classList.add('hidden');
+      } else if (e.target.id === 'exitIntentModal') {
+        e.target.classList.add('hidden');
+      } else if (e.target.closest('.btn-buy-deal, .btn-chart-deal, .amazon-unlocker-btn, #exitModalBuyBtn')) {
+        sessionStorage.setItem('bb_clicked_deal', '1');
+      }
+    });
   }
 
   // ── 17. UTILITIES ──────────────────────────────────────────────────────────

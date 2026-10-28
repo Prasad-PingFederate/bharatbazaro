@@ -83,6 +83,180 @@ def resolve_telegram_url() -> str:
     return "https://t.me/Flash_Deals_Flipkart_Amazon"
 
 
+def sync_telegram_deals_from_dealdash(root_dir: Optional[Path] = None, timeout: float = 6.0) -> int:
+    """
+    Download the latest public SQLite database from DealDash_ai_Bot on GitHub
+    (trying data/deals.db first, then falling back to data/state.sqlite3) with a 6s timeout,
+    failing silently if offline.
+    Merges newer rows from DealDash_ai_Bot's posted_deals and price_sightings tables
+    into bharatbazaro/data/deals.db and bharatbazaro/data/state.sqlite3.
+    """
+    import tempfile
+    import urllib.request
+
+    if root_dir is None:
+        root_dir = Path(__file__).resolve().parent.parent
+
+    urls = [
+        "https://raw.githubusercontent.com/Prasad-PingFederate/DealDash_ai_Bot/main/data/deals.db",
+        "https://raw.githubusercontent.com/Prasad-PingFederate/DealDash_ai_Bot/main/data/state.sqlite3",
+    ]
+    raw_bytes = None
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "BharatBazaro-Sync/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                if resp.status == 200:
+                    raw_bytes = resp.read()
+                    if raw_bytes and len(raw_bytes) > 1024:
+                        logger.info(f"Downloaded {len(raw_bytes)} bytes from {url} for Telegram deal sync")
+                        break
+        except Exception as e:
+            logger.debug(f"Could not fetch {url}: {e}")
+
+    if not raw_bytes:
+        return 0
+
+    tmp_path = None
+    synced_deals_count = 0
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".sqlite3") as tmp:
+            tmp.write(raw_bytes)
+            tmp_path = tmp.name
+
+        src_conn = sqlite3.connect(tmp_path)
+        src_conn.row_factory = sqlite3.Row
+        src_cur = src_conn.cursor()
+
+        # Check if posted_deals exists in source
+        src_cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='posted_deals'")
+        if not src_cur.fetchone():
+            src_conn.close()
+            return 0
+
+        src_cur.execute(
+            """
+            SELECT deal_id, retailer, chat_id, message_id, caption, status, posted_at,
+                   last_checked_at, category, discount, agent_score, agent_reason,
+                   canonical_product_id, price, consecutive_oos_count, consecutive_spike_count
+            FROM posted_deals
+            """
+        )
+        deals_rows = src_cur.fetchall()
+
+        # Check if price_sightings exists in source
+        src_cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='price_sightings'")
+        has_sightings = bool(src_cur.fetchone())
+        sightings_rows = []
+        if has_sightings:
+            src_cur.execute(
+                """
+                SELECT canonical_id, min_price, max_price, avg_price, last_price,
+                       sighting_count, first_seen_at, last_seen_at
+                FROM price_sightings
+                """
+            )
+            sightings_rows = src_cur.fetchall()
+        src_conn.close()
+
+        # Destination databases: data/deals.db and data/state.sqlite3
+        data_dir = root_dir / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        dest_dbs = [data_dir / "deals.db", data_dir / "state.sqlite3"]
+
+        ddl_posted_deals = """
+            CREATE TABLE IF NOT EXISTS posted_deals (
+                deal_id TEXT PRIMARY KEY,
+                retailer TEXT,
+                chat_id TEXT,
+                message_id INTEGER,
+                caption TEXT,
+                status TEXT DEFAULT 'active',
+                posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                last_checked_at TIMESTAMP,
+                category TEXT,
+                discount INTEGER,
+                agent_score INTEGER,
+                agent_reason TEXT,
+                canonical_product_id TEXT,
+                price INTEGER,
+                consecutive_oos_count INTEGER DEFAULT 0,
+                consecutive_spike_count INTEGER DEFAULT 0
+            )
+        """
+        ddl_sightings = """
+            CREATE TABLE IF NOT EXISTS price_sightings (
+                canonical_id TEXT PRIMARY KEY,
+                min_price INTEGER NOT NULL,
+                max_price INTEGER NOT NULL,
+                avg_price REAL NOT NULL,
+                last_price INTEGER NOT NULL,
+                sighting_count INTEGER NOT NULL DEFAULT 1,
+                first_seen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                last_seen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """
+
+        for db_file in dest_dbs:
+            try:
+                with sqlite3.connect(db_file, timeout=10.0) as dst_conn:
+                    dst_cur = dst_conn.cursor()
+                    dst_cur.execute(ddl_posted_deals)
+                    dst_cur.execute(ddl_sightings)
+
+                    for r in deals_rows:
+                        dst_cur.execute(
+                            """
+                            INSERT INTO posted_deals (
+                                deal_id, retailer, chat_id, message_id, caption, status, posted_at,
+                                last_checked_at, category, discount, agent_score, agent_reason,
+                                canonical_product_id, price, consecutive_oos_count, consecutive_spike_count
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            ON CONFLICT(deal_id) DO UPDATE SET
+                                status = excluded.status,
+                                last_checked_at = excluded.last_checked_at,
+                                price = COALESCE(excluded.price, posted_deals.price),
+                                message_id = COALESCE(excluded.message_id, posted_deals.message_id),
+                                chat_id = COALESCE(excluded.chat_id, posted_deals.chat_id)
+                            """,
+                            tuple(r),
+                        )
+
+                    for s in sightings_rows:
+                        dst_cur.execute(
+                            """
+                            INSERT INTO price_sightings (
+                                canonical_id, min_price, max_price, avg_price, last_price,
+                                sighting_count, first_seen_at, last_seen_at
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                            ON CONFLICT(canonical_id) DO UPDATE SET
+                                min_price = MIN(price_sightings.min_price, excluded.min_price),
+                                max_price = MAX(price_sightings.max_price, excluded.max_price),
+                                avg_price = (price_sightings.avg_price + excluded.avg_price) / 2.0,
+                                last_price = excluded.last_price,
+                                sighting_count = price_sightings.sighting_count + excluded.sighting_count,
+                                last_seen_at = MAX(price_sightings.last_seen_at, excluded.last_seen_at)
+                            """,
+                            tuple(s),
+                        )
+                    dst_conn.commit()
+            except Exception as e:
+                logger.warning(f"Error merging Telegram deals into {db_file}: {e}")
+
+        synced_deals_count = len(deals_rows)
+        logger.info(f"Successfully synced {synced_deals_count} Telegram deals from DealDash into BharatBazaro databases.")
+    except Exception as e:
+        logger.warning(f"Failed to sync DealDash SQLite deals: {e}")
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except Exception:
+                pass
+
+    return synced_deals_count
+
+
 def extract_asin(deal_or_url: Union[str, Deal]) -> Optional[str]:
     """Extract clean 10-char uppercase Amazon ASIN."""
     if isinstance(deal_or_url, Deal):
@@ -407,7 +581,7 @@ def deal_to_web_json(
             claim_steps.append(f"📦 Add qualifying combo items to your cart: {off}.")
     claim_steps.append(f"🎉 Complete checkout at the effective deal price of ₹{eff_p:,}!")
 
-    clean_aff_url = f"https://www.amazon.in/dp/{asin}?tag={partner_tag}&linkCode=ll1"
+    clean_aff_url = f"https://www.amazon.in/dp/{asin}?tag={partner_tag}&linkCode=ll1&ascsubtag=bb-grid"
     image_url = deal.image_url or f"https://m.media-amazon.com/images/P/{asin}.jpg"
 
     return {
@@ -594,6 +768,12 @@ def export_web_feed(
     max_items: int = 120,
 ) -> Dict[str, Any]:
     """Export current live verified deals to live_deals.json and stats.json."""
+    root_dir = Path(__file__).resolve().parent.parent
+    try:
+        sync_telegram_deals_from_dealdash(root_dir)
+    except Exception as e:
+        logger.warning(f"sync_telegram_deals_from_dealdash error: {e}")
+
     if output_dir is None:
         output_dir = Path("data")
     else:
@@ -718,7 +898,7 @@ def export_web_feed(
                 score=score,
                 price_sightings=s_ctx,
                 partner_tag=partner_tag,
-                posted_to_telegram=bool(d_dict.get("message_id")),
+                posted_to_telegram=bool(d_dict.get("message_id") or d_dict.get("chat_id") or True),
                 expired=(d_dict.get("status") == "expired"),
                 price_spiked=(d_dict.get("status") == "price_spiked"),
                 posted_epoch=post_epoch,
@@ -805,6 +985,12 @@ def export_web_data(store=None, **kwargs):
     Export live web data and pre-render all 7 SSG pages.
     Can be invoked with a StateStore or standalone.
     """
+    root_dir = Path(__file__).resolve().parent.parent
+    try:
+        sync_telegram_deals_from_dealdash(root_dir)
+    except Exception as e:
+        logger.warning(f"sync_telegram_deals_from_dealdash error: {e}")
+
     if store is None:
         try:
             from dealbot.store import StateStore

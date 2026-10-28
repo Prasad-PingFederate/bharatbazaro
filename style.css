@@ -3664,3 +3664,407 @@ body {
 [data-theme="light"] .exit-deal-title {
   color: #0f172a !important;
 }
+
+/* ── Global Affiliate Giants CRO Upgrades (Wirecutter, BuyHatke, HotUKDeals, GrabOn, OzBargain) ── */
+
+/* Telegram Badge & Keyword Match Badge */
+.badge-telegram {
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+}
+
+[data-theme="light"] .badge-telegram {
+  background: rgba(2, 132, 199, 0.12);
+  border: 1px solid rgba(2, 132, 199, 0.35);
+  color: #0369a1;
+}
+
+.badge-keyword-match {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(139, 92, 246, 0.4); }
+  50% { box-shadow: 0 0 14px rgba(139, 92, 246, 0.8); }
+}
+
+/* Clickable Coupon / Bank Offer Pill */
+.clickable-coupon-pill {
+  cursor: pointer;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.clickable-coupon-pill:hover {
+  transform: scale(1.01);
+  border-color: #10b981;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+}
+
+/* Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip */
+.top3-spotlight-strip {
+  margin-bottom: 24px;
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .top3-spotlight-strip {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.12);
+}
+
+.spotlight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.spotlight-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+[data-theme="light"] .spotlight-title {
+  color: #b45309;
+}
+
+.spotlight-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .spotlight-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spotlight-mini-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.spotlight-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: #f59e0b;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.2);
+}
+
+.spotlight-ribbon {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #090d16;
+}
+
+/* BuyHatke Price Range Slider Bar */
+.buyhatke-range-box {
+  margin: 10px 0;
+  padding: 8px 10px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+}
+
+[data-theme="light"] .buyhatke-range-box {
+  background: rgba(241, 245, 249, 0.7);
+  border-color: rgba(203, 213, 225, 0.8);
+}
+
+.range-labels-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.range-lbl.range-low { color: #10b981; }
+.range-lbl.range-now { color: #f59e0b; font-weight: 800; }
+.range-lbl.range-high { color: var(--text-muted); }
+
+.range-track {
+  position: relative;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #10b981 0%, #eab308 50%, #ef4444 100%);
+}
+
+.range-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8), 0 0 10px #f59e0b;
+  cursor: pointer;
+}
+
+/* HotUKDeals Hotness Degree Button */
+.btn-hotness-degree {
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  color: #fb923c;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all var(--transition-fast);
+}
+
+.btn-hotness-degree:hover, .btn-hotness-degree.voted {
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  color: #ffffff;
+  border-color: #f97316;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+  transform: scale(1.05);
+}
+
+/* GrabOn Trust Line */
+.grabon-trust-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.grabon-trust-line .trust-check {
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* View Mode & Keyword Alerts Toolbar Items */
+.view-mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: var(--bg-input);
+}
+
+.btn-view-mode {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-view-mode.active {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.keyword-alerts-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-keyword-alerts {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  color: #a5b4fc;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition-fast);
+}
+
+[data-theme="light"] .btn-keyword-alerts {
+  background: rgba(79, 70, 229, 0.1);
+  border-color: rgba(79, 70, 229, 0.3);
+  color: #4338ca;
+}
+
+.btn-keyword-alerts:hover {
+  background: #6366f1;
+  color: #ffffff;
+}
+
+.keyword-alerts-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 300px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  padding: 14px;
+  z-index: 999;
+}
+
+.keyword-alerts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.keyword-popover-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.keyword-alerts-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.keyword-input-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.keyword-input-row input {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-input);
+  background: var(--bg-input);
+  color: var(--text-main);
+}
+
+.keyword-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.keyword-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  border-radius: var(--radius-full);
+}
+
+[data-theme="light"] .keyword-tag-pill {
+  background: rgba(5, 150, 105, 0.12);
+  border-color: rgba(5, 150, 105, 0.3);
+  color: #047857;
+}
+
+.keyword-tag-pill .remove-tag {
+  cursor: pointer;
+  font-weight: 800;
+  opacity: 0.8;
+}
+
+/* Compact List View (OzBargain / Slickdeals Style) */
+#dealsGrid.compact-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#dealsGrid.compact-view .deal-card {
+  display: grid;
+  grid-template-columns: 140px 1fr 180px;
+  grid-template-rows: auto;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 16px;
+}
+
+#dealsGrid.compact-view .card-top {
+  display: none;
+}
+
+#dealsGrid.compact-view .card-media {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#dealsGrid.compact-view .card-image-wrap {
+  height: 100px;
+  width: 100px;
+}
+
+#dealsGrid.compact-view .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#dealsGrid.compact-view .card-footer {
+  margin-top: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  #dealsGrid.compact-view .deal-card {
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px;
+  }
+  #dealsGrid.compact-view .card-footer {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+}

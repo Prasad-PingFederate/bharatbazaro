@@ -27,6 +27,9 @@
     originalTitle: document.title,
     titleFlashTimer: null,
     watchlist: new Set(JSON.parse(localStorage.getItem('bb_watchlist') || '[]')),
+    upvotedDeals: new Set(JSON.parse(localStorage.getItem('bb_upvoted_deals') || '[]')),
+    keywordAlerts: JSON.parse(localStorage.getItem('bb_keyword_alerts') || '["earbuds", "smartwatch"]'),
+    viewMode: localStorage.getItem('bb_view_mode') || 'grid',
     activeModalDeal: null,
     refreshIntervalSeconds: 60,
     countdownSeconds: 60,
@@ -37,12 +40,31 @@
   const AMAZON_TAG = 'dammaiprasad-21';
   const DEFAULT_TELEGRAM_URL = 'https://t.me/Flash_Deals_Flipkart_Amazon';
 
+  function getAffiliateUrlWithSubtag(deal, subtag = 'bb-grid') {
+    const asin = typeof deal === 'string' ? deal : (deal.asin || '');
+    let base = (deal && deal.affiliate_url) ? deal.affiliate_url : `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1`;
+    if (base.includes('ascsubtag=')) {
+      return base.replace(/ascsubtag=[^&]+/, `ascsubtag=${subtag}`);
+    }
+    return base + (base.includes('?') ? '&' : '?') + `ascsubtag=${subtag}`;
+  }
+
   // ── 2. DOM ELEMENT REFERENCES ──────────────────────────────────────────────
   const el = {
     themeToggleBtn: document.getElementById('themeToggleBtn'),
     statusText: document.getElementById('statusText'),
     radarStatusBadge: document.getElementById('radarStatusBadge'),
     tickerContent: document.getElementById('tickerContent'),
+    btnViewGrid: document.getElementById('btnViewGrid'),
+    btnViewCompact: document.getElementById('btnViewCompact'),
+    btnKeywordAlerts: document.getElementById('btnKeywordAlerts'),
+    keywordAlertsPopover: document.getElementById('keywordAlertsPopover'),
+    keywordAlertsClose: document.getElementById('keywordAlertsClose'),
+    keywordAlertInput: document.getElementById('keywordAlertInput'),
+    keywordAlertAddBtn: document.getElementById('keywordAlertAddBtn'),
+    keywordTagsContainer: document.getElementById('keywordTagsContainer'),
+    keywordAlertsCount: document.getElementById('keywordAlertsCount'),
+    top3SpotlightStrip: document.getElementById('top3SpotlightStrip'),
     statCardLiveDeals: document.getElementById('statCardLiveDeals'),
     statCardLoot: document.getElementById('statCardLoot'),
     statCardMaxDiscount: document.getElementById('statCardMaxDiscount'),
@@ -117,12 +139,69 @@
   function init() {
     initTheme();
     initAlertsUI();
+    initViewMode();
+    initKeywordAlerts();
     handleUrlRouting();
     setupEventListeners();
     fetchData(true);
     startAutoRefreshTimer();
     startLiveSyncTimer();
     setupExitIntentListeners();
+  }
+
+  function initViewMode() {
+    setViewMode(state.viewMode || 'grid');
+  }
+
+  function setViewMode(mode) {
+    state.viewMode = mode;
+    localStorage.setItem('bb_view_mode', mode);
+    if (el.dealsGrid) {
+      el.dealsGrid.classList.toggle('compact-view', mode === 'compact');
+    }
+    if (el.btnViewGrid) el.btnViewGrid.classList.toggle('active', mode === 'grid');
+    if (el.btnViewCompact) el.btnViewCompact.classList.toggle('active', mode === 'compact');
+  }
+
+  function initKeywordAlerts() {
+    renderKeywordAlertTags();
+  }
+
+  function renderKeywordAlertTags() {
+    if (!el.keywordTagsContainer) return;
+    if (!state.keywordAlerts.length) {
+      el.keywordTagsContainer.innerHTML = '<span style="font-size:0.75rem; color:var(--text-muted);">No alert keywords yet. Add some above!</span>';
+    } else {
+      el.keywordTagsContainer.innerHTML = state.keywordAlerts.map(kw => `
+        <span class="keyword-tag-pill">
+          <span>${escapeHtml(kw)}</span>
+          <span class="remove-tag" data-kw="${escapeHtml(kw)}" title="Remove keyword">&times;</span>
+        </span>
+      `).join('');
+    }
+    if (el.keywordAlertsCount) el.keywordAlertsCount.textContent = state.keywordAlerts.length;
+  }
+
+  function addKeywordAlert(kw) {
+    const clean = (kw || '').trim().toLowerCase();
+    if (!clean || clean.length < 2) return;
+    if (!state.keywordAlerts.includes(clean)) {
+      state.keywordAlerts.push(clean);
+      localStorage.setItem('bb_keyword_alerts', JSON.stringify(state.keywordAlerts));
+      renderKeywordAlertTags();
+      renderDeals();
+      const matches = state.allDeals.filter(d => `${d.title || ''} ${d.brand || ''} ${d.category || ''}`.toLowerCase().includes(clean));
+      showToast(`🔔 Added alert for "${clean}"! Found ${matches.length} matching deals.`, 'success', 3500);
+    }
+    if (el.keywordAlertInput) el.keywordAlertInput.value = '';
+  }
+
+  function removeKeywordAlert(kw) {
+    state.keywordAlerts = state.keywordAlerts.filter(k => k !== kw);
+    localStorage.setItem('bb_keyword_alerts', JSON.stringify(state.keywordAlerts));
+    renderKeywordAlertTags();
+    renderDeals();
+    showToast(`Removed alert for "${kw}"`, 'info', 2000);
   }
 
   // ── 4. THEME MANAGEMENT ────────────────────────────────────────────────────
@@ -394,8 +473,8 @@
 
     updateInspectorChart(asin, state.activeInspectorRange);
 
-    const partnerUrl = `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1`;
-    if (el.inspectorBuyBtn) el.inspectorBuyBtn.href = deal ? deal.affiliate_url : partnerUrl;
+    const partnerUrl = getAffiliateUrlWithSubtag(deal || asin, 'bb-modal');
+    if (el.inspectorBuyBtn) el.inspectorBuyBtn.href = partnerUrl;
     if (el.inspectorKeepaBtn) el.inspectorKeepaBtn.href = `https://keepa.com/#!product/10-${asin}`;
     if (el.inspectorPhBtn) el.inspectorPhBtn.href = `https://keepa.com/#!product/10-${asin}`;
 
@@ -538,10 +617,10 @@
   function createAmazonUnlockerCard(query) {
     const qEnc = encodeURIComponent(query);
     const tag = 'dammaiprasad-21';
-    const allUrl = `https://www.amazon.in/s?k=${qEnc}&rh=p_72%3A1318476031%2Cp_n_pct-off-with-tax%3A2665399031&s=review-rank&tag=${tag}&linkCode=ll2`;
-    const u499Url = `https://www.amazon.in/s?k=${qEnc}&rh=p_36%3A-49900%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2`;
-    const u999Url = `https://www.amazon.in/s?k=${qEnc}&rh=p_36%3A-99900%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2`;
-    const halfOffUrl = `https://www.amazon.in/s?k=${qEnc}&rh=p_n_pct-off-with-tax%3A2665401031%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2`;
+    const allUrl = `https://www.amazon.in/s?k=${qEnc}&rh=p_72%3A1318476031%2Cp_n_pct-off-with-tax%3A2665399031&s=review-rank&tag=${tag}&linkCode=ll2&ascsubtag=bb-search`;
+    const u499Url = `https://www.amazon.in/s?k=${qEnc}&rh=p_36%3A-49900%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2&ascsubtag=bb-search`;
+    const u999Url = `https://www.amazon.in/s?k=${qEnc}&rh=p_36%3A-99900%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2&ascsubtag=bb-search`;
+    const halfOffUrl = `https://www.amazon.in/s?k=${qEnc}&rh=p_n_pct-off-with-tax%3A2665401031%2Cp_72%3A1318476031&s=review-rank&tag=${tag}&linkCode=ll2&ascsubtag=bb-search`;
 
     return `
       <div class="amazon-catalog-unlocker">
@@ -570,6 +649,99 @@
     `;
   }
 
+  function renderTop3Spotlight(deals) {
+    if (!el.top3SpotlightStrip) return;
+    const isDefaultView = state.filters.tab === 'all' &&
+      state.filters.category === 'all' &&
+      state.filters.priceBucket === 'all' &&
+      (!state.filters.search || state.filters.search.trim().length === 0);
+
+    if (!isDefaultView || !deals || deals.length < 3) {
+      el.top3SpotlightStrip.style.display = 'none';
+      return;
+    }
+    el.top3SpotlightStrip.style.display = 'block';
+
+    const pick1Candidates = [...deals].sort((a, b) => {
+      const aTier = a.brand_tier === 'tier1' ? 1 : 0;
+      const bTier = b.brand_tier === 'tier1' ? 1 : 0;
+      if (aTier !== bTier) return bTier - aTier;
+      return (b.trending_score || b.score || 0) - (a.trending_score || a.score || 0);
+    });
+    const pick1 = pick1Candidates[0] || deals[0];
+
+    const under300 = deals.filter(d => (d.effective_price || 999999) <= 299 && d.asin !== pick1.asin);
+    let pick2 = null;
+    if (under300.length) {
+      pick2 = under300.sort((a, b) => (b.effective_discount_pct || 0) - (a.effective_discount_pct || 0))[0];
+    } else {
+      const rem = deals.filter(d => d.asin !== pick1.asin);
+      pick2 = rem.sort((a, b) => (a.effective_price || 999999) - (b.effective_price || 999999))[0] || deals[1] || deals[0];
+    }
+
+    const couponDeals = deals.filter(d => ((d.coupon_discount || 0) > 0 || d.coupon_text) && d.asin !== pick1.asin && d.asin !== pick2.asin);
+    let pick3 = null;
+    if (couponDeals.length) {
+      pick3 = couponDeals[0];
+    } else {
+      const rem2 = deals.filter(d => d.asin !== pick1.asin && d.asin !== pick2.asin);
+      pick3 = rem2.sort((a, b) => (b.effective_discount_pct || 0) - (a.effective_discount_pct || 0))[0] || deals[2] || deals[0];
+    }
+
+    const picks = [
+      { ribbon: '🏆 #1 OVERALL SCREAMER', deal: pick1 },
+      { ribbon: '🪙 #1 BUDGET COOKIE-DROPPER', deal: pick2 },
+      { ribbon: '🎟️ #1 HIDDEN COUPON PICK', deal: pick3 },
+    ];
+
+    const svgPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='50%' font-size='32' text-anchor='middle' dominant-baseline='middle'>⚡</text></svg>";
+
+    const cardsHtml = picks.map(({ ribbon, deal }) => {
+      const effPrice = deal.effective_price || deal.list_price || 0;
+      const mrp = deal.mrp || 0;
+      const disc = deal.effective_discount_pct || deal.discount_pct || 0;
+      const affUrl = getAffiliateUrlWithSubtag(deal, 'bb-top3');
+      const dealUrl = `/deal/${deal.asin}.html`;
+
+      return `
+        <div class="spotlight-mini-card">
+          <div class="spotlight-ribbon">${ribbon}</div>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:10px;">
+            <a href="${escapeHtml(affUrl)}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid var(--border-card);">
+              <img src="${escapeHtml(deal.image_url)}" alt="${escapeHtml(deal.title)}" style="max-height:60px; max-width:60px; object-fit:contain;" loading="lazy" onerror="this.src='${svgPlaceholder}';">
+            </a>
+            <div style="flex:1; min-width:0;">
+              <a href="${escapeHtml(affUrl)}" target="_blank" rel="noopener noreferrer" style="font-size:0.86rem; font-weight:700; color:var(--text-main); text-decoration:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3; margin-bottom:4px;">
+                ${escapeHtml(deal.title)}
+              </a>
+              <div style="display:flex; align-items:baseline; gap:6px; flex-wrap:wrap;">
+                <span style="font-size:1.1rem; font-weight:800; color:#10b981;">₹${formatNumber(effPrice)}</span>
+                ${mrp && mrp > effPrice ? `<span style="font-size:0.78rem; text-decoration:line-through; color:var(--text-muted);">₹${formatNumber(mrp)}</span>` : ''}
+                ${disc > 0 ? `<span style="font-size:0.75rem; font-weight:700; color:#ef4444; background:rgba(239,68,68,0.12); padding:2px 6px; border-radius:4px;">${disc}% OFF</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="${escapeHtml(affUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex:1; text-align:center; padding:7px 10px; font-size:0.82rem; font-weight:700; border-radius:var(--radius-full); text-decoration:none;">🛒 Grab Now ↗</a>
+            <button class="btn-chart-deal btn-open-modal" data-asin="${escapeHtml(deal.asin)}" style="padding:7px 10px; font-size:0.82rem; font-weight:600; border-radius:var(--radius-full); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-card); cursor:pointer;">📈</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    el.top3SpotlightStrip.innerHTML = `
+      <div class="spotlight-header">
+        <h2 class="spotlight-title">
+          <span>⚡ TODAY'S TOP 3 MUST-BUY PICKS</span>
+        </h2>
+        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:600;">Updated Live from 24/7 AI Radar</span>
+      </div>
+      <div class="spotlight-cards-grid">
+        ${cardsHtml}
+      </div>
+    `;
+  }
+
   function renderDeals() {
     if (!el.dealsGrid) return;
     const deals = getFilteredDeals();
@@ -577,6 +749,7 @@
     const hasSearch = searchQuery.length >= 2;
 
     if (el.visibleCount) el.visibleCount.textContent = deals.length;
+    renderTop3Spotlight(state.allDeals);
 
     if (!deals.length) {
       if (hasSearch) {
@@ -593,7 +766,7 @@
 
     if (el.emptyState) el.emptyState.classList.add('hidden');
 
-    let html = deals.map(deal => createDealCardHtml(deal)).join('');
+    let html = deals.map((deal, idx) => createDealCardHtml(deal, idx)).join('');
     if (hasSearch) {
       html += createAmazonUnlockerCard(searchQuery);
     }
@@ -601,15 +774,29 @@
     updateWatchlistBanner();
   }
 
-  function createDealCardHtml(d) {
+  function createDealCardHtml(d, cardIndex = 0) {
     const isSaved = state.watchlist.has(d.asin);
     const effPrice = d.effective_price || d.list_price || 0;
     if (effPrice <= 0) return '';
     const discPct = d.effective_discount_pct || d.discount_pct || 0;
     const buyConf = d.buy_confidence || 75;
 
+    // Affiliate link tracking with ascsubtag placement
+    const affBtnUrl = getAffiliateUrlWithSubtag(d, 'bb-grid');
+    const affImgUrl = getAffiliateUrlWithSubtag(d, 'bb-card-img');
+    const affTitleUrl = getAffiliateUrlWithSubtag(d, 'bb-card-title');
+    const affPriceUrl = getAffiliateUrlWithSubtag(d, 'bb-card-price');
+    const affCouponUrl = getAffiliateUrlWithSubtag(d, 'bb-coupon-pill');
+
     // Badges
     const badgesHtml = [];
+    if (state.keywordAlerts && state.keywordAlerts.length > 0) {
+      const textToMatch = `${d.title || ''} ${d.brand || ''} ${d.category || ''}`.toLowerCase();
+      const matchedKw = state.keywordAlerts.some(kw => kw && textToMatch.includes(kw.toLowerCase().trim()));
+      if (matchedKw) {
+        badgesHtml.unshift('<span class="badge-tag badge-keyword-match">🔔 MATCHES YOUR ALERT</span>');
+      }
+    }
     if (d.is_new || (d.age_hours !== undefined && d.age_hours <= 2.0)) {
       badgesHtml.push('<span class="badge-tag badge-new">⚡ NEW</span>');
     }
@@ -624,13 +811,16 @@
     if (d.brand_tier === 'tier1') {
       badgesHtml.push('<span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span>');
     }
+    if (d.posted_to_telegram) {
+      badgesHtml.push('<span class="badge-tag badge-telegram">📲 Featured on Telegram</span>');
+    }
 
-    // Coupon Claim Checklist Banner (Requirement 3)
+    // Coupon Claim Checklist Banner
     let couponClaimBanner = '';
     const couponLabel = d.coupon_text || (d.coupon_discount ? `Apply ₹${formatNumber(d.coupon_discount)} coupon` : '');
     if (d.coupon_discount || d.coupon_text) {
       couponClaimBanner = `
-        <div class="coupon-claim-banner" title="Tick this coupon on Amazon product page">
+        <div class="coupon-claim-banner clickable-coupon-pill" data-aff="${escapeHtml(affCouponUrl)}" data-promo="${escapeHtml(d.promo_code || '')}" title="Click to copy promo code and open Amazon deal">
           <span class="coupon-tick-icon">☑️</span>
           <span class="coupon-claim-text">Tick <b>"${escapeHtml(couponLabel)}"</b> on Amazon page ${d.coupon_discount ? `<span class="coupon-discount-tag">(-₹${formatNumber(d.coupon_discount)})</span>` : ''}</span>
         </div>
@@ -673,7 +863,7 @@
       `);
     }
 
-    // Card Cashback Mode (Requirement 3: Amazon Pay ICICI 5% Off)
+    // Card Cashback Mode (Amazon Pay ICICI 5% Off)
     let cardPriceHtml = '';
     if (state.cardDiscount) {
       const cardPrice = Math.round(effPrice * 0.95);
@@ -704,7 +894,55 @@
       trajectoryHtml = `<div class="historical-trajectory-text">📉 <b>₹${formatNumber(dropAmount)}</b> below tracked average (₹${formatNumber(d.historical_avg)})</div>`;
     }
 
+    // BuyHatke Price Range Slider Bar
+    const lowRef = Math.min(effPrice, d.historical_min || effPrice);
+    const highRef = Math.max(d.mrp || 0, d.historical_max || (d.mrp || Math.round(effPrice * 1.35)));
+    const spread = Math.max(1, highRef - lowRef);
+    const posPct = Math.min(92, Math.max(4, Math.round(((effPrice - lowRef) / spread) * 100)));
+    const buyhatkeBarHtml = `
+      <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
+        <div class="range-labels-row">
+          <span class="range-lbl range-low">Low: ₹${formatNumber(lowRef)}</span>
+          <span class="range-lbl range-now">Now: ₹${formatNumber(effPrice)} ✅</span>
+          <span class="range-lbl range-high">MRP: ₹${formatNumber(highRef)}</span>
+        </div>
+        <div class="range-track">
+          <div class="range-marker" style="left: ${posPct}%;" title="Now: ₹${formatNumber(effPrice)} (${posPct}% of range)">●</div>
+        </div>
+      </div>
+    `;
+
+    // HotUKDeals Degree Meter
+    const baseDegrees = Math.round((d.score || 70) * 2.4 + (d.is_loot ? 45 : 0) + ((d.coupon_discount || 0) > 0 ? 25 : 0));
+    const isUpvoted = state.upvotedDeals && state.upvotedDeals.has(d.asin);
+    const currentDegrees = baseDegrees + (isUpvoted ? 1 : 0);
+
+    // GrabOn Trust Line
+    let whyBuySummary = "Lowest tracked price + verified seller";
+    if (d.coupon_discount && d.coupon_discount > 0) {
+      whyBuySummary = `Save ₹${formatNumber(d.savings_inr || 0)} + Extra ₹${formatNumber(d.coupon_discount)} Coupon`;
+    } else if (d.savings_inr && d.savings_inr >= 1000) {
+      whyBuySummary = `Save ₹${formatNumber(d.savings_inr)} below MRP (${discPct}% OFF)`;
+    } else if (d.brand_tier === 'tier1') {
+      whyBuySummary = `Genuine Tier-1 ${d.brand || 'brand'} at verified low`;
+    } else if (discPct >= 50) {
+      whyBuySummary = `Steep ${discPct}% verified drop`;
+    }
+    const grabonTrustHtml = `
+      <div class="grabon-trust-line">
+        <span class="trust-check">✓ Verified Live on Amazon</span>
+        <span class="trust-sep">•</span>
+        <span class="trust-reason">💡 <b>Why Buy:</b> ${escapeHtml(whyBuySummary)}</span>
+      </div>
+    `;
+
     const timeAgoStr = d.updated_at ? getTimeAgo(d.updated_at) : 'Just now';
+
+    // Core Web Vitals Image Tag
+    const imgAttr = (cardIndex < 3)
+      ? 'fetchpriority="high" decoding="async" width="220" height="220"'
+      : 'loading="lazy" decoding="async" width="220" height="220"';
+    const svgPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>";
 
     return `
       <article class="deal-card ${d.is_loot ? 'is-loot' : ''}" data-asin="${escapeHtml(d.asin)}">
@@ -713,6 +951,9 @@
             ${badgesHtml.join('')}
           </div>
           <div class="card-top-actions">
+            <button class="btn-hotness-degree ${isUpvoted ? 'voted' : ''}" data-asin="${escapeHtml(d.asin)}" data-base="${baseDegrees}" title="Upvote deal hotness">
+              🔥 <span class="degree-count">${currentDegrees}°</span>
+            </button>
             <span class="time-ago">${timeAgoStr}</span>
             <button class="btn-watchlist ${isSaved ? 'saved' : ''}" data-asin="${escapeHtml(d.asin)}" title="${isSaved ? 'Remove from Watchlist' : 'Save to Watchlist'}">
               ${isSaved ? '❤️' : '🤍'}
@@ -722,7 +963,9 @@
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <img src="${escapeHtml(d.image_url)}" alt="${escapeHtml(d.title)}" class="card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';">
+            <a href="${escapeHtml(affImgUrl)}" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
+              <img src="${escapeHtml(d.image_url)}" alt="${escapeHtml(d.title)}" class="card-img" ${imgAttr} onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='${svgPlaceholder}';}" onerror="this.src='${svgPlaceholder}';">
+            </a>
           </div>
           <div class="card-meta-bar">
             <span class="brand-chip">${escapeHtml(d.brand || d.category || 'Amazon')}</span>
@@ -736,25 +979,24 @@
         </div>
 
         <div class="card-content">
-          <a href="${escapeHtml(d.affiliate_url)}" target="_blank" rel="noopener noreferrer" class="card-title" title="${escapeHtml(d.title)}">
+          <a href="${escapeHtml(affTitleUrl)}" target="_blank" rel="noopener noreferrer" class="card-title" title="${escapeHtml(d.title)}">
             ${escapeHtml(d.title)}
           </a>
 
           <!-- Price Waterfall -->
           <div class="price-waterfall-box">
-            <div class="price-main-row">
+            <a href="${escapeHtml(affPriceUrl)}" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
               <span class="effective-price">₹${formatNumber(effPrice)}</span>
               ${d.mrp && d.mrp > effPrice ? `<span class="original-mrp">₹${formatNumber(d.mrp)}</span>` : ''}
               ${discPct ? `<span class="discount-badge">${discPct}% OFF</span>` : ''}
-            </div>
+            </a>
             ${d.savings_inr > 0 ? `<div class="savings-line">You save ₹${formatNumber(d.savings_inr)}</div>` : ''}
             ${cardPriceHtml}
           </div>
 
+          ${buyhatkeBarHtml}
           ${couponClaimBanner}
           ${extraOffersHtml}
-
-          <!-- Callouts -->
           ${calloutsHtml.length ? `<div class="callouts-list">${calloutsHtml.join('')}</div>` : ''}
 
           <!-- Buy Confidence Meter -->
@@ -771,10 +1013,12 @@
             </div>
             ${trajectoryHtml}
           </div>
+
+          ${grabonTrustHtml}
         </div>
 
         <div class="card-footer">
-          <a href="${escapeHtml(d.affiliate_url)}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+          <a href="${escapeHtml(affBtnUrl)}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
             <span>🛒 Grab Deal on Amazon ↗</span>
           </a>
           <button class="btn-card-share" data-asin="${escapeHtml(d.asin)}" title="Share Deal via WhatsApp / Copy Link">
@@ -1276,6 +1520,37 @@
     // Delegated clicks inside Deals Grid
     if (el.dealsGrid) {
       el.dealsGrid.addEventListener('click', e => {
+        // Clickable coupon banner
+        const couponPill = e.target.closest('.clickable-coupon-pill');
+        if (couponPill) {
+          e.preventDefault();
+          const affUrl = couponPill.getAttribute('data-aff');
+          const promo = couponPill.getAttribute('data-promo');
+          if (promo) copyPromoCode(promo);
+          showToast('☑️ Coupon instruction noted! Tick the checkbox on Amazon page — Opening deal...', 'success', 3500);
+          if (affUrl) window.open(affUrl, '_blank', 'noopener');
+          return;
+        }
+
+        // HotUKDeals Degree Meter
+        const heatBtn = e.target.closest('.btn-hotness-degree');
+        if (heatBtn) {
+          e.preventDefault();
+          const asin = heatBtn.getAttribute('data-asin');
+          const base = parseInt(heatBtn.getAttribute('data-base') || '150', 10);
+          if (!state.upvotedDeals.has(asin)) {
+            state.upvotedDeals.add(asin);
+            localStorage.setItem('bb_upvoted_deals', JSON.stringify([...state.upvotedDeals]));
+            heatBtn.classList.add('voted');
+            const countEl = heatBtn.querySelector('.degree-count');
+            if (countEl) countEl.textContent = `${base + 1}°`;
+            showToast('🔥 Voted Hot! Added +1° to deal heat score', 'success', 2500);
+          } else {
+            showToast('🔥 You already upvoted this hot deal!', 'info', 2000);
+          }
+          return;
+        }
+
         // Watchlist heart
         const watchBtn = e.target.closest('.btn-watchlist');
         if (watchBtn) {
@@ -1311,6 +1586,40 @@
           const asin = modalBtn.getAttribute('data-asin');
           openDealModal(asin);
           return;
+        }
+      });
+    }
+
+    // View Mode Toggle
+    if (el.btnViewGrid) el.btnViewGrid.addEventListener('click', () => setViewMode('grid'));
+    if (el.btnViewCompact) el.btnViewCompact.addEventListener('click', () => setViewMode('compact'));
+
+    // Keyword Alerts UI
+    if (el.btnKeywordAlerts) {
+      el.btnKeywordAlerts.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (el.keywordAlertsPopover) el.keywordAlertsPopover.classList.toggle('hidden');
+      });
+    }
+    if (el.keywordAlertsClose) {
+      el.keywordAlertsClose.addEventListener('click', () => {
+        if (el.keywordAlertsPopover) el.keywordAlertsPopover.classList.add('hidden');
+      });
+    }
+    if (el.keywordAlertAddBtn && el.keywordAlertInput) {
+      el.keywordAlertAddBtn.addEventListener('click', () => addKeywordAlert(el.keywordAlertInput.value));
+      el.keywordAlertInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          addKeywordAlert(el.keywordAlertInput.value);
+        }
+      });
+    }
+    if (el.keywordTagsContainer) {
+      el.keywordTagsContainer.addEventListener('click', e => {
+        const remBtn = e.target.closest('.remove-tag');
+        if (remBtn) {
+          removeKeywordAlert(remBtn.getAttribute('data-kw'));
         }
       });
     }

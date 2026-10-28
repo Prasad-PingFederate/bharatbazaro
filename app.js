@@ -327,6 +327,12 @@
     if (el.countCoupons) el.countCoupons.textContent = coupons;
     if (el.countTier1) el.countTier1.textContent = tier1;
     if (el.countWatchlist) el.countWatchlist.textContent = watchlist;
+    const navCount = document.getElementById('navWatchlistCount');
+    if (navCount) navCount.textContent = watchlist;
+    const navBtn = document.getElementById('navWatchlistBtn');
+    if (navBtn) {
+      navBtn.classList.toggle('active', state.filters.tab === 'watchlist');
+    }
   }
 
   function updateTicker() {
@@ -660,7 +666,7 @@
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <img src="${escapeHtml(d.image_url)}" alt="${escapeHtml(d.title)}" class="card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/${escapeHtml(d.asin)}.jpg'">
+            <img src="${escapeHtml(d.image_url)}" alt="${escapeHtml(d.title)}" class="card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';">
           </div>
           <div class="card-meta-bar">
             <span class="brand-chip">${escapeHtml(d.brand || d.category || 'Amazon')}</span>
@@ -865,13 +871,38 @@
   }
 
   // ── 13. WATCHLIST & PROMO COPY ─────────────────────────────────────────────
+  function switchFilterTab(tabName) {
+    state.filters.tab = tabName;
+    if (el.filterTabs) {
+      el.filterTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === tabName));
+    }
+    updateActiveMobileNav(tabName);
+    updateTabCounts();
+    renderDeals();
+    updateWatchlistBanner();
+  }
+
+  function updateWatchlistBanner() {
+    const banner = document.getElementById('watchlistBanner');
+    if (!banner) return;
+    if (state.filters.tab === 'watchlist') {
+      banner.classList.remove('hidden');
+      const countEl = document.getElementById('watchlistBannerCount');
+      if (countEl) countEl.textContent = state.watchlist.size;
+      const totalEl = document.getElementById('watchlistTotalCount');
+      if (totalEl) totalEl.textContent = state.allDeals ? state.allDeals.length : 59;
+    } else {
+      banner.classList.add('hidden');
+    }
+  }
+
   function toggleWatchlist(asin) {
     if (state.watchlist.has(asin)) {
       state.watchlist.delete(asin);
       showToast('Removed deal from Watchlist');
     } else {
       state.watchlist.add(asin);
-      showToast('❤️ Deal saved to Watchlist!');
+      showToast('❤️ Deal saved to Watchlist! <span class="toast-link" id="toast-view-watchlist" role="button" tabindex="0">View Watchlist →</span>', true);
     }
     localStorage.setItem('bb_watchlist', JSON.stringify([...state.watchlist]));
     updateTabCounts();
@@ -905,6 +936,39 @@
     if (el.alertsToggleBtn) {
       el.alertsToggleBtn.addEventListener('click', toggleAlerts);
     }
+
+    // Navbar Watchlist Button
+    const navWatchlistBtn = document.getElementById('navWatchlistBtn');
+    if (navWatchlistBtn) {
+      navWatchlistBtn.addEventListener('click', () => {
+        if (state.filters.tab === 'watchlist') {
+          switchFilterTab('all');
+        } else {
+          switchFilterTab('watchlist');
+        }
+        scrollToDeals();
+      });
+    }
+
+    // Watchlist Banner Back and Clear buttons + Clickable Toast
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('#watchlistBackBtn')) {
+        switchFilterTab('all');
+        scrollToDeals();
+      } else if (e.target.closest('#watchlistClearBtn')) {
+        if (confirm('Clear all deals from your saved Watchlist?')) {
+          state.watchlist.clear();
+          localStorage.setItem('bb_watchlist', JSON.stringify([]));
+          updateTabCounts();
+          renderDeals();
+          showToast('🗑️ Watchlist cleared');
+        }
+      } else if (e.target.closest('#toast-view-watchlist, .toast-link')) {
+        e.preventDefault();
+        switchFilterTab('watchlist');
+        scrollToDeals();
+      }
+    });
 
     // Card Discount Mode Selector (Amazon Pay 5% Off)
     if (el.btnPriceModeStd) {
@@ -1377,18 +1441,22 @@
       .replace(/'/g, '&#39;');
   }
 
-  function showToast(message) {
+  function showToast(message, isHtml = false) {
     if (!el.toastContainer) return;
     const toast = document.createElement('div');
     toast.className = 'toast';
-    toast.textContent = message;
+    if (isHtml) {
+      toast.innerHTML = message;
+    } else {
+      toast.textContent = message;
+    }
     el.toastContainer.appendChild(toast);
     setTimeout(() => {
       toast.style.opacity = '0';
       toast.style.transform = 'translateY(12px)';
       toast.style.transition = 'all 250ms ease';
       setTimeout(() => toast.remove(), 250);
-    }, 2800);
+    }, 3200);
   }
 
   // Run on DOM ready

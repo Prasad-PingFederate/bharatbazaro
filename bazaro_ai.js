@@ -359,7 +359,7 @@
     card.innerHTML = `
       <div class="mini-card-top">
         <a href="${dealPageUrl}" class="mini-card-img-link" title="View Keepa Price History">
-          <img src="${imgUrl}" alt="${escapeHtml(title)}" class="mini-card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/${asin}.jpg'">
+          <img src="${imgUrl}" alt="${escapeHtml(title)}" class="mini-card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';">
         </a>
         <div class="mini-card-details">
           <a href="${dealPageUrl}" class="mini-card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</a>

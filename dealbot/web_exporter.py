@@ -749,6 +749,14 @@ def export_web_feed(
     deal_list.sort(key=lambda x: (x.get("trending_score") or x.get("score") or 0, x.get("buy_confidence") or 0, x.get("updated_at") or 0), reverse=True)
     final_deals = deal_list[:max_items]
 
+    # Resolve and ensure high-res images and non-blank photos
+    root_dir = Path(__file__).resolve().parent.parent
+    try:
+        from dealbot.image_resolver import resolve_deal_images
+        final_deals = resolve_deal_images(final_deals, root_dir=root_dir)
+    except Exception as e:
+        logger.warning(f"resolve_deal_images error: {e}")
+
     # Write data/live_deals.json
     live_deals_path = output_dir / "live_deals.json"
     with open(live_deals_path, "w", encoding="utf-8") as f:

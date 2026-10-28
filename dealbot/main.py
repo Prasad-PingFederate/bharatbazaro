@@ -221,6 +221,23 @@ def verify_and_enrich_deal(deal: Deal, store: StateStore, skip_tracker: dict | N
             elif live_price and is_unverified_source:
                 deal.current_price = f"₹{live_price:,}"
 
+            # Live title & image backfill
+            live_title = enrichment.get("live_title")
+            if live_title and (not deal.title or deal.title.startswith("Amazon Deal") or len(deal.title) < 15):
+                deal.title = live_title
+                try:
+                    from dealbot.enricher import detect_brand, detect_category
+                    deal.brand = detect_brand(deal.title)
+                    new_cat = detect_category(deal.title)
+                    if new_cat:
+                        deal.category = new_cat
+                except Exception:
+                    pass
+
+            hi_res_image = enrichment.get("hi_res_image")
+            if hi_res_image and (not getattr(deal, "image_url", None) or "/images/P/" in deal.image_url):
+                deal.image_url = hi_res_image
+
             live_mrp = enrichment.get("mrp")
             if live_mrp:
                 deal.original_price = f"₹{live_mrp:,}"

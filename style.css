@@ -2920,3 +2920,250 @@ body {
 .drawer-send-btn:active {
   transform: scale(0.95);
 }
+
+
+/* ── HIGH-CONTRAST LIGHT MODE & WATCHLIST UPGRADES ── */
+
+/* Sticky scroll margin to prevent sticky header overlap */
+.filter-tabs-section,
+.price-buckets-section,
+.toolbar-section,
+.results-header,
+.deals-grid,
+#dealsGrid,
+#deals-section {
+  scroll-margin-top: 110px;
+}
+
+/* Navbar Watchlist Button */
+.btn-watchlist-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: var(--radius-full);
+  color: #f87171;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-watchlist-nav:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-watchlist-nav.active {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+}
+
+/* Light Mode Overrides for High Contrast */
+[data-theme="light"] .btn-watchlist-nav {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+}
+
+[data-theme="light"] .btn-watchlist-nav:hover {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+[data-theme="light"] .btn-watchlist-nav.active {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+/* Light Mode Filter Tabs High Contrast */
+[data-theme="light"] .filter-tab {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+[data-theme="light"] .filter-tab:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+[data-theme="light"] .filter-tab .tab-count {
+  background: #e2e8f0;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+[data-theme="light"] .filter-tab.active {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+[data-theme="light"] .filter-tab.active.loot-tab {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+}
+
+[data-theme="light"] .filter-tab.active.drop-tab {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+[data-theme="light"] .filter-tab.active.coupon-tab {
+  background: #d97706;
+  color: #ffffff;
+  border-color: #d97706;
+}
+
+[data-theme="light"] .filter-tab.active.brand-tab {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+[data-theme="light"] .filter-tab.active.watchlist-tab {
+  background: #e11d48;
+  color: #ffffff;
+  border-color: #e11d48;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+}
+
+[data-theme="light"] .filter-tab.active .tab-count {
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+/* Light Mode Secondary Pills Contrast */
+[data-theme="light"] .price-pill,
+[data-theme="light"] .cat-pill {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+[data-theme="light"] .price-pill:hover,
+[data-theme="light"] .cat-pill:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+[data-theme="light"] .price-pill.active,
+[data-theme="light"] .cat-pill.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+/* Watchlist Saved Banner */
+.watchlist-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(244, 63, 94, 0.08));
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+}
+
+.watchlist-banner.hidden {
+  display: none !important;
+}
+
+.watchlist-banner-title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-theme="light"] .watchlist-banner {
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+[data-theme="light"] .watchlist-banner-title {
+  color: #be123c;
+}
+
+.watchlist-banner-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-watchlist-banner {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.btn-watchlist-back {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-card);
+}
+
+.btn-watchlist-back:hover {
+  background: var(--bg-input);
+  border-color: var(--border-active);
+}
+
+.btn-watchlist-clear {
+  color: var(--text-muted);
+}
+
+.btn-watchlist-clear:hover {
+  color: #ef4444;
+}
+
+.watchlist-sep {
+  color: var(--border-card);
+}
+
+/* Clickable Toast Link */
+.toast-link {
+  display: inline-block;
+  margin-left: 8px;
+  color: #38bdf8;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.toast-link:hover {
+  color: #7dd3fc;
+}
+
+[data-theme="light"] .toast-link {
+  color: #0284c7;
+}

@@ -265,6 +265,7 @@ def enrich_amazon_deal(url: str, timeout: int = 8) -> dict:
         "bank_discount_amount": None,
         "extra_offers": [],
         "hi_res_image": None,
+        "live_title": None,
     }
     if not url:
         result["stock_status"] = "out_of_stock"
@@ -297,6 +298,28 @@ def enrich_amazon_deal(url: str, timeout: int = 8) -> dict:
             result["stock_status"] = "in_stock"
         else:
             result["stock_status"] = "unknown"
+
+        # 0. Live Product Title Extraction
+        title_patterns = [
+            r'<span id="productTitle"[^>]*>([^<]+)</span>',
+            r'id="title"[^>]*>([^<]+)<',
+            r'<meta name="title" content="([^"]+)"',
+            r'<meta property="og:title" content="([^"]+)"',
+            r'<title>([^<]+)</title>',
+        ]
+        import html as html_lib
+        for t_pat in title_patterns:
+            t_m = re.search(t_pat, text, re.IGNORECASE)
+            if t_m:
+                raw_t = html_lib.unescape(t_m.group(1)).strip()
+                clean_t = re.sub(r"^Amazon\.in:\s*Buy\s*", "", raw_t, flags=re.IGNORECASE)
+                clean_t = re.sub(r"\s+at\s+Low\s+Prices\s+in\s+India.*$", "", clean_t, flags=re.IGNORECASE)
+                clean_t = re.sub(r"\s*:\s*Amazon\.in.*$", "", clean_t, flags=re.IGNORECASE)
+                clean_t = re.sub(r"\s*\|\s*Amazon\.in.*$", "", clean_t, flags=re.IGNORECASE)
+                clean_t = re.sub(r"\s+", " ", clean_t).strip()
+                if len(clean_t) >= 5 and "Robot Check" not in clean_t and "Page Not Found" not in clean_t:
+                    result["live_title"] = clean_t
+                    break
 
         # 1. Live Price
         from dealbot.models import parse_rupees

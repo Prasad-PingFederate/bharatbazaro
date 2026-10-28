@@ -519,7 +519,7 @@ def render_deal_card_html(d: Dict[str, Any]) -> str:
         <div class="card-media">
           <div class="card-image-wrap">
             <a href="{deal_page_url}" title="View Keepa Price History for {title}">
-              <img src="{image_url}" alt="{title}" class="card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/{asin}.jpg'">
+              <img src="{image_url}" alt="{title}" class="card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';}}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';">
             </a>
           </div>
           <div class="card-meta-bar">
@@ -1165,7 +1165,7 @@ def render_product_page_html(
           <div style="position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; z-index: 2;">
             {badges_html}
           </div>
-          <img src="{image_url}" alt="{title}" style="max-width: 100%; max-height: 380px; object-fit: contain; border-radius: var(--radius-md);" onerror="this.src='https://m.media-amazon.com/images/P/{asin}.jpg'">
+          <img src="{image_url}" alt="{title}" style="max-width: 100%; max-height: 380px; object-fit: contain; border-radius: var(--radius-md);" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';}}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>';">
         </div>
         <div style="margin-top: 16px; font-size: 0.82rem; color: var(--text-muted);">
           Amazon ASIN: <code style="color: var(--color-cyan); font-family: var(--font-mono);">{asin}</code> · Brand: <b>{brand}</b>
@@ -1513,6 +1513,12 @@ def update_sitemap_xml(root_dir: Path, deal_asins: Optional[List[str]] = None):
         ("https://bharatbazaro.com/under-499.html", today, "daily", "0.9"),
         ("https://bharatbazaro.com/under-999.html", today, "daily", "0.9"),
         ("https://bharatbazaro.com/coupons.html", today, "hourly", "0.9"),
+        # Evergreen SEO Buying Guides
+        ("https://bharatbazaro.com/guides/best-earbuds-headphones-deals-india.html", today, "weekly", "0.8"),
+        ("https://bharatbazaro.com/guides/best-mobile-smartphone-price-drops-india.html", today, "weekly", "0.8"),
+        ("https://bharatbazaro.com/guides/best-home-kitchen-appliances-loot-deals.html", today, "weekly", "0.8"),
+        ("https://bharatbazaro.com/guides/amazon-india-hidden-coupon-price-error-tricks.html", today, "weekly", "0.8"),
+        ("https://bharatbazaro.com/guides/best-amazon-deals-under-99-299-499-india.html", today, "weekly", "0.8"),
     ]
 
     # 4. Programmatic Deal Pages
@@ -1589,6 +1595,13 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
 
     logger.info(f"Generated {len(generated_asins)} programmatic product pages in {deal_dir}")
 
+    # 2b. Generate 5 Evergreen SEO Buying Guides
+    try:
+        from dealbot.guides_engine import generate_all_guides
+        generate_all_guides(deals, root_dir)
+    except Exception as e:
+        logger.error(f"Failed to generate buying guides: {e}", exc_info=True)
+
     # 3. Generate RSS 2.0 Feed (feed.xml)
     try:
         generate_rss_feed(deals, root_dir)
@@ -1600,3 +1613,10 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
         update_sitemap_xml(root_dir, generated_asins)
     except Exception as e:
         logger.error(f"Failed to update sitemap.xml: {e}", exc_info=True)
+
+    # 5. Run SEO Promotion (IndexNow, llms.txt, robots.txt, promo pack)
+    try:
+        from scripts.seo_promoter import run_seo_promotion
+        run_seo_promotion(root_dir, deals)
+    except Exception as e:
+        logger.error(f"Failed to run SEO promotion: {e}", exc_info=True)

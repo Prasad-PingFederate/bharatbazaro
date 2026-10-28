@@ -38,11 +38,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793199960,
-    "age_hours": 0.3,
+    "age_hours": 0.4,
     "trending_score": 108.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B09CH8F5XJ",
@@ -86,8 +86,8 @@
     "age_hours": 7.1,
     "trending_score": 92.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0GTV7P6V9",
@@ -128,11 +128,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793190160,
-    "age_hours": 3.0,
-    "trending_score": 101.5,
+    "age_hours": 3.1,
+    "trending_score": 101.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0FR9SKYXY",
@@ -173,11 +173,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793114682,
-    "age_hours": 24.0,
-    "trending_score": 41.0,
+    "age_hours": 24.1,
+    "trending_score": 40.8,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0F93Z2PRJ",
@@ -221,8 +221,8 @@
     "age_hours": 27.1,
     "trending_score": 30.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0G2GLPQ16",
@@ -263,11 +263,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793109950,
-    "age_hours": 25.3,
-    "trending_score": 32.8,
+    "age_hours": 25.4,
+    "trending_score": 32.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0FD3M3X6G",
@@ -311,8 +311,8 @@
     "age_hours": 21.2,
     "trending_score": 42.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B00WUDU4FG",
@@ -356,8 +356,8 @@
     "age_hours": 31.1,
     "trending_score": 15.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0CPJG92ZS",
@@ -398,11 +398,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793199960,
-    "age_hours": 0.3,
+    "age_hours": 0.4,
     "trending_score": 87.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0GK6PQ3W8",
@@ -443,11 +443,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793194124,
-    "age_hours": 1.9,
+    "age_hours": 2.0,
     "trending_score": 87.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0866B1P6B",
@@ -491,8 +491,8 @@
     "age_hours": 31.1,
     "trending_score": 14.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0D8KX39QT",
@@ -533,11 +533,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793194124,
-    "age_hours": 1.9,
+    "age_hours": 2.0,
     "trending_score": 85.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B09T2WLGFZ",
@@ -581,8 +581,8 @@
     "age_hours": 21.2,
     "trending_score": 37.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0G5Y7WSF4",
@@ -623,11 +623,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793098442,
-    "age_hours": 28.5,
-    "trending_score": 18.8,
+    "age_hours": 28.6,
+    "trending_score": 18.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0FV3RJBV7",
@@ -668,11 +668,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793140518,
-    "age_hours": 16.8,
-    "trending_score": 47.0,
+    "age_hours": 16.9,
+    "trending_score": 46.8,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B08THVF36G",
@@ -713,11 +713,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793114682,
-    "age_hours": 24.0,
-    "trending_score": 29.0,
+    "age_hours": 24.1,
+    "trending_score": 28.8,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0GKDR88L4",
@@ -761,8 +761,8 @@
     "age_hours": 25.9,
     "trending_score": 24.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0CPFMW1FL",
@@ -803,11 +803,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793194124,
-    "age_hours": 1.9,
+    "age_hours": 2.0,
     "trending_score": 83.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0CVV45V8N",
@@ -851,8 +851,8 @@
     "age_hours": 7.1,
     "trending_score": 70.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B004W5NT8O",
@@ -896,8 +896,8 @@
     "age_hours": 21.2,
     "trending_score": 35.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0CDPJ565Q",
@@ -938,11 +938,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793109950,
-    "age_hours": 25.3,
-    "trending_score": 24.8,
+    "age_hours": 25.4,
+    "trending_score": 24.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0BZZ5H8XG",
@@ -986,8 +986,53 @@
     "age_hours": 25.9,
     "trending_score": 23.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
+  },
+  {
+    "id": "amazon:B0CQP46F1H",
+    "asin": "B0CQP46F1H",
+    "title": "Amazon Deal (B0CQP46F1H)",
+    "brand": "Amazon",
+    "brand_tier": "unbranded",
+    "category": "Personal Care & Grocery",
+    "image_url": "https://m.media-amazon.com/images/P/B0CQP46F1H.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0CQP46F1H?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": null,
+    "list_price": 592,
+    "effective_price": 592,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 54,
+    "effective_discount_pct": 54,
+    "savings_inr": 0,
+    "rating": null,
+    "review_count": null,
+    "score": 82,
+    "buy_confidence": 87,
+    "price_context": "normal",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹592!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793201125,
+    "age_hours": 0.0,
+    "trending_score": 82.0,
+    "is_new": true,
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0G12SRPB9",
@@ -1028,11 +1073,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793098442,
-    "age_hours": 28.5,
-    "trending_score": 15.8,
+    "age_hours": 28.6,
+    "trending_score": 15.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0CM3K6H57",
@@ -1074,11 +1119,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793091951,
-    "age_hours": 30.3,
-    "trending_score": 11.2,
+    "age_hours": 30.4,
+    "trending_score": 11.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0C85T9PXW",
@@ -1122,8 +1167,8 @@
     "age_hours": 31.1,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0C82PJH3S",
@@ -1167,8 +1212,8 @@
     "age_hours": 35.0,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0GGHXCQSR",
@@ -1209,11 +1254,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793034687,
-    "age_hours": 46.2,
+    "age_hours": 46.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0FLYDHYY4",
@@ -1254,11 +1299,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793031073,
-    "age_hours": 47.2,
+    "age_hours": 47.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B08THV7ZKD",
@@ -1302,8 +1347,53 @@
     "age_hours": 35.0,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
+  },
+  {
+    "id": "amazon:B0CKQX6THY",
+    "asin": "B0CKQX6THY",
+    "title": "Amazon Deal (B0CKQX6THY)",
+    "brand": "Amazon",
+    "brand_tier": "unbranded",
+    "category": "Electronics & Audio",
+    "image_url": "https://m.media-amazon.com/images/P/B0CKQX6THY.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0CKQX6THY?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": null,
+    "list_price": 284,
+    "effective_price": 284,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 72,
+    "effective_discount_pct": 72,
+    "savings_inr": 0,
+    "rating": null,
+    "review_count": null,
+    "score": 81,
+    "buy_confidence": 87,
+    "price_context": "normal",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹284!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793201125,
+    "age_hours": 0.0,
+    "trending_score": 81.0,
+    "is_new": true,
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0FWKTHQRL",
@@ -1344,11 +1434,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793151673,
-    "age_hours": 13.7,
-    "trending_score": 51.8,
+    "age_hours": 13.8,
+    "trending_score": 51.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0GJ68952R",
@@ -1389,11 +1479,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793151673,
-    "age_hours": 13.7,
-    "trending_score": 51.8,
+    "age_hours": 13.8,
+    "trending_score": 51.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B08M1KMRLC",
@@ -1434,11 +1524,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793078926,
-    "age_hours": 33.9,
+    "age_hours": 34.0,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0DWFP38DG",
@@ -1479,11 +1569,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793140518,
-    "age_hours": 16.8,
-    "trending_score": 42.0,
+    "age_hours": 16.9,
+    "trending_score": 41.8,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0HKMBDZ5Y",
@@ -1527,8 +1617,8 @@
     "age_hours": 27.1,
     "trending_score": 16.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0CKZGGRT4",
@@ -1569,11 +1659,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793190160,
-    "age_hours": 3.0,
-    "trending_score": 75.5,
+    "age_hours": 3.1,
+    "trending_score": 75.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0DFYKMR8T",
@@ -1617,8 +1707,8 @@
     "age_hours": 7.1,
     "trending_score": 65.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B09P8K152F",
@@ -1662,8 +1752,8 @@
     "age_hours": 25.9,
     "trending_score": 18.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0CJM2NST8",
@@ -1705,11 +1795,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793091958,
-    "age_hours": 30.3,
+    "age_hours": 30.4,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0D9YVTQH5",
@@ -1750,11 +1840,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793190160,
-    "age_hours": 3.0,
-    "trending_score": 74.5,
+    "age_hours": 3.1,
+    "trending_score": 74.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B097PG9JPD",
@@ -1798,8 +1888,8 @@
     "age_hours": 32.1,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0BDVBH82P",
@@ -1840,11 +1930,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793078929,
-    "age_hours": 33.9,
+    "age_hours": 34.0,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0H2F9KKP9",
@@ -1885,11 +1975,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793151673,
-    "age_hours": 13.7,
-    "trending_score": 46.8,
+    "age_hours": 13.8,
+    "trending_score": 46.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0FLK6RVHS",
@@ -1930,11 +2020,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793109950,
-    "age_hours": 25.3,
-    "trending_score": 17.8,
+    "age_hours": 25.4,
+    "trending_score": 17.5,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B07YWMQWWK",
@@ -1978,73 +2068,28 @@
     "age_hours": 32.1,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
-    "id": "amazon:B0CQP46F1H",
-    "asin": "B0CQP46F1H",
-    "title": "L'Oreal Paris Revitalift Hyaluronic Acid Lightweight Face Serum For Hydrated & L'Oreal Paris Serum",
-    "brand": "L'Oreal",
+    "id": "amazon:B0GMQRBN4M",
+    "asin": "B0GMQRBN4M",
+    "title": "LG 27G610A 68.4 cm (27 Inch) Ultragear QHD (2560x1440) IPS Gaming Monitor, 1ms (GtG), 200Hz, sRGB 99%(Typ.), Anti-Glare, HDR10, AMD FreeSync™, DP, HDMI X 2, Tilt/Swivel/Height/Pivot Adjustable(Black)",
+    "brand": "Lg",
     "brand_tier": "tier1",
-    "category": "Personal Care & Grocery",
-    "image_url": "https://m.media-amazon.com/images/P/B0CQP46F1H.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0CQP46F1H?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 1298,
-    "list_price": 592,
-    "effective_price": 592,
+    "category": "Laptops & Computing",
+    "image_url": "https://m.media-amazon.com/images/P/B0GMQRBN4M.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0GMQRBN4M?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": 35000,
+    "list_price": 13100,
+    "effective_price": 13100,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 54,
-    "effective_discount_pct": 54,
-    "savings_inr": 706,
-    "rating": null,
-    "review_count": null,
-    "score": 75,
-    "buy_confidence": 91,
-    "price_context": "real_drop",
-    "historical_min": null,
-    "historical_avg": null,
-    "historical_max": null,
-    "is_loot": false,
-    "is_further_drop": false,
-    "source_count": 1,
-    "extra_offers": [],
-    "claim_steps": [
-      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹592!"
-    ],
-    "expired": false,
-    "price_spiked": false,
-    "posted_to_telegram": false,
-    "posted_at_epoch": 1793201135,
-    "age_hours": 0.0,
-    "trending_score": 75.0,
-    "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
-  },
-  {
-    "id": "amazon:B0D738FNB2",
-    "asin": "B0D738FNB2",
-    "title": "Havells Glamax 9W B22 WiFi LED Smart Bulb with Music Sync Function, Compatible with Amazon Alexa and Google Assistant (16M Colours)",
-    "brand": "Google",
-    "brand_tier": "tier1",
-    "category": "Electronics & Audio",
-    "image_url": "https://m.media-amazon.com/images/P/B0D738FNB2.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0D738FNB2?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 1999,
-    "list_price": 349,
-    "effective_price": 349,
-    "coupon_discount": null,
-    "coupon_text": null,
-    "promo_code": null,
-    "bank_offer": null,
-    "discount_pct": 83,
-    "effective_discount_pct": 83,
-    "savings_inr": 1650,
+    "discount_pct": 63,
+    "effective_discount_pct": 63,
+    "savings_inr": 21900,
     "rating": null,
     "review_count": null,
     "score": 75,
@@ -2059,42 +2104,42 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹349!"
+      "🎉 Complete checkout at the effective deal price of ₹13,100!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793201135,
+    "posted_at_epoch": 1793201275,
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
-    "id": "amazon:B0CKQX6THY",
-    "asin": "B0CKQX6THY",
-    "title": "Amazon Basics Cat Litter Box Tray with Free Scooper | Semi Closed Design and Durable Quality | Suitable for All Adult Cats & Kittens, Pink",
-    "brand": "Amazon Basics",
-    "brand_tier": "tier2",
-    "category": "Electronics & Audio",
-    "image_url": "https://m.media-amazon.com/images/P/B0CKQX6THY.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0CKQX6THY?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 999,
-    "list_price": 284,
-    "effective_price": 284,
+    "id": "amazon:B0GMQYDCGG",
+    "asin": "B0GMQYDCGG",
+    "title": "[HDFC CC] LG 29U511A 73 cm (29 Inch) UltraWide WFHD (2560x1080) IPS Monitor, 100Hz, 5ms(GtG), Anti-Glare, sRGB 99% (Typ.), HDR10, 3-Side Virtually Borderless, DP, HDMI, Headphone Out, Tilt Adjustable (Black)",
+    "brand": "Lg",
+    "brand_tier": "tier1",
+    "category": "Audio & Headphones",
+    "image_url": "https://m.media-amazon.com/images/P/B0GMQYDCGG.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0GMQYDCGG?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": 20000,
+    "list_price": 12150,
+    "effective_price": 12150,
     "coupon_discount": null,
-    "coupon_text": "Apply 5% coupon",
+    "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
-    "discount_pct": 72,
-    "effective_discount_pct": 72,
-    "savings_inr": 715,
+    "bank_offer": "Instant Bank Discount with HDFC CC",
+    "discount_pct": 39,
+    "effective_discount_pct": 39,
+    "savings_inr": 7850,
     "rating": null,
     "review_count": null,
     "score": 75,
-    "buy_confidence": 89,
-    "price_context": "all_time_low",
+    "buy_confidence": 91,
+    "price_context": "normal",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -2104,18 +2149,63 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "☑️ Look below the price on Amazon and check the 'Apply 5% coupon' box.",
-      "🎉 Complete checkout at the effective deal price of ₹284!"
+      "💳 Select eligible card/payment for instant bank discount: Instant Bank Discount with HDFC CC.",
+      "🎉 Complete checkout at the effective deal price of ₹12,150!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793201135,
+    "posted_at_epoch": 1793201275,
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
+  },
+  {
+    "id": "amazon:B0F5HNQ3N1",
+    "asin": "B0F5HNQ3N1",
+    "title": "LG 27U631A 27 Inch (68.47 cm) QHD (2560x1440) IPS PC Monitor with HDR10, Flicker Safe, HDMI, DP, HP Output USB-C (15W PD), 100Hz 5ms (GtG), Tilt Adjustable, 3-Side Virtually Borderless Design sRGB 99%",
+    "brand": "Hp",
+    "brand_tier": "tier1",
+    "category": "Laptops & Computing",
+    "image_url": "https://m.media-amazon.com/images/P/B0F5HNQ3N1.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0F5HNQ3N1?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": 18000,
+    "list_price": 11000,
+    "effective_price": 11000,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 39,
+    "effective_discount_pct": 39,
+    "savings_inr": 7000,
+    "rating": null,
+    "review_count": null,
+    "score": 75,
+    "buy_confidence": 91,
+    "price_context": "normal",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹11,000!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793201275,
+    "age_hours": 0.0,
+    "trending_score": 75.0,
+    "is_new": true,
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0H3BXLJ3T",
@@ -2155,57 +2245,12 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793201135,
+    "posted_at_epoch": 1793201275,
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
-  },
-  {
-    "id": "amazon:B0FLF44GTQ",
-    "asin": "B0FLF44GTQ",
-    "title": "boAt Wave Call 3 Smartwatch 1.83” HD Display with Animated Watch Faces; BT Calling, Functional Crown, Multiple Sports Modes, IP68, HR, SpO2 Monitor, Smart Watches for Men & Women (Bold Black)",
-    "brand": "Boat",
-    "brand_tier": "tier2",
-    "category": "Laptops & Computing",
-    "image_url": "https://m.media-amazon.com/images/P/B0FLF44GTQ.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0FLF44GTQ?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 6999,
-    "list_price": 999,
-    "effective_price": 999,
-    "coupon_discount": null,
-    "coupon_text": null,
-    "promo_code": null,
-    "bank_offer": null,
-    "discount_pct": 86,
-    "effective_discount_pct": 86,
-    "savings_inr": 6000,
-    "rating": null,
-    "review_count": null,
-    "score": 75,
-    "buy_confidence": 89,
-    "price_context": "all_time_low",
-    "historical_min": null,
-    "historical_avg": null,
-    "historical_max": null,
-    "is_loot": false,
-    "is_further_drop": false,
-    "source_count": 1,
-    "extra_offers": [],
-    "claim_steps": [
-      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹999!"
-    ],
-    "expired": false,
-    "price_spiked": false,
-    "posted_to_telegram": false,
-    "posted_at_epoch": 1793201135,
-    "age_hours": 0.0,
-    "trending_score": 75.0,
-    "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0BD43W4YP",
@@ -2249,8 +2294,8 @@
     "age_hours": 32.1,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0F8HJZQVP",
@@ -2294,8 +2339,8 @@
     "age_hours": 27.1,
     "trending_score": 11.2,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0HB9S9BDQ",
@@ -2337,11 +2382,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793091954,
-    "age_hours": 30.3,
+    "age_hours": 30.4,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0D4DZ7WL2",
@@ -2382,11 +2427,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793031069,
-    "age_hours": 47.2,
+    "age_hours": 47.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0BRG3G7P4",
@@ -2427,11 +2472,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793140518,
-    "age_hours": 16.8,
-    "trending_score": 36.0,
+    "age_hours": 16.9,
+    "trending_score": 35.8,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B09QYV9R61",
@@ -2472,11 +2517,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793078933,
-    "age_hours": 33.9,
+    "age_hours": 34.0,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0DX3CBHHF",
@@ -2520,8 +2565,8 @@
     "age_hours": 35.0,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B08HQL1DB2",
@@ -2562,11 +2607,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793034692,
-    "age_hours": 46.2,
+    "age_hours": 46.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0C53S9X17",
@@ -2607,11 +2652,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793098442,
-    "age_hours": 28.5,
+    "age_hours": 28.6,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0DVJF7528",
@@ -2652,11 +2697,11 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793114682,
-    "age_hours": 24.0,
-    "trending_score": 15.0,
+    "age_hours": 24.1,
+    "trending_score": 14.8,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B01M0GS016",
@@ -2697,11 +2742,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793031064,
-    "age_hours": 47.2,
+    "age_hours": 47.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B07874GHW2",
@@ -2742,11 +2787,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793034695,
-    "age_hours": 46.2,
+    "age_hours": 46.3,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0F2VJN7FQ",
@@ -2787,36 +2832,36 @@
     "price_spiked": false,
     "posted_to_telegram": false,
     "posted_at_epoch": 1793199960,
-    "age_hours": 0.3,
+    "age_hours": 0.4,
     "trending_score": 90.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   },
   {
     "id": "amazon:B0F389QTNV",
     "asin": "B0F389QTNV",
     "title": "Amazon Basics Pro Series 2.4G + Bluetooth + USB Triple Mode Wireless Ergonomic Mouse | 9 Buttons | Adjustable DPI (800–2400) | 500mAh Battery | Type-C Charging | Black",
-    "brand": "Amazon Basics",
-    "brand_tier": "tier2",
-    "category": "Laptops & Computing",
+    "brand": "Amazon",
+    "brand_tier": "unbranded",
+    "category": "Electronics & Audio",
     "image_url": "https://m.media-amazon.com/images/P/B0F389QTNV.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B0F389QTNV?tag=dammaiprasad-21&linkCode=ll1",
-    "mrp": 3345,
+    "mrp": null,
     "list_price": 368,
     "effective_price": 368,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 92,
-    "effective_discount_pct": 89,
-    "savings_inr": 2977,
+    "discount_pct": 85,
+    "effective_discount_pct": 85,
+    "savings_inr": 0,
     "rating": null,
     "review_count": null,
-    "score": 75,
-    "buy_confidence": 89,
-    "price_context": "all_time_low",
+    "score": 82,
+    "buy_confidence": 87,
+    "price_context": "normal",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -2831,11 +2876,101 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793201135,
+    "posted_at_epoch": 1793201125,
+    "age_hours": 0.0,
+    "trending_score": 82.0,
+    "is_new": true,
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
+  },
+  {
+    "id": "amazon:B08BVJYLZ3",
+    "asin": "B08BVJYLZ3",
+    "title": "Amazon Basics Slim Rolling Storage Rack – 3-Tiered Shelf Plastic Slide-Out Organizer | Space-Saving, Multipurpose | for Kitchen, Bathroom, Laundry, Pantry & Utility Storage | Floor Standing | White",
+    "brand": "Amazon Basics",
+    "brand_tier": "tier2",
+    "category": "Home & Kitchen",
+    "image_url": "https://m.media-amazon.com/images/P/B08BVJYLZ3.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B08BVJYLZ3?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": 1500,
+    "list_price": 509,
+    "effective_price": 509,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 66,
+    "effective_discount_pct": 66,
+    "savings_inr": 991,
+    "rating": null,
+    "review_count": null,
+    "score": 75,
+    "buy_confidence": 89,
+    "price_context": "all_time_low",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹509!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793201275,
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
-    "updated_at": 1793201135,
-    "updated_at_ist": "2026-10-28 20:55 IST"
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
+  },
+  {
+    "id": "amazon:B0D2TVS3M3",
+    "asin": "B0D2TVS3M3",
+    "title": "TEAKWOOD LEATHERS Unisex 8 Wheels Trolley Bag, Hard Cabin with Zipper Closure, Adjustable Push Button & Cross Side Strap, Lock System 360 Degree (55 CM, Dark Grey)",
+    "brand": "Teakwood",
+    "brand_tier": "unbranded",
+    "category": "Electronics & Audio",
+    "image_url": "https://m.media-amazon.com/images/P/B0D2TVS3M3.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0D2TVS3M3?tag=dammaiprasad-21&linkCode=ll1",
+    "mrp": 5727,
+    "list_price": 859,
+    "effective_price": 859,
+    "coupon_discount": null,
+    "coupon_text": null,
+    "promo_code": null,
+    "bank_offer": null,
+    "discount_pct": 85,
+    "effective_discount_pct": 85,
+    "savings_inr": 4868,
+    "rating": null,
+    "review_count": null,
+    "score": 75,
+    "buy_confidence": 87,
+    "price_context": "normal",
+    "historical_min": null,
+    "historical_avg": null,
+    "historical_max": null,
+    "is_loot": false,
+    "is_further_drop": false,
+    "source_count": 1,
+    "extra_offers": [],
+    "claim_steps": [
+      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
+      "🎉 Complete checkout at the effective deal price of ₹859!"
+    ],
+    "expired": false,
+    "price_spiked": false,
+    "posted_to_telegram": false,
+    "posted_at_epoch": 1793201275,
+    "age_hours": 0.0,
+    "trending_score": 75.0,
+    "is_new": true,
+    "updated_at": 1793201275,
+    "updated_at_ist": "2026-10-28 20:57 IST"
   }
 ]

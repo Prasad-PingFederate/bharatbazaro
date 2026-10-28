@@ -188,6 +188,11 @@
           <span class="alert-status-label" id="alertsStatusText">Alerts: ON</span>
         </button>
 
+        <button id="navWatchlistBtn" class="btn-watchlist-nav" title="View Saved Watchlist" aria-label="View Saved Watchlist">
+          <span class="nav-watchlist-icon">❤️</span>
+          <span class="nav-watchlist-label">Watchlist (<span id="navWatchlistCount">0</span>)</span>
+        </button>
+
         <button id="themeToggleBtn" class="btn-icon" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
           <span class="theme-icon-dark">🌙</span>
           <span class="theme-icon-light">☀️</span>
@@ -401,6 +406,16 @@
       <div class="sync-time" id="syncTime">Auto-refreshing in 60s</div>
     </div>
 
+    <!-- Saved Watchlist Header Banner -->
+    <div id="watchlistBanner" class="watchlist-banner hidden">
+      <span class="watchlist-banner-title">❤️ Your Saved Watchlist (<span id="watchlistBannerCount">0</span> Deals)</span>
+      <div class="watchlist-banner-actions">
+        <button id="watchlistBackBtn" class="btn-watchlist-banner btn-watchlist-back">← Back to All <span id="watchlistTotalCount">59</span> Live Deals</button>
+        <span class="watchlist-sep">|</span>
+        <button id="watchlistClearBtn" class="btn-watchlist-banner btn-watchlist-clear">🗑️ Clear Watchlist</button>
+      </div>
+    </div>
+
     <!-- Deals Grid Container -->
     <div id="dealsGrid" class="deals-grid" data-anchor="deals-grid">
       <article class="deal-card " data-asin="B000000001">
@@ -419,7 +434,7 @@
         <div class="card-media">
           <div class="card-image-wrap">
             <a href="/deal/B000000001.html" title="View Keepa Price History for Sony Product 1 Audio Gadget">
-              <img src="https://m.media-amazon.com/images/P/B000000001.jpg" alt="Sony Product 1 Audio Gadget" class="card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/B000000001.jpg'">
+              <img src="https://m.media-amazon.com/images/P/B000000001.jpg" alt="Sony Product 1 Audio Gadget" class="card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>';">
             </a>
           </div>
           <div class="card-meta-bar">
@@ -502,7 +517,7 @@
         <div class="card-media">
           <div class="card-image-wrap">
             <a href="/deal/B000000002.html" title="View Keepa Price History for Sony Product 2 Audio Gadget">
-              <img src="https://m.media-amazon.com/images/P/B000000002.jpg" alt="Sony Product 2 Audio Gadget" class="card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/B000000002.jpg'">
+              <img src="https://m.media-amazon.com/images/P/B000000002.jpg" alt="Sony Product 2 Audio Gadget" class="card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>';">
             </a>
           </div>
           <div class="card-meta-bar">
@@ -585,7 +600,7 @@
         <div class="card-media">
           <div class="card-image-wrap">
             <a href="/deal/B000000003.html" title="View Keepa Price History for Sony Product 3 Audio Gadget">
-              <img src="https://m.media-amazon.com/images/P/B000000003.jpg" alt="Sony Product 3 Audio Gadget" class="card-img" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/P/B000000003.jpg'">
+              <img src="https://m.media-amazon.com/images/P/B000000003.jpg" alt="Sony Product 3 Audio Gadget" class="card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='45%' font-size='48' text-anchor='middle' dominant-baseline='middle'>⚡</text><text x='50%' y='72%' font-size='13' font-weight='bold' fill='%2364748b' text-anchor='middle' font-family='sans-serif'>Amazon Verified Deal</text></svg>';">
             </a>
           </div>
           <div class="card-meta-bar">
@@ -661,6 +676,50 @@
       <p class="empty-desc">Try clearing your search query or selecting a different price bucket or filter tab.</p>
       <button id="resetFiltersBtn" class="btn btn-primary">Reset All Filters</button>
     </div>
+
+    <!-- 📚 Latest AI Buying Guides & Deal Tricks -->
+    <section class="guides-section" id="buyingGuidesSection" style="margin-top: 40px; margin-bottom: 30px;">
+      <div class="section-header" style="margin-bottom: 20px;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+          <span>📚 Latest AI Buying Guides & Deal Tricks</span>
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">
+          Expert shopping strategies, Keepa price-drop analysis, secret coupon stacking tricks, and curated Indian buyer guides.
+        </p>
+      </div>
+      <div class="guides-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+        <a href="/guides/best-earbuds-headphones-deals-india.html" class="guide-card" style="display: block; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+          <span style="font-size: 1.8rem;">🎧</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 10px 0 6px; color: var(--text-main);">Best Earbuds & Headphones Deals</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">boAt, Sony, JBL & Noise TWS earbuds, neckbands and ANC headphones on Amazon India.</p>
+          <span style="display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: #10b981;">Read Guide →</span>
+        </a>
+        <a href="/guides/best-mobile-smartphone-price-drops-india.html" class="guide-card" style="display: block; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+          <span style="font-size: 1.8rem;">📱</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 10px 0 6px; color: var(--text-main);">Mobile & Smartphone Price Drops</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">Real-time 5G phone price drops, exchange bonuses, and SBI/HDFC bank discounts.</p>
+          <span style="display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: #10b981;">Read Guide →</span>
+        </a>
+        <a href="/guides/best-home-kitchen-appliances-loot-deals.html" class="guide-card" style="display: block; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+          <span style="font-size: 1.8rem;">🏠</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 10px 0 6px; color: var(--text-main);">Home & Kitchen Appliance Loots</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">Top discounts on Philips, Prestige, Wonderchef, and Havells home appliances.</p>
+          <span style="display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: #10b981;">Read Guide →</span>
+        </a>
+        <a href="/guides/amazon-india-hidden-coupon-price-error-tricks.html" class="guide-card" style="display: block; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+          <span style="font-size: 1.8rem;">🎟️</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 10px 0 6px; color: var(--text-main);">Hidden Coupons & Price Error Tricks</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">How to find and claim secret checkbox coupons and stack Subscribe & Save.</p>
+          <span style="display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: #10b981;">Read Guide →</span>
+        </a>
+        <a href="/guides/best-amazon-deals-under-99-299-499-india.html" class="guide-card" style="display: block; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+          <span style="font-size: 1.8rem;">🪙</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 10px 0 6px; color: var(--text-main);">Pocket Stores: Under ₹99, ₹299 & ₹499</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">Curated high-rating essentials, daily lifestyle loots, and budget-friendly gadgets.</p>
+          <span style="display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: #10b981;">Read Guide →</span>
+        </a>
+      </div>
+    </section>
   </main>
 
   <!-- Price History & Keepa Chart Modal -->

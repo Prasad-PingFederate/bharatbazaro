@@ -69,31 +69,27 @@ jobs:
           LISTEN_FOR_ENGAGEMENT: 'true'
           MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
+          echo "Pulling latest changes before cycle..."
+          git pull --rebase -X theirs origin main || true
           echo "Starting BharatBazaro 24/7 Radar Cycle at $(date -u)"
           python run_once.py || true
-          # Guarantee feed export even if Telegram publishing encountered network timeouts
-          python -c "from dealbot.publisher import StateStore; from dealbot.web_exporter import export_web_feed; s = StateStore('data/state.sqlite3'); export_web_feed(s, output_dir='data')" || true
+          # Guarantee feed export and SSG pages even if Telegram publishing encountered network timeouts
+          python -c "from dealbot.publisher import StateStore; from dealbot.web_exporter import export_web_data; export_web_data()" || true
 
       - name: Persist SQLite Database & Web Feeds (data/live_deals.json)
         if: always()
         run: |
-          python -c "from dealbot.publisher import StateStore; StateStore('data/state.sqlite3').checkpoint()" || true
+          python -c "from dealbot.publisher import StateStore; StateStore('data/state.sqlite3').checkpoint()" 2>/dev/null || true
           rm -f data/*.sqlite3-wal data/*.sqlite3-shm data/*.db-wal data/*.db-shm || true
-          mkdir -p /tmp/bb_data_bak
-          cp -f data/*.* /tmp/bb_data_bak/ 2>/dev/null || true
           bash -c '
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git fetch origin main || true
-            git checkout -f -B main origin/main || true
-            mkdir -p data
-            cp -f /tmp/bb_data_bak/*.* data/ 2>/dev/null || true
-            rm -f data/*.sqlite3-wal data/*.sqlite3-shm data/*.db-wal data/*.db-shm || true
-            git add -f data/live_deals.json data/stats.json data/ai_briefing.json data/state.sqlite3 data/deals.db *.html deal/*.html feed.xml sitemap.xml og-banner.png 2>/dev/null || true
+            git add data/ *.html deal/ guides/ feed.xml sitemap.xml robots.txt llms.txt bharatbazaro-indexnow-key.txt og-banner.png 2>/dev/null || true
             if ! git diff --staged --quiet; then
-              git commit -m "chore(feed): sync 24/7 live_deals, ai_briefing, SSG pages, deal pages, feed.xml and sitemap [skip ci]" || true
-              git push origin HEAD:main || true
+              git pull --rebase -X theirs origin main || true
+              git commit -m "chore(radar): update live deals, programmatic SEO pages and sitemap [skip ci]" || true
+              git push origin main || git push origin HEAD:main || true
             else
-              echo "Feed data unchanged."
+              echo "Feed data and SEO pages unchanged."
             fi
           '

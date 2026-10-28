@@ -1,0 +1,42 @@
+# BharatBazaro — 24/7 AI Deal Radar & Price Error Finder (India)
+
+> BharatBazaro autonomously detects, verifies, and indexes live price drops, hidden checkbox coupons, and loot deals on Amazon India every 30 minutes.
+
+## Core Capabilities
+- Autonomous price error detection using Keepa 90-day price history graphs and BuyHatke data.
+- Live on-page checkbox coupon discovery and Subscribe & Save stackable discounts.
+- Programmatic SEO landing pages for high-intent budget brackets (₹99, ₹299, ₹499, ₹999).
+- BazarAI conversational shopping concierge for instant deal recommendations and budget analysis.
+
+## API & Machine-Readable Feeds
+- Live Deals JSON: https://bharatbazaro.com/data/live_deals.json
+- AI Market Briefing: https://bharatbazaro.com/data/ai_briefing.json
+- RSS 2.0 Feed: https://bharatbazaro.com/feed.xml
+- XML Sitemap: https://bharatbazaro.com/sitemap.xml
+
+## High-Intent Deal Categories
+- [All Live Deals](https://bharatbazaro.com/deals.html)
+- [Mobiles & 5G Smartphones](https://bharatbazaro.com/mobiles.html)
+- [Electronics & Laptops](https://bharatbazaro.com/electronics.html)
+- [Home & Kitchen Appliances](https://bharatbazaro.com/home.html)
+- [Fashion & Footwear](https://bharatbazaro.com/fashion.html)
+- [Personal Care & Grocery](https://bharatbazaro.com/grocery.html)
+
+## Curated Price Stores
+- [Amazon ₹99 Store India](https://bharatbazaro.com/under-99.html)
+- [Best Amazon Deals Under ₹299](https://bharatbazaro.com/under-299.html)
+- [Top Deals Under ₹499](https://bharatbazaro.com/under-499.html)
+- [Best Gadgets Under ₹999](https://bharatbazaro.com/under-999.html)
+- [Hidden Checkbox Coupons Finder](https://bharatbazaro.com/coupons.html)
+
+## Evergreen Buying Guides
+- [Best Earbuds & Headphones Deals (2026 Guide)](https://bharatbazaro.com/guides/best-earbuds-headphones-deals-india.html)
+- [Mobile & Smartphone Price Drops Today](https://bharatbazaro.com/guides/best-mobile-smartphone-price-drops-india.html)
+- [Home & Kitchen Appliance Loot Deals](https://bharatbazaro.com/guides/best-home-kitchen-appliances-loot-deals.html)
+- [Amazon Hidden Coupons & Price Error Tricks](https://bharatbazaro.com/guides/amazon-india-hidden-coupon-price-error-tricks.html)
+- [Amazon Deals Under ₹99, ₹299 & ₹499 Strategy](https://bharatbazaro.com/guides/best-amazon-deals-under-99-299-499-india.html)
+
+## Top Sample Verified Deals Today (2026-10-28)
+- [Sony Product 1 Audio Gadget](https://bharatbazaro.com/deal/B000000001.html): ₹1,299 (40% off)
+- [Sony Product 2 Audio Gadget](https://bharatbazaro.com/deal/B000000002.html): ₹1,299 (40% off)
+- [Sony Product 3 Audio Gadget](https://bharatbazaro.com/deal/B000000003.html): ₹1,299 (40% off)

@@ -117,11 +117,11 @@
   function init() {
     initTheme();
     initAlertsUI();
+    handleUrlRouting();
     setupEventListeners();
     fetchData(true);
     startAutoRefreshTimer();
     startLiveSyncTimer();
-    handleUrlRouting();
   }
 
   // ── 4. THEME MANAGEMENT ────────────────────────────────────────────────────
@@ -457,7 +457,27 @@
 
     // 4. Category Filter
     if (state.filters.category && state.filters.category !== 'all') {
-      result = result.filter(d => d.category === state.filters.category);
+      const filterCat = state.filters.category.toLowerCase();
+      result = result.filter(d => {
+        if (!d.category) return false;
+        const dCat = d.category.toLowerCase();
+        if (filterCat === 'electronics' || filterCat === 'electronics & audio') {
+          return dCat.includes('electronic') || dCat.includes('audio') || dCat.includes('laptop');
+        }
+        if (filterCat === 'mobiles' || filterCat === 'mobiles & accessories') {
+          return dCat.includes('mobile');
+        }
+        if (filterCat === 'home' || filterCat === 'home & kitchen') {
+          return dCat.includes('home') || dCat.includes('kitchen');
+        }
+        if (filterCat === 'fashion' || filterCat === 'fashion & footwear') {
+          return dCat.includes('fashion') || dCat.includes('footwear');
+        }
+        if (filterCat === 'grocery' || filterCat === 'personal care & grocery') {
+          return dCat.includes('grocery') || dCat.includes('personal care') || dCat.includes('beauty');
+        }
+        return dCat === filterCat;
+      });
     }
 
     // 5. Search Filter
@@ -1217,21 +1237,81 @@
   }
 
   // ── 16. ROUTING & DEEP LINKING ─────────────────────────────────────────────
-  function handleUrlRouting() {
-    const params = new URLSearchParams(window.location.search);
+  const CATEGORY_SLUG_MAP = {
+    'mobiles': 'Mobiles & Accessories',
+    'mobile': 'Mobiles & Accessories',
+    'electronics': 'Electronics & Audio',
+    'laptops': 'Laptops & Computing',
+    'audio': 'Audio & Headphones',
+    'home': 'Home & Kitchen',
+    'fashion': 'Fashion & Footwear',
+    'grocery': 'Personal Care & Grocery',
+  };
 
-    const cat = params.get('category');
-    if (cat) {
-      state.filters.category = cat;
-      el.catPills.forEach(p => {
-        p.classList.toggle('active', p.getAttribute('data-category').toLowerCase() === cat.toLowerCase());
-      });
+  function detectInitialRoute() {
+    let cat = (typeof window !== 'undefined' && window.INITIAL_CATEGORY) || null;
+    let filter = (typeof window !== 'undefined' && window.INITIAL_FILTER) || null;
+
+    const path = (typeof window !== 'undefined' && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (!cat && !filter) {
+      if (path.includes('mobiles')) cat = 'mobiles';
+      else if (path.includes('electronics')) cat = 'electronics';
+      else if (path.includes('home')) cat = 'home';
+      else if (path.includes('fashion')) cat = 'fashion';
+      else if (path.includes('grocery')) cat = 'grocery';
+      else if (path.includes('deals')) filter = 'loot';
     }
 
-    const asin = params.get('asin');
-    if (asin) {
+    if (typeof window !== 'undefined' && window.location.search) {
+      const params = new URLSearchParams(window.location.search);
+      const qCat = params.get('category');
+      if (qCat) cat = qCat;
+      const qTab = params.get('tab') || params.get('filter');
+      if (qTab) filter = qTab;
+      return { category: cat, filter: filter, asin: params.get('asin') };
+    }
+
+    return { category: cat, filter: filter, asin: null };
+  }
+
+  function handleUrlRouting() {
+    const route = detectInitialRoute();
+
+    if (route.category) {
+      const mapped = CATEGORY_SLUG_MAP[route.category.toLowerCase()] || route.category;
+      state.filters.category = mapped;
+      if (el.catPills) {
+        el.catPills.forEach(p => {
+          const pCat = p.getAttribute('data-category');
+          const isActive = pCat && (
+            pCat.toLowerCase() === mapped.toLowerCase() ||
+            pCat.toLowerCase() === route.category.toLowerCase()
+          );
+          p.classList.toggle('active', !!isActive);
+        });
+      }
+    }
+
+    if (route.filter) {
+      state.filters.tab = route.filter;
+      if (el.filterTabs) {
+        el.filterTabs.forEach(t => {
+          const tTab = t.getAttribute('data-tab');
+          t.classList.toggle('active', tTab === route.filter);
+        });
+      }
+      if (route.filter === 'loot' && el.mNavLoot && el.mNavAll) {
+        el.mNavLoot.classList.add('active');
+        el.mNavAll.classList.remove('active');
+      } else if (route.filter === 'coupons' && el.mNavCoupons && el.mNavAll) {
+        el.mNavCoupons.classList.add('active');
+        el.mNavAll.classList.remove('active');
+      }
+    }
+
+    if (route.asin) {
       setTimeout(() => {
-        openDealModal(asin.toUpperCase());
+        openDealModal(route.asin.toUpperCase());
       }, 600);
     }
   }

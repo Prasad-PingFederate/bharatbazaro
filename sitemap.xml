@@ -2,39 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bharatbazaro.com/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://bharatbazaro.com/deals.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bharatbazaro.com/electronics.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <loc>https://bharatbazaro.com/mobiles.html</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bharatbazaro.com/mobiles.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <loc>https://bharatbazaro.com/electronics.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bharatbazaro.com/home.html</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://bharatbazaro.com/fashion.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://bharatbazaro.com/grocery.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>
-

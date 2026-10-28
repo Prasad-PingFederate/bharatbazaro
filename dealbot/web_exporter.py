@@ -1,3 +1,9 @@
+from dealbot.ssg_engine import (
+    ensure_og_banner,
+    pre_render_all_pages,
+    render_deal_card_html,
+    generate_page_html,
+)
 """
 Web Feed Exporter for BharatBazaro.com and DealDash AI.
 Exports high-value verified live deals and statistics to data/live_deals.json and data/stats.json.
@@ -684,4 +690,47 @@ def export_web_feed(
         json.dump(stats, f, indent=2, ensure_ascii=False)
     logger.info(f"Exported stats to {stats_path}")
 
+    # SSG Pre-rendering of index.html and all 6 standalone category landing pages
+    root_dir = Path(__file__).resolve().parent.parent
+    try:
+        ensure_og_banner(root_dir)
+        pre_render_all_pages(final_deals, stats, root_dir=root_dir)
+    except Exception as e:
+        logger.error(f"Error pre-rendering SSG HTML pages: {e}", exc_info=True)
+
     return {"deals_count": len(final_deals), "stats": stats}
+
+
+def export_web_data(store=None, **kwargs):
+    """
+    Export live web data and pre-render all 7 SSG pages.
+    Can be invoked with a StateStore or standalone.
+    """
+    if store is None:
+        try:
+            from dealbot.store import StateStore
+            store = StateStore()
+        except Exception:
+            store = None
+
+    if store is not None:
+        return export_web_feed(store, **kwargs)
+
+    root_dir = Path(__file__).resolve().parent.parent
+    output_dir = kwargs.get("output_dir") or (root_dir / "data")
+    output_dir = Path(output_dir)
+    live_deals_path = output_dir / "live_deals.json"
+    stats_path = output_dir / "stats.json"
+    deals = []
+    stats = {}
+    import json
+    if live_deals_path.exists():
+        with open(live_deals_path, "r", encoding="utf-8") as f:
+            deals = json.load(f)
+    if stats_path.exists():
+        with open(stats_path, "r", encoding="utf-8") as f:
+            stats = json.load(f)
+
+    ensure_og_banner(root_dir)
+    pre_render_all_pages(deals, stats, root_dir=root_dir)
+    return {"deals_count": len(deals), "stats": stats}

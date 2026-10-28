@@ -1,6 +1,6 @@
 {
-  "timestamp_ist": "2026-10-27 19:27:59 IST",
-  "timestamp_epoch": 1793109479,
+  "timestamp_ist": "2026-10-28 14:56:18 IST",
+  "timestamp_epoch": 1793179578,
   "overall_status": "DEGRADED",
   "checks": [
     {
@@ -34,33 +34,33 @@
     {
       "name": "Deal Discovery Feeds",
       "status": "ok",
-      "candidate_count": 32,
-      "latency_ms": 3099,
-      "detail": "Discovered 32 candidates across live feeds"
+      "candidate_count": 31,
+      "latency_ms": 15570,
+      "detail": "Discovered 31 candidates across live feeds"
     },
     {
       "name": "Amazon.in Scraper",
       "status": "warning",
       "stock_status": "unknown",
       "live_price": "N/A",
-      "latency_ms": 325,
+      "latency_ms": 211,
       "detail": "Status: unknown, Price: \u20b9N/A"
     },
     {
       "name": "SQLite Integrity",
       "status": "ok",
-      "active_deals": 87,
+      "active_deals": 108,
       "integrity": "ok",
-      "latency_ms": 9,
-      "detail": "PRAGMA: ok, Active Deals: 87"
+      "latency_ms": 5,
+      "detail": "PRAGMA: ok, Active Deals: 108"
     },
     {
       "name": "BharatBazaro Live",
       "status": "ok",
       "live_deals": 59,
-      "feed_age_min": 26,
-      "latency_ms": 78,
-      "detail": "59 live deals online (synced 26m ago)"
+      "feed_age_min": 64,
+      "latency_ms": 164,
+      "detail": "59 live deals online (synced 64m ago)"
     },
     {
       "name": "Telegram Bot API",

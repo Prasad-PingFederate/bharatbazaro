@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-29 12:05 IST",
-  "generated_at_epoch": 1793255726,
+  "generated_at_ist": "2026-10-29 12:19 IST",
+  "generated_at_epoch": 1793256591,
   "top_loot_summary": [
     {
       "asin": "B0CWGD6G4L",
@@ -16,19 +16,6 @@
       "coupon_text": null
     },
     {
-      "asin": "B0CKVLCMJZ",
-      "title": "Havells Delite Kop'ere Water Purifier (Black), RO+UV+pH Balance, 7 Stages, 6.5L Stainless Steel Tank,Copper+Zinc+Minerals, Suitable for Borewell, Tanker &amp; Municipal Water",
-      "effective_price": 8289,
-      "mrp": 27000,
-      "discount_pct": 69,
-      "savings_inr": 18711,
-      "brand": "Havells",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0CKVLCMJZ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CKVLCMJZ.html",
-      "coupon_text": null
-    },
-    {
       "asin": "B0FS17S4WK",
       "title": "Standard by Havells Vertex Neo 4 Star 15L Storage Water Heater(Geyser)|Faster Heating|Safe to Use|Saves Electricity|Hydro Guard Coated Anti Rust Tank|Temp. Setting Knob|5 Yr. Tank Warranty| White",
       "effective_price": 5227,
@@ -39,6 +26,19 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B0FS17S4WK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0FS17S4WK.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0CKVLCMJZ",
+      "title": "Havells Delite Kop'ere Water Purifier (Black), RO+UV+pH Balance, 7 Stages, 6.5L Stainless Steel Tank,Copper+Zinc+Minerals, Suitable for Borewell, Tanker &amp; Municipal Water",
+      "effective_price": 8289,
+      "mrp": 27000,
+      "discount_pct": 69,
+      "savings_inr": 18711,
+      "brand": "Havells",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0CKVLCMJZ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CKVLCMJZ.html",
       "coupon_text": null
     },
     {
@@ -69,24 +69,24 @@
     }
   ],
   "best_coupon_deal": {
-    "id": "amazon:B011C1B2XY",
-    "asin": "B011C1B2XY",
-    "title": "Himalaya Herbals Neem and Turmeric Soap, 125gm (Pack of 4) with Value Pack Save",
+    "id": "amazon:B00RV73XDG",
+    "asin": "B00RV73XDG",
+    "title": "Himalaya Pure Skin Neem Facial Kit",
     "brand": "Himalaya",
     "brand_tier": "tier2",
-    "category": "Personal Care & Grocery",
-    "image_url": "https://m.media-amazon.com/images/P/B011C1B2XY.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B011C1B2XY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 204,
+    "category": "Electronics & Audio",
+    "image_url": "https://m.media-amazon.com/images/P/B00RV73XDG.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B00RV73XDG?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 200,
     "list_price": 94,
-    "effective_price": 74,
-    "coupon_discount": 20,
-    "coupon_text": "Apply ₹20 coupon",
+    "effective_price": 94,
+    "coupon_discount": null,
+    "coupon_text": "Apply 5% coupon",
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 54,
-    "effective_discount_pct": 54,
-    "savings_inr": 130,
+    "discount_pct": 53,
+    "effective_discount_pct": 53,
+    "savings_inr": 106,
     "rating": null,
     "review_count": null,
     "score": 75,
@@ -101,18 +101,18 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "☑️ Look below the price on Amazon and check the 'Apply ₹20 coupon' box.",
-      "🎉 Complete checkout at the effective deal price of ₹74!"
+      "☑️ Look below the price on Amazon and check the 'Apply 5% coupon' box.",
+      "🎉 Complete checkout at the effective deal price of ₹94!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793255713,
+    "posted_at_epoch": 1793256580,
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
-    "updated_at": 1793255713,
-    "updated_at_ist": "2026-10-29 12:05 IST"
+    "updated_at": 1793256580,
+    "updated_at_ist": "2026-10-29 12:19 IST"
   },
   "best_under_299": {
     "id": "amazon:B0DN6FVPZ8",
@@ -153,36 +153,36 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793255585,
-    "age_hours": 0.0,
+    "age_hours": 0.3,
     "trending_score": 91.0,
     "is_new": true,
-    "updated_at": 1793255712,
-    "updated_at_ist": "2026-10-29 12:05 IST"
+    "updated_at": 1793256580,
+    "updated_at_ist": "2026-10-29 12:19 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B0CKVLCMJZ",
-    "asin": "B0CKVLCMJZ",
-    "title": "Havells Delite Kop'ere Water Purifier (Black), RO+UV+pH Balance, 7 Stages, 6.5L Stainless Steel Tank,Copper+Zinc+Minerals, Suitable for Borewell, Tanker &amp; Municipal Water",
+    "id": "amazon:B0FS17S4WK",
+    "asin": "B0FS17S4WK",
+    "title": "Standard by Havells Vertex Neo 4 Star 15L Storage Water Heater(Geyser)|Faster Heating|Safe to Use|Saves Electricity|Hydro Guard Coated Anti Rust Tank|Temp. Setting Knob|5 Yr. Tank Warranty| White",
     "brand": "Havells",
     "brand_tier": "tier1",
     "category": "Home & Kitchen",
-    "image_url": "https://m.media-amazon.com/images/P/B0CKVLCMJZ.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0CKVLCMJZ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 27000,
-    "list_price": 8289,
-    "effective_price": 8289,
+    "image_url": "https://m.media-amazon.com/images/P/B0FS17S4WK.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0FS17S4WK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 11990,
+    "list_price": 5227,
+    "effective_price": 5227,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 69,
-    "effective_discount_pct": 69,
-    "savings_inr": 18711,
+    "discount_pct": 56,
+    "effective_discount_pct": 56,
+    "savings_inr": 6763,
     "rating": null,
     "review_count": null,
     "score": 102,
     "buy_confidence": 91,
-    "price_context": "all_time_low",
+    "price_context": "real_drop",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
@@ -192,17 +192,17 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹8,289!"
+      "🎉 Complete checkout at the effective deal price of ₹5,227!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "posted_at_epoch": 1793097346,
-    "age_hours": 44.0,
+    "posted_at_epoch": 1793113091,
+    "age_hours": 39.9,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793255713,
-    "updated_at_ist": "2026-10-29 12:05 IST"
+    "updated_at": 1793256580,
+    "updated_at_ist": "2026-10-29 12:19 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -242,9 +242,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 96,
+    "total_deals": 99,
     "loot_count": 15,
     "max_discount_pct": 89,
-    "total_savings_inr": 414565
+    "total_savings_inr": 437696
   }
 }

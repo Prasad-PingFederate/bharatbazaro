@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-30 01:04 IST",
-  "generated_at_epoch": 1793302488,
+  "generated_at_ist": "2026-10-30 05:04 IST",
+  "generated_at_epoch": 1793316893,
   "top_loot_summary": [
     {
       "asin": "B09JWLHS4B",
@@ -13,6 +13,19 @@
       "category": "Laptops & Computing",
       "affiliate_url": "https://www.amazon.in/dp/B09JWLHS4B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B09JWLHS4B.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0912M6DNV",
+      "title": "[HDFC CC] Marshall Kilburn II 36W Portable Bluetooth Speaker - Black &amp; Brass",
+      "effective_price": 17999,
+      "mrp": 31999,
+      "discount_pct": 44,
+      "savings_inr": 14000,
+      "brand": "Marshall",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0912M6DNV?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0912M6DNV.html",
       "coupon_text": null
     },
     {
@@ -29,6 +42,19 @@
       "coupon_text": null
     },
     {
+      "asin": "B001OBTA2S",
+      "title": "HP, Black, Standard (C4901A)",
+      "effective_price": 603,
+      "mrp": 5482,
+      "discount_pct": 89,
+      "savings_inr": 4879,
+      "brand": "Hp",
+      "category": "Electronics & Audio",
+      "affiliate_url": "https://www.amazon.in/dp/B001OBTA2S?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B001OBTA2S.html",
+      "coupon_text": null
+    },
+    {
       "asin": "B0GYX5TFJ5",
       "title": "Havells Gatik Pro 400mm BLDC Pedestal Fan| 120 Ribs Guard for Safety| Smooth Oscillation| Heavy Base| ISI Marked | 2 Year Warranty | Black",
       "effective_price": 2592,
@@ -40,32 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B0GYX5TFJ5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0GYX5TFJ5.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B0F9F8D46V",
-      "title": "HP Travel Plus 22L 16-inch Laptop Bag",
-      "effective_price": 1063,
-      "mrp": 5295,
-      "discount_pct": 80,
-      "savings_inr": 4232,
-      "brand": "Hp",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0F9F8D46V?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0F9F8D46V.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0F7R58YD5",
-      "title": "Havells Crabtree iSense Smart Monoblock Touch Panel with 1 Curtain Controller &amp; 2 Scene(White) I Compatible with 2M Gang Box I Mesh connectivity I Compatible with Alexa, Google Home",
-      "effective_price": 2343,
-      "mrp": 15625,
-      "discount_pct": 85,
-      "savings_inr": 13282,
-      "brand": "Google",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0F7R58YD5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0F7R58YD5.html",
-      "coupon_text": "Apply 40% coupon"
     }
   ],
   "best_coupon_deal": {
@@ -108,11 +108,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793273361,
-    "age_hours": 8.1,
-    "trending_score": 74.8,
+    "age_hours": 12.1,
+    "trending_score": 64.8,
     "is_new": false,
-    "updated_at": 1793302468,
-    "updated_at_ist": "2026-10-30 01:04 IST"
+    "updated_at": 1793316873,
+    "updated_at_ist": "2026-10-30 05:04 IST"
   },
   "best_under_299": {
     "id": "amazon:B0DN6FVPZ8",
@@ -153,11 +153,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793255585,
-    "age_hours": 13.0,
-    "trending_score": 63.5,
+    "age_hours": 17.0,
+    "trending_score": 53.5,
     "is_new": false,
-    "updated_at": 1793302468,
-    "updated_at_ist": "2026-10-30 01:04 IST"
+    "updated_at": 1793316873,
+    "updated_at_ist": "2026-10-30 05:04 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B09JWLHS4B",
@@ -199,11 +199,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793206163,
-    "age_hours": 26.8,
-    "trending_score": 32.0,
+    "age_hours": 30.8,
+    "trending_score": 22.0,
     "is_new": false,
-    "updated_at": 1793302468,
-    "updated_at_ist": "2026-10-30 01:04 IST"
+    "updated_at": 1793316873,
+    "updated_at_ist": "2026-10-30 05:04 IST"
   },
   "category_highlights": {
     "electronics": {
@@ -229,7 +229,7 @@
     },
     "grocery": {
       "asin": "B011C1B2XY",
-      "title": "Amazon Deal (B011C1B2XY)",
+      "title": "Himalaya Herbals Neem and Turmeric Soap, 125gm (Pack of 4) with Value Pack Save Rs.20",
       "effective_price": 74,
       "discount_pct": 54,
       "deal_url": "https://bharatbazaro.com/deal/B011C1B2XY.html"
@@ -237,8 +237,8 @@
   },
   "market_stats": {
     "total_deals": 77,
-    "loot_count": 16,
+    "loot_count": 19,
     "max_discount_pct": 89,
-    "total_savings_inr": 453019
+    "total_savings_inr": 472258
   }
 }

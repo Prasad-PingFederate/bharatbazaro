@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-29 12:19 IST",
-  "generated_at_epoch": 1793256591,
+  "generated_at_ist": "2026-10-29 19:11 IST",
+  "generated_at_epoch": 1793281267,
   "top_loot_summary": [
     {
       "asin": "B0CWGD6G4L",
@@ -29,32 +29,6 @@
       "coupon_text": null
     },
     {
-      "asin": "B0CKVLCMJZ",
-      "title": "Havells Delite Kop'ere Water Purifier (Black), RO+UV+pH Balance, 7 Stages, 6.5L Stainless Steel Tank,Copper+Zinc+Minerals, Suitable for Borewell, Tanker &amp; Municipal Water",
-      "effective_price": 8289,
-      "mrp": 27000,
-      "discount_pct": 69,
-      "savings_inr": 18711,
-      "brand": "Havells",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0CKVLCMJZ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CKVLCMJZ.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0F8QC2Z7C",
-      "title": "₹6848",
-      "effective_price": 6848,
-      "mrp": 20000,
-      "discount_pct": 66,
-      "savings_inr": 13152,
-      "brand": null,
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0F8QC2Z7C?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0F8QC2Z7C.html",
-      "coupon_text": null
-    },
-    {
       "asin": "B09JWLHS4B",
       "title": "[HDFC CC] ASUS 27” 1080P Eye Care Monitor (VY279HGR) - Full HD, IPS, 120Hz, 1ms, Adaptive Sync, for Working and Gaming, Eye Care Plus, Blue Light Filter, Flicker Free, SmoothMotion, Display Widget",
       "effective_price": 6360,
@@ -66,53 +40,79 @@
       "affiliate_url": "https://www.amazon.in/dp/B09JWLHS4B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B09JWLHS4B.html",
       "coupon_text": null
+    },
+    {
+      "asin": "B0FJYJ8LVY",
+      "title": "[AXIS/ICICI CC] HP 15 Smartchoice, AMD Ryzen 3 7320U (8GB LPDDR5, 512GB SSD) FHD, Anti-Glare, Micro-Edge, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fc0500AU, FHD Camera w/Privacy Shutter Laptop",
+      "effective_price": 48490,
+      "mrp": 87179,
+      "discount_pct": 44,
+      "savings_inr": 38689,
+      "brand": "Hp",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0FJYJ8LVY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0FJYJ8LVY.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0GYX5TFJ5",
+      "title": "Havells Gatik Pro 400mm BLDC Pedestal Fan| 120 Ribs Guard for Safety| Smooth Oscillation| Heavy Base| ISI Marked | 2 Year Warranty | Black",
+      "effective_price": 2592,
+      "mrp": 6790,
+      "discount_pct": 62,
+      "savings_inr": 4198,
+      "brand": "Havells",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0GYX5TFJ5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0GYX5TFJ5.html",
+      "coupon_text": null
     }
   ],
   "best_coupon_deal": {
-    "id": "amazon:B00RV73XDG",
-    "asin": "B00RV73XDG",
-    "title": "Himalaya Pure Skin Neem Facial Kit",
-    "brand": "Himalaya",
-    "brand_tier": "tier2",
-    "category": "Electronics & Audio",
-    "image_url": "https://m.media-amazon.com/images/P/B00RV73XDG.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B00RV73XDG?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 200,
-    "list_price": 94,
-    "effective_price": 94,
+    "id": "amazon:B0F7R58YD5",
+    "asin": "B0F7R58YD5",
+    "title": "Havells Crabtree iSense Smart Monoblock Touch Panel with 1 Curtain Controller &amp; 2 Scene(White) I Compatible with 2M Gang Box I Mesh connectivity I Compatible with Alexa, Google Home",
+    "brand": "Google",
+    "brand_tier": "tier1",
+    "category": "Home & Kitchen",
+    "image_url": "https://m.media-amazon.com/images/P/B0F7R58YD5.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0F7R58YD5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 15625,
+    "list_price": 2343,
+    "effective_price": 2343,
     "coupon_discount": null,
-    "coupon_text": "Apply 5% coupon",
+    "coupon_text": "Apply 40% coupon",
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 53,
-    "effective_discount_pct": 53,
-    "savings_inr": 106,
+    "discount_pct": 85,
+    "effective_discount_pct": 85,
+    "savings_inr": 13282,
     "rating": null,
     "review_count": null,
-    "score": 75,
-    "buy_confidence": 89,
-    "price_context": "normal",
+    "score": 90,
+    "buy_confidence": 91,
+    "price_context": "all_time_low",
     "historical_min": null,
     "historical_avg": null,
     "historical_max": null,
-    "is_loot": false,
+    "is_loot": true,
     "is_further_drop": false,
     "source_count": 1,
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "☑️ Look below the price on Amazon and check the 'Apply 5% coupon' box.",
-      "🎉 Complete checkout at the effective deal price of ₹94!"
+      "☑️ Look below the price on Amazon and check the 'Apply 40% coupon' box.",
+      "🎉 Complete checkout at the effective deal price of ₹2,343!"
     ],
     "expired": false,
     "price_spiked": false,
-    "posted_to_telegram": false,
-    "posted_at_epoch": 1793256580,
-    "age_hours": 0.0,
-    "trending_score": 75.0,
-    "is_new": true,
-    "updated_at": 1793256580,
-    "updated_at_ist": "2026-10-29 12:19 IST"
+    "posted_to_telegram": true,
+    "posted_at_epoch": 1793273361,
+    "age_hours": 2.2,
+    "trending_score": 89.5,
+    "is_new": false,
+    "updated_at": 1793281251,
+    "updated_at_ist": "2026-10-29 19:10 IST"
   },
   "best_under_299": {
     "id": "amazon:B0DN6FVPZ8",
@@ -153,11 +153,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793255585,
-    "age_hours": 0.3,
-    "trending_score": 91.0,
-    "is_new": true,
-    "updated_at": 1793256580,
-    "updated_at_ist": "2026-10-29 12:19 IST"
+    "age_hours": 7.1,
+    "trending_score": 78.2,
+    "is_new": false,
+    "updated_at": 1793281251,
+    "updated_at_ist": "2026-10-29 19:10 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0FS17S4WK",
@@ -198,19 +198,19 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793113091,
-    "age_hours": 39.9,
+    "age_hours": 46.7,
     "trending_score": 10.0,
     "is_new": false,
-    "updated_at": 1793256580,
-    "updated_at_ist": "2026-10-29 12:19 IST"
+    "updated_at": 1793281251,
+    "updated_at_ist": "2026-10-29 19:10 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0BD43W4YP",
-      "title": "Crompton Galaxy Decoration Copper USB Powered String Fairy Lights with 100 Led Light (10 Meters / 32 Feet, Warm White, Pack of 1)",
-      "effective_price": 128,
-      "discount_pct": 82,
-      "deal_url": "https://bharatbazaro.com/deal/B0BD43W4YP.html"
+      "asin": "B0D4J4K68Z",
+      "title": "ZEBRONICS CMH100 Car Mobile Holder for Windshield, Dashboard and Other Suitable Surfaces, Strong Suction Cup, 360° Rotatable, Devices Upto 6.8 inch, One Click Quick Release",
+      "effective_price": 249,
+      "discount_pct": 72,
+      "deal_url": "https://bharatbazaro.com/deal/B0D4J4K68Z.html"
     },
     "electronics": {
       "asin": "B0G61JSXWJ",
@@ -242,9 +242,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 99,
-    "loot_count": 15,
+    "total_deals": 89,
+    "loot_count": 16,
     "max_discount_pct": 89,
-    "total_savings_inr": 437696
+    "total_savings_inr": 409997
   }
 }

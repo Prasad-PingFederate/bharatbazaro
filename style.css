@@ -1587,6 +1587,13 @@ body {
   animation: toast-in 250ms ease-out;
 }
 
+[data-theme="light"] .toast {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -3471,12 +3478,27 @@ body {
 }
 
 /* 2. Welcome Tooltip Callout: High-contrast legible bubble */
+#bazaroAiTooltip,
 .bazaro-ai-tooltip {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  z-index: 9995;
+  max-width: 310px;
   background: #1e293b !important;
+  color: #f8fafc !important;
   border: 2px solid #10b981 !important;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.3) !important;
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.65), 0 0 25px rgba(16, 185, 129, 0.35) !important;
 }
 
+#bazaroAiTooltip .tooltip-content,
+.bazaro-ai-tooltip .tooltip-content {
+  color: #f8fafc !important;
+}
+
+#bazaroAiTooltip .tooltip-content span,
 .bazaro-ai-tooltip .tooltip-content span {
   color: #f8fafc !important;
   font-size: 0.88rem !important;
@@ -3484,47 +3506,99 @@ body {
   line-height: 1.45 !important;
 }
 
+#bazaroAiTooltip .tooltip-close,
 .bazaro-ai-tooltip .tooltip-close {
   color: #94a3b8 !important;
   font-size: 1.3rem !important;
   line-height: 1;
 }
 
+#bazaroAiTooltip .tooltip-close:hover,
+.bazaro-ai-tooltip .tooltip-close:hover {
+  color: #f8fafc !important;
+}
+
+#bazaroAiTooltip::after,
 .bazaro-ai-tooltip::after {
   background: #1e293b !important;
   border-color: #10b981 !important;
 }
 
 /* 3. LIGHT THEME POPUP VISIBILITY OVERRIDES */
-[data-theme="light"] .bazaro-ai-launcher {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+[data-theme="light"] #bazaroAiLauncher,
+html[data-theme="light"] #bazaroAiLauncher,
+body[data-theme="light"] #bazaroAiLauncher,
+[data-theme="light"] .bazaro-ai-launcher,
+html[data-theme="light"] .bazaro-ai-launcher,
+body[data-theme="light"] .bazaro-ai-launcher {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
   color: #ffffff !important;
-  border: 2px solid #10b981 !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 18px rgba(16, 185, 129, 0.35) !important;
+  border: 2px solid #34d399 !important;
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.45), 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
-[data-theme="light"] .bazaro-ai-launcher .launcher-label {
+[data-theme="light"] #bazaroAiLauncher .launcher-label,
+html[data-theme="light"] #bazaroAiLauncher .launcher-label,
+[data-theme="light"] .bazaro-ai-launcher .launcher-label,
+html[data-theme="light"] .bazaro-ai-launcher .launcher-label {
   color: #ffffff !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) !important;
 }
 
-[data-theme="light"] .bazaro-ai-tooltip {
+[data-theme="light"] #bazaroAiLauncher .launcher-avatar-wrap,
+[data-theme="light"] .bazaro-ai-launcher .launcher-avatar-wrap {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="light"] #bazaroAiTooltip,
+html[data-theme="light"] #bazaroAiTooltip,
+body[data-theme="light"] #bazaroAiTooltip,
+[data-theme="light"] .bazaro-ai-tooltip,
+html[data-theme="light"] .bazaro-ai-tooltip,
+body[data-theme="light"] .bazaro-ai-tooltip {
   background: #ffffff !important;
+  color: #0f172a !important;
   border: 2px solid #10b981 !important;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 0 20px rgba(16, 185, 129, 0.25) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.2), 0 0 25px rgba(16, 185, 129, 0.3) !important;
 }
 
-[data-theme="light"] .bazaro-ai-tooltip .tooltip-content span {
+[data-theme="light"] #bazaroAiTooltip .tooltip-content,
+html[data-theme="light"] #bazaroAiTooltip .tooltip-content,
+[data-theme="light"] .bazaro-ai-tooltip .tooltip-content,
+html[data-theme="light"] .bazaro-ai-tooltip .tooltip-content {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] #bazaroAiTooltip .tooltip-content span,
+html[data-theme="light"] #bazaroAiTooltip .tooltip-content span,
+[data-theme="light"] .bazaro-ai-tooltip .tooltip-content span,
+html[data-theme="light"] .bazaro-ai-tooltip .tooltip-content span {
   color: #0f172a !important;
   font-size: 0.88rem !important;
   font-weight: 700 !important;
+  line-height: 1.45 !important;
 }
 
-[data-theme="light"] .bazaro-ai-tooltip .tooltip-close {
-  color: #475569 !important;
+[data-theme="light"] #bazaroAiTooltip .tooltip-close,
+html[data-theme="light"] #bazaroAiTooltip .tooltip-close,
+[data-theme="light"] .bazaro-ai-tooltip .tooltip-close,
+html[data-theme="light"] .bazaro-ai-tooltip .tooltip-close {
+  color: #334155 !important;
+  font-weight: 800 !important;
+  font-size: 1.3rem !important;
 }
 
-[data-theme="light"] .bazaro-ai-tooltip::after {
+[data-theme="light"] #bazaroAiTooltip .tooltip-close:hover,
+[data-theme="light"] .bazaro-ai-tooltip .tooltip-close:hover {
+  color: #ef4444 !important;
+}
+
+[data-theme="light"] #bazaroAiTooltip::after,
+html[data-theme="light"] #bazaroAiTooltip::after,
+[data-theme="light"] .bazaro-ai-tooltip::after,
+html[data-theme="light"] .bazaro-ai-tooltip::after {
   background: #ffffff !important;
   border-color: #10b981 !important;
 }
@@ -3941,6 +4015,13 @@ body {
   z-index: 999;
 }
 
+[data-theme="light"] .keyword-alerts-popover {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18) !important;
+  color: #0f172a !important;
+}
+
 .keyword-alerts-header {
   display: flex;
   justify-content: space-between;
@@ -3948,6 +4029,10 @@ body {
   font-weight: 800;
   font-size: 0.9rem;
   margin-bottom: 8px;
+}
+
+[data-theme="light"] .keyword-alerts-header {
+  color: #0f172a !important;
 }
 
 .keyword-popover-close {
@@ -3964,6 +4049,10 @@ body {
   margin-bottom: 8px;
 }
 
+[data-theme="light"] .keyword-alerts-desc {
+  color: #475569 !important;
+}
+
 .keyword-input-row {
   display: flex;
   gap: 6px;
@@ -3978,6 +4067,12 @@ body {
   border: 1px solid var(--border-input);
   background: var(--bg-input);
   color: var(--text-main);
+}
+
+[data-theme="light"] .keyword-input-row input {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
 }
 
 .keyword-tags-container {

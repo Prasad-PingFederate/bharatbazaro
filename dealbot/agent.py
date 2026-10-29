@@ -442,6 +442,15 @@ def score_deal(deal: Deal, recent_categories: Sequence[str], slot: Optional[str]
             score += 6
             reasons.append(f"psychological price point ({curr_sym}{eval_price}) (+6)")
 
+    # AI Web Discovery bonus (+8 pts)
+    if (
+        getattr(deal, "source_platform", None) == "AI Web Search"
+        or "AI Web Search" in (getattr(deal, "matched_sources", []) or [])
+        or (deal.id and deal.id.startswith("aiweb:"))
+    ):
+        score += 8
+        reasons.append("🌐 AI Web Discovery (+8)")
+
     # Deduct penalty if price verification was inconclusive
     if getattr(deal, "score_penalty", 0):
         score -= deal.score_penalty

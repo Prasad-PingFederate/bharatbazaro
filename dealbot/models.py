@@ -55,6 +55,7 @@ class Deal:
     coupon_text: Optional[str] = None
     extra_offers: list = field(default_factory=list)
     claim_steps: list = field(default_factory=list)
+    requires_live_verification: bool = False
 
     def __post_init__(self):
         if not self.matched_sources:

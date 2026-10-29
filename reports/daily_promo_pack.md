@@ -1,8 +1,8 @@
-# Daily Viral Social Media Promo Pack — 28 Oct 2026
+# Daily Viral Social Media Promo Pack — 29 Oct 2026
 
 ## 1. 📲 WhatsApp & Telegram Channel Broadcast
 ```text
-🚨 *TOP AMAZON INDIA LOOT DEALS (28 Oct 2026)* 🚨
+🚨 *TOP AMAZON INDIA LOOT DEALS (29 Oct 2026)* 🚨
 ⚡ *Verified Price Drops & Hidden Coupons by BharatBazaro Radar*
 
 1️⃣ *Sony Product 1 Audio Gadget*
@@ -27,7 +27,7 @@
 
 ## 2. 🐦 X (Twitter) Deals Thread
 ```text
-⚡ 5 CRAZY AMAZON INDIA PRICE DROPS TODAY (28 Oct 2026)
+⚡ 5 CRAZY AMAZON INDIA PRICE DROPS TODAY (29 Oct 2026)
 
 We track 10,000+ items every 30 minutes with Keepa price history charts.
 
@@ -52,7 +52,7 @@ Explore all verified drops: https://bharatbazaro.com
 
 ## 3. 🤖 Reddit / DesiDime Markdown Post (/r/dealsindia, /r/IndianShoppingDeals)
 ```markdown
-### [Verified Deals] Top Amazon India Price Drops & Hidden Coupons for 28 Oct 2026
+### [Verified Deals] Top Amazon India Price Drops & Hidden Coupons for 29 Oct 2026
 
 Hey everyone, here is a curated list of verified price drops on Amazon India today, cross-checked against Keepa 90-day price history:
 

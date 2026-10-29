@@ -144,43 +144,45 @@ def resolve_deal_images(deals: List[Dict[str, Any]], root_dir: Optional[Path] = 
             or len(current_title) < 15
         )
 
-        has_cached_image = bool(cache.get(asin, {}).get("image_url"))
-        has_cached_title = bool(cache.get(asin, {}).get("title"))
+        cached_meta = cache.get(asin, {})
+        cached_img = cached_meta.get("image_url")
+        cached_title = cached_meta.get("title")
+
+        has_cached_image = bool(cached_img and "/images/P/" not in cached_img)
+        has_cached_title = bool(cached_title and not cached_title.startswith("Amazon Deal") and len(cached_title) >= 15)
 
         # Apply cache if available
         if has_cached_image:
-            d["image_url"] = cache[asin]["image_url"]
+            d["image_url"] = cached_img
         if is_generic_title and has_cached_title:
-            d["title"] = cache[asin]["title"]
+            d["title"] = cached_title
             current_title = d["title"]
             is_generic_title = False
 
         # Check if we need to fetch live from Amazon
-        needs_img_fetch = False
-        if not d.get("image_url") or "/images/P/" in (d.get("image_url") or ""):
-            p_url = f"https://m.media-amazon.com/images/P/{asin}.jpg"
-            if is_dummy_pixel(p_url):
-                needs_img_fetch = True
-            else:
-                d["image_url"] = p_url
+        needs_img_fetch = not d.get("image_url") or "/images/P/" in (d.get("image_url") or "")
+        if needs_img_fetch and d.get("image_url"):
+            # Check if current P-url is dummy pixel
+            if not is_dummy_pixel(d["image_url"]):
+                needs_img_fetch = False
 
         if is_generic_title or needs_img_fetch:
             meta = fetch_real_amazon_image_and_title(asin)
             new_img = meta.get("image_url")
             new_title = meta.get("title")
 
-            if new_img:
+            if new_img and "/images/P/" not in new_img:
                 d["image_url"] = new_img
             elif not d.get("image_url"):
                 d["image_url"] = f"https://m.media-amazon.com/images/P/{asin}.jpg"
 
-            if new_title and is_generic_title:
+            if new_title and (is_generic_title or not d.get("title") or d["title"].startswith("Amazon Deal")):
                 d["title"] = new_title
                 current_title = new_title
 
             cache[asin] = {
-                "image_url": d.get("image_url"),
-                "title": d.get("title") if not (d.get("title") or "").startswith("Amazon Deal (") else None
+                "image_url": d.get("image_url") if (d.get("image_url") and "/images/P/" not in d.get("image_url")) else None,
+                "title": d.get("title") if not (d.get("title") or "").startswith("Amazon Deal") else None,
             }
             cache_dirty = True
             logger.info(f"Resolved Amazon metadata for {asin}: title='{d.get('title')[:40]}...', img={d.get('image_url')}")

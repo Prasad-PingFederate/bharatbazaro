@@ -559,12 +559,12 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0) -> str:
     loot_class = "is-loot" if is_loot else ""
 
     svg_placeholder = "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\'/><text x=\'50%\' y=\'45%\' font-size=\'48\' text-anchor=\'middle\' dominant-baseline=\'middle\'>⚡</text><text x=\'50%\' y=\'72%\' font-size=\'13\' font-weight=\'bold\' fill=\'%2364748b\' text-anchor=\'middle\' font-family=\'sans-serif\'>Amazon Verified Deal</text></svg>"
-    img_fallback = f"if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='{svg_placeholder}';}}"
+    img_fallback = f"if(this.naturalWidth<=1||this.naturalHeight<=1){{this.onload=null;this.src='{svg_placeholder}';}}"
 
     if card_index < 3:
-        img_tag = f'<img src="{image_url}" alt="{title}" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="{img_fallback}" onerror="this.src=\'{svg_placeholder}\';">'
+        img_tag = f'<img src="{image_url}" alt="{title}" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="{img_fallback}" onerror="this.onerror=null;this.src=\'{svg_placeholder}\';">'
     else:
-        img_tag = f'<img src="{image_url}" alt="{title}" class="card-img" loading="lazy" decoding="async" width="220" height="220" onload="{img_fallback}" onerror="this.src=\'{svg_placeholder}\';">'
+        img_tag = f'<img src="{image_url}" alt="{title}" class="card-img" loading="lazy" decoding="async" width="220" height="220" onload="{img_fallback}" onerror="this.onerror=null;this.src=\'{svg_placeholder}\';">'
 
     return f'''      <article class="deal-card {loot_class}" data-asin="{asin}">
         <div class="card-top">

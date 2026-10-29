@@ -177,6 +177,12 @@ def verify_and_enrich_deal(deal: Deal, store: StateStore, skip_tracker: dict | N
     """Check stock and enrich Amazon deals with live price, MRP, ratings, coupons, and images.
     Returns True if valid for posting, False if rejected (OOS, price jumped >20%, or poor rating)."""
     logger = logging.getLogger("dealbot.main")
+    is_ai_web_deal = (
+        getattr(deal, "requires_live_verification", False)
+        or getattr(deal, "source_platform", "") == "AI Web Search"
+        or (deal.id and deal.id.startswith("aiweb:"))
+    )
+
     status = inspect_stock(deal.url)
     if status == "out_of_stock":
         logger.info(f"Skipping {deal.id}: out of stock or gone.")
@@ -185,11 +191,25 @@ def verify_and_enrich_deal(deal: Deal, store: StateStore, skip_tracker: dict | N
         deal._verify_skip_reason = "oos"
         store.record_event(deal.id, "skipped_oos")
         return False
+    if is_ai_web_deal and status != "in_stock":
+        logger.info(f"Skipping AI Web Search deal {deal.id}: not verified in stock (status={status}).")
+        if skip_tracker is not None:
+            skip_tracker["unverified_stock"] = skip_tracker.get("unverified_stock", 0) + 1
+        deal._verify_skip_reason = "unverified_stock"
+        store.record_event(deal.id, "skipped_aiweb_unverified_stock")
+        return False
     if status == "in_stock":
         deal.checked = True
         if "amazon." in (deal.url or "").lower():
             enrichment = enrich_amazon_deal(deal.url)
             live_price = enrichment.get("live_price")
+            if is_ai_web_deal and (not live_price or live_price <= 0):
+                logger.info(f"Skipping AI Web Search deal {deal.id}: missing verified live Amazon price.")
+                if skip_tracker is not None:
+                    skip_tracker["unverified_price"] = skip_tracker.get("unverified_price", 0) + 1
+                deal._verify_skip_reason = "unverified_price"
+                store.record_event(deal.id, "skipped_aiweb_unverified_price")
+                return False
             feed_price = parse_rupees(deal.current_price)
             feed_mrp = parse_rupees(deal.original_price)
             is_unverified_source = (
@@ -322,6 +342,19 @@ def verify_and_enrich_deal(deal: Deal, store: StateStore, skip_tracker: dict | N
                 store.record_event(deal.id, "skipped_low_discount")
                 return False
 
+            if is_ai_web_deal:
+                p_ctx = getattr(deal, "price_context", None)
+                is_hist_drop = p_ctx in ("real_drop", "all_time_low") or getattr(deal, "is_further_price_drop", False)
+                if (eff_disc is None or eff_disc < 25) and not is_hist_drop:
+                    logger.info(
+                        f"Skipping AI Web Search deal {deal.id}: effective discount {eff_disc}% is below required 25%."
+                    )
+                    if skip_tracker is not None:
+                        skip_tracker["low_discount"] = skip_tracker.get("low_discount", 0) + 1
+                    deal._verify_skip_reason = "low_discount"
+                    store.record_event(deal.id, "skipped_aiweb_low_discount")
+                    return False
+
             # Record verified price sighting into historical tracker
             canon_id = getattr(deal, "canonical_product_id", None) or deal.id
             verified_price = deal.effective_price if deal.effective_price is not None else live_price
@@ -337,6 +370,13 @@ def verify_and_enrich_deal(deal: Deal, store: StateStore, skip_tracker: dict | N
                     deal.price_trend_text = f"📉 Price Trend: {curr_sym}{baseline:,} (Avg) ➔ {curr_sym}{verified_price:,} (Now!)"
         return True
     else:
+        if is_ai_web_deal:
+            logger.info(f"Skipping AI Web Search deal {deal.id}: stock unknown, strict verification failed.")
+            if skip_tracker is not None:
+                skip_tracker["unverified_stock"] = skip_tracker.get("unverified_stock", 0) + 1
+            deal._verify_skip_reason = "unverified_stock"
+            store.record_event(deal.id, "skipped_aiweb_unverified_stock")
+            return False
         store.record_event(deal.id, "stock_unknown")
         return True
 

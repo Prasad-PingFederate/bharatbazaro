@@ -846,6 +846,12 @@ def collect_all_deals() -> List[Deal]:
             lambda: fetch_reddit_deals(min_discount=min_disc),
             lambda: fetch_amazon_movers_and_shakers(min_discount=min_disc),
         ]
+        if os.getenv("AI_WEB_SEARCH_ENABLED", "true").lower() == "true":
+            try:
+                from dealbot.ai_web_search import fetch_ai_web_search_deals
+                tasks.append(lambda: fetch_ai_web_search_deals(max_results=8))
+            except Exception as e:
+                logger.debug(f"Could not load AI Web Search engine: {e}")
         for rf in cfg.get("rss_feeds", []):
             tasks.append(lambda u=rf: _download_feed(u, min_discount=min_disc))
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:

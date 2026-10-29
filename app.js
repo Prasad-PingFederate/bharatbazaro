@@ -964,7 +964,7 @@
         <div class="card-media">
           <div class="card-image-wrap">
             <a href="${escapeHtml(affImgUrl)}" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
-              <img src="${escapeHtml(d.image_url)}" alt="${escapeHtml(d.title)}" class="card-img" ${imgAttr} onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='${svgPlaceholder}';}" onerror="this.src='${svgPlaceholder}';">
+              <img src="${escapeHtml(d.image_url)}" alt="${escapeHtml(d.title)}" class="card-img" ${imgAttr} onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='${svgPlaceholder}';}" onerror="this.onerror=null;this.src='${svgPlaceholder}';">
             </a>
           </div>
           <div class="card-meta-bar">

@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-10-30 22:03 IST",
-  "generated_at_epoch": 1793378030,
+  "generated_at_ist": "2026-10-30 22:11 IST",
+  "generated_at_epoch": 1793378499,
   "top_loot_summary": [
+    {
+      "asin": "B008A2796G",
+      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
+      "effective_price": 6995,
+      "mrp": 13995,
+      "discount_pct": 50,
+      "savings_inr": 7000,
+      "brand": "Fossil",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09V4B6K5W",
+      "title": "Samsung Galaxy S23 FE 5G (Graphite, 8GB, 128GB Storage)",
+      "effective_price": 32999,
+      "mrp": 79999,
+      "discount_pct": 59,
+      "savings_inr": 47000,
+      "brand": "Samsung",
+      "category": "Mobiles & Accessories",
+      "affiliate_url": "https://www.amazon.in/dp/B09V4B6K5W?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09V4B6K5W.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B25L78CD",
       "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
@@ -39,32 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B000I6IY2W",
-      "title": "Beurer German Engineering UB 33 Electric Underblanket for Single Bed I German Engineering I 3 Temperature Settings I Printed Cotton Top I Overheat Protection I Illuminated Controls I Machine Washable 30°C I OEKO-TEX Certified I 3-Year Warranty",
-      "effective_price": 1122,
-      "mrp": 5584,
-      "discount_pct": 80,
-      "savings_inr": 4462,
-      "brand": "Beurer",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B000I6IY2W?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B000I6IY2W.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08X3Q32H6",
-      "title": "TIMEX Fria Round 33mm Dial Analog Women Watch",
-      "effective_price": 3382,
-      "mrp": 7495,
-      "discount_pct": 55,
-      "savings_inr": 4113,
-      "brand": "Timex",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B08X3Q32H6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08X3Q32H6.html",
       "coupon_text": null
     }
   ],
@@ -113,8 +113,8 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1793277265,
     "last_verified_at_ist": "2026-10-29 18:04 IST",
-    "age_hours": 28.0,
-    "trending_score": 22.0,
+    "age_hours": 28.1,
+    "trending_score": 21.8,
     "is_new": false,
     "is_fresh": false,
     "updated_at": 1793277265,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793377992,
-    "last_verified_at_epoch": 1793377992,
-    "last_verified_at_ist": "2026-10-30 22:03 IST",
+    "posted_at_epoch": 1793378491,
+    "last_verified_at_epoch": 1793378491,
+    "last_verified_at_ist": "2026-10-30 22:11 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793377992,
-    "updated_at_ist": "2026-10-30 22:03 IST"
+    "updated_at": 1793378491,
+    "updated_at_ist": "2026-10-30 22:11 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CHX1W1XY",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793377992,
-    "last_verified_at_epoch": 1793377992,
-    "last_verified_at_ist": "2026-10-30 22:03 IST",
+    "posted_at_epoch": 1793378491,
+    "last_verified_at_epoch": 1793378491,
+    "last_verified_at_ist": "2026-10-30 22:11 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793377992,
-    "updated_at_ist": "2026-10-30 22:03 IST"
+    "updated_at": 1793378491,
+    "updated_at_ist": "2026-10-30 22:11 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 186,
-    "loot_count": 8,
+    "total_deals": 192,
+    "loot_count": 10,
     "max_discount_pct": 89,
-    "total_savings_inr": 717063
+    "total_savings_inr": 725798
   }
 }

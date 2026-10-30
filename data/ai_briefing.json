@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-10-30 05:04 IST",
-  "generated_at_epoch": 1793316893,
+  "generated_at_ist": "2026-10-30 08:25 IST",
+  "generated_at_epoch": 1793328935,
   "top_loot_summary": [
+    {
+      "asin": "B08PBS34V9",
+      "title": "[HDFC CC] Butterfly Jet Elite 750 Watts Mixer Grinder And Vegetable Chopper, Grey",
+      "effective_price": 2665,
+      "mrp": 7198,
+      "discount_pct": 63,
+      "savings_inr": 4533,
+      "brand": "Butterfly",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B08PBS34V9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B08PBS34V9.html",
+      "coupon_text": null
+    },
     {
       "asin": "B09JWLHS4B",
       "title": "[HDFC CC] ASUS 27” 1080P Eye Care Monitor (VY279HGR) - Full HD, IPS, 120Hz, 1ms, Adaptive Sync, for Working and Gaming, Eye Care Plus, Blue Light Filter, Flicker Free, SmoothMotion, Display Widget",
@@ -13,6 +26,19 @@
       "category": "Laptops & Computing",
       "affiliate_url": "https://www.amazon.in/dp/B09JWLHS4B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B09JWLHS4B.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0CSYYQ82J",
+      "title": "Milton Pro Cook Kitchen Pride Non-Stick Cookware Set of 5 | Includes Nonstick Tawa, Frying Pan, Kadhai with Lid, Nylon Laddle &amp; Spatula | Non-Induction Base | Peach Color",
+      "effective_price": 1435,
+      "mrp": 4687,
+      "discount_pct": 69,
+      "savings_inr": 3252,
+      "brand": "Milton",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0CSYYQ82J?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CSYYQ82J.html",
       "coupon_text": null
     },
     {
@@ -39,32 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B0HBBTV4J4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0HBBTV4J4.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B001OBTA2S",
-      "title": "HP, Black, Standard (C4901A)",
-      "effective_price": 603,
-      "mrp": 5482,
-      "discount_pct": 89,
-      "savings_inr": 4879,
-      "brand": "Hp",
-      "category": "Electronics & Audio",
-      "affiliate_url": "https://www.amazon.in/dp/B001OBTA2S?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B001OBTA2S.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0GYX5TFJ5",
-      "title": "Havells Gatik Pro 400mm BLDC Pedestal Fan| 120 Ribs Guard for Safety| Smooth Oscillation| Heavy Base| ISI Marked | 2 Year Warranty | Black",
-      "effective_price": 2592,
-      "mrp": 6790,
-      "discount_pct": 62,
-      "savings_inr": 4198,
-      "brand": "Havells",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0GYX5TFJ5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0GYX5TFJ5.html",
       "coupon_text": null
     }
   ],
@@ -108,11 +108,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793273361,
-    "age_hours": 12.1,
-    "trending_score": 64.8,
+    "age_hours": 15.4,
+    "trending_score": 56.5,
     "is_new": false,
-    "updated_at": 1793316873,
-    "updated_at_ist": "2026-10-30 05:04 IST"
+    "updated_at": 1793328923,
+    "updated_at_ist": "2026-10-30 08:25 IST"
   },
   "best_under_299": {
     "id": "amazon:B0DN6FVPZ8",
@@ -153,34 +153,34 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793255585,
-    "age_hours": 17.0,
-    "trending_score": 53.5,
+    "age_hours": 20.4,
+    "trending_score": 45.0,
     "is_new": false,
-    "updated_at": 1793316873,
-    "updated_at_ist": "2026-10-30 05:04 IST"
+    "updated_at": 1793328923,
+    "updated_at_ist": "2026-10-30 08:25 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B09JWLHS4B",
-    "asin": "B09JWLHS4B",
-    "title": "[HDFC CC] ASUS 27” 1080P Eye Care Monitor (VY279HGR) - Full HD, IPS, 120Hz, 1ms, Adaptive Sync, for Working and Gaming, Eye Care Plus, Blue Light Filter, Flicker Free, SmoothMotion, Display Widget",
-    "brand": "Asus",
+    "id": "amazon:B08PBS34V9",
+    "asin": "B08PBS34V9",
+    "title": "[HDFC CC] Butterfly Jet Elite 750 Watts Mixer Grinder And Vegetable Chopper, Grey",
+    "brand": "Butterfly",
     "brand_tier": "tier1",
-    "category": "Laptops & Computing",
-    "image_url": "https://m.media-amazon.com/images/P/B09JWLHS4B.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B09JWLHS4B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 57818,
-    "list_price": 6360,
-    "effective_price": 6360,
+    "category": "Home & Kitchen",
+    "image_url": "https://m.media-amazon.com/images/P/B08PBS34V9.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B08PBS34V9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 7198,
+    "list_price": 2665,
+    "effective_price": 2665,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": "Instant Bank Discount with HDFC CC",
-    "discount_pct": 94,
-    "effective_discount_pct": 89,
-    "savings_inr": 51458,
+    "discount_pct": 63,
+    "effective_discount_pct": 63,
+    "savings_inr": 4533,
     "rating": null,
     "review_count": null,
-    "score": 94,
+    "score": 102,
     "buy_confidence": 91,
     "price_context": "all_time_low",
     "historical_min": null,
@@ -193,17 +193,17 @@
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
       "💳 Select eligible card/payment for instant bank discount: Instant Bank Discount with HDFC CC.",
-      "🎉 Complete checkout at the effective deal price of ₹6,360!"
+      "🎉 Complete checkout at the effective deal price of ₹2,665!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "posted_at_epoch": 1793206163,
-    "age_hours": 30.8,
-    "trending_score": 22.0,
+    "posted_at_epoch": 1793316861,
+    "age_hours": 3.4,
+    "trending_score": 98.5,
     "is_new": false,
-    "updated_at": 1793316873,
-    "updated_at_ist": "2026-10-30 05:04 IST"
+    "updated_at": 1793328923,
+    "updated_at_ist": "2026-10-30 08:25 IST"
   },
   "category_highlights": {
     "electronics": {
@@ -237,8 +237,8 @@
   },
   "market_stats": {
     "total_deals": 77,
-    "loot_count": 19,
+    "loot_count": 20,
     "max_discount_pct": 89,
-    "total_savings_inr": 472258
+    "total_savings_inr": 425197
   }
 }

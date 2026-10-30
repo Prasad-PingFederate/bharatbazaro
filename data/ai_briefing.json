@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-30 22:11 IST",
-  "generated_at_epoch": 1793378499,
+  "generated_at_ist": "2026-10-30 23:24 IST",
+  "generated_at_epoch": 1793382893,
   "top_loot_summary": [
     {
       "asin": "B008A2796G",
@@ -113,8 +113,8 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1793277265,
     "last_verified_at_ist": "2026-10-29 18:04 IST",
-    "age_hours": 28.1,
-    "trending_score": 21.8,
+    "age_hours": 29.3,
+    "trending_score": 18.8,
     "is_new": false,
     "is_fresh": false,
     "updated_at": 1793277265,
@@ -127,7 +127,7 @@
     "brand": "Nivea",
     "brand_tier": "tier1",
     "category": "Personal Care & Grocery",
-    "image_url": "https://m.media-amazon.com/images/P/B008T1V3KC.jpg",
+    "image_url": "https://m.media-amazon.com/images/I/51M1FoB3qYL._SL600_.jpg",
     "affiliate_url": "https://www.amazon.in/dp/B008T1V3KC?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
     "mrp": 499,
     "list_price": 299,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793378491,
-    "last_verified_at_epoch": 1793378491,
-    "last_verified_at_ist": "2026-10-30 22:11 IST",
+    "posted_at_epoch": 1793382845,
+    "last_verified_at_epoch": 1793382845,
+    "last_verified_at_ist": "2026-10-30 23:24 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793378491,
-    "updated_at_ist": "2026-10-30 22:11 IST"
+    "updated_at": 1793382845,
+    "updated_at_ist": "2026-10-30 23:24 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CHX1W1XY",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793378491,
-    "last_verified_at_epoch": 1793378491,
-    "last_verified_at_ist": "2026-10-30 22:11 IST",
+    "posted_at_epoch": 1793382845,
+    "last_verified_at_epoch": 1793382845,
+    "last_verified_at_ist": "2026-10-30 23:24 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793378491,
-    "updated_at_ist": "2026-10-30 22:11 IST"
+    "updated_at": 1793382845,
+    "updated_at_ist": "2026-10-30 23:24 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -232,38 +232,38 @@
       "deal_url": "https://bharatbazaro.com/deal/B0CHX1W1XY.html"
     },
     "electronics": {
-      "asin": "B07YYK13LF",
-      "title": "SanDisk 128GB Ultra Dual Drive Luxe USB Type-C Flash Drive (All-Metal)",
-      "effective_price": 1199,
-      "discount_pct": 54,
-      "deal_url": "https://bharatbazaro.com/deal/B07YYK13LF.html"
+      "asin": "B0CYQ4M4N5",
+      "title": "Sony Bravia 55 inches 4K Ultra HD Smart LED Google TV KD-55X74L",
+      "effective_price": 52990,
+      "discount_pct": 47,
+      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html"
     },
     "home": {
-      "asin": "B07XLML2YS",
-      "title": "TP-Link Tapo C200 360-degree 2MP 1080p Full HD Pan/Tilt WiFi Security Camera",
-      "effective_price": 1699,
-      "discount_pct": 48,
-      "deal_url": "https://bharatbazaro.com/deal/B07XLML2YS.html"
+      "asin": "B08HN6PCDJ",
+      "title": "Philips Digital Air Fryer HD9252/90 (4.1 Litre, 1400W Rapid Air Technology)",
+      "effective_price": 6999,
+      "discount_pct": 42,
+      "deal_url": "https://bharatbazaro.com/deal/B08HN6PCDJ.html"
     },
     "fashion": {
-      "asin": "B000LAKYW8",
-      "title": "Casio Vintage Digital Unisex Watch A168WA-1DF with Illuminator",
-      "effective_price": 1995,
-      "discount_pct": 26,
-      "deal_url": "https://bharatbazaro.com/deal/B000LAKYW8.html"
+      "asin": "B0B8NTZ24L",
+      "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
+      "effective_price": 1899,
+      "discount_pct": 58,
+      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html"
     },
     "grocery": {
-      "asin": "B0BHTNWSZF",
-      "title": "Dove Refreshing Body Wash with Cucumber and Green Tea Extract, 1 Litre Mega Pack",
-      "effective_price": 389,
-      "discount_pct": 51,
-      "deal_url": "https://bharatbazaro.com/deal/B0BHTNWSZF.html"
+      "asin": "B07V2QJ412",
+      "title": "Cetaphil Gentle Skin Cleanser 500ml for Sensitive Skin with Niacinamide",
+      "effective_price": 549,
+      "discount_pct": 23,
+      "deal_url": "https://bharatbazaro.com/deal/B07V2QJ412.html"
     }
   },
   "market_stats": {
-    "total_deals": 192,
-    "loot_count": 10,
+    "total_deals": 189,
+    "loot_count": 8,
     "max_discount_pct": 89,
-    "total_savings_inr": 725798
+    "total_savings_inr": 683792
   }
 }

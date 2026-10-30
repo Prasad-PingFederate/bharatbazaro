@@ -228,6 +228,7 @@ def search_gemini_grounded(timeout: float = 10.0) -> List[WebDealCandidate]:
 GOOGLE_NEWS_QUERIES = [
     '("Amazon India" OR "Amazon.in") ("price drop" OR "lowest price" OR "deal" OR "discount") ₹ when:1d',
     '("Amazon" ₹) (earbuds OR smartwatch OR smartphone OR laptop OR air fryer OR headphones) deal when:1d',
+    '("Amazon" ₹) (Dove OR Nivea OR "Surf Excel" OR Colgate OR Cetaphil OR Minimalist OR Ariel OR Cadbury) deal when:1d',
 ]
 
 
@@ -333,6 +334,7 @@ def search_google_news_india(timeout: float = 10.0) -> List[WebDealCandidate]:
 DDG_QUERIES = [
     'site:amazon.in/dp/ ("off" OR "deal" OR "coupon") ₹',
     '("amazon.in/dp/" OR "amzn.to") ("loot" OR "price drop" OR "apply coupon") ₹',
+    'site:amazon.in/dp/ ("Dove" OR "Nivea" OR "Surf Excel" OR "Colgate" OR "Minimalist" OR "Cadbury") ("off" OR "₹")',
 ]
 
 

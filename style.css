@@ -4341,3 +4341,78 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
 .older-deals-grid.hidden {
   display: none;
 }
+
+
+.badge-diwali {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+}
+
+.filter-tab.diwali-tab {
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #f59e0b;
+}
+
+.filter-tab.diwali-tab:hover {
+  border-color: #f59e0b;
+}
+
+.filter-tab.active.diwali-tab {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #ffffff;
+  border-color: #f59e0b;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+/* Cookie Magnet & Daily Essentials Tabs & Badges (Revenue Optimization) */
+.badge-magnet {
+  background: linear-gradient(135deg, #ec4899, #be123c);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+}
+
+.filter-tab.daily-tab {
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #10b981;
+}
+
+.filter-tab.daily-tab:hover {
+  border-color: #10b981;
+}
+
+.filter-tab.active.daily-tab {
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+.filter-tab.magnet-tab {
+  border-color: rgba(244, 63, 94, 0.4);
+  color: #f43f5e;
+}
+
+.filter-tab.magnet-tab:hover {
+  border-color: #f43f5e;
+}
+
+.filter-tab.active.magnet-tab {
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  color: #ffffff;
+  border-color: #f43f5e;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.35);
+}
+
+[data-theme="light"] .filter-tab.active.daily-tab {
+  background: #059669;
+  color: #ffffff;
+  border-color: #059669;
+}
+
+[data-theme="light"] .filter-tab.active.magnet-tab {
+  background: #e11d48;
+  color: #ffffff;
+  border-color: #e11d48;
+}

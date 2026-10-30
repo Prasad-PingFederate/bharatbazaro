@@ -323,24 +323,32 @@ def verify_and_enrich_deal(deal: Deal, store: StateStore, skip_tracker: dict | N
             elif deal.discount_percent is not None:
                 deal.effective_discount_pct = deal.discount_percent
 
-            # Enforce minimum discount threshold after enrichment
-            min_disc_env = int(os.getenv("MIN_DISCOUNT_PERCENT", "30"))
-            from dealbot.agent import brand_tier
+            # Enforce tiered discount threshold after enrichment (Requirement 2)
+            from dealbot.agent import brand_tier, get_tiered_discount_requirement
             b_tier = brand_tier(deal.title)
-            required_disc = 25 if b_tier == 1 else min_disc_env
+            rating_val = getattr(deal, "rating", None) or enrichment.get("rating")
+            savings_val = deal.savings_rupees()
+            required_disc = get_tiered_discount_requirement(
+                eff_price,
+                brand_tier=b_tier,
+                rating=rating_val,
+                savings_inr=savings_val,
+            )
             eff_disc = getattr(deal, "effective_discount_pct", None)
             if eff_disc is None:
                 eff_disc = deal.discount_percent
             if eff_disc is not None and eff_disc < required_disc:
-                logger.info(
-                    f"Skipping {deal.id}: effective discount {eff_disc}% is below required {required_disc}% "
-                    f"(Tier-{b_tier} brand)."
-                )
-                if skip_tracker is not None:
-                    skip_tracker["low_discount"] = skip_tracker.get("low_discount", 0) + 1
-                deal._verify_skip_reason = "low_discount"
-                store.record_event(deal.id, "skipped_low_discount")
-                return False
+                # Also allow if significant absolute rupee drop (>= ₹1,500 savings on high-ticket)
+                if not (eff_price and eff_price >= 3000 and savings_val and savings_val >= 1500 and eff_disc >= 15):
+                    logger.info(
+                        f"Skipping {deal.id}: effective discount {eff_disc}% is below tiered requirement {required_disc}% "
+                        f"(Price: ₹{eff_price}, Tier-{b_tier} brand, Rating: {rating_val})."
+                    )
+                    if skip_tracker is not None:
+                        skip_tracker["low_discount"] = skip_tracker.get("low_discount", 0) + 1
+                    deal._verify_skip_reason = "low_discount"
+                    store.record_event(deal.id, "skipped_low_discount")
+                    return False
 
             if is_ai_web_deal:
                 p_ctx = getattr(deal, "price_context", None)
@@ -527,6 +535,8 @@ def run_once() -> int:
                     canonical_product_id=getattr(deal, "canonical_product_id", None),
                     price=post_price,
                     effective_price=eff_price,
+                    rating=getattr(deal, "rating", None),
+                    review_count=getattr(deal, "review_count", None),
                 )
                 posted_count += 1
             continue
@@ -554,6 +564,8 @@ def run_once() -> int:
                     canonical_product_id=getattr(deal, "canonical_product_id", None),
                     price=post_price,
                     effective_price=eff_price,
+                    rating=getattr(deal, "rating", None),
+                    review_count=getattr(deal, "review_count", None),
                 )
             continue
 
@@ -577,6 +589,8 @@ def run_once() -> int:
                     canonical_product_id=getattr(deal, "canonical_product_id", None),
                     price=post_price,
                     effective_price=eff_price,
+                    rating=getattr(deal, "rating", None),
+                    review_count=getattr(deal, "review_count", None),
                 )
                 time.sleep(post_delay)
                 store.record_event(deal.id, "posted", "checked" if deal.checked else "unverified")

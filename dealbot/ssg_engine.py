@@ -396,15 +396,12 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0) -> str:
     buy_conf = d.get("buy_confidence") or 75
     brand_chip = html_lib.escape(str(d.get("brand") or d.get("category") or "Amazon"))
 
-    raw_aff = str(d.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1")
-    if "ascsubtag=" not in raw_aff:
-        raw_aff += ("&" if "?" in raw_aff else "?") + "ascsubtag=bb-grid"
-
+    raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid"
     aff_btn_url = html_lib.escape(raw_aff)
-    aff_img_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-card-img", raw_aff))
-    aff_title_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-card-title", raw_aff))
-    aff_price_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-card-price", raw_aff))
-    aff_coupon_url = html_lib.escape(re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-coupon-pill", raw_aff))
+    aff_img_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-card-img")
+    aff_title_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-card-title")
+    aff_price_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-card-price")
+    aff_coupon_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-coupon-pill")
 
     image_url = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
     is_loot = bool(d.get("is_loot"))
@@ -413,6 +410,11 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0) -> str:
     badges = []
     if d.get("is_new") or (d.get("age_hours") is not None and d.get("age_hours") <= 2.0):
         badges.append('<span class="badge-tag badge-new">⚡ NEW</span>')
+    is_diwali_steal = bool(d.get("is_diwali_steal") or (savings_inr >= 1000 and disc_pct >= 25))
+    if is_diwali_steal:
+        badges.append('<span class="badge-tag badge-diwali">🔥 DIWALI STEAL</span>')
+    if d.get("is_cookie_magnet"):
+        badges.append('<span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span>')
     if is_loot:
         badges.append('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>')
     if d.get("price_context") == "all_time_low":
@@ -637,7 +639,7 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0) -> str:
 
         <div class="card-footer">
           <a href="{aff_btn_url}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Deal on Amazon ↗</span>
+            <span>{'🛒 Grab Daily Steal on Amazon ↗' if d.get('is_cookie_magnet') else ('🛒 Grab Diwali Deal on Amazon ↗' if (buy_conf >= 80 or d.get('is_diwali_steal') or eff_price >= 2000) else '🛒 Grab Deal on Amazon ↗')}</span>
           </a>
           <button class="btn-card-share" data-asin="{asin}" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>
@@ -1487,7 +1489,7 @@ def render_product_page_html(
         <!-- Primary CTA Buttons -->
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
           <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
-            <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
+            <span>🛒 Grab Diwali Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
           </a>
           <div style="display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap;">
             <a href="https://api.whatsapp.com/send?text={html_lib.escape(f'🔥 Unbelievable Amazon Deal! {raw_title} at ₹{eff_price:,} ({disc_pct}% OFF): {canonical}')}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; text-decoration: none; padding: 10px 16px;">

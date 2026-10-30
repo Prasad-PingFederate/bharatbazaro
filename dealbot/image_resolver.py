@@ -232,6 +232,8 @@ def resolve_deal_images(deals: List[Dict[str, Any]], root_dir: Optional[Path] = 
     cache_path = root_dir / "data" / "image_cache.json"
     cache = load_image_cache(cache_path)
     cache_dirty = False
+    live_fetches_done = 0
+    max_live_fetches = int(os.getenv("MAX_IMAGE_RESOLVE_FETCHES", "8"))
 
     for d in deals:
         asin = d.get("asin")
@@ -275,7 +277,8 @@ def resolve_deal_images(deals: List[Dict[str, Any]], root_dir: Optional[Path] = 
             if not is_dummy_pixel(d["image_url"]):
                 needs_img_fetch = False
 
-        if is_generic_title or needs_img_fetch:
+        if (is_generic_title or needs_img_fetch) and live_fetches_done < max_live_fetches:
+            live_fetches_done += 1
             slug_hint = d.get("url") or d.get("affiliate_url") or ""
             meta = fetch_real_amazon_image_and_title(asin, url_slug_hint=slug_hint)
             new_img = meta.get("image_url")

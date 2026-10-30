@@ -99,6 +99,7 @@
     visibleCount: document.getElementById('visibleCount'),
     activeFilterBadge: document.getElementById('activeFilterBadge'),
     syncTime: document.getElementById('syncTime'),
+    feedLiveTimestamp: document.getElementById('feedLiveTimestamp'),
     // Modal
     chartModal: document.getElementById('chartModal'),
     modalTitle: document.getElementById('modalTitle'),
@@ -369,18 +370,42 @@
   }
 
   // ── 7. UI UPDATES (STATS, COUNTERS, TICKER) ────────────────────────────────
-  function updateStatsUI() {
-    const totalDeals = state.allDeals.length;
-    const lootCount = state.allDeals.filter(d => d.is_loot).length;
-    const maxDiscount = state.allDeals.reduce((max, d) => Math.max(max, d.effective_discount_pct || d.discount_pct || 0), 0);
-    const totalSavings = state.allDeals.reduce((sum, d) => sum + (d.savings_inr || 0), 0);
+  function formatLiveIstTimestamp(timestampStr) {
+    if (timestampStr) return timestampStr;
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istDate = new Date(now.getTime() + istOffset + (now.getTimezoneOffset() * 60 * 1000));
+    const day = String(istDate.getDate()).padStart(2, '0');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[istDate.getMonth()];
+    const year = istDate.getFullYear();
+    let hours = istDate.getHours();
+    const minutes = String(istDate.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${day} ${month} ${year}, ${hours}:${minutes} ${ampm} IST`;
+  }
 
-    if (el.statLiveDeals) el.statLiveDeals.textContent = state.stats.total_live_deals || totalDeals;
+  function updateStatsUI() {
+    const freshDeals = state.allDeals.filter(d => (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
+    const freshCount = state.stats.fresh_deals_count !== undefined ? state.stats.fresh_deals_count : freshDeals.length;
+    const lootCount = freshDeals.filter(d => d.is_loot).length;
+    const maxDiscount = freshDeals.reduce((max, d) => Math.max(max, d.effective_discount_pct || d.discount_pct || 0), 0);
+    const totalSavings = freshDeals.reduce((sum, d) => sum + (d.savings_inr || 0), 0);
+
+    if (el.statLiveDeals) el.statLiveDeals.textContent = freshCount;
     if (el.statLootCount) el.statLootCount.textContent = state.stats.loot_count || lootCount;
     if (el.statMaxDiscount) el.statMaxDiscount.textContent = `${state.stats.max_discount_pct || maxDiscount}%`;
     if (el.statTotalSavings) {
       const savings = state.stats.total_savings_available || totalSavings;
       el.statTotalSavings.textContent = formatCurrencyShort(savings);
+    }
+
+    if (el.feedLiveTimestamp) {
+      el.feedLiveTimestamp.textContent = formatLiveIstTimestamp(state.stats.last_updated_ist);
+    }
+    if (el.statusText) {
+      el.statusText.textContent = "Latest Amazon Deals: Live";
     }
 
     // Dynamic binding of real Telegram URL
@@ -394,11 +419,12 @@
 
   function updateTabCounts() {
     if (!state.allDeals) return;
-    const all = state.allDeals.length;
-    const loot = state.allDeals.filter(d => d.is_loot).length;
-    const drops = state.allDeals.filter(d => d.price_context === 'all_time_low' || d.price_context === 'real_drop' || d.is_further_drop).length;
-    const coupons = state.allDeals.filter(d => (d.coupon_discount && d.coupon_discount > 0) || d.coupon_text || d.promo_code || d.bank_offer).length;
-    const tier1 = state.allDeals.filter(d => d.brand_tier === 'tier1').length;
+    const freshDeals = state.allDeals.filter(d => (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
+    const all = state.stats.fresh_deals_count !== undefined ? state.stats.fresh_deals_count : freshDeals.length;
+    const loot = freshDeals.filter(d => d.is_loot).length;
+    const drops = freshDeals.filter(d => d.price_context === 'all_time_low' || d.price_context === 'real_drop' || d.is_further_drop).length;
+    const coupons = freshDeals.filter(d => (d.coupon_discount && d.coupon_discount > 0) || d.coupon_text || d.promo_code || d.bank_offer).length;
+    const tier1 = freshDeals.filter(d => d.brand_tier === 'tier1').length;
     const watchlist = state.watchlist.size;
 
     if (el.countAll) el.countAll.textContent = all;
@@ -581,13 +607,22 @@
       });
     }
 
-    // 6. Sorting (Default: Freshness Time-Decay Trending Score)
+    function getDealRecency(d) {
+      return d.last_verified_at_epoch || d.posted_at_epoch || d.updated_at || 0;
+    }
+
+    // 6. Sorting (Default: Strict Recency / Most Recently Verified First)
     switch (state.filters.sort) {
-      case 'score':
-        result.sort((a, b) => (b.trending_score || b.score || 0) - (a.trending_score || a.score || 0) || (b.buy_confidence || 0) - (a.buy_confidence || 0));
-        break;
       case 'newest':
-        result.sort((a, b) => (b.updated_at || 0) - (a.updated_at || 0));
+        result.sort((a, b) => getDealRecency(b) - getDealRecency(a));
+        break;
+      case 'score':
+        result.sort((a, b) => {
+          const aFresh = (a.is_fresh !== false && (a.age_hours === undefined || a.age_hours <= 24.0)) ? 1 : 0;
+          const bFresh = (b.is_fresh !== false && (b.age_hours === undefined || b.age_hours <= 24.0)) ? 1 : 0;
+          if (bFresh !== aFresh) return bFresh - aFresh;
+          return (getDealRecency(b) - getDealRecency(a)) || ((b.trending_score || b.score || 0) - (a.trending_score || a.score || 0));
+        });
         break;
       case 'discount':
         result.sort((a, b) => (b.effective_discount_pct || b.discount_pct || 0) - (a.effective_discount_pct || a.discount_pct || 0));
@@ -748,10 +783,10 @@
     const searchQuery = (state.filters.search || '').trim();
     const hasSearch = searchQuery.length >= 2;
 
-    if (el.visibleCount) el.visibleCount.textContent = deals.length;
     renderTop3Spotlight(state.allDeals);
 
     if (!deals.length) {
+      if (el.visibleCount) el.visibleCount.textContent = '0';
       if (hasSearch) {
         if (el.emptyState) el.emptyState.classList.add('hidden');
         el.dealsGrid.innerHTML = createAmazonUnlockerCard(searchQuery);
@@ -760,21 +795,86 @@
       }
       el.dealsGrid.innerHTML = '';
       if (el.emptyState) el.emptyState.classList.remove('hidden');
+      const olderContainer = document.getElementById('olderDealsContainer');
+      if (olderContainer) {
+        olderContainer.classList.add('hidden');
+        olderContainer.innerHTML = '';
+      }
       updateWatchlistBanner();
       return;
     }
 
     if (el.emptyState) el.emptyState.classList.add('hidden');
 
-    let html = deals.map((deal, idx) => createDealCardHtml(deal, idx)).join('');
-    if (hasSearch) {
-      html += createAmazonUnlockerCard(searchQuery);
+    // Separate fresh deals (<= 24h) from historical older deals (> 24h)
+    const freshDeals = deals.filter(d => (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
+    const olderDeals = deals.filter(d => !(d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
+
+    if (freshDeals.length > 0) {
+      if (el.visibleCount) el.visibleCount.textContent = freshDeals.length;
+      let html = freshDeals.map((deal, idx) => createDealCardHtml(deal, idx, false)).join('');
+      if (hasSearch) {
+        html += createAmazonUnlockerCard(searchQuery);
+      }
+      el.dealsGrid.innerHTML = html;
+    } else {
+      // If no fresh deals are loaded yet, display older deals in primary feed with warning
+      if (el.visibleCount) el.visibleCount.textContent = olderDeals.length;
+      let html = olderDeals.map((deal, idx) => createDealCardHtml(deal, idx, true)).join('');
+      if (hasSearch) {
+        html += createAmazonUnlockerCard(searchQuery);
+      }
+      el.dealsGrid.innerHTML = html;
     }
-    el.dealsGrid.innerHTML = html;
+
+    // Render Collapsible Older Deals Section if both fresh and older exist
+    const olderContainer = document.getElementById('olderDealsContainer');
+    if (olderContainer) {
+      if (freshDeals.length > 0 && olderDeals.length > 0) {
+        olderContainer.classList.remove('hidden');
+        olderContainer.innerHTML = `
+          <div class="older-deals-header" id="olderDealsToggle" role="button" tabindex="0" title="Click to toggle older deals">
+            <div class="older-deals-title-wrap">
+              <span class="older-deals-icon">⚠️</span>
+              <div class="older-deals-text">
+                <h3 class="older-deals-heading">Older Deals (Prices May Have Changed)</h3>
+                <span class="older-deals-subtext">Verified &gt; 24h ago. Amazon prices fluctuate frequently.</span>
+              </div>
+              <span class="older-deals-badge">${olderDeals.length} Deals</span>
+            </div>
+            <button class="older-deals-toggle-btn" type="button" aria-expanded="false">
+              <span class="older-toggle-text">Show Older Deals</span>
+              <span class="older-toggle-arrow">▼</span>
+            </button>
+          </div>
+          <div class="older-deals-grid hidden" id="olderDealsGrid">
+            ${olderDeals.map((deal, idx) => createDealCardHtml(deal, idx + freshDeals.length, true)).join('')}
+          </div>
+        `;
+        const toggleBtn = olderContainer.querySelector('#olderDealsToggle');
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', () => {
+            const grid = document.getElementById('olderDealsGrid');
+            const btnText = olderContainer.querySelector('.older-toggle-text');
+            const arrow = olderContainer.querySelector('.older-toggle-arrow');
+            if (grid) {
+              const isHidden = grid.classList.contains('hidden');
+              grid.classList.toggle('hidden', !isHidden);
+              if (btnText) btnText.textContent = isHidden ? 'Hide Older Deals' : 'Show Older Deals';
+              if (arrow) arrow.textContent = isHidden ? '▲' : '▼';
+            }
+          });
+        }
+      } else {
+        olderContainer.classList.add('hidden');
+        olderContainer.innerHTML = '';
+      }
+    }
+
     updateWatchlistBanner();
   }
 
-  function createDealCardHtml(d, cardIndex = 0) {
+  function createDealCardHtml(d, cardIndex = 0, isOlder = false) {
     const isSaved = state.watchlist.has(d.asin);
     const effPrice = d.effective_price || d.list_price || 0;
     if (effPrice <= 0) return '';
@@ -928,9 +1028,14 @@
     } else if (discPct >= 50) {
       whyBuySummary = `Steep ${discPct}% verified drop`;
     }
+    const isDealFresh = !isOlder && (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0));
+    const trustBadgeHtml = isDealFresh
+      ? `<span class="trust-check">✓ Verified Live on Amazon</span>`
+      : `<span class="trust-check trust-warning">⚠️ Price subject to change on Amazon</span>`;
+
     const grabonTrustHtml = `
       <div class="grabon-trust-line">
-        <span class="trust-check">✓ Verified Live on Amazon</span>
+        ${trustBadgeHtml}
         <span class="trust-sep">•</span>
         <span class="trust-reason">💡 <b>Why Buy:</b> ${escapeHtml(whyBuySummary)}</span>
       </div>
@@ -1889,9 +1994,22 @@
     return `${Math.floor(elapsed / 86400)}d ago`;
   }
 
-  function escapeHtml(str) {
+  function decodeHtmlEntities(str) {
     if (!str) return '';
     return String(str)
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&apos;/g, "'")
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    const decoded = decodeHtmlEntities(str);
+    return decoded
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')

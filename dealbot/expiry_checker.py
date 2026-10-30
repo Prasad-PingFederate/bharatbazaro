@@ -611,3 +611,103 @@ def mark_telegram_deal_expired(token: str, chat_id: str, message_id: int, origin
     except requests.RequestException as e:
         logger.error(f"Error calling Telegram edit message: {e}")
         return False
+
+
+def reverify_active_deals(store, max_checks: int = 25, sleep_sec: float = 1.0) -> dict:
+    """
+    Re-verify currently active deals against live Amazon India product pages.
+    - If price increased significantly (>15% above deal price or discount dropped below 25%),
+      mark deal as expired/inactive (or adjust price if still high discount).
+    - If product is out of stock (OOS), mark deal as expired.
+    - If price dropped or remained low, update verified price & timestamp last_verified_at.
+    """
+    stats = {"checked": 0, "verified": 0, "expired_oos": 0, "price_spiked": 0, "price_updated": 0}
+    if not hasattr(store, "get_deals_for_reverification"):
+        return stats
+
+    deals_to_check = store.get_deals_for_reverification(limit=max_checks)
+    if not deals_to_check:
+        return stats
+
+    import time
+    for idx, row in enumerate(deals_to_check):
+        if idx > 0 and sleep_sec > 0:
+            time.sleep(sleep_sec)
+
+        deal_id = row["deal_id"]
+        posted_price = row.get("price")
+        stats["checked"] += 1
+
+        asin = None
+        url = None
+        if deal_id.startswith("amz-"):
+            asin = deal_id.replace("amz-", "").strip().upper()
+            url = f"https://www.amazon.in/dp/{asin}"
+        elif (row.get("canonical_product_id") or "").startswith("amazon:"):
+            asin = row["canonical_product_id"].replace("amazon:", "").strip().upper()
+            url = f"https://www.amazon.in/dp/{asin}"
+        elif "amazon.in" in (row.get("caption") or ""):
+            m = re.search(r"/(?:dp|gp/product)/([A-Z0-9]{10})", row.get("caption") or "")
+            if m:
+                asin = m.group(1).upper()
+                url = f"https://www.amazon.in/dp/{asin}"
+
+        if not url:
+            store.touch_checked(deal_id)
+            continue
+
+        try:
+            enrichment = enrich_amazon_deal(url, timeout=8)
+            stock_status = enrichment.get("stock_status")
+
+            if stock_status == "out_of_stock":
+                consecutive = store.increment_oos_count(deal_id)
+                if consecutive >= 2:
+                    logger.info(f"[REVERIFY] Deal {deal_id} ({asin}) confirmed OUT OF STOCK ({consecutive} checks). Marking expired.")
+                    store.mark_expired(deal_id)
+                    stats["expired_oos"] += 1
+                else:
+                    logger.info(f"[REVERIFY] Deal {deal_id} ({asin}) first OOS signal detected. Awaiting 2nd confirmation.")
+                continue
+
+            if stock_status == "in_stock" or enrichment.get("live_price"):
+                store.reset_oos_count(deal_id)
+                live_price = enrichment.get("live_price")
+                live_effective = enrichment.get("effective_price") or live_price
+                live_mrp = enrichment.get("mrp")
+
+                if live_effective and live_effective > 0:
+                    # Check price spike or discount drop
+                    if posted_price and posted_price > 0 and live_effective >= int(posted_price * 1.15):
+                        # Price increased by > 15%!
+                        new_disc = int(round((live_mrp - live_effective) / live_mrp * 100)) if (live_mrp and live_mrp > live_effective) else 0
+                        if new_disc < 25:
+                            logger.info(
+                                f"[REVERIFY] Deal {deal_id} ({asin}) PRICE JUMPED from ₹{posted_price:,} to ₹{live_effective:,} "
+                                f"(discount dropped to {new_disc}%). Marking deal EXPIRED / INACTIVE."
+                            )
+                            store.update_verified_deal(deal_id, price=live_effective, discount=new_disc, status="expired")
+                            stats["price_spiked"] += 1
+                        else:
+                            logger.info(
+                                f"[REVERIFY] Deal {deal_id} ({asin}) price increased from ₹{posted_price:,} to ₹{live_effective:,} "
+                                f"but still {new_disc}% off. Updating verified price."
+                            )
+                            store.update_verified_deal(deal_id, price=live_effective, discount=new_disc, status="active")
+                            stats["price_updated"] += 1
+                    else:
+                        # Price is verified at or below original deal price!
+                        new_disc = int(round((live_mrp - live_effective) / live_mrp * 100)) if (live_mrp and live_mrp > live_effective) else row.get("discount")
+                        store.update_verified_deal(deal_id, price=live_effective, discount=new_disc, status="active")
+                        stats["verified"] += 1
+                        logger.info(f"[REVERIFY] Deal {deal_id} ({asin}) successfully re-verified at ₹{live_effective:,} ({new_disc}% off).")
+                else:
+                    store.touch_checked(deal_id)
+            else:
+                store.touch_checked(deal_id)
+        except Exception as e:
+            logger.warning(f"[REVERIFY] Error verifying deal {deal_id}: {e}")
+            store.touch_checked(deal_id)
+
+    logger.info(f"[REVERIFY SUMMARY] Checked: {stats['checked']} | Verified: {stats['verified']} | Price Jumps/Expired: {stats['price_spiked']} | OOS: {stats['expired_oos']} | Price Updated: {stats['price_updated']}")
+    return stats

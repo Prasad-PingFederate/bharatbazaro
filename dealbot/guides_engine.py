@@ -374,6 +374,7 @@ def render_guide_html(spec: Dict[str, Any], deals: List[Dict[str, Any]], root_di
       <div class="header-actions">
         <a href="/" class="btn btn-secondary" style="font-size: 0.85rem; padding: 6px 14px; text-decoration: none; border-radius: var(--radius-full);">← Back to Live Deals</a>
         <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="btn btn-telegram"><span>Join Telegram</span></a>
+        <a href="https://chat.whatsapp.com/GspHsCGTRm29orUszbuvh3?s=cl&p=a&mlu=4&ilr=4&iam=2" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp"><span>Join WhatsApp</span></a>
       </div>
     </div>
   </header>
@@ -443,6 +444,7 @@ def render_guide_html(spec: Dict[str, Any], deals: List[Dict[str, Any]], root_di
           <a href="/under-99.html" class="footer-link">🪙 ₹99 Store</a>
           <a href="/under-499.html" class="footer-link">Under ₹499</a>
           <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="footer-link">📲 Telegram</a>
+          <a href="https://chat.whatsapp.com/GspHsCGTRm29orUszbuvh3?s=cl&p=a&mlu=4&ilr=4&iam=2" target="_blank" rel="noopener noreferrer" class="footer-link">💬 WhatsApp</a>
         </div>
       </div>
     </div>

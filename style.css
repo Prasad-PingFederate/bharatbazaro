@@ -359,6 +359,22 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-1px);
+}
+
+.telegram-icon,
+.whatsapp-icon {
+  flex-shrink: 0;
+}
+
 .btn-primary {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
@@ -4162,4 +4178,166 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
     grid-column: 1 / -1;
     flex-direction: row;
   }
+}
+
+
+/* ── LATEST AMAZON DEALS FEED HEADER & OLDER DEALS SECTION ── */
+.feed-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg, 14px);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.feed-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feed-section-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-main);
+}
+
+.feed-live-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.feed-timestamp-line {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.feed-live-timestamp {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.feed-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.trust-check.trust-warning {
+  color: #d97706;
+  background: rgba(245, 158, 11, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  font-weight: 700;
+}
+
+/* Older Historical Deals Section */
+.older-deals-container {
+  margin-top: 36px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg, 14px);
+  overflow: hidden;
+}
+
+.older-deals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(245, 158, 11, 0.06);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.older-deals-header:hover {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.older-deals-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.older-deals-icon {
+  font-size: 1.25rem;
+}
+
+.older-deals-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.older-deals-subtext {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.older-deals-badge {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.older-deals-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-card);
+  color: var(--text-main);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.older-deals-toggle-btn:hover {
+  border-color: #f59e0b;
+  color: #d97706;
+}
+
+.older-deals-grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.older-deals-grid.hidden {
+  display: none;
 }

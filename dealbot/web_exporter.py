@@ -1,3 +1,4 @@
+import html
 from dealbot.ssg_engine import (
     ensure_og_banner,
     pre_render_all_pages,
@@ -281,25 +282,84 @@ def extract_asin(deal_or_url: Union[str, Deal]) -> Optional[str]:
     return None
 
 
+def strip_title_prefixes(title: str) -> str:
+    """Strip leading brackets [ICICI CC], (Offer), emojis, and promo prefixes."""
+    if not title:
+        return ""
+    t = title.strip()
+    while True:
+        m = re.match(r"^(?:\[[^\]]*\]|\([^\)]*\)|\{[^\}]*\}|【[^】]*】)\s*", t)
+        if m:
+            t = t[m.end():].strip()
+        else:
+            break
+    # Strip leading emoji or non-alphanumeric punctuation (except opening brackets)
+    t = re.sub(r"^[^\w\[\(\{]+", "", t).strip()
+    # Strip prefixes like "Deal:", "Loot:", "Hot Deal -", etc.
+    t = re.sub(r"^(?:deal|loot|hot\s+deal|steal\s+deal|special\s+deal|offer)\s*[:\-]\s*", "", t, flags=re.IGNORECASE).strip()
+    return t
+
+
 def detect_brand(title: str) -> Optional[str]:
-    """Extract brand name from product title."""
+    """
+    Extract brand name from product title.
+    Focuses strictly on the first 1-2 words of the product title
+    (after stripping bank tags like [ICICI CC], coupon brackets, and prefixes)
+    rather than scanning the entire title string, preventing false positive matches
+    from feature descriptions (e.g. 'Google Assistant' in Philips bulbs, or 'HP Out' in LG monitors).
+    """
     if not title:
         return None
-    lower_title = title.lower()
-    # Check Tier-1 first
-    for b in TIER_1_BRANDS:
-        if b == "apple" and re.search(r"\b(green\s+apple|apple\s+cider|apple\s+juice|apple\s+flavo?ur)\b", lower_title):
+    clean = strip_title_prefixes(title)
+    if not clean:
+        return None
+
+    raw_words = clean.split()
+    words = []
+    for w in raw_words:
+        cw = w.strip(" ,-:()[]{}\"'`")
+        if cw:
+            words.append(cw)
+    if not words:
+        return None
+
+    stop_words = {
+        "the", "new", "all", "deal", "loot", "best", "pack", "set", "combo",
+        "item", "unit", "buy", "save", "upto", "flat", "special", "super", "mega",
+    }
+    acronym_brands = {
+        "lg": "LG",
+        "hp": "HP",
+        "jbl": "JBL",
+        "ifb": "IFB",
+        "wd": "WD",
+        "dji": "DJI",
+        "boat": "boAt",
+        "u.s. polo": "U.S. Polo",
+        "us polo": "U.S. Polo",
+    }
+
+    start_idx = 1 if words[0].lower() in ("new", "all-new", "latest", "trending", "original", "genuine") and len(words) > 1 else 0
+    lead_words = words[start_idx : start_idx + 3]
+    lead_str = " ".join(lead_words).lower()
+    first_w = lead_words[0].lower().rstrip(".") if lead_words else ""
+
+    all_brands = sorted(list(set(TIER_1_BRANDS + TIER_2_BRANDS)), key=len, reverse=True)
+    for b in all_brands:
+        if b == "apple" and re.search(r"\b(green\s+apple|apple\s+cider|apple\s+juice|apple\s+flavo?ur)\b", lead_str):
             continue
-        if re.search(r"\b" + re.escape(b) + r"\b", lower_title):
-            return b.title()
-    # Check Tier-2
-    for b in TIER_2_BRANDS:
-        if re.search(r"\b" + re.escape(b) + r"\b", lower_title):
-            return b.title()
-    # Fallback: first word of title if alphabetic
-    first_word = title.split()[0].strip(",.-:()")
-    if len(first_word) >= 3 and first_word.isalpha():
-        return first_word.title()
+        if " " in b or "-" in b or "." in b:
+            if re.search(r"^\b" + re.escape(b) + r"\b", lead_str):
+                return acronym_brands.get(b, b.title())
+        else:
+            if first_w == b:
+                return acronym_brands.get(b, b.title())
+            if len(lead_words) > 1 and lead_words[1].lower().rstrip(".") == b and first_w in stop_words:
+                return acronym_brands.get(b, b.title())
+
+    # Fallback: first word of title if alphabetic and not a generic stop word
+    if len(first_w) >= 3 and first_w.isalpha() and first_w not in stop_words:
+        return first_w.title()
     return None
 
 
@@ -454,23 +514,26 @@ def deal_to_web_json(
     expired: bool = False,
     price_spiked: bool = False,
     posted_epoch: Optional[int] = None,
+    last_verified_epoch: Optional[int] = None,
 ) -> Dict[str, Any]:
     """Transform an internal Deal object into the standard BharatBazaro live_deals.json item."""
     asin = extract_asin(deal)
     if not asin:
         asin = "B0UNKNOWN0"
 
-    now_ist = datetime.now(timezone(timedelta(hours=5, minutes=30)))
-    updated_at_epoch = int(time.time())
-    updated_at_ist = now_ist.strftime("%Y-%m-%d %H:%M IST")
-
-    # Time-decay freshness ranking (Requirement 2)
-    now_epoch = updated_at_epoch
-    post_time = posted_epoch or updated_at_epoch
-    age_hours = round(max(0.0, (now_epoch - post_time) / 3600.0), 1)
+    now_epoch = int(time.time())
+    post_time = posted_epoch or now_epoch
+    verified_time = last_verified_epoch or post_time
+    age_hours = round(max(0.0, (now_epoch - verified_time) / 3600.0), 1)
     decay = max(0.0, (age_hours - 2.0) * 2.5)
     trending_score = round(max(10.0, float(score or 70) - decay), 1)
     is_new = bool(age_hours <= 2.0)
+    is_fresh = bool(age_hours <= 24.0)
+
+    # Use verified timestamp for updated_at display
+    verif_dt = datetime.fromtimestamp(verified_time, tz=timezone(timedelta(hours=5, minutes=30)))
+    updated_at_ist = verif_dt.strftime("%Y-%m-%d %H:%M IST")
+    updated_at_epoch = verified_time
 
     mrp = parse_rupees(deal.original_price)
     list_p = parse_rupees(deal.current_price)
@@ -587,7 +650,7 @@ def deal_to_web_json(
     return {
         "id": f"amazon:{asin}",
         "asin": asin,
-        "title": deal.title or "Amazon Special Deal",
+        "title": html.unescape(deal.title or "Amazon Special Deal").strip(),
         "brand": brand,
         "brand_tier": brand_tier,
         "category": ui_category,
@@ -620,9 +683,12 @@ def deal_to_web_json(
         "price_spiked": price_spiked,
         "posted_to_telegram": posted_to_telegram,
         "posted_at_epoch": post_time,
+        "last_verified_at_epoch": verified_time,
+        "last_verified_at_ist": updated_at_ist,
         "age_hours": age_hours,
         "trending_score": trending_score,
         "is_new": is_new,
+        "is_fresh": is_fresh,
         "updated_at": updated_at_epoch,
         "updated_at_ist": updated_at_ist,
     }
@@ -775,7 +841,7 @@ def export_web_feed(
         logger.warning(f"sync_telegram_deals_from_dealdash error: {e}")
 
     if output_dir is None:
-        output_dir = Path("data")
+        output_dir = root_dir / "data"
     else:
         output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -800,17 +866,27 @@ def export_web_feed(
 
     deals_by_asin: Dict[str, Dict[str, Any]] = {}
 
+    # Load image/title cache for robust title fallbacks
+    cache_path = root_dir / "data" / "image_cache.json"
+    img_cache: Dict[str, Dict[str, Any]] = {}
+    if cache_path.exists():
+        try:
+            with open(cache_path, "r", encoding="utf-8") as cf:
+                img_cache = json.load(cf)
+        except Exception:
+            pass
+
     # 1. Ingest deals from SQLite posted_deals (active, within last 48 hours)
     with store._connect() as conn:
         conn.row_factory = sqlite3.Row
         cur = conn.execute(
             """
-            SELECT deal_id, retailer, chat_id, message_id, caption, status, posted_at,
+            SELECT deal_id, retailer, chat_id, message_id, caption, status, posted_at, last_verified_at,
                    category, discount, agent_score, agent_reason, canonical_product_id, price
             FROM posted_deals
             WHERE status = 'active'
-              AND posted_at >= datetime('now', '-48 hours')
-            ORDER BY posted_at DESC
+              AND (posted_at >= datetime('now', '-48 hours') OR last_verified_at >= datetime('now', '-48 hours'))
+            ORDER BY COALESCE(last_verified_at, posted_at) DESC
             LIMIT ?
             """,
             (max_items * 2,),
@@ -837,7 +913,29 @@ def export_web_feed(
                     break
             if not title:
                 m_sub = re.search(r"<b>([^<]{5,80})</b>", caption)
-                title = m_sub.group(1).strip() if m_sub else f"Amazon Deal ({asin})"
+                if m_sub and not m_sub.group(1).strip().startswith("Amazon Deal"):
+                    title = m_sub.group(1).strip()
+
+            # Robust fallback: check image cache, Keepa, or URL slug before accepting placeholder title
+            if not title or title.startswith("Amazon Deal") or title.startswith("Trending Amazon Deal"):
+                if asin in img_cache and img_cache[asin].get("title"):
+                    c_title = img_cache[asin]["title"]
+                    if not c_title.startswith("Amazon Deal") and not c_title.startswith("Trending Amazon Deal"):
+                        title = c_title
+
+                if not title or title.startswith("Amazon Deal") or title.startswith("Trending Amazon Deal"):
+                    url_m = re.search(r'https?://(?:www\.)?amazon\.in/[^\s<>"]+', caption)
+                    if url_m:
+                        try:
+                            from dealbot.sources import extract_title_from_amazon_url_slug
+                            slug_t = extract_title_from_amazon_url_slug(url_m.group(0))
+                            if slug_t:
+                                title = slug_t
+                        except Exception:
+                            pass
+
+                if not title:
+                    title = f"Amazon Deal ({asin})"
 
             # Extract coupon & promo code from caption and title
             c_disc, c_text, p_code = extract_coupon_info(f"{title}\n{caption}")
@@ -854,9 +952,11 @@ def export_web_feed(
 
             # Time-decay check: drop unverified deals older than 48h
             post_epoch = parse_posted_epoch(d_dict.get("posted_at"))
+            verif_epoch = parse_posted_epoch(d_dict.get("last_verified_at")) if d_dict.get("last_verified_at") else post_epoch
             now_epoch = int(time.time())
-            age_hours = round(max(0.0, (now_epoch - post_epoch) / 3600.0), 1)
-            if age_hours > 48.0:
+            verif_age_hours = round(max(0.0, (now_epoch - verif_epoch) / 3600.0), 1)
+            post_age_hours = round(max(0.0, (now_epoch - post_epoch) / 3600.0), 1)
+            if verif_age_hours > 48.0 and post_age_hours > 48.0:
                 continue
 
             deal_obj = Deal(
@@ -902,6 +1002,7 @@ def export_web_feed(
                 expired=(d_dict.get("status") == "expired"),
                 price_spiked=(d_dict.get("status") == "price_spiked"),
                 posted_epoch=post_epoch,
+                last_verified_epoch=verif_epoch,
             )
             deals_by_asin[asin] = w_json
 
@@ -926,7 +1027,16 @@ def export_web_feed(
     # Sort final items by trending_score DESC, then buy_confidence DESC, then updated_at DESC
     # Guard: Strictly filter out any anomalies with zero or missing price
     deal_list = [d for d in deals_by_asin.values() if (d.get("effective_price") or 0) > 0]
-    deal_list.sort(key=lambda x: (x.get("trending_score") or x.get("score") or 0, x.get("buy_confidence") or 0, x.get("updated_at") or 0), reverse=True)
+    # Sort strictly: fresh deals first, newest verified timestamp first, then score
+    deal_list.sort(
+        key=lambda x: (
+            1 if x.get("is_fresh", True) else 0,
+            x.get("last_verified_at_epoch") or x.get("posted_at_epoch") or x.get("updated_at") or 0,
+            x.get("trending_score") or x.get("score") or 0,
+            x.get("buy_confidence") or 0
+        ),
+        reverse=True
+    )
     final_deals = deal_list[:max_items]
 
     # Resolve and ensure high-res images and non-blank photos
@@ -946,15 +1056,20 @@ def export_web_feed(
     # Compute stats
     now_ist = datetime.now(timezone(timedelta(hours=5, minutes=30)))
     tg_url = resolve_telegram_url()
+    fresh_deals = [d for d in final_deals if d.get("is_fresh", True)]
+    older_deals = [d for d in final_deals if not d.get("is_fresh", True)]
     stats = {
         "last_updated_ist": now_ist.strftime("%Y-%m-%d %H:%M IST"),
         "last_updated_epoch": int(time.time()),
-        "total_live_deals": len(final_deals),
-        "loot_count": sum(1 for d in final_deals if d.get("is_loot")),
-        "coupon_deals_count": sum(1 for d in final_deals if (d.get("coupon_discount") or d.get("coupon_text") or d.get("promo_code") or d.get("bank_offer"))),
-        "all_time_lows_count": sum(1 for d in final_deals if (d.get("price_context") in ("all_time_low", "real_drop") or d.get("is_further_drop"))),
-        "max_discount_pct": max((d.get("effective_discount_pct") or d.get("discount_pct") or 0 for d in final_deals), default=0),
-        "total_savings_available": sum(d.get("savings_inr") or 0 for d in final_deals),
+        "total_live_deals": len(fresh_deals),
+        "total_all_deals": len(final_deals),
+        "fresh_deals_count": len(fresh_deals),
+        "older_deals_count": len(older_deals),
+        "loot_count": sum(1 for d in fresh_deals if d.get("is_loot")),
+        "coupon_deals_count": sum(1 for d in fresh_deals if (d.get("coupon_discount") or d.get("coupon_text") or d.get("promo_code") or d.get("bank_offer"))),
+        "all_time_lows_count": sum(1 for d in fresh_deals if (d.get("price_context") in ("all_time_low", "real_drop") or d.get("is_further_drop"))),
+        "max_discount_pct": max((d.get("effective_discount_pct") or d.get("discount_pct") or 0 for d in fresh_deals), default=0),
+        "total_savings_available": sum(d.get("savings_inr") or 0 for d in fresh_deals),
         "telegram_url": tg_url,
     }
 
@@ -993,9 +1108,20 @@ def export_web_data(store=None, **kwargs):
 
     if store is None:
         try:
-            from dealbot.store import StateStore
-            store = StateStore()
-        except Exception:
+            from dealbot.publisher import StateStore
+            from dealbot.session import database_path
+            db_p = database_path()
+            if not db_p.exists():
+                alt_p = root_dir / "data" / "deals.db"
+                if alt_p.exists():
+                    db_p = alt_p
+                else:
+                    alt_p2 = root_dir / "data" / "state.sqlite3"
+                    if alt_p2.exists():
+                        db_p = alt_p2
+            store = StateStore(str(db_p))
+        except Exception as e:
+            logger.warning(f"Failed to initialize StateStore in export_web_data: {e}")
             store = None
 
     if store is not None:

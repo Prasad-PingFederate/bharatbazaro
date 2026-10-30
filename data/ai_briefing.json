@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-10-30 21:58 IST",
-  "generated_at_epoch": 1793377725,
+  "generated_at_ist": "2026-10-30 22:03 IST",
+  "generated_at_epoch": 1793378030,
   "top_loot_summary": [
+    {
+      "asin": "B0B25L78CD",
+      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
+      "effective_price": 5299,
+      "mrp": 11000,
+      "discount_pct": 52,
+      "savings_inr": 5701,
+      "brand": "Crucial",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B083W7V3YB",
+      "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
+      "effective_price": 6990,
+      "mrp": 14990,
+      "discount_pct": 53,
+      "savings_inr": 8000,
+      "brand": "Sennheiser",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B091CR2FXY",
+      "title": "AGARO Regency Air Fryer 12L 1800W with 9 Preset Menus & Rotisserie",
+      "effective_price": 7499,
+      "mrp": 15999,
+      "discount_pct": 53,
+      "savings_inr": 8500,
+      "brand": "Agaro",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
+      "coupon_text": null
+    },
     {
       "asin": "B000I6IY2W",
       "title": "Beurer German Engineering UB 33 Electric Underblanket for Single Bed I German Engineering I 3 Temperature Settings I Printed Cotton Top I Overheat Protection I Illuminated Controls I Machine Washable 30°C I OEKO-TEX Certified I 3-Year Warranty",
@@ -26,45 +65,6 @@
       "category": "Fashion & Footwear",
       "affiliate_url": "https://www.amazon.in/dp/B08X3Q32H6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B08X3Q32H6.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0CG239B3T",
-      "title": "Pigeon by Stovekraft Edge Carbon Knife Set 6 Pcs (Black)",
-      "effective_price": 402,
-      "mrp": 1995,
-      "discount_pct": 80,
-      "savings_inr": 1593,
-      "brand": "Pigeon",
-      "category": "Electronics & Audio",
-      "affiliate_url": "https://www.amazon.in/dp/B0CG239B3T?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CG239B3T.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0GD1R32YJ",
-      "title": "[HDFC CC] Bajaj Style Mix 1000W 5 Jar Mixer Grinder",
-      "effective_price": 8045,
-      "mrp": 17990,
-      "discount_pct": 55,
-      "savings_inr": 9945,
-      "brand": "Bajaj",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0GD1R32YJ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0GD1R32YJ.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0HBBTV4J4",
-      "title": "[HDFC CC] Lenovo Idea Tab (Smartchoice) with Tab Pen | WiFi Only |11\" 2.5K IPS Display |6GB RAM + 128GB ROM (Expandable Upto 2TB)| MediaTek Dimensity 6300|7040mAh|4 Speakers| Grey",
-      "effective_price": 16949,
-      "mrp": 48000,
-      "discount_pct": 65,
-      "savings_inr": 31051,
-      "brand": "Lenovo",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0HBBTV4J4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0HBBTV4J4.html",
       "coupon_text": null
     }
   ],
@@ -113,8 +113,8 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1793277265,
     "last_verified_at_ist": "2026-10-29 18:04 IST",
-    "age_hours": 27.8,
-    "trending_score": 22.5,
+    "age_hours": 28.0,
+    "trending_score": 22.0,
     "is_new": false,
     "is_fresh": false,
     "updated_at": 1793277265,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793377328,
-    "last_verified_at_epoch": 1793377328,
-    "last_verified_at_ist": "2026-10-30 21:52 IST",
+    "posted_at_epoch": 1793377992,
+    "last_verified_at_epoch": 1793377992,
+    "last_verified_at_ist": "2026-10-30 22:03 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793377328,
-    "updated_at_ist": "2026-10-30 21:52 IST"
+    "updated_at": 1793377992,
+    "updated_at_ist": "2026-10-30 22:03 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CHX1W1XY",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793377328,
-    "last_verified_at_epoch": 1793377328,
-    "last_verified_at_ist": "2026-10-30 21:52 IST",
+    "posted_at_epoch": 1793377992,
+    "last_verified_at_epoch": 1793377992,
+    "last_verified_at_ist": "2026-10-30 22:03 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793377328,
-    "updated_at_ist": "2026-10-30 21:52 IST"
+    "updated_at": 1793377992,
+    "updated_at_ist": "2026-10-30 22:03 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 184,
-    "loot_count": 5,
+    "total_deals": 186,
+    "loot_count": 8,
     "max_discount_pct": 89,
-    "total_savings_inr": 715140
+    "total_savings_inr": 717063
   }
 }

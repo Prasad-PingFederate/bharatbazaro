@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-30 08:25 IST",
-  "generated_at_epoch": 1793328935,
+  "generated_at_ist": "2026-10-30 15:25 IST",
+  "generated_at_epoch": 1793354137,
   "top_loot_summary": [
     {
       "asin": "B08PBS34V9",
@@ -13,19 +13,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B08PBS34V9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B08PBS34V9.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09JWLHS4B",
-      "title": "[HDFC CC] ASUS 27” 1080P Eye Care Monitor (VY279HGR) - Full HD, IPS, 120Hz, 1ms, Adaptive Sync, for Working and Gaming, Eye Care Plus, Blue Light Filter, Flicker Free, SmoothMotion, Display Widget",
-      "effective_price": 6360,
-      "mrp": 57818,
-      "discount_pct": 89,
-      "savings_inr": 51458,
-      "brand": "Asus",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B09JWLHS4B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09JWLHS4B.html",
       "coupon_text": null
     },
     {
@@ -42,6 +29,19 @@
       "coupon_text": null
     },
     {
+      "asin": "B09JWLHS4B",
+      "title": "[HDFC CC] ASUS 27” 1080P Eye Care Monitor (VY279HGR) - Full HD, IPS, 120Hz, 1ms, Adaptive Sync, for Working and Gaming, Eye Care Plus, Blue Light Filter, Flicker Free, SmoothMotion, Display Widget",
+      "effective_price": 6360,
+      "mrp": 57818,
+      "discount_pct": 89,
+      "savings_inr": 51458,
+      "brand": "Asus",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B09JWLHS4B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09JWLHS4B.html",
+      "coupon_text": null
+    },
+    {
       "asin": "B0912M6DNV",
       "title": "[HDFC CC] Marshall Kilburn II 36W Portable Bluetooth Speaker - Black &amp; Brass",
       "effective_price": 17999,
@@ -55,16 +55,16 @@
       "coupon_text": null
     },
     {
-      "asin": "B0HBBTV4J4",
-      "title": "[HDFC CC] Lenovo Idea Tab (Smartchoice) with Tab Pen | WiFi Only |11\" 2.5K IPS Display |6GB RAM + 128GB ROM (Expandable Upto 2TB)| MediaTek Dimensity 6300|7040mAh|4 Speakers| Grey",
-      "effective_price": 16949,
-      "mrp": 48000,
-      "discount_pct": 65,
-      "savings_inr": 31051,
-      "brand": "Lenovo",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0HBBTV4J4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0HBBTV4J4.html",
+      "asin": "B0GNLSQS61",
+      "title": "Havells Craft Kitchen Harmony Combo for Premium and Modern Kitchens | Mixer Grinder + Toaster + Hand Blender | Perfect Kitchen Companion and Gifting Range (Blue &amp; Golden)",
+      "effective_price": 7227,
+      "mrp": 25085,
+      "discount_pct": 71,
+      "savings_inr": 17858,
+      "brand": "Havells",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0GNLSQS61?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0GNLSQS61.html",
       "coupon_text": null
     }
   ],
@@ -108,11 +108,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793273361,
-    "age_hours": 15.4,
-    "trending_score": 56.5,
+    "age_hours": 22.4,
+    "trending_score": 39.0,
     "is_new": false,
-    "updated_at": 1793328923,
-    "updated_at_ist": "2026-10-30 08:25 IST"
+    "updated_at": 1793354120,
+    "updated_at_ist": "2026-10-30 15:25 IST"
   },
   "best_under_299": {
     "id": "amazon:B0DN6FVPZ8",
@@ -153,11 +153,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793255585,
-    "age_hours": 20.4,
-    "trending_score": 45.0,
+    "age_hours": 27.4,
+    "trending_score": 27.5,
     "is_new": false,
-    "updated_at": 1793328923,
-    "updated_at_ist": "2026-10-30 08:25 IST"
+    "updated_at": 1793354120,
+    "updated_at_ist": "2026-10-30 15:25 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B08PBS34V9",
@@ -199,11 +199,11 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "posted_at_epoch": 1793316861,
-    "age_hours": 3.4,
-    "trending_score": 98.5,
+    "age_hours": 10.3,
+    "trending_score": 81.2,
     "is_new": false,
-    "updated_at": 1793328923,
-    "updated_at_ist": "2026-10-30 08:25 IST"
+    "updated_at": 1793354120,
+    "updated_at_ist": "2026-10-30 15:25 IST"
   },
   "category_highlights": {
     "electronics": {
@@ -221,11 +221,11 @@
       "deal_url": "https://bharatbazaro.com/deal/B0GTV7P6V9.html"
     },
     "fashion": {
-      "asin": "B09CH8F5XJ",
-      "title": "Puma Mens Pacer Fire Sneaker",
-      "effective_price": 1124,
-      "discount_pct": 75,
-      "deal_url": "https://bharatbazaro.com/deal/B09CH8F5XJ.html"
+      "asin": "B07STZJRLH",
+      "title": "Campus Women Alexa Running Shoes",
+      "effective_price": 340,
+      "discount_pct": 80,
+      "deal_url": "https://bharatbazaro.com/deal/B07STZJRLH.html"
     },
     "grocery": {
       "asin": "B011C1B2XY",
@@ -237,8 +237,8 @@
   },
   "market_stats": {
     "total_deals": 77,
-    "loot_count": 20,
+    "loot_count": 22,
     "max_discount_pct": 89,
-    "total_savings_inr": 425197
+    "total_savings_inr": 423009
   }
 }

@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-30 23:42 IST",
-  "generated_at_epoch": 1793383951,
+  "generated_at_ist": "2026-10-31 02:57 IST",
+  "generated_at_epoch": 1793395657,
   "top_loot_summary": [
     {
       "asin": "B008A2796G",
@@ -113,8 +113,8 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1793277265,
     "last_verified_at_ist": "2026-10-29 18:04 IST",
-    "age_hours": 29.6,
-    "trending_score": 18.0,
+    "age_hours": 32.9,
+    "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
     "updated_at": 1793277265,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793383939,
-    "last_verified_at_epoch": 1793383939,
-    "last_verified_at_ist": "2026-10-30 23:42 IST",
+    "posted_at_epoch": 1793395633,
+    "last_verified_at_epoch": 1793395633,
+    "last_verified_at_ist": "2026-10-31 02:57 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793383939,
-    "updated_at_ist": "2026-10-30 23:42 IST"
+    "updated_at": 1793395633,
+    "updated_at_ist": "2026-10-31 02:57 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CHX1W1XY",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793383939,
-    "last_verified_at_epoch": 1793383939,
-    "last_verified_at_ist": "2026-10-30 23:42 IST",
+    "posted_at_epoch": 1793395633,
+    "last_verified_at_epoch": 1793395633,
+    "last_verified_at_ist": "2026-10-31 02:57 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793383939,
-    "updated_at_ist": "2026-10-30 23:42 IST"
+    "updated_at": 1793395633,
+    "updated_at_ist": "2026-10-31 02:57 IST"
   },
   "category_highlights": {
     "mobiles": {

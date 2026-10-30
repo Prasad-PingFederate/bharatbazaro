@@ -105,6 +105,7 @@ class StateStore:
                 "price INTEGER",
                 "consecutive_oos_count INTEGER DEFAULT 0",
                 "consecutive_spike_count INTEGER DEFAULT 0",
+                "last_verified_at TIMESTAMP",
             ]:
                 try:
                     conn.execute(f"ALTER TABLE posted_deals ADD COLUMN {col}")
@@ -265,9 +266,9 @@ class StateStore:
                 INSERT INTO posted_deals (
                     deal_id, retailer, chat_id, message_id, caption, status,
                     category, discount, agent_score, agent_reason,
-                    canonical_product_id, price, posted_at, consecutive_oos_count, consecutive_spike_count
+                    canonical_product_id, price, posted_at, consecutive_oos_count, consecutive_spike_count, last_verified_at
                 )
-                VALUES (?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0, 0)
+                VALUES (?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0, 0, CURRENT_TIMESTAMP)
                 ON CONFLICT(deal_id) DO UPDATE SET
                     retailer=excluded.retailer,
                     chat_id=excluded.chat_id,
@@ -281,6 +282,7 @@ class StateStore:
                     canonical_product_id=COALESCE(excluded.canonical_product_id, posted_deals.canonical_product_id),
                     price=COALESCE(excluded.price, posted_deals.price),
                     posted_at=CURRENT_TIMESTAMP,
+                    last_verified_at=CURRENT_TIMESTAMP,
                     consecutive_oos_count=0,
                     consecutive_spike_count=0
                 """,
@@ -436,6 +438,46 @@ class StateStore:
                 )
                 """
             )
+
+    def update_verified_deal(
+        self,
+        deal_id: str,
+        price: Optional[int] = None,
+        discount: Optional[int] = None,
+        status: str = "active",
+    ) -> None:
+        """Update verified price, discount, status and mark last_verified_at / last_checked_at."""
+        with self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE posted_deals
+                SET price = COALESCE(?, price),
+                    discount = COALESCE(?, discount),
+                    status = ?,
+                    last_checked_at = CURRENT_TIMESTAMP,
+                    last_verified_at = CURRENT_TIMESTAMP
+                WHERE deal_id = ?
+                """,
+                (price, discount, status, deal_id),
+            )
+
+    def get_deals_for_reverification(self, limit: int = 30) -> List[Dict[str, Any]]:
+        """Fetch active deals ordered by least recently verified."""
+        with self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            cur = conn.execute(
+                """
+                SELECT deal_id, retailer, chat_id, message_id, caption, status, posted_at,
+                       last_checked_at, last_verified_at, category, discount, agent_score,
+                       canonical_product_id, price
+                FROM posted_deals
+                WHERE status = 'active'
+                ORDER BY COALESCE(last_verified_at, last_checked_at, posted_at) ASC
+                LIMIT ?
+                """,
+                (limit,),
+            )
+            return [dict(r) for r in cur.fetchall()]
 
     def mark_expired(self, deal_id: str):
         with self._connect() as conn:

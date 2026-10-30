@@ -1,11 +1,14 @@
 {
-  "last_updated_ist": "2026-10-30 15:25 IST",
-  "last_updated_epoch": 1793354133,
-  "total_live_deals": 77,
-  "loot_count": 22,
-  "coupon_deals_count": 18,
-  "all_time_lows_count": 36,
-  "max_discount_pct": 89,
-  "total_savings_available": 423009,
+  "last_updated_ist": "2026-10-30 17:03 IST",
+  "last_updated_epoch": 1793360011,
+  "total_live_deals": 9,
+  "total_all_deals": 54,
+  "fresh_deals_count": 9,
+  "older_deals_count": 45,
+  "loot_count": 6,
+  "coupon_deals_count": 4,
+  "all_time_lows_count": 9,
+  "max_discount_pct": 80,
+  "total_savings_available": 68605,
   "telegram_url": "https://t.me/Flash_Deals_Flipkart_Amazon"
 }

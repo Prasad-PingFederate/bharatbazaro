@@ -628,6 +628,13 @@ def run_once() -> int:
     # Sweep and update previously posted deals that may have gone Out of Stock
     sweep_expired_deals(store, dry_run=dry_run)
 
+    # Re-verify active existing deals against live Amazon prices & stock
+    try:
+        from dealbot.expiry_checker import reverify_active_deals
+        reverify_active_deals(store, max_checks=20, sleep_sec=0.5)
+    except Exception as e:
+        logger.warning(f"Error in reverify_active_deals: {e}")
+
     # Automated Nightly Top 5 Live Mega-Deals Digest (runs once per calendar day in 21:00-22:15 IST window)
     now_ist = datetime.now(timezone(timedelta(hours=5, minutes=30)))
     is_digest_window = (now_ist.hour == 21) or (now_ist.hour == 22 and now_ist.minute <= 15)

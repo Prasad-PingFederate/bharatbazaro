@@ -386,7 +386,7 @@ def ensure_og_banner(root_dir: Path) -> Path:
 def render_deal_card_html(d: Dict[str, Any], card_index: int = 0) -> str:
     """Render a semantic HTML article matching client-side createDealCardHtml in app.js."""
     asin = html_lib.escape(str(d.get("asin") or "B0UNKNOWN0"))
-    title = html_lib.escape(str(d.get("title") or "Amazon Deal"))
+    title = html_lib.escape(html_lib.unescape(str(d.get("title") or "Amazon Deal")).strip())
     eff_price = d.get("effective_price") or d.get("list_price") or 0
     if eff_price <= 0:
         return ""
@@ -549,9 +549,15 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0) -> str:
     elif disc_pct >= 50:
         why_buy = f"Steep {disc_pct}% verified drop"
 
+    is_deal_fresh = bool(d.get("is_fresh", True))
+    if d.get("age_hours") is not None and d.get("age_hours") > 24.0:
+        is_deal_fresh = False
+
+    trust_check_badge = '<span class="trust-check">✓ Verified Live on Amazon</span>' if is_deal_fresh else '<span class="trust-check trust-warning">⚠️ Price subject to change on Amazon</span>'
+
     grabon_trust_html = f'''
           <div class="grabon-trust-line">
-            <span class="trust-check">✓ Verified Live on Amazon</span>
+            {trust_check_badge}
             <span class="trust-sep">•</span>
             <span class="trust-reason">💡 <b>Why Buy:</b> {why_buy}</span>
           </div>'''
@@ -673,7 +679,8 @@ def build_structured_data(page_cfg: dict, page_deals: list) -> str:
                 "height": 512
             },
             "sameAs": [
-                "https://t.me/Flash_Deals_Flipkart_Amazon"
+                "https://t.me/Flash_Deals_Flipkart_Amazon",
+                "https://chat.whatsapp.com/GspHsCGTRm29orUszbuvh3?s=cl&p=a&mlu=4&ilr=4&iam=2"
             ]
         }
     ]
@@ -882,7 +889,7 @@ def render_top5_quick_compare_table(deals: List[Dict[str, Any]]) -> str:
     rows = []
     for rank, d in enumerate(top5, 1):
         asin = d.get("asin")
-        title = html_lib.escape(str(d.get("title") or "Amazon Deal"))
+        title = html_lib.escape(html_lib.unescape(str(d.get("title") or "Amazon Deal")).strip())
         eff_price = d.get("effective_price") or d.get("list_price") or 0
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
@@ -967,7 +974,7 @@ def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
 
     for ribbon, d in picks:
         asin = d.get("asin") or ""
-        title = html_lib.escape(str(d.get("title") or "Amazon Deal"))
+        title = html_lib.escape(html_lib.unescape(str(d.get("title") or "Amazon Deal")).strip())
         eff_price = d.get("effective_price") or d.get("list_price") or 0
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
@@ -1404,6 +1411,9 @@ def render_product_page_html(
         <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="btn btn-telegram btn-sm">
           <span>📢 Join Telegram</span>
         </a>
+        <a href="https://chat.whatsapp.com/GspHsCGTRm29orUszbuvh3?s=cl&p=a&mlu=4&ilr=4&iam=2" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm" title="Join WhatsApp Deals">
+          <span>💬 Join WhatsApp</span>
+        </a>
         <a href="/" class="btn btn-outline btn-sm">
           <span>🌐 Browse All Deals</span>
         </a>
@@ -1584,6 +1594,7 @@ def render_product_page_html(
         </div>
         <div class="footer-links">
           <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="footer-link">📢 Telegram Channel</a>
+          <a href="https://chat.whatsapp.com/GspHsCGTRm29orUszbuvh3?s=cl&p=a&mlu=4&ilr=4&iam=2" target="_blank" rel="noopener noreferrer" class="footer-link">💬 WhatsApp Deals</a>
           <a href="/deals.html" class="footer-link">🔥 Deals</a>
           <a href="/electronics.html" class="footer-link">⚡ Electronics</a>
           <a href="/mobiles.html" class="footer-link">📱 Mobiles</a>

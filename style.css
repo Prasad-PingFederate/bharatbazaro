@@ -1127,7 +1127,7 @@ body {
 
 .card-image-wrap {
   width: 100%;
-  height: 180px;
+  height: 220px;
   background: #ffffff;
   border-radius: var(--radius-lg);
   padding: 12px;
@@ -1138,9 +1138,20 @@ body {
   position: relative;
 }
 
+.card-img-anchor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
 .card-img {
   max-width: 100%;
   max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   transition: transform var(--transition-normal);
 }
@@ -4133,11 +4144,11 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
 
 #dealsGrid.compact-view .deal-card {
   display: grid;
-  grid-template-columns: 140px 1fr 180px;
+  grid-template-columns: 180px 1fr 180px;
   grid-template-rows: auto;
   align-items: center;
-  padding: 12px 16px;
-  gap: 16px;
+  padding: 16px 20px;
+  gap: 20px;
 }
 
 #dealsGrid.compact-view .card-top {
@@ -4149,11 +4160,21 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
+  width: 100%;
 }
 
 #dealsGrid.compact-view .card-image-wrap {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
+  border-radius: var(--radius-md, 10px);
+  padding: 8px;
+}
+
+#dealsGrid.compact-view .card-img {
+  max-height: 134px;
+  max-width: 134px;
+  object-fit: contain;
 }
 
 #dealsGrid.compact-view .card-content {

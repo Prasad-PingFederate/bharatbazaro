@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-10-31 17:18 IST",
-  "generated_at_epoch": 1793447335,
+  "generated_at_ist": "2026-10-31 19:06 IST",
+  "generated_at_epoch": 1793453814,
   "top_loot_summary": [
     {
       "asin": "B008A2796G",
@@ -68,58 +68,7 @@
       "coupon_text": null
     }
   ],
-  "best_coupon_deal": {
-    "id": "amazon:B0GKDFR8YS",
-    "asin": "B0GKDFR8YS",
-    "title": "Havells 2000W Hexo EZ HEAT Infrared Induction Cooctop with Digital Display| TC-20 with Grill| 6kV Surge Protection| Cool Touch Body| Fast Heating | 1 Year Door Step Warranty By Havells",
-    "brand": "Havells",
-    "brand_tier": "tier1",
-    "category": "Home & Kitchen",
-    "image_url": "https://m.media-amazon.com/images/P/B0GKDFR8YS.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0GKDFR8YS?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 7955,
-    "list_price": 3542,
-    "effective_price": 3542,
-    "coupon_discount": null,
-    "coupon_text": "Apply 20% coupon",
-    "promo_code": null,
-    "bank_offer": null,
-    "discount_pct": 55,
-    "effective_discount_pct": 55,
-    "savings_inr": 4413,
-    "rating": null,
-    "review_count": null,
-    "score": 87,
-    "buy_confidence": 91,
-    "price_context": "real_drop",
-    "historical_min": null,
-    "historical_avg": null,
-    "historical_max": null,
-    "is_loot": true,
-    "is_diwali_steal": true,
-    "is_cookie_magnet": false,
-    "is_daily_essential": false,
-    "is_further_drop": false,
-    "source_count": 1,
-    "extra_offers": [],
-    "claim_steps": [
-      "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "☑️ Look below the price on Amazon and check the 'Apply 20% coupon' box.",
-      "🎉 Complete checkout at the effective deal price of ₹3,542!"
-    ],
-    "expired": false,
-    "price_spiked": false,
-    "posted_to_telegram": true,
-    "posted_at_epoch": 1793277265,
-    "last_verified_at_epoch": 1793277265,
-    "last_verified_at_ist": "2026-10-29 18:04 IST",
-    "age_hours": 47.2,
-    "trending_score": 10.0,
-    "is_new": false,
-    "is_fresh": false,
-    "updated_at": 1793277265,
-    "updated_at_ist": "2026-10-29 18:04 IST"
-  },
+  "best_coupon_deal": null,
   "best_under_299": {
     "id": "amazon:B008T1V3KC",
     "asin": "B008T1V3KC",
@@ -161,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793447319,
-    "last_verified_at_epoch": 1793447319,
-    "last_verified_at_ist": "2026-10-31 17:18 IST",
+    "posted_at_epoch": 1793453787,
+    "last_verified_at_epoch": 1793453787,
+    "last_verified_at_ist": "2026-10-31 19:06 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793447319,
-    "updated_at_ist": "2026-10-31 17:18 IST"
+    "updated_at": 1793453787,
+    "updated_at_ist": "2026-10-31 19:06 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793447319,
-    "last_verified_at_epoch": 1793447319,
-    "last_verified_at_ist": "2026-10-31 17:18 IST",
+    "posted_at_epoch": 1793453787,
+    "last_verified_at_epoch": 1793453787,
+    "last_verified_at_ist": "2026-10-31 19:06 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793447319,
-    "updated_at_ist": "2026-10-31 17:18 IST"
+    "updated_at": 1793453787,
+    "updated_at_ist": "2026-10-31 19:06 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 173,
+    "total_deals": 170,
     "loot_count": 5,
     "max_discount_pct": 89,
-    "total_savings_inr": 584771
+    "total_savings_inr": 576021
   }
 }

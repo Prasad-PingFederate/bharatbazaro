@@ -115,11 +115,11 @@ logger = logging.getLogger(__name__)
 PAGE_CONFIGS = [
     {
         "filename": "index.html",
-        "title": "BharatBazaro — Live Amazon India Loot Deals, Price Drop Radar & Hidden Coupon Finder (2026)",
+        "title": "BharatBazaro — Amazon India deals today, verified price drops",
         "canonical": "https://bharatbazaro.com/",
-        "meta_description": "Discover screaming Amazon India price drops, 80% off lightning loot deals, and stackable hidden on-page coupons verified live 24/7 with BharatBazaro's AI Deal Radar.",
-        "hero_title": 'India\'s 24/7 AI Deal & <span class="gradient-text">Price Drop Radar</span>',
-        "hero_subtitle": "Real-time price error alerts, stackable on-page coupons, Keepa charts & BuyHatke-inspired confidence ratings verified autonomously every cycle.",
+        "meta_description": "Today's Amazon India deals with the real discount shown first. Verified prices on boAt, Samsung, Havells, Apple and more, updated through the day.",
+        "hero_title": 'Amazon India deals, <span class="gradient-text">priced for today</span>',
+        "hero_subtitle": "The steepest verified drops first. boAt, Samsung, Havells, Apple and the rest, checked through the day.",
         "category_slug": "all",
         "initial_filter": None,
         "initial_max_price": None,
@@ -951,7 +951,7 @@ def build_head_html(page_cfg: dict, page_deals: list) -> str:
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.json">
   <link rel="alternate" type="application/rss+xml" title="BharatBazaro Live Amazon India Loot Deals RSS" href="https://bharatbazaro.com/feed.xml">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#0e0d0b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -961,7 +961,7 @@ def build_head_html(page_cfg: dict, page_deals: list) -> str:
   <!-- Fonts & Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@360;460;560&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>'''
 
@@ -1477,7 +1477,7 @@ def render_product_page_html(
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.json">
   <link rel="alternate" type="application/rss+xml" title="BharatBazaro Live Amazon India Loot Deals RSS" href="https://bharatbazaro.com/feed.xml">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#0e0d0b">
 
   <!-- Schema.org Product Structured Data -->
   <script type="application/ld+json">
@@ -1487,7 +1487,7 @@ def render_product_page_html(
   <!-- Google Fonts & Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@360;460;560&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>

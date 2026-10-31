@@ -1,16 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@360;460;560&display=swap");
 /* ==========================================================================
    BharatBazaro.com — Modern Glassmorphic AI Deal Radar Design System
    ========================================================================== */
 
 :root {
   /* Fonts */
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Accent Colors */
-  --color-emerald: #10b981;
-  --color-emerald-light: #34d399;
-  --color-emerald-glow: rgba(16, 185, 129, 0.25);
+  /* Brass on warm ink. One accent, not five neon colors. */
+  --color-emerald: #c6a36a;
+  --color-emerald-light: #e4d0a8;
+  --color-emerald-glow: rgba(198, 163, 106, 0.22);
   
   --color-crimson: #ef4444;
   --color-crimson-light: #f87171;
@@ -39,49 +41,49 @@
 
 /* Dark Theme (Default) */
 [data-theme="dark"] {
-  --bg-body: #090d16;
-  --bg-surface: #0f172a;
-  --bg-card: rgba(30, 41, 59, 0.7);
-  --bg-card-hover: rgba(30, 41, 59, 0.95);
-  --bg-input: #1e293b;
-  --bg-modal: #0f172a;
-  
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(255, 255, 255, 0.1);
-  --border-active: rgba(16, 185, 129, 0.4);
+  --bg-body: #0e0d0b;
+  --bg-surface: #161411;
+  --bg-card: #1c1916;
+  --bg-card-hover: #241f1a;
+  --bg-input: #221e1a;
+  --bg-modal: #161411;
 
-  --text-main: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-inverse: #090d16;
+  --border-subtle: rgba(243, 238, 230, 0.08);
+  --border-card: rgba(243, 238, 230, 0.12);
+  --border-active: rgba(198, 163, 106, 0.55);
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.6);
-  --glass-blur: blur(16px);
+  --text-main: #f4efe6;
+  --text-secondary: #c4b8a6;
+  --text-muted: #8d8274;
+  --text-inverse: #0e0d0b;
+
+  --shadow-sm: 0 1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 30px 70px rgba(0, 0, 0, 0.45);
+  --glass-blur: none;
 }
 
 /* Light Theme */
 [data-theme="light"] {
-  --bg-body: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-card: #ffffff;
+  --bg-body: #f7f3ec;
+  --bg-surface: #fffdf8;
+  --bg-card: #fffdf8;
   --bg-card-hover: #ffffff;
-  --bg-input: #f1f5f9;
-  --bg-modal: #ffffff;
+  --bg-input: #f3eee6;
+  --bg-modal: #fffdf8;
 
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-card: rgba(0, 0, 0, 0.08);
-  --border-active: rgba(16, 185, 129, 0.6);
+  --border-subtle: rgba(28, 25, 21, 0.08);
+  --border-card: rgba(28, 25, 21, 0.1);
+  --border-active: rgba(122, 90, 42, 0.45);
 
-  --text-main: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-inverse: #ffffff;
+  --text-main: #1c1915;
+  --text-secondary: #5c5348;
+  --text-muted: #8a7d6d;
+  --text-inverse: #fffdf8;
 
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 0 rgba(28, 25, 21, 0.04);
+  --shadow-md: 0 16px 36px rgba(28, 25, 21, 0.08);
+  --shadow-lg: 0 24px 50px rgba(28, 25, 21, 0.12);
   --glass-blur: none;
 }
 
@@ -99,10 +101,7 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 65%, rgba(99, 102, 241, 0.05) 0%, transparent 40%);
-  background-attachment: fixed;
+  background-image: none;
 }
 
 .container {
@@ -4437,3 +4436,260 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
   color: #ffffff;
   border-color: #e11d48;
 }
+
+/* ==========================================================================
+   Premium storefront. Loaded last so it wins over the old neon dashboard.
+   ========================================================================== */
+
+.hero-title,
+.spotlight-title,
+.brand-name,
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 520;
+  letter-spacing: -0.03em;
+}
+
+.ticker-wrapper {
+  background: #141210;
+  border-bottom: 1px solid rgba(198, 163, 106, 0.18);
+  height: 34px;
+}
+
+.ticker-label {
+  background: #c6a36a;
+  color: #1c1915;
+  font-weight: 560;
+  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+  box-shadow: none;
+}
+
+.ticker-content {
+  color: #d9cbb6;
+  font-weight: 400;
+}
+
+.site-header {
+  background: rgba(14, 13, 11, 0.92);
+  border-bottom: 1px solid rgba(243, 238, 230, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="light"] .site-header {
+  background: rgba(247, 243, 236, 0.92);
+}
+
+.header-inner {
+  height: 72px;
+}
+
+.brand-icon {
+  background: #c6a36a;
+  color: #1c1915;
+  border-radius: 50%;
+  box-shadow: none;
+  font-size: 1rem;
+}
+
+.brand-accent {
+  background: none;
+  -webkit-text-fill-color: #c6a36a;
+  color: #c6a36a;
+}
+
+.brand-badge {
+  color: #8d8274;
+  letter-spacing: 0.16em;
+  font-weight: 560;
+}
+
+.radar-status-badge,
+.hero-pill {
+  background: transparent;
+  border: 1px solid rgba(198, 163, 106, 0.45);
+  color: #e4d0a8;
+  box-shadow: none;
+  letter-spacing: 0.12em;
+}
+
+.hero-section {
+  padding: 48px 0 8px;
+  text-align: left;
+}
+
+.hero-content {
+  max-width: 760px;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  line-height: 1.02;
+  margin: 14px 0 12px;
+}
+
+.gradient-text {
+  background: none;
+  -webkit-text-fill-color: #c6a36a;
+  color: #c6a36a;
+}
+
+.hero-subtitle {
+  margin: 0 0 28px;
+  font-size: 1.05rem;
+  max-width: 520px;
+  color: var(--text-secondary);
+}
+
+.stats-grid {
+  margin: 0;
+  max-width: none;
+  gap: 10px;
+}
+
+.stat-card {
+  background: transparent;
+  border: 1px solid rgba(243, 238, 230, 0.1);
+  border-radius: 14px;
+  box-shadow: none;
+  text-align: left;
+  padding: 14px 16px;
+}
+
+.stat-val {
+  font-family: var(--font-display);
+  color: #f4efe6;
+}
+
+.brand-rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 28px;
+}
+
+.brand-rail a {
+  color: #f4efe6;
+  text-decoration: none;
+  border: 1px solid rgba(243, 238, 230, 0.14);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.brand-rail a:hover {
+  border-color: #c6a36a;
+  color: #e4d0a8;
+}
+
+[data-theme="light"] .brand-rail a,
+[data-theme="light"] .stat-val,
+[data-theme="light"] .hero-pill,
+[data-theme="light"] .radar-status-badge {
+  color: #1c1915;
+}
+
+.search-input,
+.filter-tab,
+.price-pill,
+.cat-pill {
+  border-radius: 999px;
+}
+
+.btn-telegram,
+.btn-whatsapp {
+  background: transparent;
+  color: #f4efe6;
+  border: 1px solid rgba(243, 238, 230, 0.16);
+  box-shadow: none;
+}
+
+.btn-telegram:hover,
+.btn-whatsapp:hover {
+  background: #c6a36a;
+  color: #1c1915;
+  border-color: #c6a36a;
+}
+
+.btn-primary,
+.btn-buy-deal,
+.filter-tab.active,
+.price-pill.active,
+.cat-pill.active {
+  background: #c6a36a;
+  color: #1c1915;
+  border-color: #c6a36a;
+  box-shadow: none;
+}
+
+.deal-card {
+  background: #171512;
+  border: 1px solid rgba(243, 238, 230, 0.08);
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.deal-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(198, 163, 106, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.deal-card.is-loot {
+  border-color: rgba(198, 163, 106, 0.35);
+  box-shadow: none;
+}
+
+.deal-card.is-loot::before {
+  background: #c6a36a;
+  height: 2px;
+}
+
+.card-image-wrap {
+  background: #f7f3ec;
+  border-radius: 12px;
+}
+
+.effective-price,
+.card-title:hover {
+  color: #e4d0a8;
+}
+
+.discount-badge,
+.badge-loot {
+  background: #3a2a1c;
+  color: #e4d0a8;
+  box-shadow: none;
+}
+
+.top3-spotlight-strip,
+.spotlight-mini-card {
+  background: #171512;
+  border-color: rgba(243, 238, 230, 0.08);
+}
+
+.spotlight-ribbon {
+  background: #c6a36a;
+  color: #1c1915;
+}
+
+[data-theme="light"] .deal-card,
+[data-theme="light"] .top3-spotlight-strip,
+[data-theme="light"] .spotlight-mini-card {
+  background: #fffdf8;
+}
+
+[data-theme="light"] .effective-price,
+[data-theme="light"] .card-title:hover {
+  color: #7a5a2a;
+}
+
+@media (max-width: 720px) {
+  .hero-title { font-size: 2.15rem; }
+  .header-actions .btn-telegram span,
+  .header-actions .btn-whatsapp span,
+  .radar-status-badge .status-text { display: none; }
+  .hero-section { padding-top: 28px; }
+}
+

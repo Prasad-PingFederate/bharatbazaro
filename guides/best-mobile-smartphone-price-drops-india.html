@@ -108,6 +108,23 @@
   ]
 }
   </script>
+<!-- BB-ANALYTICS-START -->
+<meta name="google-site-verification" content="bharatbazaro-search-console-verify" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHARATBAZARO"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', localStorage.getItem('bb_ga_id') || 'G-BHARATBAZARO', { 'anonymize_ip': true });
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href*="amazon."]');
+    if (a && typeof gtag === 'function') {
+      gtag('event', 'affiliate_click', { 'event_category': 'outbound', 'event_label': a.href });
+    }
+  });
+</script>
+<!-- BB-ANALYTICS-END -->
 </head>
 <body>
   <!-- Header -->

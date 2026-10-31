@@ -2129,3 +2129,24 @@
     init();
   }
 })();
+
+/* === TELEGRAM DEEP-LINK HANDLER === */
+window.addEventListener("DOMContentLoaded", function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var dealAsin = params.get("deal");
+    if (dealAsin) {
+      setTimeout(function () {
+        var cards = document.querySelectorAll(".deal-card, [data-asin], [data-id]");
+        for (var i = 0; i < cards.length; i++) {
+          if (cards[i].innerHTML.indexOf(dealAsin) !== -1) {
+            cards[i].scrollIntoView({ behavior: "smooth", block: "center" });
+            cards[i].style.outline = "3px solid #ff9900";
+            cards[i].style.boxShadow = "0 0 25px rgba(255, 153, 0, 0.5)";
+            break;
+          }
+        }
+      }, 900);
+    }
+  } catch (e) {}
+});

@@ -781,6 +781,39 @@ def build_structured_data(page_cfg: dict, page_deals: list) -> str:
     return f'<script type="application/ld+json">\n{json.dumps(data, indent=2, ensure_ascii=False)}\n  </script>'
 
 
+def _disc(d: Dict[str, Any]) -> float:
+    try:
+        return float(d.get("effective_discount_pct") or d.get("discount_pct") or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _savings(d: Dict[str, Any]) -> float:
+    try:
+        return float(d.get("savings_inr") or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def visitor_rank(d: Dict[str, Any]) -> tuple:
+    """Higher tuple sorts first. Loot and deep discounts outrank a 12% 'tier-1' phone."""
+    disc = _disc(d)
+    loot = 1 if d.get("is_loot") else 0
+    coupon = 1 if ((d.get("coupon_discount") or 0) > 0 or d.get("coupon_text")) else 0
+    shareable = 1 if loot or disc >= 40 else 0
+    # Anything under 25% off is a normal price unless it was explicitly flagged as loot.
+    not_weak = 0 if (disc < 25 and not loot) else 1
+    return (
+        not_weak,
+        loot,
+        shareable,
+        coupon,
+        disc,
+        _savings(d),
+        float(d.get("trending_score") or d.get("score") or 0),
+    )
+
+
 def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Filter deals matching category, price threshold, or filter, backfilling so pages are never thin."""
     slug = page_cfg.get("category_slug")
@@ -793,6 +826,7 @@ def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> Li
         combined = loots + [d for d in steep if d not in loots]
         if len(combined) < 15:
             combined += [d for d in all_deals if d not in combined]
+        combined.sort(key=visitor_rank, reverse=True)
         return combined[:30]
 
     if filt == "coupons":
@@ -821,7 +855,8 @@ def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> Li
         return matched[:30]
 
     if not slug or slug == "all":
-        return all_deals[:30]
+        ranked = sorted(all_deals, key=visitor_rank, reverse=True)
+        return ranked[:30]
 
     matched = []
     for d in all_deals:
@@ -851,6 +886,7 @@ def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> Li
         backfill = [d for d in all_deals if d not in matched]
         matched += backfill
 
+    matched.sort(key=visitor_rank, reverse=True)
     return matched[:30]
 
 
@@ -860,6 +896,7 @@ def build_head_html(page_cfg: dict, page_deals: list) -> str:
     return f'''<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <title>{page_cfg["title"]}</title>
   <meta name="description" content="{page_cfg["meta_description"]}">
   <meta name="keywords" content="Amazon deals, price drop alert, loot deals, coupons, India deals, Keepa charts, BuyHatke, PriceHistory">
@@ -967,8 +1004,9 @@ def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
     if not deals or len(deals) < 3:
         return ""
 
-    pick1_candidates = sorted(deals, key=lambda d: ((1 if d.get("brand_tier") == "tier1" else 0), d.get("trending_score") or d.get("score") or 0, d.get("effective_discount_pct") or 0), reverse=True)
-    pick1 = pick1_candidates[0] if pick1_candidates else deals[0]
+    shareable = [d for d in deals if d.get("is_loot") or _disc(d) >= 35]
+    pool = shareable or list(deals)
+    pick1 = sorted(pool, key=visitor_rank, reverse=True)[0]
 
     under_300 = [d for d in deals if (d.get("effective_price") or 999999) <= 299 and d != pick1]
     if under_300:
@@ -1388,6 +1426,7 @@ def render_product_page_html(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <title>{html_lib.escape(page_title)}</title>
   <meta name="description" content="{html_lib.escape(meta_desc)}">
   <link rel="canonical" href="{canonical}">
@@ -1732,7 +1771,8 @@ def generate_rss_feed(deals: List[Dict[str, Any]], root_dir: Path) -> Path:
     now_rfc822 = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
 
     items_xml = []
-    for d in deals[:30]:
+    ranked_feed = sorted(deals, key=visitor_rank, reverse=True)
+    for d in ranked_feed[:40]:
         asin = d.get("asin") or ""
         if not asin:
             continue
@@ -1881,19 +1921,28 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
     deal_dir.mkdir(parents=True, exist_ok=True)
     generated_asins = []
 
-    for idx, d in enumerate(deals[:60]):
-        asin = d.get("asin")
+    for d in deals:
+        asin = str(d.get("asin") or "").strip()
         if not asin:
             continue
         try:
-            # Related deals from the same category or other top deals
             related = [x for x in deals if x.get("asin") != asin]
+            related = sorted(related, key=visitor_rank, reverse=True)[:12]
             prod_html = render_product_page_html(d, related, stats)
             prod_dest = deal_dir / f"{asin}.html"
             prod_dest.write_text(prod_html, encoding="utf-8")
             generated_asins.append(asin)
         except Exception as e:
             logger.error(f"Failed to pre-render product page for {asin}: {e}", exc_info=True)
+
+    live_names = {f"{asin}.html" for asin in generated_asins}
+    removed = 0
+    for stale in deal_dir.glob("*.html"):
+        if stale.name not in live_names:
+            stale.unlink()
+            removed += 1
+    if removed:
+        logger.info(f"Removed {removed} expired deal pages from {deal_dir}")
 
     logger.info(f"Generated {len(generated_asins)} programmatic product pages in {deal_dir}")
 

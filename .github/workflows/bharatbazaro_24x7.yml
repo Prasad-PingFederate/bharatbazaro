@@ -70,6 +70,8 @@ jobs:
           AGENT_MODE: 'true'
           AGENT_LLM: 'true'
           ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
           LISTEN_FOR_ENGAGEMENT: 'true'
           MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
@@ -88,7 +90,7 @@ jobs:
           bash -c '
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add -A data/ deal/ guides/ 2>/dev/null || true
+            git add -A data/ deal/ deals/ brand/ guides/ 2>/dev/null || true
             git add *.html feed.xml sitemap.xml robots.txt llms.txt og-banner.png *.txt 2>/dev/null || true
             if ! git diff --staged --quiet; then
               git pull --rebase -X theirs origin main || true

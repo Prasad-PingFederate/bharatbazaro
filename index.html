@@ -7,7 +7,7 @@
   <!-- BB-ANALYTICS-START -->
 <!-- BB-ANALYTICS-END -->
   <title>BharatBazaro — Amazon India deals today, verified price drops</title>
-  <meta name="description" content="Today's Amazon India deals with the real discount shown first. Verified prices on boAt, Samsung, Havells, Apple and more, updated through the day.">
+  <meta name="description" content="Today's Amazon India deals with the real discount shown first. Verified prices on boAt, Samsung, Havells, Philips and more, updated through the day.">
   <meta name="keywords" content="Amazon deals, price drop alert, loot deals, coupons, India deals, Keepa charts, BuyHatke, PriceHistory">
   <link rel="canonical" href="https://bharatbazaro.com/">
 
@@ -15,13 +15,13 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bharatbazaro.com/">
   <meta property="og:title" content="BharatBazaro — Amazon India deals today, verified price drops">
-  <meta property="og:description" content="Today's Amazon India deals with the real discount shown first. Verified prices on boAt, Samsung, Havells, Apple and more, updated through the day.">
+  <meta property="og:description" content="Today's Amazon India deals with the real discount shown first. Verified prices on boAt, Samsung, Havells, Philips and more, updated through the day.">
   <meta property="og:image" content="https://bharatbazaro.com/og-banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BharatBazaro — Amazon India deals today, verified price drops">
-  <meta name="twitter:description" content="Today's Amazon India deals with the real discount shown first. Verified prices on boAt, Samsung, Havells, Apple and more, updated through the day.">
+  <meta name="twitter:description" content="Today's Amazon India deals with the real discount shown first. Verified prices on boAt, Samsung, Havells, Philips and more, updated through the day.">
   <meta name="twitter:image" content="https://bharatbazaro.com/og-banner.png">
 
   <!-- Favicons, Touch Icons & PWA Manifest -->
@@ -851,6 +851,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@360;460;560&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+<!-- BB-HERO-VISIBILITY-FIX -->
+<style>
+  /* Fix dark-on-dark text in Dark Mode while keeping Light Mode toggle working */
+  html:not([data-theme="light"]) body:not(.light-mode) {
+    --ink: #f8fafc;
+    --text: #f8fafc;
+    --text-primary: #ffffff;
+    --text-main: #ffffff;
+    --heading: #ffffff;
+    --fg: #f8fafc;
+    --muted: #cbd5e1;
+  }
+  html[data-theme="light"] body,
+  body.light-mode {
+    --ink: #18181b !important;
+    --text: #18181b !important;
+    --text-primary: #18181b !important;
+    --text-main: #18181b !important;
+    --heading: #111827 !important;
+    --fg: #18181b !important;
+    --bg: #faf8f5 !important;
+    --bg-primary: #faf8f5 !important;
+    --surface: #ffffff !important;
+    background: #faf8f5 !important;
+    color: #18181b !important;
+  }
+</style>
+<!-- /BB-HERO-VISIBILITY-FIX -->
 </head>
 <body>
   <!-- Scrolling Live Loot Ticker -->
@@ -944,7 +972,7 @@
           Amazon India deals, <span class="gradient-text">priced for today</span>
         </h1>
         <p class="hero-subtitle">
-          The steepest verified drops first. boAt, Samsung, Havells, Apple and the rest, checked through the day.
+          The steepest verified drops first. boAt, Samsung, Havells, Philips and the rest, checked through the day.
         </p>
 
         <!-- Stats Bar -->
@@ -978,9 +1006,9 @@
       <a href="/brand/boat.html">boAt</a>
       <a href="/brand/samsung.html">Samsung</a>
       <a href="/brand/havells.html">Havells</a>
-      <a href="/brand/oneplus.html">OnePlus</a>
+      <a href="/brand/oneplus.html">Philips</a>
       <a href="/brand/sony.html">Sony</a>
-      <a href="/brand/apple.html">Apple</a>
+      <a href="/brand/apple.html">Milton</a>
       <a href="/under-499.html">Under ₹499</a>
     </nav>
 
@@ -992,7 +1020,7 @@
           type="search" 
           id="searchInput" 
           class="search-input" 
-          placeholder="Search by title, brand (Sony, Apple, boAt), or paste ANY Amazon.in URL / ASIN..." 
+          placeholder="Search by title, brand (Sony, Philips, boAt), or paste ANY Amazon.in URL / ASIN..." 
           autocomplete="off"
           spellcheck="false"
         >

@@ -963,7 +963,7 @@ def build_head_html(page_cfg: dict, page_deals: list) -> str:
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@360;460;560&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-</head>'''
+<script src="/bb-fix.js"></script></head>'''
 
 
 def render_top5_quick_compare_table(deals: List[Dict[str, Any]]) -> str:
@@ -1120,9 +1120,9 @@ def generate_page_html(
     """Generate complete standalone static HTML for a given page configuration."""
     html_out = base_html
 
-    # 1. Cleanly replace the entire <head>...</head> section
+    # 1. Cleanly replace the entire <head>...<script src="/bb-fix.js"></script></head> section
     new_head = build_head_html(page_cfg, page_deals)
-    html_out = re.sub(r'<head>.*?</head>', new_head, html_out, count=1, flags=re.DOTALL)
+    html_out = re.sub(r'<head>.*?<script src="/bb-fix.js"></script></head>', new_head, html_out, count=1, flags=re.DOTALL)
 
     # 2. Hero Title & Subtitle
     html_out = re.sub(
@@ -1489,7 +1489,7 @@ def render_product_page_html(
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@360;460;560&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
-</head>
+<script src="/bb-fix.js"></script></head>
 <body>
   <!-- Header -->
   <header class="site-header">

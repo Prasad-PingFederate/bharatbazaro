@@ -88,7 +88,8 @@ jobs:
           bash -c '
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add data/ *.html deal/ guides/ feed.xml sitemap.xml robots.txt llms.txt bharatbazaro-indexnow-key.txt og-banner.png 2>/dev/null || true
+            git add -A data/ deal/ guides/ 2>/dev/null || true
+            git add *.html feed.xml sitemap.xml robots.txt llms.txt og-banner.png *.txt 2>/dev/null || true
             if ! git diff --staged --quiet; then
               git pull --rebase -X theirs origin main || true
               git commit -m "chore(radar): update live deals, programmatic SEO pages and sitemap [skip ci]" || true

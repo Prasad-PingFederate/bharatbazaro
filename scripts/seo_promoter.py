@@ -29,12 +29,14 @@ INDEXNOW_ENDPOINTS = [
 
 
 def ensure_indexnow_key_file(root_dir: Path) -> str:
-    """Ensure the IndexNow key file exists at the root of the site."""
-    key_file = root_dir / "bharatbazaro-indexnow-key.txt"
-    if not key_file.exists():
-        key_file.write_text(INDEXNOW_KEY, encoding="utf-8")
-        logger.info(f"Created IndexNow verification key file at {key_file}")
-    return key_file.read_text(encoding="utf-8").strip()
+    """Host the key at /{key}.txt. Bing rejects a differently named key file."""
+    key = INDEXNOW_KEY
+    key_file = root_dir / f"{key}.txt"
+    key_file.write_text(key + "\n", encoding="utf-8")
+    legacy = root_dir / "bharatbazaro-indexnow-key.txt"
+    legacy.write_text(key + "\n", encoding="utf-8")
+    logger.info(f"IndexNow key file ready at {key_file.name}")
+    return key
 
 
 def extract_sitemap_urls(root_dir: Path) -> List[str]:
@@ -67,8 +69,8 @@ def submit_to_indexnow(urls: List[str], key: str, timeout: float = 6.0) -> Dict[
     payload = {
         "host": HOST,
         "key": key,
-        "keyLocation": f"https://{HOST}/bharatbazaro-indexnow-key.txt",
-        "urlList": urls[:100],  # IndexNow max per batch is 10,000
+        "keyLocation": f"https://{HOST}/{key}.txt",
+        "urlList": urls[:10000],
     }
     data = json.dumps(payload).encode("utf-8")
 
@@ -206,7 +208,11 @@ def generate_promo_pack(root_dir: Path, deals: List[Dict[str, Any]]) -> Path:
     today = datetime.now(timezone.utc).strftime("%d %b %Y")
     partner_tag = os.getenv("AMAZON_AFFILIATE_TAG") or os.getenv("AMAZON_PARTNER_TAG") or "dammaiprasad-21"
 
-    top_loots = [d for d in deals if d.get("is_loot") or (d.get("effective_discount_pct") or 0) >= 60][:5]
+    top_loots = sorted(
+        [d for d in deals if d.get("is_loot") or (d.get("effective_discount_pct") or 0) >= 60],
+        key=lambda d: ((d.get("effective_discount_pct") or 0), (d.get("savings_inr") or 0)),
+        reverse=True,
+    )[:5]
     if len(top_loots) < 3:
         top_loots = deals[:5]
 
@@ -221,13 +227,15 @@ def generate_promo_pack(root_dir: Path, deals: List[Dict[str, Any]]) -> Path:
         mrp = d.get("mrp") or d.get("original_price")
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
         asin = d.get("asin")
+        deal_url = f"https://{HOST}/deal/{asin}.html"
         aff_url = f"https://www.amazon.in/dp/{asin}?tag={partner_tag}&linkCode=ll1"
         mrp_str = f" | MRP: ~₹{mrp:,}~" if mrp and isinstance(mrp, (int, float)) and mrp > p else ""
         tg_lines.append(f"{idx}️⃣ *{t}*")
         tg_lines.append(f"💰 Deal Price: *₹{p:,}* ({disc}% OFF{mrp_str})")
         if d.get("coupon_discount"):
             tg_lines.append(f"🎟️ Tick on-page coupon: *-₹{d.get('coupon_discount')}*")
-        tg_lines.append(f"👉 Buy Link: {aff_url}\n")
+        tg_lines.append(f"👉 Full price history: {deal_url}")
+        tg_lines.append(f"🛒 Buy on Amazon: {aff_url}\n")
     tg_lines.append("🔥 *More live loots refreshed every 30 mins:* https://bharatbazaro.com")
 
     # X / Twitter Post
@@ -241,10 +249,10 @@ def generate_promo_pack(root_dir: Path, deals: List[Dict[str, Any]]) -> Path:
         p = d.get("effective_price") or d.get("list_price") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
         asin = d.get("asin")
-        aff_url = f"https://www.amazon.in/dp/{asin}?tag={partner_tag}&linkCode=ll1"
+        deal_url = f"https://{HOST}/deal/{asin}.html"
         x_lines.append(f"{idx}/ {t}")
         x_lines.append(f"📉 ₹{p:,} ({disc}% Off)")
-        x_lines.append(f"🔗 {aff_url}\n")
+        x_lines.append(f"🔗 {deal_url}\n")
     x_lines.append("Explore all verified drops: https://bharatbazaro.com")
 
     # Reddit Post
@@ -260,9 +268,9 @@ def generate_promo_pack(root_dir: Path, deals: List[Dict[str, Any]]) -> Path:
         mrp = d.get("mrp") or d.get("original_price") or p
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
         asin = d.get("asin")
-        aff_url = f"https://www.amazon.in/dp/{asin}?tag={partner_tag}&linkCode=ll1"
+        deal_url = f"https://{HOST}/deal/{asin}.html"
         mrp_val = f"₹{mrp:,}" if isinstance(mrp, (int, float)) else str(mrp)
-        reddit_lines.append(f"| {t} | ₹{p:,} | {mrp_val} | {disc}% Off | [View on Amazon]({aff_url}) |")
+        reddit_lines.append(f"| {t} | ₹{p:,} | {mrp_val} | {disc}% Off | [Price history]({deal_url}) |")
     reddit_lines.append(f"\n*Full live radar and price error finder:* [BharatBazaro.com](https://bharatbazaro.com)")
 
     content = f"""# Daily Viral Social Media Promo Pack — {today}

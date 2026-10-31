@@ -1971,3 +1971,88 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
         run_seo_promotion(root_dir, deals)
     except Exception as e:
         logger.error(f"Failed to run SEO promotion: {e}", exc_info=True)
+
+ANALYTICS_SNIPPET = '<!-- BB-ANALYTICS-START -->\n<meta name="google-site-verification" content="bharatbazaro-search-console-verify" />\n<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />\n<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHARATBAZARO"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag(\'js\', new Date());\n  gtag(\'config\', localStorage.getItem(\'bb_ga_id\') || \'G-BHARATBAZARO\', { \'anonymize_ip\': true });\n  document.addEventListener(\'click\', function(e) {\n    var a = e.target.closest(\'a[href*="amazon."]\');\n    if (a && typeof gtag === \'function\') {\n      gtag(\'event\', \'affiliate_click\', { \'event_category\': \'outbound\', \'event_label\': a.href });\n    }\n  });\n</script>\n<!-- BB-ANALYTICS-END -->'
+
+def generate_grok_brand_and_daily_pages(deals_list=None):
+    import os, json, re, glob, html, pathlib
+    from datetime import datetime, timezone, timedelta
+    ist_now = datetime.now(timezone(timedelta(hours=5, minutes=30)))
+    today_slug = ist_now.strftime("%Y-%m-%d")
+    today_human = ist_now.strftime("%d %B %Y")
+    site_url = "https://bharatbazaro.com"
+
+    if not deals_list:
+        for cand in ["data/deals.json", "deals.json"]:
+            if os.path.exists(cand):
+                try:
+                    raw = json.loads(pathlib.Path(cand).read_text(encoding="utf-8"))
+                    deals_list = raw if isinstance(raw, list) else raw.get("deals", raw.get("items", []))
+                    break
+                except Exception:
+                    deals_list = []
+    deals_list = deals_list or []
+    sorted_deals = sorted(deals_list, key=lambda d: (float(d.get("discount_percent") or d.get("discount") or 0)*1.6)+float(d.get("agent_score") or d.get("score") or 0), reverse=True)
+
+    def _render_cards_html(items):
+        cards = []
+        for idx, d in enumerate(items[:24]):
+            title = html.escape(str(d.get("title") or d.get("name") or "Amazon India Deal"))
+            price = html.escape(str(d.get("effective_price") or d.get("current_price") or d.get("price") or "Check Price"))
+            if price.isdigit():
+                price = f"₹{int(price):,}"
+            mrp = html.escape(str(d.get("original_price") or d.get("mrp") or ""))
+            disc = d.get("discount_percent") or d.get("discount") or ""
+            url = html.escape(str(d.get("url") or d.get("link") or "https://www.amazon.in/?tag=dammaiprasad-21"))
+            if "tag=" not in url and "amazon.in" in url:
+                url += ("&" if "?" in url else "?") + "tag=dammaiprasad-21&ascsubtag=bb-seo"
+            img = html.escape(str(d.get("image_url") or d.get("image") or f"{site_url}/og-banner.png"))
+            prio = 'fetchpriority="high" decoding="async"' if idx < 3 else 'loading="lazy" decoding="async"'
+            disc_badge = f'<span style="background:#ef4444;color:#fff;padding:3px 8px;border-radius:6px;font-weight:700;font-size:12px;">{disc}% OFF</span>' if disc else ""
+            mrp_html = f'<del style="color:#94a3b8;font-size:13px;margin-left:6px;">{mrp}</del>' if mrp else ""
+            cards.append(f"""<article class="deal-card" style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">{disc_badge}<span style="color:#38bdf8;font-size:12px;">✓ Verified Live</span></div><a href="{url}" target="_blank" rel="nofollow sponsored noopener" style="display:block;text-align:center;background:#fff;border-radius:8px;padding:12px;margin-bottom:12px;"><img src="{img}" alt="{title}" width="200" height="200" {prio} style="object-fit:contain;max-height:180px;width:auto;margin:0 auto;" /></a><h2 style="font-size:15px;line-height:1.4;margin:0 0 10px;"><a href="{url}" target="_blank" rel="nofollow sponsored noopener" style="color:#f8fafc;text-decoration:none;">{title}</a></h2></div><div><div style="font-size:20px;font-weight:800;color:#22c55e;margin-bottom:12px;">{price} {mrp_html}</div><a href="{url}" target="_blank" rel="nofollow sponsored noopener" style="display:block;text-align:center;background:#f97316;color:#fff;font-weight:700;padding:10px;border-radius:8px;text-decoration:none;">🛒 Grab Deal on Amazon</a></div></article>""")
+        return "\n".join(cards)
+
+    def _page_shell(title, h1, subtitle, canonical_url, body_cards_html, schema_json):
+        return f"""<!DOCTYPE html><html lang="en-IN"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{html.escape(title)}</title><meta name="description" content="{html.escape(subtitle)}" /><link rel="canonical" href="{canonical_url}" /><link rel="alternate" hreflang="en-in" href="{canonical_url}" /><meta property="og:title" content="{html.escape(title)}" /><meta property="og:description" content="{html.escape(subtitle)}" /><meta property="og:url" content="{canonical_url}" /><meta property="og:image" content="{site_url}/og-banner.png" /><meta property="og:type" content="article" /><meta name="twitter:card" content="summary_large_image" /><link rel="stylesheet" href="/style.css" />{ANALYTICS_SNIPPET}<script type="application/ld+json">{schema_json}</script></head><body style="background:#0f172a;color:#f8fafc;font-family:system-ui,-apple-system,sans-serif;margin:0;padding:0;"><header style="background:#1e293b;border-bottom:1px solid #334155;padding:16px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;"><a href="/" style="color:#f97316;font-size:22px;font-weight:900;text-decoration:none;">⚡ BharatBazaro.com</a><nav style="display:flex;flex-wrap:wrap;gap:14px;font-size:14px;"><a href="/deals/{today_slug}.html" style="color:#38bdf8;text-decoration:none;font-weight:700;">🔥 Amazon Deals Today</a><a href="/under-99.html" style="color:#e2e8f0;text-decoration:none;">Under ₹99</a><a href="/under-499.html" style="color:#e2e8f0;text-decoration:none;">Under ₹499</a><a href="/brand/boat.html" style="color:#e2e8f0;text-decoration:none;">boAt</a><a href="/brand/samsung.html" style="color:#e2e8f0;text-decoration:none;">Samsung</a><a href="/brand/havells.html" style="color:#e2e8f0;text-decoration:none;">Havells</a><a href="/brand/oneplus.html" style="color:#e2e8f0;text-decoration:none;">OnePlus</a></nav></header><main style="max-width:1200px;margin:0 auto;padding:24px;"><h1 style="font-size:28px;margin-bottom:8px;">{html.escape(h1)}</h1><p style="color:#94a3b8;margin-bottom:24px;">{html.escape(subtitle)} • Updated Live ({today_human} IST)</p><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;">{body_cards_html}</div></main><footer style="text-align:center;padding:30px 16px;color:#64748b;font-size:13px;border-top:1px solid #1e293b;margin-top:40px;"><p>As an Amazon Associate I earn from qualifying purchases. Prices &amp; availability are accurate as of {today_human} IST.</p><p><a href="/" style="color:#38bdf8;">BharatBazaro Home</a> • <a href="/sitemap.xml" style="color:#38bdf8;">Sitemap</a></p></footer></body></html>"""
+
+    os.makedirs("brand", exist_ok=True)
+    brands = {
+        "boat": ("boAt", "boAt Earbuds, Headphones, Smartwatches & Soundbars Deals Today on Amazon India"),
+        "samsung": ("Samsung", "Samsung Galaxy 5G Mobiles, Tablets, SSDs & Smart TV Price Drops Today"),
+        "havells": ("Havells", "Havells Home & Kitchen Appliances, Fans, Geysers & Grooming Deals Today"),
+        "oneplus": ("OnePlus", "OnePlus 5G Phones, Nord Series & OnePlus Buds Lowest Price Deals Today"),
+        "sony": ("Sony", "Sony Noise Cancelling Headphones, Speakers & Bravia Deals on Amazon India"),
+        "philips": ("Philips", "Philips Trimmers, Air Fryers & Home Appliances Price Drops Today"),
+        "xiaomi": ("Xiaomi", "Xiaomi & Redmi 5G Smartphones, Power Banks & Smart TV Loot Deals"),
+        "apple": ("Apple", "Apple iPhone, iPad, MacBook & AirPods Lowest Tracked Prices in India"),
+    }
+    generated_urls = []
+    for slug, (bname, bdesc) in brands.items():
+        matched = [d for d in sorted_deals if bname.lower() in str(d.get("title") or d.get("name") or "").lower()]
+        display_items = matched if len(matched) >= 2 else sorted_deals[:12]
+        can_url = f"{site_url}/brand/{slug}.html"
+        schema = json.dumps({"@context": "https://schema.org", "@type": "CollectionPage", "name": f"{bname} Amazon India Deals Today", "description": bdesc, "url": can_url})
+        pathlib.Path(f"brand/{slug}.html").write_text(_page_shell(f"{bname} Deals Today on Amazon India | BharatBazaro", f"{bname} Official Amazon India Deals & Price Drops", bdesc, can_url, _render_cards_html(display_items), schema), encoding="utf-8")
+        generated_urls.append(can_url)
+
+    os.makedirs("deals", exist_ok=True)
+    daily_url = f"{site_url}/deals/{today_slug}.html"
+    discover_schema = json.dumps({"@context": "https://schema.org", "@type": "NewsArticle", "headline": f"Amazon deals today ({today_human}): Top Verified Price Drops in India", "datePublished": f"{today_slug}T06:00:00+05:30", "dateModified": ist_now.isoformat(), "image": [f"{site_url}/og-banner.png"]})
+    pathlib.Path(f"deals/{today_slug}.html").write_text(_page_shell(f"Amazon deals today ({today_human}) — Live Loot & Price Drops | BharatBazaro", f"Amazon deals today ({today_human})", f"Handpicked Amazon India price drops, hidden coupons, and under ₹499 loot deals for {today_human}", daily_url, _render_cards_html(sorted_deals[:24]), discover_schema), encoding="utf-8")
+    generated_urls.append(daily_url)
+
+    for hf in glob.glob("*.html") + glob.glob("deal/*.html") + glob.glob("guides/*.html"):
+        hp = pathlib.Path(hf)
+        htxt = hp.read_text(encoding="utf-8")
+        if "<!-- BB-ANALYTICS-START -->" not in htxt and "</head>" in htxt:
+            hp.write_text(htxt.replace("</head>", ANALYTICS_SNIPPET + "
+</head>", 1), encoding="utf-8")
+
+    sm_path = pathlib.Path("sitemap.xml")
+    if sm_path.exists():
+        sm_txt = sm_path.read_text(encoding="utf-8")
+        new_entries = [f"  <url><loc>{gu}</loc><lastmod>{today_slug}</lastmod><changefreq>hourly</changefreq><priority>0.9</priority></url>" for gu in generated_urls if f"<loc>{gu}</loc>" not in sm_txt]
+        if new_entries and "</urlset>" in sm_txt:
+            sm_path.write_text(sm_txt.replace("</urlset>", "\n".join(new_entries) + "\n</urlset>"), encoding="utf-8")
+    print(f"[OK] Generated /brand/*.html + /deals/{today_slug}.html + Analytics + sitemap.xml")

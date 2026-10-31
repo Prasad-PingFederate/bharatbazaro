@@ -4693,76 +4693,54 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
   .hero-section { padding-top: 28px; }
 }
 
-/* === VIBRANT INDIAN LOOT THEME OVERRIDE === */
-:root {
-  --bg-primary: #070b14 !important;
-  --bg-secondary: #0f172a !important;
-  --bg-card: rgba(17, 25, 45, 0.94) !important;
-  --bg-surface: #131c33 !important;
-  --text-primary: #ffffff !important;
-  --text-secondary: #cbd5e1 !important;
-  --text-muted: #94a3b8 !important;
-  --accent-primary: #ff6b00 !important;
-  --accent-secondary: #ff9900 !important;
-  --accent-glow: rgba(255, 107, 0, 0.38) !important;
-  --price-green: #00e676 !important;
-  --loot-red: #ff2a5f !important;
-  --border-color: rgba(255, 153, 0, 0.24) !important;
+/* === THEME-AWARE CONTRAST & VISIBILITY FIX === */
+/* Ensure dark backgrounds ALWAYS have bright, high-contrast visible text on Logo, Stats (189, 89%), and Pills */
+body:not(.light-mode):not([data-theme="light"]) .logo,
+body:not(.light-mode):not([data-theme="light"]) .brand-logo,
+body:not(.light-mode):not([data-theme="light"]) header a,
+[data-theme="dark"] .logo,
+[data-theme="dark"] header a,
+body.dark-mode .logo,
+body.dark-mode header a {
+  color: #ffffff !important;
 }
 
-body {
-  background: radial-gradient(circle at 15% 10%, rgba(255, 107, 0, 0.15), transparent 35%),
-              radial-gradient(circle at 85% 15%, rgba(14, 165, 233, 0.15), transparent 35%),
-              linear-gradient(180deg, #060913 0%, #0b1120 50%, #070b14 100%) !important;
+/* Fix invisible stat numbers (189, 89%) on dark background */
+body:not(.light-mode):not([data-theme="light"]) .stat-value,
+body:not(.light-mode):not([data-theme="light"]) .stat-num,
+body:not(.light-mode):not([data-theme="light"]) .stat-number,
+body:not(.light-mode):not([data-theme="light"]) .stat-card > div:first-child,
+body:not(.light-mode):not([data-theme="light"]) .hero-stat strong,
+body:not(.light-mode):not([data-theme="light"]) .stats-grid div > span:first-child,
+body:not(.light-mode):not([data-theme="light"]) .stats-grid div > div:first-child {
+  color: #ffffff !important;
+}
+
+/* Fix invisible quick-filter pills (Today's loots, boAt, Samsung, Havells, Under 499) */
+body:not(.light-mode):not([data-theme="light"]) button,
+body:not(.light-mode):not([data-theme="light"]) .pill,
+body:not(.light-mode):not([data-theme="light"]) .chip,
+body:not(.light-mode):not([data-theme="light"]) .filter-pill,
+body:not(.light-mode):not([data-theme="light"]) .quick-filter,
+body:not(.light-mode):not([data-theme="light"]) .brand-chip {
   color: #f8fafc !important;
 }
 
-.deal-card, article.deal-card, .card {
-  background: linear-gradient(145deg, rgba(20, 30, 55, 0.96) 0%, rgba(11, 17, 32, 0.98) 100%) !important;
-  border: 1px solid rgba(255, 153, 0, 0.24) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease !important;
+/* When Light Mode IS toggled via the sun/moon button, give clean bright ivory background & crisp dark text */
+body.light-mode,
+html.light-mode body,
+html[data-theme="light"] body,
+body[data-theme="light"] {
+  background: #faf8f5 !important;
+  color: #18181b !important;
 }
 
-.deal-card:hover, article.deal-card:hover, .card:hover {
-  transform: translateY(-5px) !important;
-  border-color: #ff9900 !important;
-  box-shadow: 0 16px 38px rgba(255, 107, 0, 0.3), 0 0 20px rgba(255, 153, 0, 0.2) !important;
-}
-
-.buy-btn, .cta-btn, .deal-btn, a[href*="amazon.in"].btn, .deal-card a[target="_blank"]:last-child {
-  background: linear-gradient(135deg, #ff5500 0%, #ff8800 55%, #ffb700 100%) !important;
-  color: #ffffff !important;
-  font-weight: 800 !important;
-  border: none !important;
-  border-radius: 10px !important;
-  box-shadow: 0 6px 20px rgba(255, 102, 0, 0.42) !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) !important;
-  transition: all 0.2s ease !important;
-}
-
-.buy-btn:hover, .cta-btn:hover, .deal-btn:hover, .deal-card a[target="_blank"]:last-child:hover {
-  background: linear-gradient(135deg, #ff6a00 0%, #ffa200 60%, #ffd000 100%) !important;
-  box-shadow: 0 8px 26px rgba(255, 136, 0, 0.65) !important;
-  transform: scale(1.02) !important;
-}
-
-.deal-price, .current-price, .price-now, .effective-price {
-  color: #00e676 !important;
-  font-weight: 900 !important;
-  text-shadow: 0 0 14px rgba(0, 230, 118, 0.3) !important;
-}
-
-.discount-badge, .badge-loot, .off-badge, .loot-tag {
-  background: linear-gradient(135deg, #ff1744 0%, #ff6b00 100%) !important;
-  color: #ffffff !important;
-  font-weight: 800 !important;
-  box-shadow: 0 4px 12px rgba(255, 23, 68, 0.38) !important;
-}
-
-header, .navbar, .site-header {
-  background: rgba(10, 15, 29, 0.92) !important;
-  backdrop-filter: blur(16px) !important;
-  border-bottom: 1px solid rgba(255, 153, 0, 0.28) !important;
+body.light-mode .stat-value,
+body.light-mode .stat-num,
+body.light-mode .stat-number,
+body[data-theme="light"] .stat-value,
+body[data-theme="light"] .stat-num,
+html[data-theme="light"] .stat-value,
+html[data-theme="light"] .stat-num {
+  color: #18181b !important;
 }

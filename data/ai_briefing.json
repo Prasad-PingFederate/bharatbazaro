@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-03 12:27 IST",
-  "generated_at_epoch": 1793689070,
+  "generated_at_ist": "2026-11-03 16:15 IST",
+  "generated_at_epoch": 1793702731,
   "top_loot_summary": [
+    {
+      "asin": "B0B25L78CD",
+      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
+      "effective_price": 5299,
+      "mrp": 11000,
+      "discount_pct": 52,
+      "savings_inr": 5701,
+      "brand": "Crucial",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BC8P3X65",
+      "title": "Puma Men Smashic Casual Sneaker Shoes White & Navy",
+      "effective_price": 1799,
+      "mrp": 4499,
+      "discount_pct": 60,
+      "savings_inr": 2700,
+      "brand": "Puma",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X65?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X65.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B008A2796G",
+      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
+      "effective_price": 6995,
+      "mrp": 13995,
+      "discount_pct": 50,
+      "savings_inr": 7000,
+      "brand": "Fossil",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0BF54979B",
       "title": "Fire-Boltt Ninja Call Pro Plus 1.83 inch Smart Watch with AI Voice Assistant",
@@ -26,19 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B091CR2FXY",
-      "title": "AGARO Regency Air Fryer 12L 1800W with 9 Preset Menus & Rotisserie",
-      "effective_price": 7499,
-      "mrp": 15999,
-      "discount_pct": 53,
-      "savings_inr": 8500,
-      "brand": "Agaro",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
       "coupon_text": null
     }
   ],
@@ -84,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793689056,
-    "last_verified_at_epoch": 1793689056,
-    "last_verified_at_ist": "2026-11-03 12:27 IST",
+    "posted_at_epoch": 1793702729,
+    "last_verified_at_epoch": 1793702729,
+    "last_verified_at_ist": "2026-11-03 16:15 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793689056,
-    "updated_at_ist": "2026-11-03 12:27 IST"
+    "updated_at": 1793702729,
+    "updated_at_ist": "2026-11-03 16:15 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -136,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793689056,
-    "last_verified_at_epoch": 1793689056,
-    "last_verified_at_ist": "2026-11-03 12:27 IST",
+    "posted_at_epoch": 1793702729,
+    "last_verified_at_epoch": 1793702729,
+    "last_verified_at_ist": "2026-11-03 16:15 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793689056,
-    "updated_at_ist": "2026-11-03 12:27 IST"
+    "updated_at": 1793702729,
+    "updated_at_ist": "2026-11-03 16:15 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -184,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 161,
-    "loot_count": 3,
+    "total_deals": 162,
+    "loot_count": 6,
     "max_discount_pct": 89,
-    "total_savings_inr": 518363
+    "total_savings_inr": 518481
   }
 }

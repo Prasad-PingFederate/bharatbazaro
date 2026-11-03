@@ -63,7 +63,8 @@ jobs:
           REDDIT_COMMUNITY_LINK: ${{ vars.REDDIT_COMMUNITY_LINK || 'https://www.reddit.com/r/Indiashopping/' }}
           DRY_RUN: 'false'
           CONTINUOUS: 'false'
-          MAX_POSTS_PER_CYCLE: '3'
+          MAX_POSTS_PER_CYCLE: '6'
+          TELEGRAM_24X7: 'true'
           FEEDS_ENABLED: 'true'
           MIN_DISCOUNT_PERCENT: '30'
           ALLOWED_RETAILERS: 'Amazon'

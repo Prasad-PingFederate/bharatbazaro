@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-04 19:57 IST",
-  "generated_at_epoch": 1793802433,
+  "generated_at_ist": "2026-11-05 02:26 IST",
+  "generated_at_epoch": 1793825763,
   "top_loot_summary": [
+    {
+      "asin": "B09G3Z55TK",
+      "title": "JBL Flip 6 Wireless Portable Bluetooth Speaker (IP67 Waterproof)",
+      "effective_price": 8999,
+      "mrp": 13999,
+      "discount_pct": 36,
+      "savings_inr": 5000,
+      "brand": "JBL",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09G3Z55TK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09G3Z55TK.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B8NTZ24P",
       "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
@@ -53,19 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B0B551YGY3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0B551YGY3.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B08HMWZB8B",
-      "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
-      "effective_price": 3999,
-      "mrp": 9999,
-      "discount_pct": 60,
-      "savings_inr": 6000,
-      "brand": "Zebronics",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B08HMWZB8B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08HMWZB8B.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": null,
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793802429,
-    "last_verified_at_epoch": 1793802429,
-    "last_verified_at_ist": "2026-11-04 19:57 IST",
+    "posted_at_epoch": 1793825753,
+    "last_verified_at_epoch": 1793825753,
+    "last_verified_at_ist": "2026-11-05 02:25 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793802429,
-    "updated_at_ist": "2026-11-04 19:57 IST"
+    "updated_at": 1793825753,
+    "updated_at_ist": "2026-11-05 02:25 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793802429,
-    "last_verified_at_epoch": 1793802429,
-    "last_verified_at_ist": "2026-11-04 19:57 IST",
+    "posted_at_epoch": 1793825753,
+    "last_verified_at_epoch": 1793825753,
+    "last_verified_at_ist": "2026-11-05 02:25 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793802429,
-    "updated_at_ist": "2026-11-04 19:57 IST"
+    "updated_at": 1793825753,
+    "updated_at_ist": "2026-11-05 02:25 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 162,
-    "loot_count": 12,
+    "total_deals": 154,
+    "loot_count": 10,
     "max_discount_pct": 88,
-    "total_savings_inr": 536761
+    "total_savings_inr": 477868
   }
 }

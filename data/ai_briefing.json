@@ -1,7 +1,59 @@
 {
-  "generated_at_ist": "2026-11-05 02:26 IST",
-  "generated_at_epoch": 1793825763,
+  "generated_at_ist": "2026-11-05 06:58 IST",
+  "generated_at_epoch": 1793842092,
   "top_loot_summary": [
+    {
+      "asin": "B0BF54979C",
+      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars and Juicer Jar",
+      "effective_price": 2899,
+      "mrp": 6195,
+      "discount_pct": 53,
+      "savings_inr": 3296,
+      "brand": "Prestige",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0BF54979C?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BF54979C.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0C4ZHYX58",
+      "title": "boAt EnergyShroom PB400 20000mAh Power Bank (22.5W Fast Charging)",
+      "effective_price": 1299,
+      "mrp": 3999,
+      "discount_pct": 68,
+      "savings_inr": 2700,
+      "brand": "boAt",
+      "category": "Mobiles & Accessories",
+      "affiliate_url": "https://www.amazon.in/dp/B0C4ZHYX58?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0C4ZHYX58.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B085Z1F1M6",
+      "title": "Cello Opalware Dazzle Tropical Lagoon Dinner Set 35 Pieces (White)",
+      "effective_price": 2199,
+      "mrp": 4990,
+      "discount_pct": 56,
+      "savings_inr": 2791,
+      "brand": "Cello",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B085Z1F1M6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B085Z1F1M6.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B08C1Q1W5X",
+      "title": "Crompton Arno Neo 15-Litre Storage Water Heater Geyser (5-Star Rated)",
+      "effective_price": 5499,
+      "mrp": 9800,
+      "discount_pct": 44,
+      "savings_inr": 4301,
+      "brand": "Crompton",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B08C1Q1W5X?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B08C1Q1W5X.html",
+      "coupon_text": null
+    },
     {
       "asin": "B09G3Z55TK",
       "title": "JBL Flip 6 Wireless Portable Bluetooth Speaker (IP67 Waterproof)",
@@ -13,58 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B09G3Z55TK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B09G3Z55TK.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B8NTZ24P",
-      "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
-      "effective_price": 1199,
-      "mrp": 6990,
-      "discount_pct": 83,
-      "savings_inr": 5791,
-      "brand": "boAt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24P.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0892R627P",
-      "title": "Bajaj New Shakti Neo 15L Vertical Storage Water Heater (Geyser 2000W)",
-      "effective_price": 5699,
-      "mrp": 10500,
-      "discount_pct": 46,
-      "savings_inr": 4801,
-      "brand": "Bajaj",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0892R627P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0892R627P.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B00W7D765E",
-      "title": "Wonderchef Nutri-blend 400W Mixer Grinder Blender with 2 Unbreakable Jars",
-      "effective_price": 2399,
-      "mrp": 5000,
-      "discount_pct": 52,
-      "savings_inr": 2601,
-      "brand": "Wonderchef",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B00W7D765E?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B00W7D765E.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B551YGY3",
-      "title": "Noise ColorFit Pulse 2 Max 1.85 inch Display Bluetooth Calling Smart Watch",
-      "effective_price": 1299,
-      "mrp": 5999,
-      "discount_pct": 78,
-      "savings_inr": 4700,
-      "brand": "Noise",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0B551YGY3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B551YGY3.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793825753,
-    "last_verified_at_epoch": 1793825753,
-    "last_verified_at_ist": "2026-11-05 02:25 IST",
+    "posted_at_epoch": 1793842088,
+    "last_verified_at_epoch": 1793842088,
+    "last_verified_at_ist": "2026-11-05 06:58 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793825753,
-    "updated_at_ist": "2026-11-05 02:25 IST"
+    "updated_at": 1793842088,
+    "updated_at_ist": "2026-11-05 06:58 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793825753,
-    "last_verified_at_epoch": 1793825753,
-    "last_verified_at_ist": "2026-11-05 02:25 IST",
+    "posted_at_epoch": 1793842088,
+    "last_verified_at_epoch": 1793842088,
+    "last_verified_at_ist": "2026-11-05 06:58 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793825753,
-    "updated_at_ist": "2026-11-05 02:25 IST"
+    "updated_at": 1793842088,
+    "updated_at_ist": "2026-11-05 06:58 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 154,
-    "loot_count": 10,
+    "total_deals": 147,
+    "loot_count": 12,
     "max_discount_pct": 88,
-    "total_savings_inr": 477868
+    "total_savings_inr": 515730
   }
 }

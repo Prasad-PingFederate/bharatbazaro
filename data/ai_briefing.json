@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-05 14:00 IST",
-  "generated_at_epoch": 1793867429,
+  "generated_at_ist": "2026-11-05 22:18 IST",
+  "generated_at_epoch": 1793897329,
   "top_loot_summary": [
+    {
+      "asin": "B008A2796G",
+      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
+      "effective_price": 6995,
+      "mrp": 13995,
+      "discount_pct": 50,
+      "savings_inr": 7000,
+      "brand": "Fossil",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0B25L78CD",
+      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
+      "effective_price": 5299,
+      "mrp": 11000,
+      "discount_pct": 52,
+      "savings_inr": 5701,
+      "brand": "Crucial",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0H6MJBCHN",
       "title": "[ICICI / AXIS CC] Acer Chromebook, Intel Celeron- N4500 Processor, 4GB LPDDR4 RAM, 64GB eMMC, 29.46cm /11.6\" inch HD Display, Chrome OS, Intel UHD Graphics,WiFi 5, Black, 1.2 KG, CO731, Thin & Light Laptop",
@@ -39,32 +65,6 @@
       "category": "Fashion & Footwear",
       "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BF54979B",
-      "title": "Fire-Boltt Ninja Call Pro Plus 1.83 inch Smart Watch with AI Voice Assistant",
-      "effective_price": 1099,
-      "mrp": 9999,
-      "discount_pct": 89,
-      "savings_inr": 8900,
-      "brand": "Fire-Boltt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0BF54979B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BF54979B.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B083W7V3YB",
-      "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
-      "effective_price": 6990,
-      "mrp": 14990,
-      "discount_pct": 53,
-      "savings_inr": 8000,
-      "brand": "Sennheiser",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
       "coupon_text": null
     }
   ],
@@ -110,37 +110,37 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793867414,
-    "last_verified_at_epoch": 1793867414,
-    "last_verified_at_ist": "2026-11-05 14:00 IST",
+    "posted_at_epoch": 1793897320,
+    "last_verified_at_epoch": 1793897320,
+    "last_verified_at_ist": "2026-11-05 22:18 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793867414,
-    "updated_at_ist": "2026-11-05 14:00 IST"
+    "updated_at": 1793897320,
+    "updated_at_ist": "2026-11-05 22:18 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B0C46DW3KH",
-    "asin": "B0C46DW3KH",
-    "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
+    "id": "amazon:B0BZV8RF79",
+    "asin": "B0BZV8RF79",
+    "title": "OnePlus Nord Buds 2r True Wireless in Ear Earbuds with Mic, 38H Playtime, 12.4mm Drivers",
     "brand": "Oneplus",
     "brand_tier": "tier1",
     "category": "Mobiles & Accessories",
-    "image_url": "https://m.media-amazon.com/images/I/61WoAhwb5mL._SL600_.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0C46DW3KH?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 42999,
-    "list_price": 37999,
-    "effective_price": 37999,
+    "image_url": "https://m.media-amazon.com/images/I/710fNBm3CVL._SL600_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0BZV8RF79?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 2299,
+    "list_price": 1799,
+    "effective_price": 1799,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": "Instant ₹3,000 Bank Discount with ICICI CC",
-    "discount_pct": 12,
-    "effective_discount_pct": 12,
-    "savings_inr": 5000,
-    "rating": 4.4,
-    "review_count": 4120,
+    "bank_offer": null,
+    "discount_pct": 22,
+    "effective_discount_pct": 22,
+    "savings_inr": 500,
+    "rating": 4.2,
+    "review_count": 48000,
     "score": 75,
     "buy_confidence": 95,
     "price_context": "normal",
@@ -148,7 +148,7 @@
     "historical_avg": null,
     "historical_max": null,
     "is_loot": false,
-    "is_diwali_steal": true,
+    "is_diwali_steal": false,
     "is_cookie_magnet": false,
     "is_daily_essential": false,
     "is_further_drop": false,
@@ -156,29 +156,28 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "💳 Select eligible card/payment for instant bank discount: Instant ₹3,000 Bank Discount with ICICI CC.",
-      "🎉 Complete checkout at the effective deal price of ₹37,999!"
+      "🎉 Complete checkout at the effective deal price of ₹1,799!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793867414,
-    "last_verified_at_epoch": 1793867414,
-    "last_verified_at_ist": "2026-11-05 14:00 IST",
+    "posted_at_epoch": 1793897321,
+    "last_verified_at_epoch": 1793897321,
+    "last_verified_at_ist": "2026-11-05 22:18 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793867414,
-    "updated_at_ist": "2026-11-05 14:00 IST"
+    "updated_at": 1793897321,
+    "updated_at_ist": "2026-11-05 22:18 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0C46DW3KH",
-      "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
-      "effective_price": 37999,
-      "discount_pct": 12,
-      "deal_url": "https://bharatbazaro.com/deal/B0C46DW3KH.html"
+      "asin": "B0BZV8RF79",
+      "title": "OnePlus Nord Buds 2r True Wireless in Ear Earbuds with Mic, 38H Playtime, 12.4mm Drivers",
+      "effective_price": 1799,
+      "discount_pct": 22,
+      "deal_url": "https://bharatbazaro.com/deal/B0BZV8RF79.html"
     },
     "electronics": {
       "asin": "B0CGM17GYC",
@@ -188,31 +187,31 @@
       "deal_url": "https://bharatbazaro.com/deal/B0CGM17GYC.html"
     },
     "home": {
-      "asin": "B002MPPTB8",
-      "title": "Hawkins Futura Hard Anodised Pressure Cooker 3 Litre with Induction Base",
-      "effective_price": 2499,
-      "discount_pct": 25,
-      "deal_url": "https://bharatbazaro.com/deal/B002MPPTB8.html"
+      "asin": "B0BDJ6ZPH3",
+      "title": "Havells Instanio 3-Litre Instant Water Heater Geyser with LED Indicator",
+      "effective_price": 3199,
+      "discount_pct": 47,
+      "deal_url": "https://bharatbazaro.com/deal/B0BDJ6ZPH3.html"
     },
     "fashion": {
-      "asin": "B08V5Q4X1A",
-      "title": "Nike Mens Revolution 6 Running Shoes (Lightweight & Breathable)",
-      "effective_price": 2499,
-      "discount_pct": 37,
-      "deal_url": "https://bharatbazaro.com/deal/B08V5Q4X1A.html"
+      "asin": "B0BBWH1R8J",
+      "title": "Casio Vintage Digital Dial Unisex Watch A158WA-1DF with Stainless Steel Band",
+      "effective_price": 1695,
+      "discount_pct": 23,
+      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8J.html"
     },
     "grocery": {
-      "asin": "B07V2QJ412",
-      "title": "Cetaphil Gentle Skin Cleanser 500ml for Sensitive Skin with Niacinamide",
-      "effective_price": 549,
-      "discount_pct": 23,
-      "deal_url": "https://bharatbazaro.com/deal/B07V2QJ412.html"
+      "asin": "B08NVPSCQZ",
+      "title": "Minimalist 10% Niacinamide Face Serum with Zinc for Blemishes & Dark Spots, 30ml",
+      "effective_price": 399,
+      "discount_pct": 33,
+      "deal_url": "https://bharatbazaro.com/deal/B08NVPSCQZ.html"
     }
   },
   "market_stats": {
-    "total_deals": 153,
-    "loot_count": 14,
+    "total_deals": 150,
+    "loot_count": 12,
     "max_discount_pct": 89,
-    "total_savings_inr": 536515
+    "total_savings_inr": 497300
   }
 }

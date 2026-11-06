@@ -1,7 +1,59 @@
 {
-  "generated_at_ist": "2026-11-06 04:11 IST",
-  "generated_at_epoch": 1793918464,
+  "generated_at_ist": "2026-11-06 08:54 IST",
+  "generated_at_epoch": 1793935487,
   "top_loot_summary": [
+    {
+      "asin": "B09K7RLCPL",
+      "title": "[ICICI CC] PHILIPS Essential Air Fryer (Slate Grey, HD9200/60, 4.1L, 0.80 kilograms), 1400 Watts",
+      "effective_price": 4890,
+      "mrp": 8995,
+      "discount_pct": 46,
+      "savings_inr": 4105,
+      "brand": "Philips",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B09K7RLCPL?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09K7RLCPL.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0CJLWDVD1",
+      "title": "Crompton Versa Horizontal RHS 25L Storage Water Heater (Geyser) with Rust Proof Plastic body and Superior Glassline Coating, Fits under false ceilings, 8 Bar pressure rating and 7yr Tank warranty",
+      "effective_price": 9599,
+      "mrp": 13900,
+      "discount_pct": 20,
+      "savings_inr": 4301,
+      "brand": "Crompton",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0CJLWDVD1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CJLWDVD1.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BBWH1R8H",
+      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
+      "effective_price": 5499,
+      "mrp": 10500,
+      "discount_pct": 48,
+      "savings_inr": 5001,
+      "brand": "Kingston",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09WDP4MMK",
+      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
+      "effective_price": 7999,
+      "mrp": 16100,
+      "discount_pct": 50,
+      "savings_inr": 8101,
+      "brand": "Samsung",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0BC8P3X65",
       "title": "Puma Men Smashic Casual Sneaker Shoes White & Navy",
@@ -13,58 +65,6 @@
       "category": "Fashion & Footwear",
       "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X65?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X65.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BN8H1L7L",
-      "title": "Philips Air Fryer HD9200/90 4.1 Litre Rapid Air Technology with 90% Less Fat Cooking",
-      "effective_price": 5499,
-      "mrp": 9995,
-      "discount_pct": 45,
-      "savings_inr": 4496,
-      "brand": "Philips",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0BN8H1L7L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BN8H1L7L.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0CYQ4M4N5",
-      "title": "Sony Bravia 55 inches 4K Ultra HD Smart LED Google TV KD-55X74L",
-      "effective_price": 52990,
-      "mrp": 99900,
-      "discount_pct": 47,
-      "savings_inr": 46910,
-      "brand": "Sony",
-      "category": "Electronics & Audio",
-      "affiliate_url": "https://www.amazon.in/dp/B0CYQ4M4N5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B008A2796G",
-      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
-      "effective_price": 6995,
-      "mrp": 13995,
-      "discount_pct": 50,
-      "savings_inr": 7000,
-      "brand": "Fossil",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B25L78CD",
-      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
-      "effective_price": 5299,
-      "mrp": 11000,
-      "discount_pct": 52,
-      "savings_inr": 5701,
-      "brand": "Crucial",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793918452,
-    "last_verified_at_epoch": 1793918452,
-    "last_verified_at_ist": "2026-11-06 04:10 IST",
+    "posted_at_epoch": 1793935479,
+    "last_verified_at_epoch": 1793935479,
+    "last_verified_at_ist": "2026-11-06 08:54 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793918452,
-    "updated_at_ist": "2026-11-06 04:10 IST"
+    "updated_at": 1793935479,
+    "updated_at_ist": "2026-11-06 08:54 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793918452,
-    "last_verified_at_epoch": 1793918452,
-    "last_verified_at_ist": "2026-11-06 04:10 IST",
+    "posted_at_epoch": 1793935479,
+    "last_verified_at_epoch": 1793935479,
+    "last_verified_at_ist": "2026-11-06 08:54 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793918452,
-    "updated_at_ist": "2026-11-06 04:10 IST"
+    "updated_at": 1793935479,
+    "updated_at_ist": "2026-11-06 08:54 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 150,
+    "total_deals": 149,
     "loot_count": 14,
     "max_discount_pct": 89,
-    "total_savings_inr": 547916
+    "total_savings_inr": 495856
   }
 }

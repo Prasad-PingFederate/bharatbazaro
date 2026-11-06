@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-06 23:54 IST",
-  "generated_at_epoch": 1793989489,
+  "generated_at_ist": "2026-11-07 05:00 IST",
+  "generated_at_epoch": 1794007858,
   "top_loot_summary": [
+    {
+      "asin": "B00W7D765E",
+      "title": "Wonderchef Nutri-blend 400W Mixer Grinder Blender with 2 Unbreakable Jars",
+      "effective_price": 2399,
+      "mrp": 5000,
+      "discount_pct": 52,
+      "savings_inr": 2601,
+      "brand": "Wonderchef",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B00W7D765E?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B00W7D765E.html",
+      "coupon_text": null
+    },
     {
       "asin": "B08HMWZB8B",
       "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
@@ -53,19 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B0B551YGY3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0B551YGY3.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B0BNVFXCQ9",
-      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds with 20H Battery & Fast Charge",
-      "effective_price": 3990,
-      "mrp": 8990,
-      "discount_pct": 56,
-      "savings_inr": 5000,
-      "brand": "Sony",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0BNVFXCQ9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BNVFXCQ9.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": null,
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793989486,
-    "last_verified_at_epoch": 1793989486,
-    "last_verified_at_ist": "2026-11-06 23:54 IST",
+    "posted_at_epoch": 1794007848,
+    "last_verified_at_epoch": 1794007848,
+    "last_verified_at_ist": "2026-11-07 05:00 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793989486,
-    "updated_at_ist": "2026-11-06 23:54 IST"
+    "updated_at": 1794007848,
+    "updated_at_ist": "2026-11-07 05:00 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1793989486,
-    "last_verified_at_epoch": 1793989486,
-    "last_verified_at_ist": "2026-11-06 23:54 IST",
+    "posted_at_epoch": 1794007848,
+    "last_verified_at_epoch": 1794007848,
+    "last_verified_at_ist": "2026-11-07 05:00 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1793989486,
-    "updated_at_ist": "2026-11-06 23:54 IST"
+    "updated_at": 1794007848,
+    "updated_at_ist": "2026-11-07 05:00 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -211,8 +211,8 @@
   },
   "market_stats": {
     "total_deals": 143,
-    "loot_count": 14,
-    "max_discount_pct": 83,
-    "total_savings_inr": 467989
+    "loot_count": 12,
+    "max_discount_pct": 89,
+    "total_savings_inr": 424005
   }
 }

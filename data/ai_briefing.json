@@ -1,7 +1,59 @@
 {
-  "generated_at_ist": "2026-11-09 00:36 IST",
-  "generated_at_epoch": 1794164816,
+  "generated_at_ist": "2026-11-09 04:22 IST",
+  "generated_at_epoch": 1794178338,
   "top_loot_summary": [
+    {
+      "asin": "B07WGNKGYK",
+      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars & Juicer",
+      "effective_price": 2899,
+      "mrp": 6295,
+      "discount_pct": 54,
+      "savings_inr": 3396,
+      "brand": "Prestige",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B07WGNKGYK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B07WGNKGYK.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0CYQ4M4N4",
+      "title": "HP 15s 12th Gen Intel Core i5 15.6 inch FHD Laptop (16GB RAM, 512GB SSD)",
+      "effective_price": 49990,
+      "mrp": 68233,
+      "discount_pct": 27,
+      "savings_inr": 18243,
+      "brand": "HP",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0CYQ4M4N4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N4.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BC8P3X64",
+      "title": "Amazfit GTR 4 Smart Watch with Bluetooth Calling, 150+ Sports Modes",
+      "effective_price": 14999,
+      "mrp": 23999,
+      "discount_pct": 38,
+      "savings_inr": 9000,
+      "brand": "Amazfit",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X64?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X64.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0B551YGY3",
+      "title": "Noise ColorFit Pulse 2 Max 1.85 inch Display Bluetooth Calling Smart Watch",
+      "effective_price": 1299,
+      "mrp": 5999,
+      "discount_pct": 78,
+      "savings_inr": 4700,
+      "brand": "Noise",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0B551YGY3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B551YGY3.html",
+      "coupon_text": null
+    },
     {
       "asin": "B08HMWZB8B",
       "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
@@ -13,58 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B08HMWZB8B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B08HMWZB8B.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09C63T5V3",
-      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds (20H Battery, IPX4)",
-      "effective_price": 3990,
-      "mrp": 8990,
-      "discount_pct": 56,
-      "savings_inr": 5000,
-      "brand": "Sony",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09C63T5V3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09C63T5V3.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0C82PJH3S",
-      "title": "Orient Electric Aura Rapid Pro Geyser 5.9 Litre Instant Water Heater | 3000 W Powerful Heating | Suitable For Kitchen & Bathroom | 5 Year Inner Tank Warranty by Orient | High-rise Compatible| White",
-      "effective_price": 3099,
-      "mrp": 7990,
-      "discount_pct": 61,
-      "savings_inr": 4891,
-      "brand": "Orient",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0C82PJH3S?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0C82PJH3S.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08C1Q1W5X",
-      "title": "Crompton Arno Neo 15-Litre Storage Water Heater Geyser (5-Star Rated)",
-      "effective_price": 5499,
-      "mrp": 9800,
-      "discount_pct": 44,
-      "savings_inr": 4301,
-      "brand": "Crompton",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B08C1Q1W5X?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08C1Q1W5X.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BNVFXCQ9",
-      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds with 20H Battery & Fast Charge",
-      "effective_price": 3990,
-      "mrp": 8990,
-      "discount_pct": 56,
-      "savings_inr": 5000,
-      "brand": "Sony",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0BNVFXCQ9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BNVFXCQ9.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794164808,
-    "last_verified_at_epoch": 1794164808,
-    "last_verified_at_ist": "2026-11-09 00:36 IST",
+    "posted_at_epoch": 1794178332,
+    "last_verified_at_epoch": 1794178332,
+    "last_verified_at_ist": "2026-11-09 04:22 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794164808,
-    "updated_at_ist": "2026-11-09 00:36 IST"
+    "updated_at": 1794178332,
+    "updated_at_ist": "2026-11-09 04:22 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794164808,
-    "last_verified_at_epoch": 1794164808,
-    "last_verified_at_ist": "2026-11-09 00:36 IST",
+    "posted_at_epoch": 1794178332,
+    "last_verified_at_epoch": 1794178332,
+    "last_verified_at_ist": "2026-11-09 04:22 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794164808,
-    "updated_at_ist": "2026-11-09 00:36 IST"
+    "updated_at": 1794178332,
+    "updated_at_ist": "2026-11-09 04:22 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 148,
-    "loot_count": 19,
-    "max_discount_pct": 89,
-    "total_savings_inr": 485981
+    "total_deals": 139,
+    "loot_count": 15,
+    "max_discount_pct": 83,
+    "total_savings_inr": 437361
   }
 }

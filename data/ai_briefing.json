@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-08 05:59 IST",
-  "generated_at_epoch": 1794097794,
+  "generated_at_ist": "2026-11-08 12:10 IST",
+  "generated_at_epoch": 1794120054,
   "top_loot_summary": [
+    {
+      "asin": "B0BBWH1R8H",
+      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
+      "effective_price": 5499,
+      "mrp": 10500,
+      "discount_pct": 48,
+      "savings_inr": 5001,
+      "brand": "Kingston",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09WDP4MMK",
+      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
+      "effective_price": 7999,
+      "mrp": 16100,
+      "discount_pct": 50,
+      "savings_inr": 8101,
+      "brand": "Samsung",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0BN8H1L7L",
       "title": "Philips Air Fryer HD9200/90 4.1 Litre Rapid Air Technology with 90% Less Fat Cooking",
@@ -39,32 +65,6 @@
       "category": "Electronics & Audio",
       "affiliate_url": "https://www.amazon.in/dp/B0CYQ4M4N5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0GGHXCQSR",
-      "title": "Fire-Boltt Ninja Phantom Smart Watch 1.83” Display, Transparent Clear Body Design, Bluetooth Calling, 120+ Sports Modes, Voice Assistant, AI Outfit Watch Face Smartwatch for Men & Women Black Smoke",
-      "effective_price": 999,
-      "mrp": 9082,
-      "discount_pct": 89,
-      "savings_inr": 8083,
-      "brand": "Fire-Boltt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0GGHXCQSR?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0GGHXCQSR.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0DMS8VK96",
-      "title": "LG 27GS60QC 68.4cm (27 Inch) Ultragear Curved (1000R) QHD (2560x1440) Gaming Monitor, 180Hz, 1ms, 3-Side Virtually Borderless, Anti-Glare, DP, HDMI X 2, HP Out, AMD FreeSync™, Tilt Adjustment (Black)",
-      "effective_price": 14888,
-      "mrp": 21287,
-      "discount_pct": 39,
-      "savings_inr": 6399,
-      "brand": "LG",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0DMS8VK96?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0DMS8VK96.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794097790,
-    "last_verified_at_epoch": 1794097790,
-    "last_verified_at_ist": "2026-11-08 05:59 IST",
+    "posted_at_epoch": 1794120048,
+    "last_verified_at_epoch": 1794120048,
+    "last_verified_at_ist": "2026-11-08 12:10 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794097790,
-    "updated_at_ist": "2026-11-08 05:59 IST"
+    "updated_at": 1794120048,
+    "updated_at_ist": "2026-11-08 12:10 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794097790,
-    "last_verified_at_epoch": 1794097790,
-    "last_verified_at_ist": "2026-11-08 05:59 IST",
+    "posted_at_epoch": 1794120048,
+    "last_verified_at_epoch": 1794120048,
+    "last_verified_at_ist": "2026-11-08 12:10 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794097790,
-    "updated_at_ist": "2026-11-08 05:59 IST"
+    "updated_at": 1794120048,
+    "updated_at_ist": "2026-11-08 12:10 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 148,
-    "loot_count": 20,
+    "total_deals": 149,
+    "loot_count": 18,
     "max_discount_pct": 89,
-    "total_savings_inr": 496954
+    "total_savings_inr": 479316
   }
 }

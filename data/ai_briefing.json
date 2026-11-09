@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-09 15:51 IST",
-  "generated_at_epoch": 1794219706,
+  "generated_at_ist": "2026-11-10 02:33 IST",
+  "generated_at_epoch": 1794258192,
   "top_loot_summary": [
+    {
+      "asin": "B0B25L78CD",
+      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
+      "effective_price": 5299,
+      "mrp": 11000,
+      "discount_pct": 52,
+      "savings_inr": 5701,
+      "brand": "Crucial",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B091CR2FXY",
+      "title": "AGARO Regency Air Fryer 12L 1800W with 9 Preset Menus & Rotisserie",
+      "effective_price": 7499,
+      "mrp": 15999,
+      "discount_pct": 53,
+      "savings_inr": 8500,
+      "brand": "Agaro",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B8NTZ24P",
       "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
@@ -39,32 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B00W7D765E?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B00W7D765E.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09XXWMS4Z",
-      "title": "Marshall Emberton II Portable Bluetooth Speaker (30+ Hours Playtime)",
-      "effective_price": 13999,
-      "mrp": 19999,
-      "discount_pct": 30,
-      "savings_inr": 6000,
-      "brand": "Marshall",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09XXWMS4Z?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09XXWMS4Z.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B07WGNKGYK",
-      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars & Juicer",
-      "effective_price": 2899,
-      "mrp": 6295,
-      "discount_pct": 54,
-      "savings_inr": 3396,
-      "brand": "Prestige",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B07WGNKGYK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B07WGNKGYK.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794219697,
-    "last_verified_at_epoch": 1794219697,
-    "last_verified_at_ist": "2026-11-09 15:51 IST",
+    "posted_at_epoch": 1794258183,
+    "last_verified_at_epoch": 1794258183,
+    "last_verified_at_ist": "2026-11-10 02:33 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794219697,
-    "updated_at_ist": "2026-11-09 15:51 IST"
+    "updated_at": 1794258183,
+    "updated_at_ist": "2026-11-10 02:33 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794219697,
-    "last_verified_at_epoch": 1794219697,
-    "last_verified_at_ist": "2026-11-09 15:51 IST",
+    "posted_at_epoch": 1794258183,
+    "last_verified_at_epoch": 1794258183,
+    "last_verified_at_ist": "2026-11-10 02:33 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794219697,
-    "updated_at_ist": "2026-11-09 15:51 IST"
+    "updated_at": 1794258183,
+    "updated_at_ist": "2026-11-10 02:33 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -195,11 +195,11 @@
       "deal_url": "https://bharatbazaro.com/deal/B002MPPTB8.html"
     },
     "fashion": {
-      "asin": "B08V5Q4X1A",
-      "title": "Nike Mens Revolution 6 Running Shoes (Lightweight & Breathable)",
-      "effective_price": 2499,
-      "discount_pct": 37,
-      "deal_url": "https://bharatbazaro.com/deal/B08V5Q4X1A.html"
+      "asin": "B0B8NTZ24L",
+      "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
+      "effective_price": 1899,
+      "discount_pct": 58,
+      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html"
     },
     "grocery": {
       "asin": "B07V2QJ412",
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 138,
-    "loot_count": 14,
-    "max_discount_pct": 83,
-    "total_savings_inr": 394111
+    "total_deals": 141,
+    "loot_count": 10,
+    "max_discount_pct": 89,
+    "total_savings_inr": 425109
   }
 }

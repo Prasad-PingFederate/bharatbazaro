@@ -1,13 +1,13 @@
 {
-  "timestamp_ist": "2026-11-08 15:27:42 IST",
-  "timestamp_epoch": 1794131862,
+  "timestamp_ist": "2026-11-09 16:34:45 IST",
+  "timestamp_epoch": 1794222285,
   "overall_status": "DEGRADED",
   "checks": [
     {
       "name": "Gemini API",
       "status": "failed",
       "model": "gemini-2.5-flash",
-      "latency_ms": 146,
+      "latency_ms": 134,
       "detail": "HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. "
     },
     {
@@ -34,39 +34,39 @@
     {
       "name": "Deal Discovery Feeds",
       "status": "ok",
-      "candidate_count": 32,
-      "latency_ms": 2574,
-      "detail": "Discovered 32 candidates across live feeds"
+      "candidate_count": 29,
+      "latency_ms": 1078,
+      "detail": "Discovered 29 candidates across live feeds"
     },
     {
       "name": "Amazon.in Scraper",
       "status": "warning",
       "stock_status": "unknown",
-      "live_price": "\u20b94,890",
-      "latency_ms": 1675,
-      "detail": "Status: unknown, Price: \u20b94890"
+      "live_price": "N/A",
+      "latency_ms": 331,
+      "detail": "Status: unknown, Price: \u20b9N/A"
     },
     {
       "name": "SQLite Integrity",
       "status": "ok",
-      "active_deals": 252,
+      "active_deals": 262,
       "integrity": "ok",
-      "latency_ms": 3,
-      "detail": "PRAGMA: ok, Active Deals: 252"
+      "latency_ms": 5,
+      "detail": "PRAGMA: ok, Active Deals: 262"
     },
     {
       "name": "BharatBazaro Live",
       "status": "ok",
-      "live_deals": 149,
-      "feed_age_min": 196,
-      "latency_ms": 280,
-      "detail": "149 live deals online (synced 196m ago)"
+      "live_deals": 138,
+      "feed_age_min": 42,
+      "latency_ms": 275,
+      "detail": "138 live deals online (synced 42m ago)"
     },
     {
       "name": "Telegram Bot API",
       "status": "ok",
       "bot_username": "DealDash_ai_Bot",
-      "latency_ms": 359,
+      "latency_ms": 399,
       "detail": "@DealDash_ai_Bot -> Flash Deals 24/7"
     }
   ]

@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-11 06:07 IST",
-  "generated_at_epoch": 1794357476,
+  "generated_at_ist": "2026-11-11 12:39 IST",
+  "generated_at_epoch": 1794380978,
   "top_loot_summary": [
+    {
+      "asin": "B0B551YGY3",
+      "title": "Noise ColorFit Pulse 2 Max 1.85 inch Display Bluetooth Calling Smart Watch",
+      "effective_price": 1299,
+      "mrp": 5999,
+      "discount_pct": 78,
+      "savings_inr": 4700,
+      "brand": "Noise",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0B551YGY3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B551YGY3.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BNVFXCQ9",
+      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds with 20H Battery & Fast Charge",
+      "effective_price": 3990,
+      "mrp": 8990,
+      "discount_pct": 56,
+      "savings_inr": 5000,
+      "brand": "Sony",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0BNVFXCQ9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BNVFXCQ9.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B8NTZ24L",
       "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
@@ -39,32 +65,6 @@
       "category": "Fashion & Footwear",
       "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X65?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X65.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08HMWZB8B",
-      "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
-      "effective_price": 3999,
-      "mrp": 9999,
-      "discount_pct": 60,
-      "savings_inr": 6000,
-      "brand": "Zebronics",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B08HMWZB8B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08HMWZB8B.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0CYQ4M4N5",
-      "title": "Sony Bravia 55 inches 4K Ultra HD Smart LED Google TV KD-55X74L",
-      "effective_price": 52990,
-      "mrp": 99900,
-      "discount_pct": 47,
-      "savings_inr": 46910,
-      "brand": "Sony",
-      "category": "Electronics & Audio",
-      "affiliate_url": "https://www.amazon.in/dp/B0CYQ4M4N5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794357473,
-    "last_verified_at_epoch": 1794357473,
-    "last_verified_at_ist": "2026-11-11 06:07 IST",
+    "posted_at_epoch": 1794380973,
+    "last_verified_at_epoch": 1794380973,
+    "last_verified_at_ist": "2026-11-11 12:39 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794357473,
-    "updated_at_ist": "2026-11-11 06:07 IST"
+    "updated_at": 1794380973,
+    "updated_at_ist": "2026-11-11 12:39 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794357473,
-    "last_verified_at_epoch": 1794357473,
-    "last_verified_at_ist": "2026-11-11 06:07 IST",
+    "posted_at_epoch": 1794380973,
+    "last_verified_at_epoch": 1794380973,
+    "last_verified_at_ist": "2026-11-11 12:39 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794357473,
-    "updated_at_ist": "2026-11-11 06:07 IST"
+    "updated_at": 1794380973,
+    "updated_at_ist": "2026-11-11 12:39 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -211,8 +211,8 @@
   },
   "market_stats": {
     "total_deals": 145,
-    "loot_count": 12,
-    "max_discount_pct": 89,
-    "total_savings_inr": 485227
+    "loot_count": 11,
+    "max_discount_pct": 85,
+    "total_savings_inr": 466266
   }
 }

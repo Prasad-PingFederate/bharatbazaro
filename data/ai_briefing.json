@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-11 01:10 IST",
-  "generated_at_epoch": 1794339636,
+  "generated_at_ist": "2026-11-11 06:07 IST",
+  "generated_at_epoch": 1794357476,
   "top_loot_summary": [
+    {
+      "asin": "B0B8NTZ24L",
+      "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
+      "effective_price": 1899,
+      "mrp": 4499,
+      "discount_pct": 58,
+      "savings_inr": 2600,
+      "brand": "Puma",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B08HN6PCDJ",
+      "title": "Philips Digital Air Fryer HD9252/90 (4.1 Litre, 1400W Rapid Air Technology)",
+      "effective_price": 6999,
+      "mrp": 11995,
+      "discount_pct": 42,
+      "savings_inr": 4996,
+      "brand": "Philips",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B08HN6PCDJ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B08HN6PCDJ.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BC8P3X65",
+      "title": "Puma Men Smashic Casual Sneaker Shoes White & Navy",
+      "effective_price": 1799,
+      "mrp": 4499,
+      "discount_pct": 60,
+      "savings_inr": 2700,
+      "brand": "Puma",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X65?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X65.html",
+      "coupon_text": null
+    },
     {
       "asin": "B08HMWZB8B",
       "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
@@ -26,45 +65,6 @@
       "category": "Electronics & Audio",
       "affiliate_url": "https://www.amazon.in/dp/B0CYQ4M4N5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09C63T5V3",
-      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds (20H Battery, IPX4)",
-      "effective_price": 3990,
-      "mrp": 8990,
-      "discount_pct": 56,
-      "savings_inr": 5000,
-      "brand": "Sony",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09C63T5V3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09C63T5V3.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BBWH1R8H",
-      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
-      "effective_price": 5499,
-      "mrp": 10500,
-      "discount_pct": 48,
-      "savings_inr": 5001,
-      "brand": "Kingston",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09WDP4MMK",
-      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
-      "effective_price": 7999,
-      "mrp": 16100,
-      "discount_pct": 50,
-      "savings_inr": 8101,
-      "brand": "Samsung",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
       "coupon_text": null
     }
   ],
@@ -110,37 +110,37 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794339633,
-    "last_verified_at_epoch": 1794339633,
-    "last_verified_at_ist": "2026-11-11 01:10 IST",
+    "posted_at_epoch": 1794357473,
+    "last_verified_at_epoch": 1794357473,
+    "last_verified_at_ist": "2026-11-11 06:07 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794339633,
-    "updated_at_ist": "2026-11-11 01:10 IST"
+    "updated_at": 1794357473,
+    "updated_at_ist": "2026-11-11 06:07 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B0BZV8RF79",
-    "asin": "B0BZV8RF79",
-    "title": "OnePlus Nord Buds 2r True Wireless in Ear Earbuds with Mic, 38H Playtime, 12.4mm Drivers",
+    "id": "amazon:B0C46DW3KH",
+    "asin": "B0C46DW3KH",
+    "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
     "brand": "Oneplus",
     "brand_tier": "tier1",
     "category": "Mobiles & Accessories",
-    "image_url": "https://m.media-amazon.com/images/I/710fNBm3CVL._SL600_.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0BZV8RF79?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 2299,
-    "list_price": 1799,
-    "effective_price": 1799,
+    "image_url": "https://m.media-amazon.com/images/I/61WoAhwb5mL._SL600_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0C46DW3KH?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 42999,
+    "list_price": 37999,
+    "effective_price": 37999,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
-    "discount_pct": 22,
-    "effective_discount_pct": 22,
-    "savings_inr": 500,
-    "rating": 4.2,
-    "review_count": 48000,
+    "bank_offer": "Instant ₹3,000 Bank Discount with ICICI CC",
+    "discount_pct": 12,
+    "effective_discount_pct": 12,
+    "savings_inr": 5000,
+    "rating": 4.4,
+    "review_count": 4120,
     "score": 75,
     "buy_confidence": 95,
     "price_context": "normal",
@@ -148,7 +148,7 @@
     "historical_avg": null,
     "historical_max": null,
     "is_loot": false,
-    "is_diwali_steal": false,
+    "is_diwali_steal": true,
     "is_cookie_magnet": false,
     "is_daily_essential": false,
     "is_further_drop": false,
@@ -156,28 +156,29 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹1,799!"
+      "💳 Select eligible card/payment for instant bank discount: Instant ₹3,000 Bank Discount with ICICI CC.",
+      "🎉 Complete checkout at the effective deal price of ₹37,999!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794339633,
-    "last_verified_at_epoch": 1794339633,
-    "last_verified_at_ist": "2026-11-11 01:10 IST",
+    "posted_at_epoch": 1794357473,
+    "last_verified_at_epoch": 1794357473,
+    "last_verified_at_ist": "2026-11-11 06:07 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794339633,
-    "updated_at_ist": "2026-11-11 01:10 IST"
+    "updated_at": 1794357473,
+    "updated_at_ist": "2026-11-11 06:07 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0BZV8RF79",
-      "title": "OnePlus Nord Buds 2r True Wireless in Ear Earbuds with Mic, 38H Playtime, 12.4mm Drivers",
-      "effective_price": 1799,
-      "discount_pct": 22,
-      "deal_url": "https://bharatbazaro.com/deal/B0BZV8RF79.html"
+      "asin": "B0C46DW3KH",
+      "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
+      "effective_price": 37999,
+      "discount_pct": 12,
+      "deal_url": "https://bharatbazaro.com/deal/B0C46DW3KH.html"
     },
     "electronics": {
       "asin": "B0CGM17GYC",
@@ -187,18 +188,18 @@
       "deal_url": "https://bharatbazaro.com/deal/B0CGM17GYC.html"
     },
     "home": {
-      "asin": "B0BDJ6ZPH3",
-      "title": "Havells Instanio 3-Litre Instant Water Heater Geyser with LED Indicator",
-      "effective_price": 3199,
-      "discount_pct": 47,
-      "deal_url": "https://bharatbazaro.com/deal/B0BDJ6ZPH3.html"
+      "asin": "B002MPPTB8",
+      "title": "Hawkins Futura Hard Anodised Pressure Cooker 3 Litre with Induction Base",
+      "effective_price": 2499,
+      "discount_pct": 25,
+      "deal_url": "https://bharatbazaro.com/deal/B002MPPTB8.html"
     },
     "fashion": {
-      "asin": "B01M33555E",
-      "title": "Tommy Hilfiger Mens Leather Reversible Belt with Metal Pin Buckle",
-      "effective_price": 1499,
-      "discount_pct": 50,
-      "deal_url": "https://bharatbazaro.com/deal/B01M33555E.html"
+      "asin": "B08V5Q4X1A",
+      "title": "Nike Mens Revolution 6 Running Shoes (Lightweight & Breathable)",
+      "effective_price": 2499,
+      "discount_pct": 37,
+      "deal_url": "https://bharatbazaro.com/deal/B08V5Q4X1A.html"
     },
     "grocery": {
       "asin": "B07V2QJ412",
@@ -209,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 143,
-    "loot_count": 11,
+    "total_deals": 145,
+    "loot_count": 12,
     "max_discount_pct": 89,
-    "total_savings_inr": 457770
+    "total_savings_inr": 485227
   }
 }

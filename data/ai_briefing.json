@@ -1,7 +1,59 @@
 {
-  "generated_at_ist": "2026-11-12 17:18 IST",
-  "generated_at_epoch": 1794484101,
+  "generated_at_ist": "2026-11-13 01:23 IST",
+  "generated_at_epoch": 1794513182,
   "top_loot_summary": [
+    {
+      "asin": "B0CKVLCMJZ",
+      "title": "Havells Delite Kop'ere Water Purifier (Black), RO+UV+pH Balance, 7 Stages, 6.5L Stainless Steel Tank,Copper+Zinc+Minerals, Suitable for Borewell, Tanker & Municipal Water",
+      "effective_price": 8289,
+      "mrp": 27000,
+      "discount_pct": 56,
+      "savings_inr": 18711,
+      "brand": "Havells",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0CKVLCMJZ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CKVLCMJZ.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0C85T9PXW",
+      "title": "MILTON Pro Lunch Box, 3 Microwave Safe Inner Steel Containers (180 ml, 320 ml, 450 ml), Plastic Chutney Dabba (100 ml), Steel Bottle (750 ml) with Durable Lunch Bag, Leak-Proof Tiffin for Office, Blue",
+      "effective_price": 799,
+      "mrp": 1999,
+      "discount_pct": 60,
+      "savings_inr": 1200,
+      "brand": "Milton",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0C85T9PXW?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0C85T9PXW.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09C63T5V3",
+      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds (20H Battery, IPX4)",
+      "effective_price": 3990,
+      "mrp": 8990,
+      "discount_pct": 56,
+      "savings_inr": 5000,
+      "brand": "Sony",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09C63T5V3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09C63T5V3.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B083W7V3YB",
+      "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
+      "effective_price": 6990,
+      "mrp": 14990,
+      "discount_pct": 53,
+      "savings_inr": 8000,
+      "brand": "Sennheiser",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0BF54979B",
       "title": "Fire-Boltt Ninja Call Pro Plus 1.83 inch Smart Watch with AI Voice Assistant",
@@ -13,58 +65,6 @@
       "category": "Fashion & Footwear",
       "affiliate_url": "https://www.amazon.in/dp/B0BF54979B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BF54979B.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BBWH1R8H",
-      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
-      "effective_price": 5499,
-      "mrp": 10500,
-      "discount_pct": 48,
-      "savings_inr": 5001,
-      "brand": "Kingston",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B008A2796G",
-      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
-      "effective_price": 6995,
-      "mrp": 13995,
-      "discount_pct": 50,
-      "savings_inr": 7000,
-      "brand": "Fossil",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09WDP4MMK",
-      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
-      "effective_price": 7999,
-      "mrp": 16100,
-      "discount_pct": 50,
-      "savings_inr": 8101,
-      "brand": "Samsung",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0863TXGM3",
-      "title": "Sony WH-1000XM4 Industry Leading Wireless Noise Cancelling Headphones",
-      "effective_price": 19990,
-      "mrp": 29990,
-      "discount_pct": 33,
-      "savings_inr": 10000,
-      "brand": "Sony",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0863TXGM3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0863TXGM3.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794484070,
-    "last_verified_at_epoch": 1794484070,
-    "last_verified_at_ist": "2026-11-12 17:17 IST",
+    "posted_at_epoch": 1794513174,
+    "last_verified_at_epoch": 1794513174,
+    "last_verified_at_ist": "2026-11-13 01:22 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794484070,
-    "updated_at_ist": "2026-11-12 17:17 IST"
+    "updated_at": 1794513174,
+    "updated_at_ist": "2026-11-13 01:22 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794484070,
-    "last_verified_at_epoch": 1794484070,
-    "last_verified_at_ist": "2026-11-12 17:17 IST",
+    "posted_at_epoch": 1794513174,
+    "last_verified_at_epoch": 1794513174,
+    "last_verified_at_ist": "2026-11-13 01:22 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794484070,
-    "updated_at_ist": "2026-11-12 17:17 IST"
+    "updated_at": 1794513174,
+    "updated_at_ist": "2026-11-13 01:22 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -181,11 +181,11 @@
       "deal_url": "https://bharatbazaro.com/deal/B0C46DW3KH.html"
     },
     "electronics": {
-      "asin": "B0CGM17GYC",
-      "title": "GoPro HERO12 Black Waterproof Action Camera with Front LCD and Touch Screen",
-      "effective_price": 34990,
-      "discount_pct": 22,
-      "deal_url": "https://bharatbazaro.com/deal/B0CGM17GYC.html"
+      "asin": "B0CYQ4M4N5",
+      "title": "Sony Bravia 55 inches 4K Ultra HD Smart LED Google TV KD-55X74L",
+      "effective_price": 52990,
+      "discount_pct": 47,
+      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html"
     },
     "home": {
       "asin": "B002MPPTB8",
@@ -211,8 +211,8 @@
   },
   "market_stats": {
     "total_deals": 152,
-    "loot_count": 12,
+    "loot_count": 13,
     "max_discount_pct": 89,
-    "total_savings_inr": 516153
+    "total_savings_inr": 563957
   }
 }

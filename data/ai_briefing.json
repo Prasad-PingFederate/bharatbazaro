@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-12 03:47 IST",
-  "generated_at_epoch": 1794435440,
+  "generated_at_ist": "2026-11-12 08:51 IST",
+  "generated_at_epoch": 1794453688,
   "top_loot_summary": [
+    {
+      "asin": "B0863TXGM3",
+      "title": "Sony WH-1000XM4 Industry Leading Wireless Noise Cancelling Headphones",
+      "effective_price": 19990,
+      "mrp": 29990,
+      "discount_pct": 33,
+      "savings_inr": 10000,
+      "brand": "Sony",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0863TXGM3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0863TXGM3.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0B8NTZ24P",
+      "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
+      "effective_price": 1199,
+      "mrp": 6990,
+      "discount_pct": 83,
+      "savings_inr": 5791,
+      "brand": "boAt",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24P.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09G3Z55TK",
+      "title": "JBL Flip 6 Wireless Portable Bluetooth Speaker (IP67 Waterproof)",
+      "effective_price": 8999,
+      "mrp": 13999,
+      "discount_pct": 36,
+      "savings_inr": 5000,
+      "brand": "JBL",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09G3Z55TK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09G3Z55TK.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B25L78CD",
       "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
@@ -26,45 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0CM3K6H57",
-      "title": "[ICICI CC] Wonderchef Nutri Blend Smart CKM Automatic Mixer Grinder with Dual Pulse Function|22000 RPM|100% Full Copper Motor|4 Unbreakable Jars|500 W|2 Years Warranty|Recipe book by Chef Sanjeev Kapoor| Black",
-      "effective_price": 2308,
-      "mrp": 9000,
-      "discount_pct": 56,
-      "savings_inr": 6692,
-      "brand": "Wonderchef",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0CM3K6H57?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CM3K6H57.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0892R627P",
-      "title": "Bajaj New Shakti Neo 15L Vertical Storage Water Heater (Geyser 2000W)",
-      "effective_price": 5699,
-      "mrp": 10500,
-      "discount_pct": 46,
-      "savings_inr": 4801,
-      "brand": "Bajaj",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0892R627P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0892R627P.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B00W7D765E",
-      "title": "Wonderchef Nutri-blend 400W Mixer Grinder Blender with 2 Unbreakable Jars",
-      "effective_price": 2399,
-      "mrp": 5000,
-      "discount_pct": 52,
-      "savings_inr": 2601,
-      "brand": "Wonderchef",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B00W7D765E?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B00W7D765E.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794435436,
-    "last_verified_at_epoch": 1794435436,
-    "last_verified_at_ist": "2026-11-12 03:47 IST",
+    "posted_at_epoch": 1794453675,
+    "last_verified_at_epoch": 1794453675,
+    "last_verified_at_ist": "2026-11-12 08:51 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794435436,
-    "updated_at_ist": "2026-11-12 03:47 IST"
+    "updated_at": 1794453675,
+    "updated_at_ist": "2026-11-12 08:51 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794435436,
-    "last_verified_at_epoch": 1794435436,
-    "last_verified_at_ist": "2026-11-12 03:47 IST",
+    "posted_at_epoch": 1794453675,
+    "last_verified_at_epoch": 1794453675,
+    "last_verified_at_ist": "2026-11-12 08:51 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794435436,
-    "updated_at_ist": "2026-11-12 03:47 IST"
+    "updated_at": 1794453675,
+    "updated_at_ist": "2026-11-12 08:51 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 150,
+    "total_deals": 145,
     "loot_count": 10,
-    "max_discount_pct": 85,
-    "total_savings_inr": 442535
+    "max_discount_pct": 83,
+    "total_savings_inr": 481493
   }
 }

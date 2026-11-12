@@ -1,7 +1,59 @@
 {
-  "generated_at_ist": "2026-11-12 08:51 IST",
-  "generated_at_epoch": 1794453688,
+  "generated_at_ist": "2026-11-12 17:18 IST",
+  "generated_at_epoch": 1794484101,
   "top_loot_summary": [
+    {
+      "asin": "B0BF54979B",
+      "title": "Fire-Boltt Ninja Call Pro Plus 1.83 inch Smart Watch with AI Voice Assistant",
+      "effective_price": 1099,
+      "mrp": 9999,
+      "discount_pct": 89,
+      "savings_inr": 8900,
+      "brand": "Fire-Boltt",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0BF54979B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BF54979B.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BBWH1R8H",
+      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
+      "effective_price": 5499,
+      "mrp": 10500,
+      "discount_pct": 48,
+      "savings_inr": 5001,
+      "brand": "Kingston",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B008A2796G",
+      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
+      "effective_price": 6995,
+      "mrp": 13995,
+      "discount_pct": 50,
+      "savings_inr": 7000,
+      "brand": "Fossil",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09WDP4MMK",
+      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
+      "effective_price": 7999,
+      "mrp": 16100,
+      "discount_pct": 50,
+      "savings_inr": 8101,
+      "brand": "Samsung",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0863TXGM3",
       "title": "Sony WH-1000XM4 Industry Leading Wireless Noise Cancelling Headphones",
@@ -13,58 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B0863TXGM3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0863TXGM3.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B8NTZ24P",
-      "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
-      "effective_price": 1199,
-      "mrp": 6990,
-      "discount_pct": 83,
-      "savings_inr": 5791,
-      "brand": "boAt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24P.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09G3Z55TK",
-      "title": "JBL Flip 6 Wireless Portable Bluetooth Speaker (IP67 Waterproof)",
-      "effective_price": 8999,
-      "mrp": 13999,
-      "discount_pct": 36,
-      "savings_inr": 5000,
-      "brand": "JBL",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09G3Z55TK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09G3Z55TK.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B25L78CD",
-      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
-      "effective_price": 5299,
-      "mrp": 11000,
-      "discount_pct": 52,
-      "savings_inr": 5701,
-      "brand": "Crucial",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B091CR2FXY",
-      "title": "AGARO Regency Air Fryer 12L 1800W with 9 Preset Menus & Rotisserie",
-      "effective_price": 7499,
-      "mrp": 15999,
-      "discount_pct": 53,
-      "savings_inr": 8500,
-      "brand": "Agaro",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794453675,
-    "last_verified_at_epoch": 1794453675,
-    "last_verified_at_ist": "2026-11-12 08:51 IST",
+    "posted_at_epoch": 1794484070,
+    "last_verified_at_epoch": 1794484070,
+    "last_verified_at_ist": "2026-11-12 17:17 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794453675,
-    "updated_at_ist": "2026-11-12 08:51 IST"
+    "updated_at": 1794484070,
+    "updated_at_ist": "2026-11-12 17:17 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794453675,
-    "last_verified_at_epoch": 1794453675,
-    "last_verified_at_ist": "2026-11-12 08:51 IST",
+    "posted_at_epoch": 1794484070,
+    "last_verified_at_epoch": 1794484070,
+    "last_verified_at_ist": "2026-11-12 17:17 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794453675,
-    "updated_at_ist": "2026-11-12 08:51 IST"
+    "updated_at": 1794484070,
+    "updated_at_ist": "2026-11-12 17:17 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 145,
-    "loot_count": 10,
-    "max_discount_pct": 83,
-    "total_savings_inr": 481493
+    "total_deals": 152,
+    "loot_count": 12,
+    "max_discount_pct": 89,
+    "total_savings_inr": 516153
   }
 }

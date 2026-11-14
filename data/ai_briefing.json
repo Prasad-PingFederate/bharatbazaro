@@ -1,7 +1,59 @@
 {
-  "generated_at_ist": "2026-11-14 03:44 IST",
-  "generated_at_epoch": 1794608044,
+  "generated_at_ist": "2026-11-14 08:11 IST",
+  "generated_at_epoch": 1794624098,
   "top_loot_summary": [
+    {
+      "asin": "B0866B1P6B",
+      "title": "PHILIPS WiZ 10W E27 Wi-Fi & Bluetooth LED Smart Bulb with Music Sync, Compatible with Amazon Alexa & Google Assistant, 16 Million Colours & Motion Sensing Technology | Pack of 1",
+      "effective_price": 479,
+      "mrp": 2027,
+      "discount_pct": 71,
+      "savings_inr": 1548,
+      "brand": "Philips",
+      "category": "Electronics & Audio",
+      "affiliate_url": "https://www.amazon.in/dp/B0866B1P6B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0866B1P6B.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B091CR2FXY",
+      "title": "AGARO Regency Air Fryer 12L 1800W with 9 Preset Menus & Rotisserie",
+      "effective_price": 7499,
+      "mrp": 15999,
+      "discount_pct": 53,
+      "savings_inr": 8500,
+      "brand": "Agaro",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BNVFXCQ9",
+      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds with 20H Battery & Fast Charge",
+      "effective_price": 3990,
+      "mrp": 8990,
+      "discount_pct": 56,
+      "savings_inr": 5000,
+      "brand": "Sony",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0BNVFXCQ9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BNVFXCQ9.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0B25L78CD",
+      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
+      "effective_price": 5299,
+      "mrp": 11000,
+      "discount_pct": 52,
+      "savings_inr": 5701,
+      "brand": "Crucial",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0F8QC2Z7C",
       "title": "Havells Aquas Neo Water Purifier, RO + UF Purification, Vital Magnesium Enriched, 7-stages, 7L Storage, Ideal for Borewell, Tanker & Municipal Water, Significant water savings, BIS Approved, Black",
@@ -14,82 +66,30 @@
       "affiliate_url": "https://www.amazon.in/dp/B0F8QC2Z7C?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0F8QC2Z7C.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B0892R627P",
-      "title": "Bajaj New Shakti Neo 15L Vertical Storage Water Heater (Geyser 2000W)",
-      "effective_price": 5699,
-      "mrp": 10500,
-      "discount_pct": 46,
-      "savings_inr": 4801,
-      "brand": "Bajaj",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0892R627P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0892R627P.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B8NTZ24L",
-      "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
-      "effective_price": 1899,
-      "mrp": 4499,
-      "discount_pct": 58,
-      "savings_inr": 2600,
-      "brand": "Puma",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BC8P3X64",
-      "title": "Amazfit GTR 4 Smart Watch with Bluetooth Calling, 150+ Sports Modes",
-      "effective_price": 14999,
-      "mrp": 23999,
-      "discount_pct": 38,
-      "savings_inr": 9000,
-      "brand": "Amazfit",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X64?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X64.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B00W7D765E",
-      "title": "Wonderchef Nutri-blend 400W Mixer Grinder Blender with 2 Unbreakable Jars",
-      "effective_price": 2399,
-      "mrp": 5000,
-      "discount_pct": 52,
-      "savings_inr": 2601,
-      "brand": "Wonderchef",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B00W7D765E?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B00W7D765E.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": null,
   "best_under_299": {
-    "id": "amazon:B01LY8PGB0",
-    "asin": "B01LY8PGB0",
-    "title": "Dettol Liquid Handwash Refill Original 1500ml Germ Protection",
-    "brand": "Dettol",
+    "id": "amazon:B008T1V3KC",
+    "asin": "B008T1V3KC",
+    "title": "Nivea Soft Light Moisturizer Cream with Vitamin E & Jojoba Oil 300ml",
+    "brand": "Nivea",
     "brand_tier": "tier1",
     "category": "Personal Care & Grocery",
-    "image_url": "https://m.media-amazon.com/images/I/61dqS5QDAmL._SL600_.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B01LY8PGB0?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 339,
-    "list_price": 219,
-    "effective_price": 219,
+    "image_url": "https://m.media-amazon.com/images/I/51M1FoB3qYL._SL600_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B008T1V3KC?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 499,
+    "list_price": 299,
+    "effective_price": 299,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 35,
-    "effective_discount_pct": 35,
-    "savings_inr": 120,
+    "discount_pct": 40,
+    "effective_discount_pct": 40,
+    "savings_inr": 200,
     "rating": 4.5,
-    "review_count": 94000,
+    "review_count": 89000,
     "score": 75,
     "buy_confidence": 95,
     "price_context": "normal",
@@ -105,20 +105,20 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹219!"
+      "🎉 Complete checkout at the effective deal price of ₹299!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794608030,
-    "last_verified_at_epoch": 1794608030,
-    "last_verified_at_ist": "2026-11-14 03:43 IST",
+    "posted_at_epoch": 1794624089,
+    "last_verified_at_epoch": 1794624089,
+    "last_verified_at_ist": "2026-11-14 08:11 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794608030,
-    "updated_at_ist": "2026-11-14 03:43 IST"
+    "updated_at": 1794624089,
+    "updated_at_ist": "2026-11-14 08:11 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794608030,
-    "last_verified_at_epoch": 1794608030,
-    "last_verified_at_ist": "2026-11-14 03:43 IST",
+    "posted_at_epoch": 1794624089,
+    "last_verified_at_epoch": 1794624089,
+    "last_verified_at_ist": "2026-11-14 08:11 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794608030,
-    "updated_at_ist": "2026-11-14 03:43 IST"
+    "updated_at": 1794624089,
+    "updated_at_ist": "2026-11-14 08:11 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -210,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 142,
-    "loot_count": 12,
+    "total_deals": 144,
+    "loot_count": 13,
     "max_discount_pct": 81,
-    "total_savings_inr": 454423
+    "total_savings_inr": 423454
   }
 }

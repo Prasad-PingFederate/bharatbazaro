@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-14 22:14 IST",
-  "generated_at_epoch": 1794674654,
+  "generated_at_ist": "2026-11-15 02:55 IST",
+  "generated_at_epoch": 1794691527,
   "top_loot_summary": [
+    {
+      "asin": "B083W7V3YB",
+      "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
+      "effective_price": 6990,
+      "mrp": 14990,
+      "discount_pct": 53,
+      "savings_inr": 8000,
+      "brand": "Sennheiser",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0H2BYVZWM",
       "title": "[ICICI / AXIS CC EMI] Xiaomi (108 cm) 43 inch FX 4K QD-Mini LED Smart | Full Array Local Dimming | HDR10+ | Fire TV | L43MC-FSMIN",
@@ -53,19 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B0BF54979B",
-      "title": "Fire-Boltt Ninja Call Pro Plus 1.83 inch Smart Watch with AI Voice Assistant",
-      "effective_price": 1099,
-      "mrp": 9999,
-      "discount_pct": 89,
-      "savings_inr": 8900,
-      "brand": "Fire-Boltt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0BF54979B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BF54979B.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": null,
@@ -110,37 +110,37 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794674645,
-    "last_verified_at_epoch": 1794674645,
-    "last_verified_at_ist": "2026-11-14 22:14 IST",
+    "posted_at_epoch": 1794691523,
+    "last_verified_at_epoch": 1794691523,
+    "last_verified_at_ist": "2026-11-15 02:55 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794674645,
-    "updated_at_ist": "2026-11-14 22:14 IST"
+    "updated_at": 1794691523,
+    "updated_at_ist": "2026-11-15 02:55 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B0C46DW3KH",
-    "asin": "B0C46DW3KH",
-    "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
+    "id": "amazon:B09T3H32N6",
+    "asin": "B09T3H32N6",
+    "title": "OnePlus Bullets Z2 Bluetooth Wireless in Ear Earphones (30H Playtime)",
     "brand": "Oneplus",
     "brand_tier": "tier1",
     "category": "Mobiles & Accessories",
-    "image_url": "https://m.media-amazon.com/images/I/61WoAhwb5mL._SL600_.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0C46DW3KH?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 42999,
-    "list_price": 37999,
-    "effective_price": 37999,
+    "image_url": "https://m.media-amazon.com/images/I/51wgLD9Q0tL._SL600_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B09T3H32N6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 2299,
+    "list_price": 1499,
+    "effective_price": 1499,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": "Instant ₹3,000 Bank Discount with ICICI CC",
-    "discount_pct": 12,
-    "effective_discount_pct": 12,
-    "savings_inr": 5000,
-    "rating": 4.4,
-    "review_count": 4120,
+    "bank_offer": null,
+    "discount_pct": 35,
+    "effective_discount_pct": 35,
+    "savings_inr": 800,
+    "rating": 4.2,
+    "review_count": 139000,
     "score": 75,
     "buy_confidence": 95,
     "price_context": "normal",
@@ -156,29 +156,28 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "💳 Select eligible card/payment for instant bank discount: Instant ₹3,000 Bank Discount with ICICI CC.",
-      "🎉 Complete checkout at the effective deal price of ₹37,999!"
+      "🎉 Complete checkout at the effective deal price of ₹1,499!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794674645,
-    "last_verified_at_epoch": 1794674645,
-    "last_verified_at_ist": "2026-11-14 22:14 IST",
+    "posted_at_epoch": 1794691523,
+    "last_verified_at_epoch": 1794691523,
+    "last_verified_at_ist": "2026-11-15 02:55 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794674645,
-    "updated_at_ist": "2026-11-14 22:14 IST"
+    "updated_at": 1794691523,
+    "updated_at_ist": "2026-11-15 02:55 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0C46DW3KH",
-      "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
-      "effective_price": 37999,
-      "discount_pct": 12,
-      "deal_url": "https://bharatbazaro.com/deal/B0C46DW3KH.html"
+      "asin": "B09T3H32N6",
+      "title": "OnePlus Bullets Z2 Bluetooth Wireless in Ear Earphones (30H Playtime)",
+      "effective_price": 1499,
+      "discount_pct": 35,
+      "deal_url": "https://bharatbazaro.com/deal/B09T3H32N6.html"
     },
     "electronics": {
       "asin": "B0CGM17GYC",
@@ -210,9 +209,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 149,
-    "loot_count": 10,
+    "total_deals": 155,
+    "loot_count": 11,
     "max_discount_pct": 89,
-    "total_savings_inr": 499729
+    "total_savings_inr": 515200
   }
 }

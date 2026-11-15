@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-15 06:49 IST",
-  "generated_at_epoch": 1794705596,
+  "generated_at_ist": "2026-11-15 13:56 IST",
+  "generated_at_epoch": 1794731180,
   "top_loot_summary": [
+    {
+      "asin": "B0CYQ4M4N5",
+      "title": "Sony Bravia 55 inches 4K Ultra HD Smart LED Google TV KD-55X74L",
+      "effective_price": 52990,
+      "mrp": 99900,
+      "discount_pct": 47,
+      "savings_inr": 46910,
+      "brand": "Sony",
+      "category": "Electronics & Audio",
+      "affiliate_url": "https://www.amazon.in/dp/B0CYQ4M4N5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BC8P3X65",
+      "title": "Puma Men Smashic Casual Sneaker Shoes White & Navy",
+      "effective_price": 1799,
+      "mrp": 4499,
+      "discount_pct": 60,
+      "savings_inr": 2700,
+      "brand": "Puma",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X65?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X65.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B008A2796G",
+      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
+      "effective_price": 6995,
+      "mrp": 13995,
+      "discount_pct": 50,
+      "savings_inr": 7000,
+      "brand": "Fossil",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0FS17S4WK",
       "title": "Standard by Havells Vertex Neo 4 Star 15L Storage Water Heater(Geyser)|Faster Heating|Safe to Use|Saves Electricity|Hydro Guard Coated Anti Rust Tank|Temp. Setting Knob|5 Yr. Tank Warranty| White",
@@ -26,45 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0H2BYVZWM",
-      "title": "[ICICI / AXIS CC EMI] Xiaomi (108 cm) 43 inch FX 4K QD-Mini LED Smart | Full Array Local Dimming | HDR10+ | Fire TV | L43MC-FSMIN",
-      "effective_price": 32999,
-      "mrp": 49999,
-      "discount_pct": 34,
-      "savings_inr": 17000,
-      "brand": "Xiaomi",
-      "category": "Electronics & Audio",
-      "affiliate_url": "https://www.amazon.in/dp/B0H2BYVZWM?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0H2BYVZWM.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B8NTZ24P",
-      "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
-      "effective_price": 1199,
-      "mrp": 6990,
-      "discount_pct": 83,
-      "savings_inr": 5791,
-      "brand": "boAt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24P.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BBWH1R8H",
-      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
-      "effective_price": 5499,
-      "mrp": 10500,
-      "discount_pct": 48,
-      "savings_inr": 5001,
-      "brand": "Kingston",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
       "coupon_text": null
     }
   ],
@@ -110,15 +110,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794705589,
-    "last_verified_at_epoch": 1794705589,
-    "last_verified_at_ist": "2026-11-15 06:49 IST",
+    "posted_at_epoch": 1794731166,
+    "last_verified_at_epoch": 1794731166,
+    "last_verified_at_ist": "2026-11-15 13:56 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794705589,
-    "updated_at_ist": "2026-11-15 06:49 IST"
+    "updated_at": 1794731166,
+    "updated_at_ist": "2026-11-15 13:56 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -162,15 +162,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794705589,
-    "last_verified_at_epoch": 1794705589,
-    "last_verified_at_ist": "2026-11-15 06:49 IST",
+    "posted_at_epoch": 1794731166,
+    "last_verified_at_epoch": 1794731166,
+    "last_verified_at_ist": "2026-11-15 13:56 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794705589,
-    "updated_at_ist": "2026-11-15 06:49 IST"
+    "updated_at": 1794731166,
+    "updated_at_ist": "2026-11-15 13:56 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -181,11 +181,11 @@
       "deal_url": "https://bharatbazaro.com/deal/B0C46DW3KH.html"
     },
     "electronics": {
-      "asin": "B0CYQ4M4N5",
-      "title": "Sony Bravia 55 inches 4K Ultra HD Smart LED Google TV KD-55X74L",
-      "effective_price": 52990,
-      "discount_pct": 47,
-      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html"
+      "asin": "B0CGM17GYC",
+      "title": "GoPro HERO12 Black Waterproof Action Camera with Front LCD and Touch Screen",
+      "effective_price": 34990,
+      "discount_pct": 22,
+      "deal_url": "https://bharatbazaro.com/deal/B0CGM17GYC.html"
     },
     "home": {
       "asin": "B002MPPTB8",
@@ -211,8 +211,8 @@
   },
   "market_stats": {
     "total_deals": 175,
-    "loot_count": 11,
+    "loot_count": 10,
     "max_discount_pct": 89,
-    "total_savings_inr": 627047
+    "total_savings_inr": 618234
   }
 }

@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-15 02:55 IST",
-  "generated_at_epoch": 1794691527,
+  "generated_at_ist": "2026-11-15 06:49 IST",
+  "generated_at_epoch": 1794705596,
   "top_loot_summary": [
+    {
+      "asin": "B0FS17S4WK",
+      "title": "Standard by Havells Vertex Neo 4 Star 15L Storage Water Heater(Geyser)|Faster Heating|Safe to Use|Saves Electricity|Hydro Guard Coated Anti Rust Tank|Temp. Setting Knob|5 Yr. Tank Warranty| White",
+      "effective_price": 5227,
+      "mrp": 11990,
+      "discount_pct": 61,
+      "savings_inr": 6763,
+      "brand": "Standard",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0FS17S4WK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0FS17S4WK.html",
+      "coupon_text": null
+    },
     {
       "asin": "B083W7V3YB",
       "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
@@ -53,19 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B09WDP4MMK",
-      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
-      "effective_price": 7999,
-      "mrp": 16100,
-      "discount_pct": 50,
-      "savings_inr": 8101,
-      "brand": "Samsung",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": null,
@@ -110,37 +110,37 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794691523,
-    "last_verified_at_epoch": 1794691523,
-    "last_verified_at_ist": "2026-11-15 02:55 IST",
+    "posted_at_epoch": 1794705589,
+    "last_verified_at_epoch": 1794705589,
+    "last_verified_at_ist": "2026-11-15 06:49 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794691523,
-    "updated_at_ist": "2026-11-15 02:55 IST"
+    "updated_at": 1794705589,
+    "updated_at_ist": "2026-11-15 06:49 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B09T3H32N6",
-    "asin": "B09T3H32N6",
-    "title": "OnePlus Bullets Z2 Bluetooth Wireless in Ear Earphones (30H Playtime)",
+    "id": "amazon:B0C46DW3KH",
+    "asin": "B0C46DW3KH",
+    "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
     "brand": "Oneplus",
     "brand_tier": "tier1",
     "category": "Mobiles & Accessories",
-    "image_url": "https://m.media-amazon.com/images/I/51wgLD9Q0tL._SL600_.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B09T3H32N6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 2299,
-    "list_price": 1499,
-    "effective_price": 1499,
+    "image_url": "https://m.media-amazon.com/images/I/61WoAhwb5mL._SL600_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B0C46DW3KH?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 42999,
+    "list_price": 37999,
+    "effective_price": 37999,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": null,
-    "discount_pct": 35,
-    "effective_discount_pct": 35,
-    "savings_inr": 800,
-    "rating": 4.2,
-    "review_count": 139000,
+    "bank_offer": "Instant ₹3,000 Bank Discount with ICICI CC",
+    "discount_pct": 12,
+    "effective_discount_pct": 12,
+    "savings_inr": 5000,
+    "rating": 4.4,
+    "review_count": 4120,
     "score": 75,
     "buy_confidence": 95,
     "price_context": "normal",
@@ -156,35 +156,36 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹1,499!"
+      "💳 Select eligible card/payment for instant bank discount: Instant ₹3,000 Bank Discount with ICICI CC.",
+      "🎉 Complete checkout at the effective deal price of ₹37,999!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794691523,
-    "last_verified_at_epoch": 1794691523,
-    "last_verified_at_ist": "2026-11-15 02:55 IST",
+    "posted_at_epoch": 1794705589,
+    "last_verified_at_epoch": 1794705589,
+    "last_verified_at_ist": "2026-11-15 06:49 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794691523,
-    "updated_at_ist": "2026-11-15 02:55 IST"
+    "updated_at": 1794705589,
+    "updated_at_ist": "2026-11-15 06:49 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B09T3H32N6",
-      "title": "OnePlus Bullets Z2 Bluetooth Wireless in Ear Earphones (30H Playtime)",
-      "effective_price": 1499,
-      "discount_pct": 35,
-      "deal_url": "https://bharatbazaro.com/deal/B09T3H32N6.html"
+      "asin": "B0C46DW3KH",
+      "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
+      "effective_price": 37999,
+      "discount_pct": 12,
+      "deal_url": "https://bharatbazaro.com/deal/B0C46DW3KH.html"
     },
     "electronics": {
-      "asin": "B0CGM17GYC",
-      "title": "GoPro HERO12 Black Waterproof Action Camera with Front LCD and Touch Screen",
-      "effective_price": 34990,
-      "discount_pct": 22,
-      "deal_url": "https://bharatbazaro.com/deal/B0CGM17GYC.html"
+      "asin": "B0CYQ4M4N5",
+      "title": "Sony Bravia 55 inches 4K Ultra HD Smart LED Google TV KD-55X74L",
+      "effective_price": 52990,
+      "discount_pct": 47,
+      "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N5.html"
     },
     "home": {
       "asin": "B002MPPTB8",
@@ -209,9 +210,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 155,
+    "total_deals": 175,
     "loot_count": 11,
     "max_discount_pct": 89,
-    "total_savings_inr": 515200
+    "total_savings_inr": 627047
   }
 }

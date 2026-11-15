@@ -1,13 +1,13 @@
 {
-  "timestamp_ist": "2026-11-14 15:25:19 IST",
-  "timestamp_epoch": 1794650119,
+  "timestamp_ist": "2026-11-15 16:01:19 IST",
+  "timestamp_epoch": 1794738679,
   "overall_status": "DEGRADED",
   "checks": [
     {
       "name": "Gemini API",
       "status": "failed",
       "model": "gemini-2.5-flash",
-      "latency_ms": 193,
+      "latency_ms": 166,
       "detail": "HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. "
     },
     {
@@ -33,40 +33,40 @@
     },
     {
       "name": "Deal Discovery Feeds",
-      "status": "ok",
-      "candidate_count": 34,
-      "latency_ms": 3038,
-      "detail": "Discovered 34 candidates across live feeds"
+      "status": "warning",
+      "candidate_count": 0,
+      "latency_ms": 788,
+      "detail": "Feeds reachable but 0 candidates qualified discount filter"
     },
     {
       "name": "Amazon.in Scraper",
       "status": "warning",
       "stock_status": "unknown",
-      "live_price": "\u20b98,495",
-      "latency_ms": 1618,
-      "detail": "Status: unknown, Price: \u20b98495"
+      "live_price": "N/A",
+      "latency_ms": 269,
+      "detail": "Status: unknown, Price: \u20b9N/A"
     },
     {
       "name": "SQLite Integrity",
       "status": "ok",
       "active_deals": 263,
       "integrity": "ok",
-      "latency_ms": 3,
+      "latency_ms": 4,
       "detail": "PRAGMA: ok, Active Deals: 263"
     },
     {
       "name": "BharatBazaro Live",
       "status": "ok",
-      "live_deals": 144,
-      "feed_age_min": 433,
-      "latency_ms": 217,
-      "detail": "144 live deals online (synced 433m ago)"
+      "live_deals": 175,
+      "feed_age_min": 124,
+      "latency_ms": 188,
+      "detail": "175 live deals online (synced 124m ago)"
     },
     {
       "name": "Telegram Bot API",
       "status": "ok",
       "bot_username": "DealDash_ai_Bot",
-      "latency_ms": 382,
+      "latency_ms": 415,
       "detail": "@DealDash_ai_Bot -> Flash Deals 24/7"
     }
   ]

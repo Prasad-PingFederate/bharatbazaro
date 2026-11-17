@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-16 23:55 IST",
-  "generated_at_epoch": 1794853512,
+  "generated_at_ist": "2026-11-17 07:34 IST",
+  "generated_at_epoch": 1794881079,
   "top_loot_summary": [
+    {
+      "asin": "B083W7V3YB",
+      "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
+      "effective_price": 6990,
+      "mrp": 14990,
+      "discount_pct": 53,
+      "savings_inr": 8000,
+      "brand": "Sennheiser",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BBWH1R8H",
+      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
+      "effective_price": 5499,
+      "mrp": 10500,
+      "discount_pct": 48,
+      "savings_inr": 5001,
+      "brand": "Kingston",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09WDP4MMK",
+      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
+      "effective_price": 7999,
+      "mrp": 16100,
+      "discount_pct": 50,
+      "savings_inr": 8101,
+      "brand": "Samsung",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B8NTZ24P",
       "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
@@ -26,45 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B0BNVFXCQ9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BNVFXCQ9.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BF54979B",
-      "title": "Fire-Boltt Ninja Call Pro Plus 1.83 inch Smart Watch with AI Voice Assistant",
-      "effective_price": 1099,
-      "mrp": 9999,
-      "discount_pct": 89,
-      "savings_inr": 8900,
-      "brand": "Fire-Boltt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0BF54979B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BF54979B.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B07TBX8ZV2",
-      "title": "HomeMate Wi-Fi Smart Fan Regulator Touch Switch | No Hub Required | Works with Amazon Alexa, Google Assistant & Siri (Pack of 1, Black) Rs.936 @ Amazon",
-      "effective_price": 936,
-      "mrp": 21960,
-      "discount_pct": 84,
-      "savings_inr": 21024,
-      "brand": "Homemate",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B07TBX8ZV2?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B07TBX8ZV2.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0F9F8D46V",
-      "title": "HP Travel Plus 22L 16-inch Laptop Bag",
-      "effective_price": 1063,
-      "mrp": 5295,
-      "discount_pct": 86,
-      "savings_inr": 4232,
-      "brand": "HP",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0F9F8D46V?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0F9F8D46V.html",
       "coupon_text": null
     }
   ],
@@ -113,10 +113,10 @@
     "posted_at_epoch": 1793115794,
     "last_verified_at_epoch": 1794790700,
     "last_verified_at_ist": "2026-11-16 06:28 IST",
-    "age_hours": 17.4,
-    "trending_score": 43.5,
+    "age_hours": 25.1,
+    "trending_score": 24.2,
     "is_new": false,
-    "is_fresh": true,
+    "is_fresh": false,
     "updated_at": 1794790700,
     "updated_at_ist": "2026-11-16 06:28 IST"
   },
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794853504,
-    "last_verified_at_epoch": 1794853504,
-    "last_verified_at_ist": "2026-11-16 23:55 IST",
+    "posted_at_epoch": 1794881068,
+    "last_verified_at_epoch": 1794881068,
+    "last_verified_at_ist": "2026-11-17 07:34 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794853504,
-    "updated_at_ist": "2026-11-16 23:55 IST"
+    "updated_at": 1794881068,
+    "updated_at_ist": "2026-11-17 07:34 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794853504,
-    "last_verified_at_epoch": 1794853504,
-    "last_verified_at_ist": "2026-11-16 23:55 IST",
+    "posted_at_epoch": 1794881068,
+    "last_verified_at_epoch": 1794881068,
+    "last_verified_at_ist": "2026-11-17 07:34 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794853504,
-    "updated_at_ist": "2026-11-16 23:55 IST"
+    "updated_at": 1794881068,
+    "updated_at_ist": "2026-11-17 07:34 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 150,
-    "loot_count": 16,
+    "total_deals": 141,
+    "loot_count": 11,
     "max_discount_pct": 89,
-    "total_savings_inr": 572803
+    "total_savings_inr": 450240
   }
 }

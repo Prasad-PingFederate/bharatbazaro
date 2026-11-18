@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-18 01:19 IST",
-  "generated_at_epoch": 1794944940,
+  "generated_at_ist": "2026-11-18 07:53 IST",
+  "generated_at_epoch": 1794968596,
   "top_loot_summary": [
+    {
+      "asin": "B0CSYYQ82J",
+      "title": "Milton Pro Cook Kitchen Pride Non-Stick Cookware Set of 5 | Includes Nonstick Tawa, Frying Pan, Kadhai with Lid, Nylon Laddle & Spatula | Non-Induction Base | Peach Color",
+      "effective_price": 1435,
+      "mrp": 4687,
+      "discount_pct": 63,
+      "savings_inr": 3252,
+      "brand": "Milton",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0CSYYQ82J?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CSYYQ82J.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0B8NTZ24L",
+      "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
+      "effective_price": 1899,
+      "mrp": 4499,
+      "discount_pct": 58,
+      "savings_inr": 2600,
+      "brand": "Puma",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BC8P3X65",
+      "title": "Puma Men Smashic Casual Sneaker Shoes White & Navy",
+      "effective_price": 1799,
+      "mrp": 4499,
+      "discount_pct": 60,
+      "savings_inr": 2700,
+      "brand": "Puma",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X65?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X65.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0HBBTV4J4",
       "title": "[HDFC CC] Lenovo Idea Tab (Smartchoice) with Tab Pen | WiFi Only |11\" 2.5K IPS Display |6GB RAM + 128GB ROM (Expandable Upto 2TB)| MediaTek Dimensity 6300|7040mAh|4 Speakers| Grey",
@@ -26,45 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B0FBLWG64W?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0FBLWG64W.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0F7R58YD5",
-      "title": "Havells Crabtree iSense Smart Monoblock Touch Panel with 1 Curtain Controller & 2 Scene(White) I Compatible with 2M Gang Box I Mesh connectivity I Compatible with Alexa, Google Home",
-      "effective_price": 2343,
-      "mrp": 15625,
-      "discount_pct": 75,
-      "savings_inr": 13282,
-      "brand": "Havells",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0F7R58YD5?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0F7R58YD5.html",
-      "coupon_text": "Apply 40% coupon"
-    },
-    {
-      "asin": "B0FJYJ8LVY",
-      "title": "[AXIS/ICICI CC] HP 15 Smartchoice, AMD Ryzen 3 7320U (8GB LPDDR5, 512GB SSD) FHD, Anti-Glare, Micro-Edge, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fc0500AU, FHD Camera w/Privacy Shutter Laptop",
-      "effective_price": 48490,
-      "mrp": 87179,
-      "discount_pct": 44,
-      "savings_inr": 38689,
-      "brand": "HP",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0FJYJ8LVY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0FJYJ8LVY.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08B3Q1RQT",
-      "title": "LG 27-inch 4K UHD IPS Monitor (HDR 10, AMD FreeSync, Dual HDMI)",
-      "effective_price": 22999,
-      "mrp": 35000,
-      "discount_pct": 34,
-      "savings_inr": 12001,
-      "brand": "LG",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B08B3Q1RQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08B3Q1RQT.html",
       "coupon_text": null
     }
   ],
@@ -113,34 +113,34 @@
     "posted_at_epoch": 1793273361,
     "last_verified_at_epoch": 1794944884,
     "last_verified_at_ist": "2026-11-18 01:18 IST",
-    "age_hours": 0.0,
-    "trending_score": 90.0,
-    "is_new": true,
+    "age_hours": 6.6,
+    "trending_score": 78.5,
+    "is_new": false,
     "is_fresh": true,
     "updated_at": 1794944884,
     "updated_at_ist": "2026-11-18 01:18 IST"
   },
   "best_under_299": {
-    "id": "amazon:B01LY8PGB0",
-    "asin": "B01LY8PGB0",
-    "title": "Dettol Liquid Handwash Refill Original 1500ml Germ Protection",
-    "brand": "Dettol",
+    "id": "amazon:B008T1V3KC",
+    "asin": "B008T1V3KC",
+    "title": "Nivea Soft Light Moisturizer Cream with Vitamin E & Jojoba Oil 300ml",
+    "brand": "Nivea",
     "brand_tier": "tier1",
     "category": "Personal Care & Grocery",
-    "image_url": "https://m.media-amazon.com/images/I/61dqS5QDAmL._SL600_.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B01LY8PGB0?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 339,
-    "list_price": 219,
-    "effective_price": 219,
+    "image_url": "https://m.media-amazon.com/images/I/51M1FoB3qYL._SL600_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B008T1V3KC?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 499,
+    "list_price": 299,
+    "effective_price": 299,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
     "bank_offer": null,
-    "discount_pct": 35,
-    "effective_discount_pct": 35,
-    "savings_inr": 120,
+    "discount_pct": 40,
+    "effective_discount_pct": 40,
+    "savings_inr": 200,
     "rating": 4.5,
-    "review_count": 94000,
+    "review_count": 89000,
     "score": 75,
     "buy_confidence": 95,
     "price_context": "normal",
@@ -156,20 +156,20 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "🎉 Complete checkout at the effective deal price of ₹219!"
+      "🎉 Complete checkout at the effective deal price of ₹299!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794944922,
-    "last_verified_at_epoch": 1794944922,
-    "last_verified_at_ist": "2026-11-18 01:18 IST",
+    "posted_at_epoch": 1794968593,
+    "last_verified_at_epoch": 1794968593,
+    "last_verified_at_ist": "2026-11-18 07:53 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794944922,
-    "updated_at_ist": "2026-11-18 01:18 IST"
+    "updated_at": 1794968593,
+    "updated_at_ist": "2026-11-18 07:53 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1794944922,
-    "last_verified_at_epoch": 1794944922,
-    "last_verified_at_ist": "2026-11-18 01:18 IST",
+    "posted_at_epoch": 1794968593,
+    "last_verified_at_epoch": 1794968593,
+    "last_verified_at_ist": "2026-11-18 07:53 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1794944922,
-    "updated_at_ist": "2026-11-18 01:18 IST"
+    "updated_at": 1794968593,
+    "updated_at_ist": "2026-11-18 07:53 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -239,11 +239,11 @@
       "deal_url": "https://bharatbazaro.com/deal/B0CGM17GYC.html"
     },
     "home": {
-      "asin": "B002MPPTB8",
-      "title": "Hawkins Futura Hard Anodised Pressure Cooker 3 Litre with Induction Base",
-      "effective_price": 2499,
-      "discount_pct": 25,
-      "deal_url": "https://bharatbazaro.com/deal/B002MPPTB8.html"
+      "asin": "B08HN6PCDJ",
+      "title": "Philips Digital Air Fryer HD9252/90 (4.1 Litre, 1400W Rapid Air Technology)",
+      "effective_price": 6999,
+      "discount_pct": 42,
+      "deal_url": "https://bharatbazaro.com/deal/B08HN6PCDJ.html"
     },
     "fashion": {
       "asin": "B08V5Q4X1A",
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 151,
+    "total_deals": 159,
     "loot_count": 14,
     "max_discount_pct": 80,
-    "total_savings_inr": 644696
+    "total_savings_inr": 712096
   }
 }

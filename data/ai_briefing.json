@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-19 23:32 IST",
-  "generated_at_epoch": 1795111363,
+  "generated_at_ist": "2026-11-20 00:09 IST",
+  "generated_at_epoch": 1795113561,
   "top_loot_summary": [
     {
       "asin": "B09G3Z55TK",
@@ -113,8 +113,8 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 22.7,
-    "trending_score": 15.2,
+    "age_hours": 23.3,
+    "trending_score": 13.8,
     "is_new": false,
     "is_fresh": true,
     "updated_at": 1795029794,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795111358,
-    "last_verified_at_epoch": 1795111358,
-    "last_verified_at_ist": "2026-11-19 23:32 IST",
+    "posted_at_epoch": 1795113558,
+    "last_verified_at_epoch": 1795113558,
+    "last_verified_at_ist": "2026-11-20 00:09 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795111358,
-    "updated_at_ist": "2026-11-19 23:32 IST"
+    "updated_at": 1795113558,
+    "updated_at_ist": "2026-11-20 00:09 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795111358,
-    "last_verified_at_epoch": 1795111358,
-    "last_verified_at_ist": "2026-11-19 23:32 IST",
+    "posted_at_epoch": 1795113558,
+    "last_verified_at_epoch": 1795113558,
+    "last_verified_at_ist": "2026-11-20 00:09 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795111358,
-    "updated_at_ist": "2026-11-19 23:32 IST"
+    "updated_at": 1795113558,
+    "updated_at_ist": "2026-11-20 00:09 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 157,
+    "total_deals": 160,
     "loot_count": 21,
     "max_discount_pct": 89,
-    "total_savings_inr": 527204
+    "total_savings_inr": 527628
   }
 }

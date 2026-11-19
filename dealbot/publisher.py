@@ -1,3 +1,4 @@
+import urllib.parse
 import html
 import logging
 import os
@@ -90,6 +91,32 @@ class StateStore:
                     last_seen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS deal_telemetry (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    subid TEXT,
+                    canonical_id TEXT,
+                    merchant TEXT,
+                    category TEXT,
+                    price REAL,
+                    expected_payout REAL,
+                    profit_score REAL,
+                    deal_url TEXT,
+                    clicks INTEGER DEFAULT 0,
+                    conversions INTEGER DEFAULT 0,
+                    actual_payout REAL DEFAULT 0.0
+                )
+            """)
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_telemetry_subid ON deal_telemetry (subid)")
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS unshortened_url_cache (
+                    short_url TEXT PRIMARY KEY,
+                    resolved_url TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    ttl_seconds INTEGER DEFAULT 86400
+                )
+            """)
             # Auto-migrate older schemas if missing columns
             for col in [
                 "chat_id TEXT",
@@ -128,6 +155,41 @@ class StateStore:
 
     def checkpoint_and_close(self) -> None:
         self.checkpoint()
+
+    def log_telemetry(
+        self,
+        subid: str,
+        canonical_id: str,
+        merchant: str,
+        category: str,
+        price: float,
+        expected_payout: float,
+        profit_score: float,
+        deal_url: str,
+    ) -> None:
+        """Record outbound deal attribution telemetry for closed-loop EPC analysis."""
+        try:
+            with self._connect() as conn:
+                conn.execute(
+                    """
+                    INSERT INTO deal_telemetry (
+                        subid, canonical_id, merchant, category, price,
+                        expected_payout, profit_score, deal_url
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        subid,
+                        canonical_id,
+                        merchant,
+                        category,
+                        float(price or 0.0),
+                        float(expected_payout or 0.0),
+                        float(profit_score or 0.0),
+                        deal_url,
+                    ),
+                )
+        except Exception as e:
+            logger.debug("Failed to record deal telemetry: %s", e)
 
     def is_posted(
         self,
@@ -1057,7 +1119,12 @@ def send_telegram_deal(deal: Deal, dry_run: bool = True, copywriter: Optional[AI
             provider_label = "Price History Check" if get_market_region() == "IN" else "CamelCamelCamel"
             row3.append({"text": f"🔍 {provider_label}", "url": ph_url})
 
-    row_worth = [{"text": "👍 Worth it", "callback_data": f"worth:{(deal.id or '')[:40]}"}]
+    _bharat_u = f"https://bharatbazaro.com/?deal={asin}&utm_source=telegram" if (asin and len(asin) == 10) else "https://bharatbazaro.com/?utm_source=telegram"
+    _wa_txt = f"🔥 LOOT DEAL: {deal.title or 'Deal'}\n💰 Grab @ {disp_price or 'Best Price'}{disc_part}\n📊 Price History & Link: {_bharat_u}"
+    row_worth = [
+        {"text": "👍 Worth it", "callback_data": f"worth:{(deal.id or '')[:40]}"},
+        {"text": "📲 Share on WhatsApp", "url": f"https://api.whatsapp.com/send?text={urllib.parse.quote(_wa_txt)}"},
+    ]
 
     inline_rows = [primary_row]
     if row2:
@@ -1337,7 +1404,8 @@ def send_telegram_deal(deal, dry_run: bool = True, copywriter=None):
         return False, None, ""
     _pct = offer_percent(deal) or int(getattr(deal, "discount_percent", 0) or 0)
     _price = parse_rupees(getattr(deal, "current_price", None)) or 9999
-    if _pct < 25 and _price > 199 and not getattr(deal, "is_loot", False):
+    _has_disc = bool(getattr(deal, "original_price", None) or getattr(deal, "discount_percent", None))
+    if _has_disc and _pct < 25 and _price > 199 and not getattr(deal, "is_loot", False):
         logger.info(f"[Ranking Gate] Blocked low-discount deal ({_pct}% OFF): {getattr(deal, 'title', '')}")
         return False, None, ""
     return _orig_send_telegram_deal(deal, dry_run=dry_run, copywriter=copywriter)

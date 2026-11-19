@@ -1007,7 +1007,8 @@ def send_telegram_deal(deal: Deal, dry_run: bool = True, copywriter: Optional[AI
     # [GROK-RANKING-GATE] Unified website ranking rule: block low-discount items (e.g. 12% phones)
     _pct = offer_percent(deal) or int(getattr(deal, "discount_percent", 0) or 0)
     _price = parse_rupees(getattr(deal, "current_price", None)) or 9999
-    if _pct < 25 and _price > 199 and not getattr(deal, "is_loot", False):
+    _has_disc = bool(getattr(deal, "original_price", None) or getattr(deal, "discount_percent", None))
+    if _has_disc and _pct < 25 and _price > 199 and not getattr(deal, "is_loot", False):
         logger.info(f"[Ranking Gate] Blocked low-discount deal ({_pct}% OFF, Rs {_price}): {deal.title}")
         return False, None, ""
     caption = format_caption(deal, copywriter=copywriter)

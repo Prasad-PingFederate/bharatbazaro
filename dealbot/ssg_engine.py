@@ -1324,6 +1324,7 @@ def render_product_page_html(
     category = html_lib.escape(str(deal.get("category") or "Electronics & Audio"))
     rating = deal.get("rating") or 4.3
     review_count = deal.get("review_count") or 150
+    is_expired = bool(deal.get("is_expired") or deal.get("status") == "expired")
 
     raw_aff = str(deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1")
     if "ascsubtag=" in raw_aff:
@@ -1344,8 +1345,19 @@ def render_product_page_html(
     hist_avg = deal.get("historical_avg") or (int(eff_price * 1.18) if mrp <= eff_price else int((mrp + eff_price) / 2))
     hist_max = deal.get("historical_max") or max(mrp, eff_price)
 
+    # Expired deal banner
+    expired_banner_html = ""
+    if is_expired:
+        expired_banner_html = '''
+    <div class="expired-deal-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; text-align: center;">
+      <div style="font-size: 1.3rem; font-weight: 800; color: #f87171;">⚠️ Deal Expired / Out of Stock</div>
+      <p style="color: #cbd5e1; margin-top: 4px; font-size: 0.95rem;">This deal has ended or sold out. See top active alternatives below ranked by Expected Profit!</p>
+    </div>'''
+
     # Badges
     badges = []
+    if is_expired:
+        badges.append('<span class="badge-tag badge-expired" style="background: #ef4444; color: #fff;">⚠️ EXPIRED</span>')
     if deal.get("is_loot"):
         badges.append('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>')
     if deal.get("price_context") == "all_time_low":
@@ -1433,12 +1445,12 @@ def render_product_page_html(
                     "url": affiliate_url,
                     "priceCurrency": "INR",
                     "price": str(eff_price),
-                    "priceValidUntil": "2026-12-31",
+                    "priceValidUntil": str(deal.get("expires_at") or "2026-12-31")[:10],
                     "itemCondition": "https://schema.org/NewCondition",
-                    "availability": "https://schema.org/InStock",
+                    "availability": "https://schema.org/Discontinued" if is_expired else "https://schema.org/InStock",
                     "seller": {
                         "@type": "Organization",
-                        "name": "Amazon India"
+                        "name": "Amazon India" if "amazon" in brand.lower() or "amazon" in affiliate_url.lower() else brand
                     }
                 }
             }
@@ -1446,8 +1458,43 @@ def render_product_page_html(
     }
     schema_json = json.dumps(schema_data, indent=2, ensure_ascii=False)
 
-    # Related Deals Cards HTML
-    related_cards_html = "\n".join(render_deal_card_html(d, idx + 3) for idx, d in enumerate(related_deals[:6]))
+    # Related Deals / Alternatives Cards HTML (rank by Expected Profit)
+    active_alternatives = [
+        d for d in related_deals
+        if not (d.get("is_expired") or d.get("status") == "expired") and str(d.get("asin") or d.get("canonical_id") or d.get("id")) != asin
+    ]
+    try:
+        from dealbot.profit_ranker import compute_expected_profit
+        active_alternatives.sort(
+            key=lambda d: compute_expected_profit(
+                deal_price=float(d.get("effective_price") or d.get("list_price") or d.get("price") or 0),
+                category=d.get("category"),
+                title=d.get("title"),
+                is_loot=bool(d.get("is_loot")),
+            ),
+            reverse=True,
+        )
+    except Exception as exc:
+        logger.debug("Failed sorting alternatives by profit: %s", exc)
+
+    alternatives_to_show = active_alternatives[:4] if is_expired else (active_alternatives[:6] or related_deals[:6])
+    related_cards_html = "\n".join(render_deal_card_html(d, idx + 3) for idx, d in enumerate(alternatives_to_show))
+    section_title = "🔥 Top Active Alternatives (Ranked by Expected Profit)" if is_expired else "🔥 Related Live Amazon Loot Deals"
+
+    if is_expired:
+        primary_cta_html = '''<a href="#alternatives" class="btn btn-secondary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.15rem; font-weight: 800; padding: 16px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: #475569; color: #fff;">
+            <span>⚠️ Deal Expired — See Top Alternatives Below ↓</span>
+          </a>'''
+        claim_btn_html = '''<a href="#alternatives" class="btn btn-secondary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: #475569; color: #fff;">
+          <span>⚠️ Deal Expired — See Top Alternatives Below ↓</span>
+        </a>'''
+    else:
+        primary_cta_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+            <span>🛒 Grab Diwali Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
+          </a>'''
+        claim_btn_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
+          <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
+        </a>'''
 
     return f'''<!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -1526,6 +1573,7 @@ def render_product_page_html(
 
   <!-- Main Product Detail View -->
   <main class="container" style="padding-bottom: 60px;">
+    {expired_banner_html}
     <div class="deal-detail-layout" style="display: grid; grid-template-columns: minmax(300px, 460px) 1fr; gap: 32px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 32px; margin-bottom: 40px;">
       <!-- Left: Product Image & Badges -->
       <div class="product-media-col" style="text-align: center;">
@@ -1582,9 +1630,7 @@ def render_product_page_html(
 
         <!-- Primary CTA Buttons -->
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
-          <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
-            <span>🛒 Grab Diwali Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
-          </a>
+          {primary_cta_html}
           <div style="display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap;">
             <a href="https://api.whatsapp.com/send?text={html_lib.escape(f'🔥 Unbelievable Amazon Deal! {raw_title} at ₹{eff_price:,} ({disc_pct}% OFF): {canonical}')}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; text-decoration: none; padding: 10px 16px;">
               <span>💬 Share WhatsApp</span>
@@ -1658,17 +1704,15 @@ def render_product_page_html(
       </div>
 
       <div style="margin-top: 24px; text-align: center;">
-        <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
-          <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
-        </a>
+        {claim_btn_html}
       </div>
     </section>
 
     <!-- Related Deals Section -->
-    <section>
+    <section id="alternatives">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">
-          🔥 Related Live Amazon Loot Deals
+          {section_title}
         </h2>
         <a href="/" style="color: var(--color-emerald-light); font-weight: 700; font-size: 0.9rem; text-decoration: none;">
           View All Live Deals →
@@ -1897,10 +1941,31 @@ def update_sitemap_xml(root_dir: Path, deal_asins: Optional[List[str]] = None, e
             urls.append((extra, today, "hourly", "0.9"))
 
     # 4. Programmatic Deal Pages
+    seen_asins = set()
     if deal_asins:
         for asin in deal_asins:
             if asin:
-                urls.append((f"https://bharatbazaro.com/deal/{asin}.html", today, "daily", "0.8"))
+                seen_asins.add(str(asin).replace("amz-", "").replace("amazon:", "").strip().upper())
+
+    deal_dir = root_dir / "deal"
+    if deal_dir.exists():
+        for p in deal_dir.glob("*.html"):
+            seen_asins.add(p.stem)
+
+    json_path = root_dir / "data" / "live_deals.json"
+    if json_path.exists():
+        try:
+            with open(json_path, "r", encoding="utf-8") as jf:
+                live_deals = json.load(jf)
+                for d in live_deals:
+                    k = d.get("asin") or d.get("id") or d.get("canonical_id")
+                    if k:
+                        seen_asins.add(str(k).replace("amz-", "").replace("amazon:", "").strip().upper())
+        except Exception:
+            pass
+
+    for asin in sorted(seen_asins):
+        urls.append((f"https://bharatbazaro.com/deal/{asin}.html", today, "daily", "0.8"))
 
     url_blocks = []
     for loc, lastmod, freq, prio in urls:

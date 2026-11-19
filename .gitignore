@@ -17,3 +17,4 @@ credentials.json
 *client_secret*.json
 *.pem
 *.key
+*.local_test_bak

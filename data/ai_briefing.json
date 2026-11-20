@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-20 18:56 IST",
-  "generated_at_epoch": 1795181209,
+  "generated_at_ist": "2026-11-20 23:29 IST",
+  "generated_at_epoch": 1795197596,
   "top_loot_summary": [
+    {
+      "asin": "B0BSGTLXJ1",
+      "title": "Boult Audio Z40 True Wireless in Ear Earbuds (60H Playtime, ENC)",
+      "effective_price": 999,
+      "mrp": 4999,
+      "discount_pct": 80,
+      "savings_inr": 4000,
+      "brand": "Boult",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0BSGTLXJ1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BSGTLXJ1.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B08HMWZB8B",
+      "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
+      "effective_price": 3999,
+      "mrp": 9999,
+      "discount_pct": 60,
+      "savings_inr": 6000,
+      "brand": "Zebronics",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B08HMWZB8B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B08HMWZB8B.html",
+      "coupon_text": null
+    },
     {
       "asin": "B00B29VFR6",
       "title": "Kent Grand RO Water Purifier 8L Storage with UV+UF+TDS Controller",
@@ -39,32 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B08HN6PCDJ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B08HN6PCDJ.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B091CR2FXY",
-      "title": "AGARO Regency Air Fryer 12L 1800W with 9 Preset Menus & Rotisserie",
-      "effective_price": 7499,
-      "mrp": 15999,
-      "discount_pct": 53,
-      "savings_inr": 8500,
-      "brand": "Agaro",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09XXWMS4Z",
-      "title": "Marshall Emberton II Portable Bluetooth Speaker (30+ Hours Playtime)",
-      "effective_price": 13999,
-      "mrp": 19999,
-      "discount_pct": 30,
-      "savings_inr": 6000,
-      "brand": "Marshall",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09XXWMS4Z?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09XXWMS4Z.html",
       "coupon_text": null
     }
   ],
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 42.1,
+    "age_hours": 46.6,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795181202,
-    "last_verified_at_epoch": 1795181202,
-    "last_verified_at_ist": "2026-11-20 18:56 IST",
+    "posted_at_epoch": 1795197592,
+    "last_verified_at_epoch": 1795197592,
+    "last_verified_at_ist": "2026-11-20 23:29 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795181202,
-    "updated_at_ist": "2026-11-20 18:56 IST"
+    "updated_at": 1795197592,
+    "updated_at_ist": "2026-11-20 23:29 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B002MPPTB8",
@@ -212,15 +212,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795181202,
-    "last_verified_at_epoch": 1795181202,
-    "last_verified_at_ist": "2026-11-20 18:56 IST",
+    "posted_at_epoch": 1795197592,
+    "last_verified_at_epoch": 1795197592,
+    "last_verified_at_ist": "2026-11-20 23:29 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795181202,
-    "updated_at_ist": "2026-11-20 18:56 IST"
+    "updated_at": 1795197592,
+    "updated_at_ist": "2026-11-20 23:29 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -260,9 +260,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 156,
-    "loot_count": 25,
-    "max_discount_pct": 89,
-    "total_savings_inr": 424599
+    "total_deals": 138,
+    "loot_count": 17,
+    "max_discount_pct": 88,
+    "total_savings_inr": 326229
   }
 }

@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-20 17:05 IST",
-  "generated_at_epoch": 1795174521,
+  "generated_at_ist": "2026-11-20 18:39 IST",
+  "generated_at_epoch": 1795180183,
   "top_loot_summary": [
     {
       "asin": "B0C82PJH3S",
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 40.2,
+    "age_hours": 41.8,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,37 +161,37 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795174509,
-    "last_verified_at_epoch": 1795174509,
-    "last_verified_at_ist": "2026-11-20 17:05 IST",
+    "posted_at_epoch": 1795180139,
+    "last_verified_at_epoch": 1795180139,
+    "last_verified_at_ist": "2026-11-20 18:38 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795174509,
-    "updated_at_ist": "2026-11-20 17:05 IST"
+    "updated_at": 1795180139,
+    "updated_at_ist": "2026-11-20 18:38 IST"
   },
   "best_tier1_deal": {
-    "id": "amazon:B0C46DW3KH",
-    "asin": "B0C46DW3KH",
-    "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
-    "brand": "Oneplus",
+    "id": "amazon:B08HN6PCDJ",
+    "asin": "B08HN6PCDJ",
+    "title": "Philips Digital Air Fryer HD9252/90 (4.1 Litre, 1400W Rapid Air Technology)",
+    "brand": "Philips",
     "brand_tier": "tier1",
-    "category": "Mobiles & Accessories",
-    "image_url": "https://m.media-amazon.com/images/I/61WoAhwb5mL._SL600_.jpg",
-    "affiliate_url": "https://www.amazon.in/dp/B0C46DW3KH?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-    "mrp": 42999,
-    "list_price": 37999,
-    "effective_price": 37999,
+    "category": "Home & Kitchen",
+    "image_url": "https://m.media-amazon.com/images/I/71AquVnhumL._SL600_.jpg",
+    "affiliate_url": "https://www.amazon.in/dp/B08HN6PCDJ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+    "mrp": 11995,
+    "list_price": 6999,
+    "effective_price": 6999,
     "coupon_discount": null,
     "coupon_text": null,
     "promo_code": null,
-    "bank_offer": "Instant ₹3,000 Bank Discount with ICICI CC",
-    "discount_pct": 12,
-    "effective_discount_pct": 12,
-    "savings_inr": 5000,
+    "bank_offer": null,
+    "discount_pct": 42,
+    "effective_discount_pct": 42,
+    "savings_inr": 4996,
     "rating": 4.4,
-    "review_count": 4120,
+    "review_count": 14200,
     "score": 75,
     "buy_confidence": 95,
     "price_context": "normal",
@@ -207,43 +207,42 @@
     "extra_offers": [],
     "claim_steps": [
       "🛒 Click 'Grab Deal' to open the official Amazon India product page.",
-      "💳 Select eligible card/payment for instant bank discount: Instant ₹3,000 Bank Discount with ICICI CC.",
-      "🎉 Complete checkout at the effective deal price of ₹37,999!"
+      "🎉 Complete checkout at the effective deal price of ₹6,999!"
     ],
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795174509,
-    "last_verified_at_epoch": 1795174509,
-    "last_verified_at_ist": "2026-11-20 17:05 IST",
+    "posted_at_epoch": 1795180139,
+    "last_verified_at_epoch": 1795180139,
+    "last_verified_at_ist": "2026-11-20 18:38 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795174509,
-    "updated_at_ist": "2026-11-20 17:05 IST"
+    "updated_at": 1795180139,
+    "updated_at_ist": "2026-11-20 18:38 IST"
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0C46DW3KH",
-      "title": "OnePlus 12R (Iron Gray, 8GB RAM, 128GB Storage)",
-      "effective_price": 37999,
-      "discount_pct": 12,
-      "deal_url": "https://bharatbazaro.com/deal/B0C46DW3KH.html"
+      "asin": "B0BZV8RF79",
+      "title": "OnePlus Nord Buds 2r True Wireless in Ear Earbuds with Mic, 38H Playtime, 12.4mm Drivers",
+      "effective_price": 1799,
+      "discount_pct": 22,
+      "deal_url": "https://bharatbazaro.com/deal/B0BZV8RF79.html"
     },
     "electronics": {
-      "asin": "B0CGM17GYC",
-      "title": "GoPro HERO12 Black Waterproof Action Camera with Front LCD and Touch Screen",
-      "effective_price": 34990,
-      "discount_pct": 22,
-      "deal_url": "https://bharatbazaro.com/deal/B0CGM17GYC.html"
+      "asin": "B09B8W5FW7",
+      "title": "Amazon Echo Dot 5th Gen with Clock and Smart Speaker with Alexa (Blue)",
+      "effective_price": 4449,
+      "discount_pct": 19,
+      "deal_url": "https://bharatbazaro.com/deal/B09B8W5FW7.html"
     },
     "home": {
-      "asin": "B002MPPTB8",
-      "title": "Hawkins Futura Hard Anodised Pressure Cooker 3 Litre with Induction Base",
-      "effective_price": 2499,
-      "discount_pct": 25,
-      "deal_url": "https://bharatbazaro.com/deal/B002MPPTB8.html"
+      "asin": "B08HN6PCDJ",
+      "title": "Philips Digital Air Fryer HD9252/90 (4.1 Litre, 1400W Rapid Air Technology)",
+      "effective_price": 6999,
+      "discount_pct": 42,
+      "deal_url": "https://bharatbazaro.com/deal/B08HN6PCDJ.html"
     },
     "fashion": {
       "asin": "B000LAKYW8",
@@ -261,9 +260,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 213,
-    "loot_count": 46,
+    "total_deals": 155,
+    "loot_count": 21,
     "max_discount_pct": 89,
-    "total_savings_inr": 707215
+    "total_savings_inr": 424468
   }
 }

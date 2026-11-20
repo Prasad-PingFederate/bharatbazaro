@@ -88,8 +88,12 @@
     inspectorTitle: document.getElementById('inspectorTitle'),
     inspectorGraphImg: document.getElementById('inspectorGraphImg'),
     inspectorBuyBtn: document.getElementById('inspectorBuyBtn'),
+    inspectorCopyBtn: document.getElementById('inspectorCopyBtn'),
+    inspectorWhatsAppBtn: document.getElementById('inspectorWhatsAppBtn'),
     inspectorKeepaBtn: document.getElementById('inspectorKeepaBtn'),
     inspectorPhBtn: document.getElementById('inspectorPhBtn'),
+    btnToggleFilters: document.getElementById('btnToggleFilters'),
+    filtersDrawer: document.getElementById('filtersDrawer'),
     countDiwali: document.getElementById('countDiwali'),
     countDaily: document.getElementById('countDaily'),
     countUnder399: document.getElementById('countUnder399'),
@@ -427,7 +431,7 @@
     if (!state.allDeals) return;
     const freshDeals = state.allDeals.filter(d => (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
     const all = state.stats.fresh_deals_count !== undefined ? state.stats.fresh_deals_count : freshDeals.length;
-    const diwali = freshDeals.filter(d => d.is_diwali_steal || (d.savings_inr && d.savings_inr >= 1000)).length;
+    const priceDrops = freshDeals.filter(d => d.is_price_drop || d.is_diwali_steal || (d.savings_inr && d.savings_inr >= 1000)).length;
     const daily = freshDeals.filter(d => d.is_daily_essential || d.is_cookie_magnet || (d.category && (d.category.includes('Personal Care') || d.category.includes('Grocery') || d.category.includes('Beauty'))) || /dove|nivea|pears|cetaphil|minimalist|derma co|plum|l'oreal|tresemme|vaseline|lakme|beardo|colgate|dettol|savlon|listerine|whisper|surf excel|ariel|vim|comfort|harpic|lizol|presto|cadbury|ferrero|happilo|sampann|nescafe|davidoff/i.test(d.title || '')).length;
     const under399 = freshDeals.filter(d => (d.effective_price || d.list_price || 999999) <= 399).length;
     const loot = freshDeals.filter(d => d.is_loot).length;
@@ -437,7 +441,8 @@
     const watchlist = state.watchlist.size;
 
     if (el.countAll) el.countAll.textContent = all;
-    if (el.countDiwali) el.countDiwali.textContent = diwali;
+    if (el.countDiwali) el.countDiwali.textContent = priceDrops;
+    if (el.countDrops) el.countDrops.textContent = drops || priceDrops;
     if (el.countDaily) el.countDaily.textContent = daily;
     if (el.countUnder399) el.countUnder399.textContent = under399;
     if (el.countLoot) el.countLoot.textContent = loot;
@@ -479,10 +484,43 @@
     const q = (query || '').trim();
     state.filters.search = q;
 
+    // Reels / Short-form quick-number jump: e.g. #14 or #1 or 14
+    if (/^#(\d+)$/.test(q)) {
+      const reelsNum = parseInt(q.replace(/^#/, ''), 10);
+      const targetCard = document.getElementById(`deal-${reelsNum}`) || document.querySelector(`[data-reels-num="${reelsNum}"]`);
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetCard.classList.remove('deal-reels-highlight');
+        void targetCard.offsetWidth;
+        targetCard.classList.add('deal-reels-highlight');
+        setTimeout(() => {
+          targetCard.classList.remove('deal-reels-highlight');
+        }, 3600);
+        showToast(`📍 Highlighted Reel / Deal #${reelsNum}`);
+        return;
+      }
+    }
+
     const extractedAsin = extractAsinFromQuery(q);
     if (extractedAsin) {
       showAsinInspector(extractedAsin);
     } else {
+      // Check for shortened mobile amzn.in / amzn.to link
+      if (/(?:amzn\.in|amzn\.to)\/[a-zA-Z0-9_\/-]+/i.test(q)) {
+        const matchUrl = q.match(/https?:\/\/(?:amzn\.in|amzn\.to)\/[a-zA-Z0-9_\/-]+/i) || [q];
+        const targetUrl = matchUrl[0];
+        fetch(`/api/resolve-url?url=${encodeURIComponent(targetUrl)}`)
+          .then(res => res.json())
+          .then(data => {
+            if (data && data.asin) {
+              showAsinInspector(data.asin);
+            } else if (data && data.resolved_url) {
+              const resAsin = extractAsinFromQuery(data.resolved_url);
+              if (resAsin) showAsinInspector(resAsin);
+            }
+          })
+          .catch(() => {});
+      }
       hideAsinInspector();
     }
 
@@ -506,13 +544,34 @@
 
     if (el.inspectorAsin) el.inspectorAsin.textContent = asin;
     if (el.inspectorTitle) {
-      el.inspectorTitle.textContent = deal ? deal.title : `Analyzing Amazon India ASIN: ${asin}`;
+      el.inspectorTitle.textContent = deal ? deal.title : `Amazon India Verified Product: ${asin}`;
     }
 
     updateInspectorChart(asin, state.activeInspectorRange);
 
-    const partnerUrl = getAffiliateUrlWithSubtag(deal || asin, 'bb-modal');
-    if (el.inspectorBuyBtn) el.inspectorBuyBtn.href = partnerUrl;
+    const partnerUrl = `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1&ascsubtag=link_analyzer`;
+    if (el.inspectorBuyBtn) {
+      el.inspectorBuyBtn.href = partnerUrl;
+      el.inspectorBuyBtn.textContent = '🛒 Buy on Amazon with Deal Tracking ↗';
+    }
+    if (el.inspectorCopyBtn) {
+      el.inspectorCopyBtn.onclick = () => {
+        navigator.clipboard.writeText(partnerUrl).then(() => {
+          const prev = el.inspectorCopyBtn.textContent;
+          el.inspectorCopyBtn.textContent = '✅ Copied!';
+          showToast('Tracked affiliate link copied to clipboard!');
+          setTimeout(() => {
+            el.inspectorCopyBtn.textContent = prev;
+          }, 2000);
+        });
+      };
+    }
+    if (el.inspectorWhatsAppBtn) {
+      el.inspectorWhatsAppBtn.onclick = () => {
+        const text = `Check out this verified Amazon deal: ${partnerUrl}`;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+      };
+    }
     if (el.inspectorKeepaBtn) el.inspectorKeepaBtn.href = `https://keepa.com/#!product/10-${asin}`;
     if (el.inspectorPhBtn) el.inspectorPhBtn.href = `https://keepa.com/#!product/10-${asin}`;
 
@@ -533,21 +592,62 @@
   }
 
   // ── 9. FILTERING & SORTING ENGINE ──────────────────────────────────────────
+  const PHONE_ACC_ALLOW = /\b(case|cover|back\s*cover|tempered|glass|screen\s*protector|charger|adapter|cable|cord|power\s*bank|holder|mount|stand|dock|earphone|headphone|buds|airpods)\b/i;
+  const SMARTPHONE_BLOCK = /\b(smartphone|5g\s*phone|mobile\s*phone|iphone\s*(1[1-9]|[6789]|se|pro|max|plus|air)|galaxy\s*(s[1-9]|z|a[0-9]|m[0-9]|f[0-9]|ultra|fe)|redmi\s*note|realme|poco|iqoo|oneplus\s*(1[0-9]|[6-9]|nord|ce)|pixel\s*[0-9]|vivo\s*[vtyx]|oppo\s*(reno|f|a))\b/i;
+  const LAPTOP_BLOCK = /\b(laptop|macbook|notebook|chromebook|thinkpad|ideapad|vivobook|zenbook|pavilion|inspiron|omen|tuf\s*gaming|legion)\b/i;
+
+  function isLowRoiOrZeroCommission(d) {
+    const title = (d.title || '').toLowerCase();
+    const cat = (d.category || '').toLowerCase();
+    const price = d.effective_price || d.list_price || 0;
+
+    // Laptops > ₹35,000 (0.2%-1% commission cap, terrible ROI)
+    if (price > 35000 && (cat.includes('laptop') || cat.includes('computing') || LAPTOP_BLOCK.test(title))) {
+      return true;
+    }
+
+    // 0% commission smartphones
+    if (!PHONE_ACC_ALLOW.test(title)) {
+      if (cat === 'mobile' || cat === 'mobiles' || cat === 'smartphones' || cat.includes('mobiles & accessories')) {
+        return true;
+      }
+      if (SMARTPHONE_BLOCK.test(title)) {
+        return true;
+      }
+    }
+
+    // Quarantine static fallback/seed items where hotness == 180 and low_price == current_price unless verified live within 12h
+    const hotness = d.hotness || d.score;
+    if (hotness === 180 && d.historical_min && price === d.historical_min) {
+      const verifiedSec = d.last_verified_at_epoch || d.updated_at || 0;
+      if (verifiedSec && (Date.now() / 1000 - verifiedSec) > 43200) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   function getFilteredDeals() {
     let result = [...state.allDeals];
 
-    // 0. Filter non-positive deals
+    // 0. Filter non-positive deals and prioritize 5%-9% categories on homepage
     result = result.filter(d => (d.effective_price || d.list_price || 0) > 0);
+    if (!state.filters.category || state.filters.category === 'all') {
+      result = result.filter(d => !isLowRoiOrZeroCommission(d));
+    }
 
     // 1. Hide expired
     if (state.filters.hideExpired) {
       result = result.filter(d => !d.expired && !d.price_spiked);
     }
 
-    // 2. Tab Filter (Diwali Steals & Smart Buckets)
+    // 2. Tab Filter (Drops, Loots, Smart Buckets)
     switch (state.filters.tab) {
       case 'diwali':
-        result = result.filter(d => d.is_diwali_steal || (d.savings_inr && d.savings_inr >= 1000));
+      case 'drops':
+      case 'price_drops':
+        result = result.filter(d => d.is_price_drop || d.is_diwali_steal || (d.savings_inr && d.savings_inr >= 1000) || d.price_context === 'all_time_low' || d.price_context === 'real_drop' || d.is_further_drop);
         break;
       case 'daily_essentials':
         result = result.filter(d => d.is_daily_essential || d.is_cookie_magnet || (d.category && (d.category.includes('Personal Care') || d.category.includes('Grocery') || d.category.includes('Beauty'))) || /dove|nivea|pears|cetaphil|minimalist|derma co|plum|l'oreal|tresemme|vaseline|lakme|beardo|colgate|dettol|savlon|listerine|whisper|surf excel|ariel|vim|comfort|harpic|lizol|presto|cadbury|ferrero|happilo|sampann|nescafe|davidoff/i.test(d.title || ''));
@@ -971,6 +1071,9 @@
 
     // Badges
     const badgesHtml = [];
+    const reelsNum = cardIndex + 1;
+    badgesHtml.push(`<span class="deal-reels-num" data-reels-num="${reelsNum}" title="Reel #${reelsNum}">#${reelsNum}</span>`);
+
     if (state.keywordAlerts && state.keywordAlerts.length > 0) {
       const textToMatch = `${d.title || ''} ${d.brand || ''} ${d.category || ''}`.toLowerCase();
       const matchedKw = state.keywordAlerts.some(kw => kw && textToMatch.includes(kw.toLowerCase().trim()));
@@ -981,8 +1084,8 @@
     if (d.is_new || (d.age_hours !== undefined && d.age_hours <= 2.0)) {
       badgesHtml.push('<span class="badge-tag badge-new">⚡ NEW</span>');
     }
-    if (d.is_diwali_steal) {
-      badgesHtml.push('<span class="badge-tag badge-diwali">🔥 DIWALI STEAL</span>');
+    if (d.is_price_drop || d.is_diwali_steal || (d.savings_inr && d.savings_inr >= 1000 && discPct >= 25)) {
+      badgesHtml.push('<span class="badge-tag badge-drop">⚡ TODAY\'S PRICE DROP</span>');
     }
     if (d.is_cookie_magnet) {
       badgesHtml.push('<span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span>');
@@ -1128,7 +1231,10 @@
       </div>
     `;
 
-    const timeAgoStr = d.updated_at ? getTimeAgo(d.updated_at) : 'Just now';
+    const verifiedSec = d.last_verified_at_epoch || d.updated_at || 0;
+    const timeAgoStr = verifiedSec ? getTimeAgo(verifiedSec) : 'Verified recently';
+    const isStalePrice = (d.age_hours !== undefined && d.age_hours > 6.0) || (verifiedSec && (Date.now() / 1000 - verifiedSec) > 21600);
+    const stalePriceHtml = isStalePrice ? `<div class="price-stale-note">Last checked price — Verify Live Price on Amazon ↗</div>` : '';
 
     // Core Web Vitals Image Tag
     const imgAttr = (cardIndex < 3)
@@ -1137,7 +1243,7 @@
     const svgPlaceholder = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==";
 
     return `
-      <article class="deal-card ${d.is_loot ? 'is-loot' : ''}" data-asin="${escapeHtml(d.asin)}">
+      <article class="deal-card ${d.is_loot ? 'is-loot' : ''}" data-asin="${escapeHtml(d.asin)}" id="deal-${reelsNum}" data-reels-num="${reelsNum}">
         <div class="card-top">
           <div class="card-badges">
             ${badgesHtml.join('')}
@@ -1184,6 +1290,7 @@
             </a>
             ${d.savings_inr > 0 ? `<div class="savings-line">You save ₹${formatNumber(d.savings_inr)}</div>` : ''}
             ${cardPriceHtml}
+            ${stalePriceHtml}
           </div>
 
           ${buyhatkeBarHtml}
@@ -1226,7 +1333,7 @@
           ` : ''}
           <div class="card-footer">
           <a href="${escapeHtml(affBtnUrl)}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : ((buyConf >= 80 || d.is_diwali_steal || effPrice >= 2000) ? '🛒 Grab Diwali Deal on Amazon ↗' : '🛒 Grab Deal on Amazon ↗')}</span>
+            <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : ((buyConf >= 80 || d.is_price_drop || d.is_diwali_steal || effPrice >= 2000) ? '🛒 Check Live Price on Amazon ↗' : '🛒 Check Live Price on Amazon ↗')}</span>
           </a>
           <button class="btn-card-share" data-asin="${escapeHtml(d.asin)}" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>
@@ -1637,6 +1744,24 @@
     // Close Inspector
     if (el.closeInspectorBtn) {
       el.closeInspectorBtn.addEventListener('click', hideAsinInspector);
+    }
+
+    // Toggle Mobile Filters Drawer
+    if (el.btnToggleFilters && el.filtersDrawer) {
+      el.btnToggleFilters.addEventListener('click', () => {
+        const isCollapsed = el.filtersDrawer.classList.contains('collapsed');
+        if (isCollapsed) {
+          el.filtersDrawer.classList.remove('collapsed');
+          el.filtersDrawer.classList.add('expanded');
+          el.btnToggleFilters.classList.add('is-expanded');
+          el.btnToggleFilters.setAttribute('aria-expanded', 'true');
+        } else {
+          el.filtersDrawer.classList.remove('expanded');
+          el.filtersDrawer.classList.add('collapsed');
+          el.btnToggleFilters.classList.remove('is-expanded');
+          el.btnToggleFilters.setAttribute('aria-expanded', 'false');
+        }
+      });
     }
 
     // Filter Tabs
@@ -2090,8 +2215,9 @@
   }
 
   function getTimeAgo(epochSec) {
+    if (!epochSec) return 'Verified recently';
     const elapsed = Math.floor(Date.now() / 1000) - epochSec;
-    if (elapsed < 60) return 'Just now';
+    if (elapsed < 300) return 'Just now';
     if (elapsed < 3600) return `${Math.floor(elapsed / 60)}m ago`;
     if (elapsed < 86400) return `${Math.floor(elapsed / 3600)}h ago`;
     return `${Math.floor(elapsed / 86400)}d ago`;

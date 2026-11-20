@@ -99,8 +99,8 @@ def sync_telegram_deals_from_dealdash(root_dir: Optional[Path] = None, timeout: 
         root_dir = Path(__file__).resolve().parent.parent
 
     urls = [
-        "https://raw.githubusercontent.com/Prasad-PingFederate/DealDash_ai_Bot/main/data/deals.db",
         "https://raw.githubusercontent.com/Prasad-PingFederate/DealDash_ai_Bot/main/data/state.sqlite3",
+        "https://raw.githubusercontent.com/Prasad-PingFederate/DealDash_ai_Bot/main/data/dealbot.sqlite3",
     ]
     raw_bytes = None
     for url in urls:
@@ -256,6 +256,47 @@ def sync_telegram_deals_from_dealdash(root_dir: Optional[Path] = None, timeout: 
                 pass
 
     return synced_deals_count
+
+
+def sync_live_deals_json_from_dealdash(output_dir: Path, timeout: float = 6.0) -> int:
+    """
+    Download latest verified deals from DealDash_ai_Bot live_deals.json on GitHub,
+    merging fresh items directly into data/live_deals.json.
+    """
+    import urllib.request
+    url = "https://raw.githubusercontent.com/Prasad-PingFederate/DealDash_ai_Bot/main/data/live_deals.json"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "BharatBazaro-Sync/1.0"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            if resp.status == 200:
+                raw_text = resp.read().decode("utf-8")
+                remote_deals = json.loads(raw_text)
+                if isinstance(remote_deals, list) and remote_deals:
+                    local_deals_path = output_dir / "live_deals.json"
+                    existing_deals = []
+                    if local_deals_path.exists():
+                        try:
+                            with open(local_deals_path, "r", encoding="utf-8") as f:
+                                existing_deals = json.load(f)
+                        except Exception:
+                            pass
+                    by_asin = {d["asin"]: d for d in existing_deals if isinstance(d, dict) and "asin" in d}
+                    merged_count = 0
+                    for rd in remote_deals:
+                        asin = rd.get("asin")
+                        if not asin:
+                            continue
+                        if asin not in by_asin or (rd.get("updated_at") or 0) >= (by_asin[asin].get("updated_at") or 0):
+                            by_asin[asin] = rd
+                            merged_count += 1
+                    merged_list = list(by_asin.values())
+                    with open(local_deals_path, "w", encoding="utf-8") as f:
+                        json.dump(merged_list, f, indent=2, ensure_ascii=False)
+                    logger.info(f"Synced {merged_count} verified deals from DealDash live_deals.json")
+                    return merged_count
+    except Exception as e:
+        logger.debug(f"Could not sync live_deals.json from DealDash: {e}")
+    return 0
 
 
 def extract_asin(deal_or_url: Union[str, Deal]) -> Optional[str]:
@@ -876,6 +917,7 @@ def export_web_feed(
     root_dir = Path(__file__).resolve().parent.parent
     try:
         sync_telegram_deals_from_dealdash(root_dir)
+        sync_live_deals_json_from_dealdash(root_dir / "data")
     except Exception as e:
         logger.warning(f"sync_telegram_deals_from_dealdash error: {e}")
 
@@ -884,6 +926,11 @@ def export_web_feed(
     else:
         output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    try:
+        sync_live_deals_json_from_dealdash(output_dir)
+    except Exception as e:
+        logger.warning(f"sync_live_deals_json_from_dealdash error: {e}")
 
     partner_tag = (
         os.getenv("AMAZON_AFFILIATE_TAG")
@@ -1097,16 +1144,18 @@ def export_web_feed(
     # Guard: Strictly filter out any anomalies with zero or missing price
     deal_list = [d for d in deals_by_asin.values() if (d.get("effective_price") or 0) > 0]
 
+    # Filter out 0% commission smartphones and capped laptops > 35,000 so feeds focus on high-commission (5%-9%) items
+    from dealbot.ssg_engine import is_low_roi_or_zero_commission
+    deal_list = [d for d in deal_list if not is_low_roi_or_zero_commission(d)]
+
     # Category Balancing (Requirement 1):
-    # Ensure every target category maintains at least 15 active verified deals if available
+    # Ensure every target high-commission category maintains at least 15 active verified deals if available
     TARGET_CATEGORIES = [
-        "Mobiles & Accessories",
-        "Electronics & Audio",
-        "Laptops & Computing",
-        "Audio & Headphones",
         "Home & Kitchen",
-        "Fashion & Footwear",
         "Personal Care & Grocery",
+        "Fashion & Footwear",
+        "Audio & Headphones",
+        "Electronics & Audio",
     ]
     balanced_deals = []
     selected_asins = set()
@@ -1214,6 +1263,7 @@ def export_web_data(store=None, **kwargs):
     root_dir = Path(__file__).resolve().parent.parent
     try:
         sync_telegram_deals_from_dealdash(root_dir)
+        sync_live_deals_json_from_dealdash(root_dir / "data")
     except Exception as e:
         logger.warning(f"sync_telegram_deals_from_dealdash error: {e}")
 

@@ -19,3 +19,4 @@ credentials.json
 *.key
 *.local_test_bak
 mailmap.txt
+scratch_*.py

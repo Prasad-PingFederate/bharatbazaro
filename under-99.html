@@ -954,30 +954,6 @@
         <p class="hero-subtitle">
           Verified daily essentials, mobile accessories, kitchen loots, and budget deals under ₹99 updated live 24/7.
         </p>
-
-        <!-- Stats Bar -->
-        <div class="stats-grid" id="statsGrid">
-          <div class="stat-card" id="statCardLiveDeals" role="button" tabindex="0" title="View all verified live deals">
-            <span class="stat-val" id="statLiveDeals">213</span>
-            <span class="stat-label">Verified Live Deals</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-          <div class="stat-card loot-stat" id="statCardLoot" role="button" tabindex="0" title="Filter to Loot Alerts">
-            <span class="stat-val" id="statLootCount">46</span>
-            <span class="stat-label">🚨 Loot Alerts</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-          <div class="stat-card" id="statCardMaxDiscount" role="button" tabindex="0" title="Sort by highest discount percentage">
-            <span class="stat-val" id="statMaxDiscount">89%</span>
-            <span class="stat-label">Max Discount</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-          <div class="stat-card savings-stat" id="statCardSavings" role="button" tabindex="0" title="Sort by biggest rupee savings">
-            <span class="stat-val" id="statTotalSavings">₹7.07L</span>
-            <span class="stat-label">Total Savings Live</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -993,7 +969,7 @@
       <a href="/under-499.html">Under ₹499</a>
     </nav>
 
-    <!-- Search & ASIN Analyzer Section -->
+    <!-- Unified Search & Instant Link/ASIN Analyzer Section -->
     <section class="search-section">
       <div class="search-box-wrapper">
         <div class="search-icon">🔍</div>
@@ -1001,9 +977,10 @@
           type="search" 
           id="searchInput" 
           class="search-input" 
-          placeholder="Search by title, brand (Sony, Philips, boAt), or paste ANY Amazon.in URL / ASIN..." 
+          placeholder="Paste Any Amazon Link or Search Deals (e.g. #14, boAt, Sony)..." 
           autocomplete="off"
           spellcheck="false"
+          aria-label="Paste Any Amazon Link or Search Deals"
         >
         <span class="search-shortcut" title="Press / or Ctrl+K to search">/</span>
         <button id="clearSearchBtn" class="clear-search-btn" aria-label="Clear search">✕</button>
@@ -1012,7 +989,7 @@
       <!-- Instant ASIN Inspector Card (Populated when user pastes any Amazon link/ASIN) -->
       <div id="asinInspectorCard" class="asin-inspector-card hidden">
         <div class="inspector-header">
-          <div class="inspector-badge">⚡ INSTANT ASIN ANALYZER</div>
+          <div class="inspector-badge">⚡ INSTANT AMAZON DEAL TRACKER</div>
           <button id="closeInspectorBtn" class="btn-close-inspector" aria-label="Close Inspector">✕</button>
         </div>
         <div class="inspector-body">
@@ -1022,13 +999,16 @@
             <p class="inspector-desc">Keepa price history chart and verified direct affiliate purchasing link generated on the fly:</p>
             <div class="inspector-actions">
               <a id="inspectorBuyBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                🛒 Buy on Amazon.in (Best Price) ↗
+                🛒 Buy on Amazon with Deal Tracking ↗
               </a>
-              <a id="inspectorKeepaBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                📈 Open on Keepa.com ↗
-              </a>
-              <a id="inspectorPhBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                📊 Keepa Interactive ↗
+              <button id="inspectorCopyBtn" type="button" class="btn btn-secondary">
+                📋 Copy Tracked Affiliate Link
+              </button>
+              <button id="inspectorWhatsAppBtn" type="button" class="btn btn-whatsapp" style="background:#25d366;color:#fff;font-weight:700;">
+                💬 Share on WhatsApp
+              </button>
+              <a id="inspectorKeepaBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                📈 Price History Chart ↗
               </a>
             </div>
           </div>
@@ -1045,141 +1025,168 @@
       </div>
     </section>
 
-    <!-- Card Discount Mode Selector (Amazon Pay 5% Extra Off) -->
-    <section class="card-discount-section">
-      <div class="card-discount-toggle-wrap">
-        <span class="card-discount-label">💳 Card Offer:</span>
-        <div class="card-discount-buttons">
-          <button class="card-mode-btn active" id="btnPriceModeStd" data-mode="standard">Standard Price</button>
-          <button class="card-mode-btn" id="btnPriceModeCard" data-mode="card">
-            <span>💳 +Amazon Pay ICICI (Extra 5% Off)</span>
-            <span class="discount-pill-tag">5% Flat Cashback</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Filter Tabs (Smart Deals Buckets) -->
-    <section class="filter-tabs-section">
-      <div class="filter-tabs-scroll">
-        <button class="filter-tab active" data-tab="all">
-          <span>🔥 All Live Deals</span>
-          <span class="tab-count" id="countAll">235</span>
-        </button>
-        <button class="filter-tab daily-tab" data-tab="daily_essentials">
-          <span>🧴 Daily Essentials &amp; Beauty Steals</span>
-          <span class="tab-count" id="countDaily">0</span>
-        </button>
-        <button class="filter-tab magnet-tab" data-tab="under_399">
-          <span>⚡ Under ₹399 Magnet Deals</span>
-          <span class="tab-count" id="countUnder399">0</span>
-        </button>
-        <button class="filter-tab diwali-tab" data-tab="diwali">
-          <span>🔥 Diwali Steals</span>
-          <span class="tab-count" id="countDiwali">0</span>
-        </button>
-
-        <button class="filter-tab loot-tab" data-tab="loot">
-          <span>🚨 Loot Alerts</span>
-          <span class="tab-count" id="countLoot">46</span>
-        </button>
-        <button class="filter-tab drop-tab" data-tab="drops">
-          <span>📉 All-Time Lows</span>
-          <span class="tab-count" id="countDrops">55</span>
-        </button>
-        <button class="filter-tab coupon-tab" data-tab="coupons">
-          <span>🎟️ Hidden Coupons</span>
-          <span class="tab-count" id="countCoupons">6</span>
-        </button>
-        <button class="filter-tab brand-tab" data-tab="tier1">
-          <span>🏆 Tier-1 Brands</span>
-          <span class="tab-count" id="countTier1">132</span>
-        </button>
-        <button class="filter-tab watchlist-tab" data-tab="watchlist">
-          <span>❤️ Saved Watchlist</span>
-          <span class="tab-count" id="countWatchlist">0</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Quick Price Store Buckets -->
-    <section class="price-buckets-section">
-      <div class="price-buckets-scroll">
-        <span class="bucket-label">Price Stores:</span>
-        <button class="price-pill" data-price="all">All Prices</button>
-        <button class="price-pill active" data-price="99">🪙 ₹99 Store</button>
-        <button class="price-pill" data-price="299">Under ₹299</button>
-        <button class="price-pill" data-price="under-399">⚡ Under ₹399 Magnet Deals</button>
-        <button class="price-pill" data-price="499">⚡ Under ₹499</button>
-        <button class="price-pill" data-price="999">Under ₹999</button>
-        <button class="price-pill" data-price="2499">Under ₹2,499</button>
-        <button class="price-pill" data-price="electronics">💎 Top Electronics</button>
-        <button class="price-pill" data-price="premium">💎 Premium (&gt;₹2,500)</button>
-      </div>
-    </section>
-
-    <!-- Secondary Controls: Categories & Sorting Toolbar -->
-    <section class="toolbar-section">
+    <!-- 1 Category Chip Row (Immediately Visible Above The Fold on Mobile) -->
+    <section class="toolbar-section toolbar-primary">
       <div class="category-pills" id="categoryPills">
         <button class="cat-pill active" data-category="all">All Categories</button>
-        <button class="cat-pill" data-category="Mobiles & Accessories">📱 Mobiles</button>
-        <button class="cat-pill" data-category="Electronics & Audio">⚡ Electronics</button>
-        <button class="cat-pill" data-category="Laptops & Computing">💻 Laptops</button>
-        <button class="cat-pill" data-category="Audio & Headphones">🎧 Audio</button>
         <button class="cat-pill" data-category="Home & Kitchen">🏠 Home & Kitchen</button>
-        <button class="cat-pill" data-category="Fashion & Footwear">👕 Fashion</button>
         <button class="cat-pill" data-category="Personal Care & Grocery">🧴 Beauty &amp; Essentials</button>
+        <button class="cat-pill" data-category="Fashion & Footwear">👕 Fashion</button>
+        <button class="cat-pill" data-category="Electronics & Audio">⚡ Electronics</button>
+        <button class="cat-pill" data-category="Audio & Headphones">🎧 Audio</button>
+      </div>
+      <button type="button" class="btn-toggle-filters" id="btnToggleFilters" aria-expanded="false" aria-controls="filtersDrawer">
+        <span>⚙️ Filters & Price Stores</span>
+        <span class="toggle-indicator">▾</span>
+      </button>
+    </section>
+
+    <!-- Collapsible Secondary Clutter Drawer (Hidden by default on mobile, always open on desktop) -->
+    <div id="filtersDrawer" class="filters-drawer collapsed">
+      <!-- Stats Bar -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card" id="statCardLiveDeals" role="button" tabindex="0" title="View all verified live deals">
+          <span class="stat-val" id="statLiveDeals">3</span>
+          <span class="stat-label">Verified Live Deals</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
+        <div class="stat-card loot-stat" id="statCardLoot" role="button" tabindex="0" title="Filter to Loot Alerts">
+          <span class="stat-val" id="statLootCount">0</span>
+          <span class="stat-label">🚨 Loot Alerts</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
+        <div class="stat-card" id="statCardMaxDiscount" role="button" tabindex="0" title="Sort by highest discount percentage">
+          <span class="stat-val" id="statMaxDiscount">40%</span>
+          <span class="stat-label">Max Discount</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
+        <div class="stat-card savings-stat" id="statCardSavings" role="button" tabindex="0" title="Sort by biggest rupee savings">
+          <span class="stat-val" id="statTotalSavings">₹0</span>
+          <span class="stat-label">Total Savings Live</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
       </div>
 
-      <div class="toolbar-controls">
-        <label class="hide-expired-toggle">
-          <input type="checkbox" id="hideExpiredCheck" checked>
-          <span>Hide Expired / Spiked</span>
-        </label>
-
-        <div class="sort-wrapper">
-          <span class="sort-icon">⇅</span>
-          <select id="sortSelect" class="sort-select" aria-label="Sort Deals">
-            <option value="score">🎯 Best AI Value Score</option>
-            <option value="newest">⏱️ Newest Deals First</option>
-            <option value="discount">📉 Highest Discount %</option>
-            <option value="price_asc">💰 Price: Low to High</option>
-            <option value="savings">💸 Biggest Rupee Savings (₹)</option>
-            <option value="rating">⭐ Highest Customer Rating</option>
-          </select>
-        </div>
-
-        <div class="view-mode-toggle" id="viewModeToggle" role="group" aria-label="View Layout">
-          <button type="button" class="btn-view-mode active" id="btnViewGrid" title="Grid View">⊞ Grid</button>
-          <button type="button" class="btn-view-mode" id="btnViewCompact" title="Compact List View">☰ Compact</button>
-        </div>
-
-        <div class="keyword-alerts-wrapper">
-          <button type="button" class="btn-keyword-alerts" id="btnKeywordAlerts" title="Custom Keyword Alerts">
-            <span>🔔 Alerts (<span id="keywordAlertsCount">0</span>)</span>
-          </button>
-          <div class="keyword-alerts-popover hidden" id="keywordAlertsPopover">
-            <div class="keyword-alerts-header">
-              <span>🔔 Custom Keyword Alerts</span>
-              <button type="button" class="keyword-popover-close" id="keywordAlertsClose">&times;</button>
-            </div>
-            <div class="keyword-alerts-body">
-              <p class="keyword-alerts-desc">Get highlighted deal cards and instant alerts whenever matching deals drop:</p>
-              <div class="keyword-input-row">
-                <input type="text" id="keywordAlertInput" placeholder="e.g. Sony, Earbuds, Air Fryer..." maxlength="30">
-                <button type="button" id="keywordAlertAddBtn" class="btn btn-primary">Add</button>
-              </div>
-              <div class="keyword-tags-container" id="keywordTagsContainer"></div>
-            </div>
+      <!-- Card Discount Mode Selector (Amazon Pay 5% Extra Off) -->
+      <section class="card-discount-section">
+        <div class="card-discount-toggle-wrap">
+          <span class="card-discount-label">💳 Card Offer:</span>
+          <div class="card-discount-buttons">
+            <button class="card-mode-btn active" id="btnPriceModeStd" data-mode="standard">Standard Price</button>
+            <button class="card-mode-btn" id="btnPriceModeCard" data-mode="card">
+              <span>💳 +Amazon Pay ICICI (Extra 5% Off)</span>
+              <span class="discount-pill-tag">5% Flat Cashback</span>
+            </button>
           </div>
         </div>
+      </section>
 
-        <button id="refreshBtn" class="btn-refresh" title="Refresh Live Deals">
-          <span class="refresh-icon">🔄</span>
-          <span class="refresh-text">Refresh</span>
-        </button>
-      </div>
-    </section>
+      <!-- Filter Tabs (Smart Deals Buckets) -->
+      <section class="filter-tabs-section">
+        <div class="filter-tabs-scroll">
+          <button class="filter-tab active" data-tab="all">
+            <span>🔥 All Live Deals</span>
+            <span class="tab-count" id="countAll">3</span>
+          </button>
+          <button class="filter-tab daily-tab" data-tab="daily_essentials">
+            <span>🧴 Daily Essentials &amp; Beauty Steals</span>
+            <span class="tab-count" id="countDaily">0</span>
+          </button>
+          <button class="filter-tab magnet-tab" data-tab="under_399">
+            <span>⚡ Under ₹399 Magnet Deals</span>
+            <span class="tab-count" id="countUnder399">0</span>
+          </button>
+          <button class="filter-tab drop-tab" data-tab="drops">
+            <span>⚡ Today's Price Drops</span>
+            <span class="tab-count" id="countDrops">0</span>
+          </button>
+          <button class="filter-tab loot-tab" data-tab="loot">
+            <span>🚨 Loot Alerts</span>
+            <span class="tab-count" id="countLoot">0</span>
+          </button>
+          <button class="filter-tab coupon-tab" data-tab="coupons">
+            <span>🎟️ Hidden Coupons</span>
+            <span class="tab-count" id="countCoupons">3</span>
+          </button>
+          <button class="filter-tab brand-tab" data-tab="tier1">
+            <span>🏆 Tier-1 Brands</span>
+            <span class="tab-count" id="countTier1">3</span>
+          </button>
+          <button class="filter-tab watchlist-tab" data-tab="watchlist">
+            <span>❤️ Saved Watchlist</span>
+            <span class="tab-count" id="countWatchlist">0</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Quick Price Store Buckets -->
+      <section class="price-buckets-section">
+        <div class="price-buckets-scroll">
+          <span class="bucket-label">Price Stores:</span>
+          <button class="price-pill" data-price="all">All Prices</button>
+          <button class="price-pill active" data-price="99">🪙 ₹99 Store</button>
+          <button class="price-pill" data-price="299">Under ₹299</button>
+          <button class="price-pill" data-price="under-399">⚡ Under ₹399 Magnet Deals</button>
+          <button class="price-pill" data-price="499">⚡ Under ₹499</button>
+          <button class="price-pill" data-price="999">Under ₹999</button>
+          <button class="price-pill" data-price="2499">Under ₹2,499</button>
+          <button class="price-pill" data-price="electronics">💎 Top Electronics</button>
+          <button class="price-pill" data-price="premium">💎 Premium (&gt;₹2,500)</button>
+        </div>
+      </section>
+
+      <!-- Secondary Controls & Keyword Alerts -->
+      <section class="toolbar-section toolbar-secondary">
+        <div class="toolbar-controls">
+          <label class="hide-expired-toggle">
+            <input type="checkbox" id="hideExpiredCheck" checked>
+            <span>Hide Expired / Spiked</span>
+          </label>
+
+          <div class="sort-wrapper">
+            <span class="sort-icon">⇅</span>
+            <select id="sortSelect" class="sort-select" aria-label="Sort Deals">
+              <option value="score">🎯 Best AI Value Score</option>
+              <option value="newest">⏱️ Newest Deals First</option>
+              <option value="discount">📉 Highest Discount %</option>
+              <option value="price_asc">💰 Price: Low to High</option>
+              <option value="savings">💸 Biggest Rupee Savings (₹)</option>
+              <option value="rating">⭐ Highest Customer Rating</option>
+            </select>
+          </div>
+
+          <div class="view-mode-toggle" id="viewModeToggle" role="group" aria-label="View Layout">
+            <button type="button" class="btn-view-mode active" id="btnViewGrid" title="Grid View">⊞ Grid</button>
+            <button type="button" class="btn-view-mode" id="btnViewCompact" title="Compact List View">☰ Compact</button>
+          </div>
+
+          <div class="keyword-alerts-wrapper">
+            <button type="button" class="btn-keyword-alerts" id="btnKeywordAlerts" title="Custom Keyword Alerts">
+              <span>🔔 Alerts (<span id="keywordAlertsCount">0</span>)</span>
+            </button>
+            <div class="keyword-alerts-popover hidden" id="keywordAlertsPopover">
+              <div class="keyword-alerts-header">
+                <span>🔔 Custom Keyword Alerts</span>
+                <button type="button" class="keyword-popover-close" id="keywordAlertsClose">&times;</button>
+              </div>
+              <div class="keyword-alerts-body">
+                <p class="keyword-alerts-desc">Get highlighted deal cards and instant alerts whenever matching deals drop:</p>
+                <div class="keyword-input-row">
+                  <input type="text" id="keywordAlertInput" placeholder="e.g. Sony, Earbuds, Air Fryer..." maxlength="30">
+                  <button type="button" id="keywordAlertAddBtn" class="btn btn-primary">Add</button>
+                </div>
+                <div class="keyword-tags-container" id="keywordTagsContainer"></div>
+              </div>
+            </div>
+          </div>
+
+          <button id="refreshBtn" class="btn-refresh" title="Refresh Live Deals">
+            <span class="refresh-icon">🔄</span>
+            <span class="refresh-text">Refresh</span>
+          </button>
+        </div>
+      </section>
+    </div>
 
     <!-- Main Deals Feed Section Title & Live Timestamp Banner -->
     <div class="feed-section-header">
@@ -1197,7 +1204,7 @@
       </div>
       <div class="feed-header-right">
         <div class="results-counter">
-          Showing <span id="visibleCount" class="font-bold">6</span> verified deals
+          Showing <span id="visibleCount" class="font-bold">3</span> verified deals
           <span id="activeFilterBadge" class="active-filter-badge hidden"></span>
         </div>
         <div class="sync-time" id="syncTime">Auto-refreshing in 60s</div>
@@ -1215,25 +1222,6 @@
     </div>
 
     <!-- Wirecutter-Style Today's Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
-    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
     <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
     <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
     <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
@@ -1517,391 +1505,15 @@
 
     <!-- Deals Grid Container -->
     <div id="dealsGrid" class="deals-grid" data-anchor="deals-grid">
-      <article class="deal-card " data-asin="B0H4GBJVW7">
+      <article class="deal-card " data-asin="B000000001" id="deal-1" data-reels-num="1">
         <div class="card-top">
           <div class="card-badges">
-            <span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
+            <span class="deal-reels-num" data-reels-num="1" title="Reel / Post #1">#1</span><span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
           </div>
           <div class="card-top-actions">
-            <button class="btn-hotness-degree" data-asin="B0H4GBJVW7" data-base="194" title="Upvote deal hotness">🔥 <span class="degree-count">194°</span></button>
-            <span class="time-ago">9m ago</span>
-            <button class="btn-watchlist" data-asin="B0H4GBJVW7" title="Save to Watchlist">
-              🤍
-            </button>
-          </div>
-        </div>
-
-        <div class="card-media">
-          <div class="card-image-wrap">
-            <a href="/a/B0H4GBJVW7" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
-              <img src="https://m.media-amazon.com/images/I/51hGFP2wQjL._SL1500_.jpg" alt="Enakshi Induction Pot Soup Stainless Steel Cooking Pot for Hotel Kitchen Restaurants 7.9L" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
-            </a>
-          </div>
-          <div class="card-meta-bar">
-            <span class="brand-chip">Enakshi</span>
-          </div>
-        </div>
-
-        <div class="card-content">
-          <a href="/a/B0H4GBJVW7" target="_blank" rel="noopener noreferrer" class="card-title" title="Enakshi Induction Pot Soup Stainless Steel Cooking Pot for Hotel Kitchen Restaurants 7.9L">
-            Enakshi Induction Pot Soup Stainless Steel Cooking Pot for Hotel Kitchen Restaurants 7.9L
-          </a>
-
-          <!-- Price Waterfall -->
-          <div class="price-waterfall-box">
-            <a href="/a/B0H4GBJVW7" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
-              <span class="effective-price">₹18</span>
-              <span class="original-mrp">₹120</span>
-              <span class="discount-badge">85% OFF</span>
-            </a>
-            <div class="savings-line">You save ₹102</div>
-          </div>
-
-          
-          <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
-            <div class="range-labels-row">
-              <span class="range-lbl range-low">Low: ₹18</span>
-              <span class="range-lbl range-now">Now: ₹18 ✅</span>
-              <span class="range-lbl range-high">MRP: ₹120</span>
-            </div>
-            <div class="range-track">
-              <div class="range-marker" style="left: 4%;" title="Now: ₹18 (4% of range)">●</div>
-            </div>
-          </div>
-          
-          
-          
-
-          <!-- Buy Confidence Meter -->
-          <div class="confidence-meter-box">
-            <div class="confidence-header">
-              <span class="confidence-label">
-                <span>🟢</span>
-                <span>Strong Price Drop</span>
-              </span>
-              <span class="confidence-pct">87% Confidence</span>
-            </div>
-            <div class="confidence-bar-bg">
-              <div class="confidence-bar-fill medium" style="width: 87%"></div>
-            </div>
-            
-          </div>
-
-          
-          <div class="grabon-trust-line">
-            <span class="trust-check">✓ Verified Live on Amazon</span>
-            <span class="trust-sep">•</span>
-            <span class="trust-reason">💡 <b>Why Buy:</b> Steep 85% verified drop</span>
-          </div>
-        </div>
-
-        <div class="card-footer">
-          <a href="/a/B0H4GBJVW7" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Diwali Deal on Amazon ↗</span>
-          </a>
-          <a href="https://t.me/DealDash_ai_Bot?start=track_home & kitch_16_enakshi-induction-pot-soup" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
-            <span>🔔 Track</span>
-          </a>
-          <button class="btn-card-share" data-asin="B0H4GBJVW7" title="Share Deal via WhatsApp / Copy Link">
-            <span>📤 Share</span>
-          </button>
-          <a href="/deal/B0H4GBJVW7.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
-            <span>📈 Chart</span>
-          </a>
-        </div>
-      </article>
-      <article class="deal-card " data-asin="B0FCS5BSGX">
-        <div class="card-top">
-          <div class="card-badges">
-            <span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
-          </div>
-          <div class="card-top-actions">
-            <button class="btn-hotness-degree" data-asin="B0FCS5BSGX" data-base="161" title="Upvote deal hotness">🔥 <span class="degree-count">161°</span></button>
-            <span class="time-ago">1d ago</span>
-            <button class="btn-watchlist" data-asin="B0FCS5BSGX" title="Save to Watchlist">
-              🤍
-            </button>
-          </div>
-        </div>
-
-        <div class="card-media">
-          <div class="card-image-wrap">
-            <a href="/a/B0FCS5BSGX" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
-              <img src="https://m.media-amazon.com/images/P/B0FCS5BSGX.jpg" alt="Patanjali UV Pro Advance Sun Defence Cream SPF 50 PA+++50g, Dry Touch, Non-Oily, Non-Sticky Sunscreen for All Skin Types, Ayurvedic Sunblock, Broad Spectrum UVA/UVB Protection Pack of 1" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
-            </a>
-          </div>
-          <div class="card-meta-bar">
-            <span class="brand-chip">Patanjali</span>
-          </div>
-        </div>
-
-        <div class="card-content">
-          <a href="/a/B0FCS5BSGX" target="_blank" rel="noopener noreferrer" class="card-title" title="Patanjali UV Pro Advance Sun Defence Cream SPF 50 PA+++50g, Dry Touch, Non-Oily, Non-Sticky Sunscreen for All Skin Types, Ayurvedic Sunblock, Broad Spectrum UVA/UVB Protection Pack of 1">
-            Patanjali UV Pro Advance Sun Defence Cream SPF 50 PA+++50g, Dry Touch, Non-Oily, Non-Sticky Sunscreen for All Skin Types, Ayurvedic Sunblock, Broad Spectrum UVA/UVB Protection Pack of 1
-          </a>
-
-          <!-- Price Waterfall -->
-          <div class="price-waterfall-box">
-            <a href="/a/B0FCS5BSGX" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
-              <span class="effective-price">₹75</span>
-              <span class="original-mrp">₹225</span>
-              <span class="discount-badge">36% OFF</span>
-            </a>
-            <div class="savings-line">You save ₹150</div>
-          </div>
-
-          
-          <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
-            <div class="range-labels-row">
-              <span class="range-lbl range-low">Low: ₹75</span>
-              <span class="range-lbl range-now">Now: ₹75 ✅</span>
-              <span class="range-lbl range-high">MRP: ₹225</span>
-            </div>
-            <div class="range-track">
-              <div class="range-marker" style="left: 4%;" title="Now: ₹75 (4% of range)">●</div>
-            </div>
-          </div>
-          
-          <div class="coupon-claim-banner clickable-coupon-pill" data-aff="/a/B0FCS5BSGX" data-promo="" title="Click to copy promo code and open Amazon deal">
-            <span class="coupon-tick-icon">☑️</span>
-            <span class="coupon-claim-text">Tick <b>"Apply 5% coupon"</b> on Amazon page </span>
-          </div>
-          
-          
-
-          <!-- Buy Confidence Meter -->
-          <div class="confidence-meter-box">
-            <div class="confidence-header">
-              <span class="confidence-label">
-                <span>🟢</span>
-                <span>Strong Price Drop</span>
-              </span>
-              <span class="confidence-pct">87% Confidence</span>
-            </div>
-            <div class="confidence-bar-bg">
-              <div class="confidence-bar-fill medium" style="width: 87%"></div>
-            </div>
-            
-          </div>
-
-          
-          <div class="grabon-trust-line">
-            <span class="trust-check trust-warning">⚠️ Price subject to change on Amazon</span>
-            <span class="trust-sep">•</span>
-            <span class="trust-reason">💡 <b>Why Buy:</b> Lowest tracked price + verified seller</span>
-          </div>
-        </div>
-
-        <div class="card-footer">
-          <a href="/a/B0FCS5BSGX" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Daily Steal on Amazon ↗</span>
-          </a>
-          <a href="https://t.me/DealDash_ai_Bot?start=track_personal car_67_patanjali-uv-pro-advance" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
-            <span>🔔 Track</span>
-          </a>
-          <button class="btn-card-share" data-asin="B0FCS5BSGX" title="Share Deal via WhatsApp / Copy Link">
-            <span>📤 Share</span>
-          </button>
-          <a href="/deal/B0FCS5BSGX.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
-            <span>📈 Chart</span>
-          </a>
-        </div>
-      </article>
-      <article class="deal-card " data-asin="B0HNLWCCKC">
-        <div class="card-top">
-          <div class="card-badges">
-            <span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
-          </div>
-          <div class="card-top-actions">
-            <button class="btn-hotness-degree" data-asin="B0HNLWCCKC" data-base="168" title="Upvote deal hotness">🔥 <span class="degree-count">168°</span></button>
-            <span class="time-ago">1d ago</span>
-            <button class="btn-watchlist" data-asin="B0HNLWCCKC" title="Save to Watchlist">
-              🤍
-            </button>
-          </div>
-        </div>
-
-        <div class="card-media">
-          <div class="card-image-wrap">
-            <a href="/a/B0HNLWCCKC" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
-              <img src="https://m.media-amazon.com/images/I/51SdnVOHnIL.jpg" alt="MAGIC CLEANING HACK: ZISTA Eraser Sponges!" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
-            </a>
-          </div>
-          <div class="card-meta-bar">
-            <span class="brand-chip">Magic</span>
-          </div>
-        </div>
-
-        <div class="card-content">
-          <a href="/a/B0HNLWCCKC" target="_blank" rel="noopener noreferrer" class="card-title" title="MAGIC CLEANING HACK: ZISTA Eraser Sponges!">
-            MAGIC CLEANING HACK: ZISTA Eraser Sponges!
-          </a>
-
-          <!-- Price Waterfall -->
-          <div class="price-waterfall-box">
-            <a href="/a/B0HNLWCCKC" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
-              <span class="effective-price">₹85</span>
-              <span class="original-mrp">₹567</span>
-              <span class="discount-badge">85% OFF</span>
-            </a>
-            <div class="savings-line">You save ₹482</div>
-          </div>
-
-          
-          <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
-            <div class="range-labels-row">
-              <span class="range-lbl range-low">Low: ₹85</span>
-              <span class="range-lbl range-now">Now: ₹85 ✅</span>
-              <span class="range-lbl range-high">MRP: ₹567</span>
-            </div>
-            <div class="range-track">
-              <div class="range-marker" style="left: 4%;" title="Now: ₹85 (4% of range)">●</div>
-            </div>
-          </div>
-          
-          
-          
-
-          <!-- Buy Confidence Meter -->
-          <div class="confidence-meter-box">
-            <div class="confidence-header">
-              <span class="confidence-label">
-                <span>🟢</span>
-                <span>Strong Price Drop</span>
-              </span>
-              <span class="confidence-pct">87% Confidence</span>
-            </div>
-            <div class="confidence-bar-bg">
-              <div class="confidence-bar-fill medium" style="width: 87%"></div>
-            </div>
-            
-          </div>
-
-          
-          <div class="grabon-trust-line">
-            <span class="trust-check trust-warning">⚠️ Price subject to change on Amazon</span>
-            <span class="trust-sep">•</span>
-            <span class="trust-reason">💡 <b>Why Buy:</b> Steep 85% verified drop</span>
-          </div>
-        </div>
-
-        <div class="card-footer">
-          <a href="/a/B0HNLWCCKC" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Diwali Deal on Amazon ↗</span>
-          </a>
-          <a href="https://t.me/DealDash_ai_Bot?start=track_electronics _76_magic-cleaning-hack-zista" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
-            <span>🔔 Track</span>
-          </a>
-          <button class="btn-card-share" data-asin="B0HNLWCCKC" title="Share Deal via WhatsApp / Copy Link">
-            <span>📤 Share</span>
-          </button>
-          <a href="/deal/B0HNLWCCKC.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
-            <span>📈 Chart</span>
-          </a>
-        </div>
-      </article>
-      <article class="deal-card " data-asin="B07M6KQ5M2">
-        <div class="card-top">
-          <div class="card-badges">
-            <span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
-          </div>
-          <div class="card-top-actions">
-            <button class="btn-hotness-degree" data-asin="B07M6KQ5M2" data-base="168" title="Upvote deal hotness">🔥 <span class="degree-count">168°</span></button>
-            <span class="time-ago">9m ago</span>
-            <button class="btn-watchlist" data-asin="B07M6KQ5M2" title="Save to Watchlist">
-              🤍
-            </button>
-          </div>
-        </div>
-
-        <div class="card-media">
-          <div class="card-image-wrap">
-            <a href="/a/B07M6KQ5M2" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
-              <img src="https://m.media-amazon.com/images/P/B07M6KQ5M2.jpg" alt="BALCONY BLISS: TrustBasket Railing Planters!" class="card-img" loading="lazy" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
-            </a>
-          </div>
-          <div class="card-meta-bar">
-            <span class="brand-chip">Balcony</span>
-          </div>
-        </div>
-
-        <div class="card-content">
-          <a href="/a/B07M6KQ5M2" target="_blank" rel="noopener noreferrer" class="card-title" title="BALCONY BLISS: TrustBasket Railing Planters!">
-            BALCONY BLISS: TrustBasket Railing Planters!
-          </a>
-
-          <!-- Price Waterfall -->
-          <div class="price-waterfall-box">
-            <a href="/a/B07M6KQ5M2" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
-              <span class="effective-price">₹123</span>
-              <span class="original-mrp">₹299</span>
-              <span class="discount-badge">59% OFF</span>
-            </a>
-            <div class="savings-line">You save ₹176</div>
-          </div>
-
-          
-          <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
-            <div class="range-labels-row">
-              <span class="range-lbl range-low">Low: ₹123</span>
-              <span class="range-lbl range-now">Now: ₹123 ✅</span>
-              <span class="range-lbl range-high">MRP: ₹299</span>
-            </div>
-            <div class="range-track">
-              <div class="range-marker" style="left: 4%;" title="Now: ₹123 (4% of range)">●</div>
-            </div>
-          </div>
-          
-          
-          
-
-          <!-- Buy Confidence Meter -->
-          <div class="confidence-meter-box">
-            <div class="confidence-header">
-              <span class="confidence-label">
-                <span>🟢</span>
-                <span>Strong Price Drop</span>
-              </span>
-              <span class="confidence-pct">87% Confidence</span>
-            </div>
-            <div class="confidence-bar-bg">
-              <div class="confidence-bar-fill medium" style="width: 87%"></div>
-            </div>
-            
-          </div>
-
-          
-          <div class="grabon-trust-line">
-            <span class="trust-check">✓ Verified Live on Amazon</span>
-            <span class="trust-sep">•</span>
-            <span class="trust-reason">💡 <b>Why Buy:</b> Steep 59% verified drop</span>
-          </div>
-        </div>
-
-        <div class="card-footer">
-          <a href="/a/B07M6KQ5M2" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Diwali Deal on Amazon ↗</span>
-          </a>
-          <a href="https://t.me/DealDash_ai_Bot?start=track_electronics _110_balcony-bliss-trustbasket-railing" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
-            <span>🔔 Track</span>
-          </a>
-          <button class="btn-card-share" data-asin="B07M6KQ5M2" title="Share Deal via WhatsApp / Copy Link">
-            <span>📤 Share</span>
-          </button>
-          <a href="/deal/B07M6KQ5M2.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
-            <span>📈 Chart</span>
-          </a>
-        </div>
-      </article>
-      <article class="deal-card " data-asin="B0BDVBH82P">
-        <div class="card-top">
-          <div class="card-badges">
-            <span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-diwali">🔥 DIWALI STEAL</span><span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-drop">📉 ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
-          </div>
-          <div class="card-top-actions">
-            <button class="btn-hotness-degree" data-asin="B0BDVBH82P" data-base="185" title="Upvote deal hotness">🔥 <span class="degree-count">185°</span></button>
+            <button class="btn-hotness-degree" data-asin="B000000001" data-base="229" title="Upvote deal hotness">🔥 <span class="degree-count">229°</span></button>
             <span class="time-ago">Just now</span>
-            <button class="btn-watchlist" data-asin="B0BDVBH82P" title="Save to Watchlist">
+            <button class="btn-watchlist" data-asin="B000000001" title="Save to Watchlist">
               🤍
             </button>
           </div>
@@ -1909,44 +1521,57 @@
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <a href="/a/B0BDVBH82P" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
-              <img src="https://m.media-amazon.com/images/I/61dSYN3XRtL._SL1500_.jpg" alt="Orient Electric Polycarbonate High Glo Led Lamp 9W, (Warm White, 3000K, B22 - Pack Of 8) Rs.309 @ Amazon" class="card-img" loading="lazy" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
+            <a href="https://www.amazon.in/dp/B000000001?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
+              <img src="https://m.media-amazon.com/images/P/B000000001.jpg" alt="Sony Product 1 Audio Gadget" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
             </a>
           </div>
           <div class="card-meta-bar">
-            <span class="brand-chip">Orient</span>
+            <span class="brand-chip">Sony</span>
           </div>
         </div>
 
         <div class="card-content">
-          <a href="/a/B0BDVBH82P" target="_blank" rel="noopener noreferrer" class="card-title" title="Orient Electric Polycarbonate High Glo Led Lamp 9W, (Warm White, 3000K, B22 - Pack Of 8) Rs.309 @ Amazon">
-            Orient Electric Polycarbonate High Glo Led Lamp 9W, (Warm White, 3000K, B22 - Pack Of 8) Rs.309 @ Amazon
+          <a href="https://www.amazon.in/dp/B000000001?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="card-title" title="Sony Product 1 Audio Gadget">
+            Sony Product 1 Audio Gadget
           </a>
 
           <!-- Price Waterfall -->
           <div class="price-waterfall-box">
-            <a href="/a/B0BDVBH82P" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
-              <span class="effective-price">₹129</span>
-              <span class="original-mrp">₹1,440</span>
-              <span class="discount-badge">87% OFF</span>
+            <a href="https://www.amazon.in/dp/B000000001?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
+              <span class="effective-price">₹1,299</span>
+              
+              <span class="discount-badge">40% OFF</span>
             </a>
-            <div class="savings-line">You save ₹1,311</div>
+            
+            
           </div>
 
           
           <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
             <div class="range-labels-row">
-              <span class="range-lbl range-low">Low: ₹129</span>
-              <span class="range-lbl range-now">Now: ₹129 ✅</span>
-              <span class="range-lbl range-high">MRP: ₹1,440</span>
+              <span class="range-lbl range-low">Low: ₹1,299</span>
+              <span class="range-lbl range-now">Now: ₹1,299 ✅</span>
+              <span class="range-lbl range-high">MRP: ₹1,753</span>
             </div>
             <div class="range-track">
-              <div class="range-marker" style="left: 4%;" title="Now: ₹129 (4% of range)">●</div>
+              <div class="range-marker" style="left: 4%;" title="Now: ₹1,299 (4% of range)">●</div>
             </div>
           </div>
           
+          <div class="coupon-claim-banner clickable-coupon-pill" data-aff="https://www.amazon.in/dp/B000000001?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" data-promo="SAVE200" title="Click to copy promo code and open Amazon deal">
+            <span class="coupon-tick-icon">☑️</span>
+            <span class="coupon-claim-text">Tick <b>"Apply ₹200 on-page coupon"</b> on Amazon page <span class="coupon-discount-tag">(-₹200)</span></span>
+          </div>
           
-          
+          <div class="callouts-list">
+          <div class="callout-pill callout-coupon">
+            <span>🎟️ Includes ₹200 On-Page Coupon</span>
+            <span style="font-weight:700;">Applied</span>
+          </div>
+          <div class="callout-pill callout-promo btn-copy-promo" data-promo="SAVE200" title="Click to copy promo code">
+            <span>🎟️ Code: <code style="font-weight:700;">SAVE200</code></span>
+            <span class="promo-copy-action">📋 Tap to Copy</span>
+          </div></div>
 
           <!-- Buy Confidence Meter -->
           <div class="confidence-meter-box">
@@ -1967,34 +1592,34 @@
           <div class="grabon-trust-line">
             <span class="trust-check">✓ Verified Live on Amazon</span>
             <span class="trust-sep">•</span>
-            <span class="trust-reason">💡 <b>Why Buy:</b> Save ₹1,311 below MRP (87% OFF)</span>
+            <span class="trust-reason">💡 <b>Why Buy:</b> Genuine Tier-1 Sony at verified low</span>
           </div>
         </div>
 
         <div class="card-footer">
-          <a href="/a/B0BDVBH82P" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Daily Steal on Amazon ↗</span>
+          <a href="https://www.amazon.in/dp/B000000001?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+            <span>🛒 Check Live Price on Amazon ↗</span>
           </a>
-          <a href="https://t.me/DealDash_ai_Bot?start=track_home & kitch_116_orient-electric-polycarbonate-high" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
+          <a href="https://t.me/DealDash_ai_Bot?start=track_audio & head_1169_sony-product-1-audio" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
             <span>🔔 Track</span>
           </a>
-          <button class="btn-card-share" data-asin="B0BDVBH82P" title="Share Deal via WhatsApp / Copy Link">
+          <button class="btn-card-share" data-asin="B000000001" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>
           </button>
-          <a href="/deal/B0BDVBH82P.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
+          <a href="/deal/B000000001.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
             <span>📈 Chart</span>
           </a>
         </div>
       </article>
-      <article class="deal-card " data-asin="B09XNWCL7Q">
+      <article class="deal-card " data-asin="B000000002" id="deal-2" data-reels-num="2">
         <div class="card-top">
           <div class="card-badges">
-            <span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-diwali">🔥 DIWALI STEAL</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>
+            <span class="deal-reels-num" data-reels-num="2" title="Reel / Post #2">#2</span><span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
           </div>
           <div class="card-top-actions">
-            <button class="btn-hotness-degree" data-asin="B09XNWCL7Q" data-base="180" title="Upvote deal hotness">🔥 <span class="degree-count">180°</span></button>
+            <button class="btn-hotness-degree" data-asin="B000000002" data-base="229" title="Upvote deal hotness">🔥 <span class="degree-count">229°</span></button>
             <span class="time-ago">Just now</span>
-            <button class="btn-watchlist" data-asin="B09XNWCL7Q" title="Save to Watchlist">
+            <button class="btn-watchlist" data-asin="B000000002" title="Save to Watchlist">
               🤍
             </button>
           </div>
@@ -2002,60 +1627,69 @@
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <a href="/a/B09XNWCL7Q" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
-              <img src="https://m.media-amazon.com/images/I/61VdUDBfX-L._SL600_.jpg" alt="Portronics Konnect L 1.2M 8 Pin USB Cable with 3.0A Fast Charging" class="card-img" loading="lazy" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
+            <a href="https://www.amazon.in/dp/B000000002?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
+              <img src="https://m.media-amazon.com/images/P/B000000002.jpg" alt="Sony Product 2 Audio Gadget" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
             </a>
           </div>
           <div class="card-meta-bar">
-            <span class="brand-chip">Portronics</span>
-            <div class="rating-chip">
-              <span>⭐ 4.1</span>
-              <span class="reviews-count">(14,200)</span>
-            </div>
+            <span class="brand-chip">Sony</span>
           </div>
         </div>
 
         <div class="card-content">
-          <a href="/a/B09XNWCL7Q" target="_blank" rel="noopener noreferrer" class="card-title" title="Portronics Konnect L 1.2M 8 Pin USB Cable with 3.0A Fast Charging">
-            Portronics Konnect L 1.2M 8 Pin USB Cable with 3.0A Fast Charging
+          <a href="https://www.amazon.in/dp/B000000002?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="card-title" title="Sony Product 2 Audio Gadget">
+            Sony Product 2 Audio Gadget
           </a>
 
           <!-- Price Waterfall -->
           <div class="price-waterfall-box">
-            <a href="/a/B09XNWCL7Q" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
-              <span class="effective-price">₹149</span>
-              <span class="original-mrp">₹499</span>
-              <span class="discount-badge">70% OFF</span>
+            <a href="https://www.amazon.in/dp/B000000002?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
+              <span class="effective-price">₹1,299</span>
+              
+              <span class="discount-badge">40% OFF</span>
             </a>
-            <div class="savings-line">You save ₹350</div>
+            
+            
           </div>
 
           
           <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
             <div class="range-labels-row">
-              <span class="range-lbl range-low">Low: ₹149</span>
-              <span class="range-lbl range-now">Now: ₹149 ✅</span>
-              <span class="range-lbl range-high">MRP: ₹499</span>
+              <span class="range-lbl range-low">Low: ₹1,299</span>
+              <span class="range-lbl range-now">Now: ₹1,299 ✅</span>
+              <span class="range-lbl range-high">MRP: ₹1,753</span>
             </div>
             <div class="range-track">
-              <div class="range-marker" style="left: 4%;" title="Now: ₹149 (4% of range)">●</div>
+              <div class="range-marker" style="left: 4%;" title="Now: ₹1,299 (4% of range)">●</div>
             </div>
           </div>
           
+          <div class="coupon-claim-banner clickable-coupon-pill" data-aff="https://www.amazon.in/dp/B000000002?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" data-promo="SAVE200" title="Click to copy promo code and open Amazon deal">
+            <span class="coupon-tick-icon">☑️</span>
+            <span class="coupon-claim-text">Tick <b>"Apply ₹200 on-page coupon"</b> on Amazon page <span class="coupon-discount-tag">(-₹200)</span></span>
+          </div>
           
-          
+          <div class="callouts-list">
+          <div class="callout-pill callout-coupon">
+            <span>🎟️ Includes ₹200 On-Page Coupon</span>
+            <span style="font-weight:700;">Applied</span>
+          </div>
+          <div class="callout-pill callout-promo btn-copy-promo" data-promo="SAVE200" title="Click to copy promo code">
+            <span>🎟️ Code: <code style="font-weight:700;">SAVE200</code></span>
+            <span class="promo-copy-action">📋 Tap to Copy</span>
+          </div></div>
 
           <!-- Buy Confidence Meter -->
           <div class="confidence-meter-box">
             <div class="confidence-header">
               <span class="confidence-label">
                 <span>🟢</span>
-                <span>Strong Price Drop</span>
+                <span>Screaming Deal, Buy Now!</span>
               </span>
-              <span class="confidence-pct">89% Confidence</span>
+              <span class="confidence-pct">91% Confidence</span>
             </div>
             <div class="confidence-bar-bg">
-              <div class="confidence-bar-fill medium" style="width: 89%"></div>
+              <div class="confidence-bar-fill high" style="width: 91%"></div>
             </div>
             
           </div>
@@ -2064,21 +1698,127 @@
           <div class="grabon-trust-line">
             <span class="trust-check">✓ Verified Live on Amazon</span>
             <span class="trust-sep">•</span>
-            <span class="trust-reason">💡 <b>Why Buy:</b> Steep 70% verified drop</span>
+            <span class="trust-reason">💡 <b>Why Buy:</b> Genuine Tier-1 Sony at verified low</span>
           </div>
         </div>
 
         <div class="card-footer">
-          <a href="/a/B09XNWCL7Q" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Diwali Deal on Amazon ↗</span>
+          <a href="https://www.amazon.in/dp/B000000002?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+            <span>🛒 Check Live Price on Amazon ↗</span>
           </a>
-          <a href="https://t.me/DealDash_ai_Bot?start=track_mobiles & ac_134_portronics-konnect-l-12m" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
+          <a href="https://t.me/DealDash_ai_Bot?start=track_audio & head_1169_sony-product-2-audio" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
             <span>🔔 Track</span>
           </a>
-          <button class="btn-card-share" data-asin="B09XNWCL7Q" title="Share Deal via WhatsApp / Copy Link">
+          <button class="btn-card-share" data-asin="B000000002" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>
           </button>
-          <a href="/deal/B09XNWCL7Q.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
+          <a href="/deal/B000000002.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
+            <span>📈 Chart</span>
+          </a>
+        </div>
+      </article>
+      <article class="deal-card " data-asin="B000000003" id="deal-3" data-reels-num="3">
+        <div class="card-top">
+          <div class="card-badges">
+            <span class="deal-reels-num" data-reels-num="3" title="Reel / Post #3">#3</span><span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
+          </div>
+          <div class="card-top-actions">
+            <button class="btn-hotness-degree" data-asin="B000000003" data-base="229" title="Upvote deal hotness">🔥 <span class="degree-count">229°</span></button>
+            <span class="time-ago">Just now</span>
+            <button class="btn-watchlist" data-asin="B000000003" title="Save to Watchlist">
+              🤍
+            </button>
+          </div>
+        </div>
+
+        <div class="card-media">
+          <div class="card-image-wrap">
+            <a href="https://www.amazon.in/dp/B000000003?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
+              <img src="https://m.media-amazon.com/images/P/B000000003.jpg" alt="Sony Product 3 Audio Gadget" class="card-img" fetchpriority="high" decoding="async" width="220" height="220" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==';">
+            </a>
+          </div>
+          <div class="card-meta-bar">
+            <span class="brand-chip">Sony</span>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <a href="https://www.amazon.in/dp/B000000003?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="card-title" title="Sony Product 3 Audio Gadget">
+            Sony Product 3 Audio Gadget
+          </a>
+
+          <!-- Price Waterfall -->
+          <div class="price-waterfall-box">
+            <a href="https://www.amazon.in/dp/B000000003?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
+              <span class="effective-price">₹1,299</span>
+              
+              <span class="discount-badge">40% OFF</span>
+            </a>
+            
+            
+          </div>
+
+          
+          <div class="buyhatke-range-box" title="Current Price vs Historical Low & MRP">
+            <div class="range-labels-row">
+              <span class="range-lbl range-low">Low: ₹1,299</span>
+              <span class="range-lbl range-now">Now: ₹1,299 ✅</span>
+              <span class="range-lbl range-high">MRP: ₹1,753</span>
+            </div>
+            <div class="range-track">
+              <div class="range-marker" style="left: 4%;" title="Now: ₹1,299 (4% of range)">●</div>
+            </div>
+          </div>
+          
+          <div class="coupon-claim-banner clickable-coupon-pill" data-aff="https://www.amazon.in/dp/B000000003?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" data-promo="SAVE200" title="Click to copy promo code and open Amazon deal">
+            <span class="coupon-tick-icon">☑️</span>
+            <span class="coupon-claim-text">Tick <b>"Apply ₹200 on-page coupon"</b> on Amazon page <span class="coupon-discount-tag">(-₹200)</span></span>
+          </div>
+          
+          <div class="callouts-list">
+          <div class="callout-pill callout-coupon">
+            <span>🎟️ Includes ₹200 On-Page Coupon</span>
+            <span style="font-weight:700;">Applied</span>
+          </div>
+          <div class="callout-pill callout-promo btn-copy-promo" data-promo="SAVE200" title="Click to copy promo code">
+            <span>🎟️ Code: <code style="font-weight:700;">SAVE200</code></span>
+            <span class="promo-copy-action">📋 Tap to Copy</span>
+          </div></div>
+
+          <!-- Buy Confidence Meter -->
+          <div class="confidence-meter-box">
+            <div class="confidence-header">
+              <span class="confidence-label">
+                <span>🟢</span>
+                <span>Screaming Deal, Buy Now!</span>
+              </span>
+              <span class="confidence-pct">91% Confidence</span>
+            </div>
+            <div class="confidence-bar-bg">
+              <div class="confidence-bar-fill high" style="width: 91%"></div>
+            </div>
+            
+          </div>
+
+          
+          <div class="grabon-trust-line">
+            <span class="trust-check">✓ Verified Live on Amazon</span>
+            <span class="trust-sep">•</span>
+            <span class="trust-reason">💡 <b>Why Buy:</b> Genuine Tier-1 Sony at verified low</span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <a href="https://www.amazon.in/dp/B000000003?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-grid" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+            <span>🛒 Check Live Price on Amazon ↗</span>
+          </a>
+          <a href="https://t.me/DealDash_ai_Bot?start=track_audio & head_1169_sony-product-3-audio" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
+            <span>🔔 Track</span>
+          </a>
+          <button class="btn-card-share" data-asin="B000000003" title="Share Deal via WhatsApp / Copy Link">
+            <span>📤 Share</span>
+          </button>
+          <a href="/deal/B000000003.html" class="btn-chart-deal" title="View Price History & Keepa Chart">
             <span>📈 Chart</span>
           </a>
         </div>
@@ -2097,25 +1837,6 @@
     <div id="olderDealsContainer" class="older-deals-container hidden"></div>
 
         <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
-    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
     <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
     <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
     <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
@@ -2345,61 +2066,37 @@
           <tr style="border-bottom: 1px solid var(--border-card);">
             <td style="padding: 10px; text-align:center; font-weight:800; color:#10b981;">#1</td>
             <td style="padding: 10px;">
-              <a href="/deal/B0H4GBJVW7.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">Enakshi Induction Pot Soup Stainless Steel Cooking Pot for Hotel Kitchen Restaurants 7.9L</a>
+              <a href="/deal/B000000001.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">Sony Product 1 Audio Gadget</a>
             </td>
-            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹18</td>
-            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">85% OFF</td>
-            <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 87%</span></td>
+            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹1,299</td>
+            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">40% OFF</td>
+            <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 91%</span></td>
             <td style="padding: 10px; text-align:center; white-space:nowrap;">
-              <a href="/a/B0H4GBJVW7" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
-            </td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--border-card);">
-            <td style="padding: 10px; text-align:center; font-weight:800; color:#10b981;">#2</td>
-            <td style="padding: 10px;">
-              <a href="/deal/B0FCS5BSGX.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">Patanjali UV Pro Advance Sun Defence Cream SPF 50 PA+++50g, Dry Touch, Non-Oily, Non-Sticky Sunscreen for All Skin Types, Ayurvedic Sunblock, Broad Spectrum UVA/UVB Protection Pack of 1</a>
-            </td>
-            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹75</td>
-            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">36% OFF</td>
-            <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 87%</span></td>
-            <td style="padding: 10px; text-align:center; white-space:nowrap;">
-              <a href="/a/B0FCS5BSGX" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
+              <a href="https://www.amazon.in/dp/B000000001?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-table" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
             </td>
           </tr>
           <tr style="border-bottom: 1px solid var(--border-card);">
             <td style="padding: 10px; text-align:center; font-weight:800; color:#10b981;">#3</td>
             <td style="padding: 10px;">
-              <a href="/deal/B0HNLWCCKC.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">MAGIC CLEANING HACK: ZISTA Eraser Sponges!</a>
+              <a href="/deal/B000000002.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">Sony Product 2 Audio Gadget</a>
             </td>
-            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹85</td>
-            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">85% OFF</td>
-            <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 87%</span></td>
-            <td style="padding: 10px; text-align:center; white-space:nowrap;">
-              <a href="/a/B0HNLWCCKC" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
-            </td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--border-card);">
-            <td style="padding: 10px; text-align:center; font-weight:800; color:#10b981;">#4</td>
-            <td style="padding: 10px;">
-              <a href="/deal/B07M6KQ5M2.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">BALCONY BLISS: TrustBasket Railing Planters!</a>
-            </td>
-            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹123</td>
-            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">59% OFF</td>
-            <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 87%</span></td>
-            <td style="padding: 10px; text-align:center; white-space:nowrap;">
-              <a href="/a/B07M6KQ5M2" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
-            </td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--border-card);">
-            <td style="padding: 10px; text-align:center; font-weight:800; color:#10b981;">#5</td>
-            <td style="padding: 10px;">
-              <a href="/deal/B0BDVBH82P.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">Orient Electric Polycarbonate High Glo Led Lamp 9W, (Warm White, 3000K, B22 - Pack Of 8) Rs.309 @ Amazon</a>
-            </td>
-            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹129</td>
-            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">87% OFF</td>
+            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹1,299</td>
+            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">40% OFF</td>
             <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 91%</span></td>
             <td style="padding: 10px; text-align:center; white-space:nowrap;">
-              <a href="/a/B0BDVBH82P" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
+              <a href="https://www.amazon.in/dp/B000000002?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-table" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
+            </td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-card);">
+            <td style="padding: 10px; text-align:center; font-weight:800; color:#10b981;">#3</td>
+            <td style="padding: 10px;">
+              <a href="/deal/B000000003.html" style="font-weight:600; color:var(--text-main); text-decoration:none;">Sony Product 3 Audio Gadget</a>
+            </td>
+            <td style="padding: 10px; font-weight:700; color:#10b981; white-space:nowrap;">₹1,299</td>
+            <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">40% OFF</td>
+            <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 91%</span></td>
+            <td style="padding: 10px; text-align:center; white-space:nowrap;">
+              <a href="https://www.amazon.in/dp/B000000003?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-table" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
             </td>
           </tr>
           </tbody>
@@ -2597,7 +2294,6 @@
           <a href="/promote" class="footer-link">📣 Promote</a>
           <a href="/deals.html" class="footer-link">🔥 Deals</a>
           <a href="/electronics.html" class="footer-link">💻 Electronics</a>
-          <a href="/mobiles.html" class="footer-link">📱 Mobiles</a>
           <a href="/home.html" class="footer-link">🏠 Home & Kitchen</a>
           <a href="/fashion.html" class="footer-link">👕 Fashion</a>
           <a href="/grocery.html" class="footer-link">🧴 Grocery</a>

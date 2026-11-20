@@ -951,30 +951,6 @@
         <p class="hero-subtitle">
           Impulse cart fillers, mobile accessories, kitchen loots, and daily essentials under ₹99.
         </p>
-
-        <!-- Stats Bar -->
-        <div class="stats-grid" id="statsGrid">
-          <div class="stat-card" id="statCardLiveDeals" role="button" tabindex="0" title="View all verified live deals">
-            <span class="stat-val" id="statLiveDeals">3</span>
-            <span class="stat-label">Verified Live Deals</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-          <div class="stat-card loot-stat" id="statCardLoot" role="button" tabindex="0" title="Filter to Loot Alerts">
-            <span class="stat-val" id="statLootCount">0</span>
-            <span class="stat-label">🚨 Loot Alerts</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-          <div class="stat-card" id="statCardMaxDiscount" role="button" tabindex="0" title="Sort by highest discount percentage">
-            <span class="stat-val" id="statMaxDiscount">40%</span>
-            <span class="stat-label">Max Discount</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-          <div class="stat-card savings-stat" id="statCardSavings" role="button" tabindex="0" title="Sort by biggest rupee savings">
-            <span class="stat-val" id="statTotalSavings">₹0</span>
-            <span class="stat-label">Total Savings Live</span>
-            <span class="stat-hint">Click to view →</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -989,7 +965,7 @@
       <a href="/under-499.html">Under ₹499</a>
     </nav>
 
-    <!-- Search & ASIN Analyzer Section -->
+    <!-- Unified Search & Instant Link/ASIN Analyzer Section -->
     <section class="search-section">
       <div class="search-box-wrapper">
         <div class="search-icon">🔍</div>
@@ -997,9 +973,10 @@
           type="search" 
           id="searchInput" 
           class="search-input" 
-          placeholder="Search by title, brand (Sony, Philips, boAt), or paste ANY Amazon.in URL / ASIN..." 
+          placeholder="Paste Any Amazon Link or Search Deals (e.g. #14, boAt, Sony)..." 
           autocomplete="off"
           spellcheck="false"
+          aria-label="Paste Any Amazon Link or Search Deals"
         >
         <span class="search-shortcut" title="Press / or Ctrl+K to search">/</span>
         <button id="clearSearchBtn" class="clear-search-btn" aria-label="Clear search">✕</button>
@@ -1008,7 +985,7 @@
       <!-- Instant ASIN Inspector Card (Populated when user pastes any Amazon link/ASIN) -->
       <div id="asinInspectorCard" class="asin-inspector-card hidden">
         <div class="inspector-header">
-          <div class="inspector-badge">⚡ INSTANT ASIN ANALYZER</div>
+          <div class="inspector-badge">⚡ INSTANT AMAZON DEAL TRACKER</div>
           <button id="closeInspectorBtn" class="btn-close-inspector" aria-label="Close Inspector">✕</button>
         </div>
         <div class="inspector-body">
@@ -1018,13 +995,16 @@
             <p class="inspector-desc">Keepa price history chart and verified direct affiliate purchasing link generated on the fly:</p>
             <div class="inspector-actions">
               <a id="inspectorBuyBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                🛒 Buy on Amazon.in (Best Price) ↗
+                🛒 Buy on Amazon with Deal Tracking ↗
               </a>
-              <a id="inspectorKeepaBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                📈 Open on Keepa.com ↗
-              </a>
-              <a id="inspectorPhBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                📊 Keepa Interactive ↗
+              <button id="inspectorCopyBtn" type="button" class="btn btn-secondary">
+                📋 Copy Tracked Affiliate Link
+              </button>
+              <button id="inspectorWhatsAppBtn" type="button" class="btn btn-whatsapp" style="background:#25d366;color:#fff;font-weight:700;">
+                💬 Share on WhatsApp
+              </button>
+              <a id="inspectorKeepaBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                📈 Price History Chart ↗
               </a>
             </div>
           </div>
@@ -1041,141 +1021,168 @@
       </div>
     </section>
 
-    <!-- Card Discount Mode Selector (Amazon Pay 5% Extra Off) -->
-    <section class="card-discount-section">
-      <div class="card-discount-toggle-wrap">
-        <span class="card-discount-label">💳 Card Offer:</span>
-        <div class="card-discount-buttons">
-          <button class="card-mode-btn active" id="btnPriceModeStd" data-mode="standard">Standard Price</button>
-          <button class="card-mode-btn" id="btnPriceModeCard" data-mode="card">
-            <span>💳 +Amazon Pay ICICI (Extra 5% Off)</span>
-            <span class="discount-pill-tag">5% Flat Cashback</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Filter Tabs (Smart Deals Buckets) -->
-    <section class="filter-tabs-section">
-      <div class="filter-tabs-scroll">
-        <button class="filter-tab active" data-tab="all">
-          <span>🔥 All Live Deals</span>
-          <span class="tab-count" id="countAll">3</span>
-        </button>
-        <button class="filter-tab daily-tab" data-tab="daily_essentials">
-          <span>🧴 Daily Essentials &amp; Beauty Steals</span>
-          <span class="tab-count" id="countDaily">0</span>
-        </button>
-        <button class="filter-tab magnet-tab" data-tab="under_399">
-          <span>⚡ Under ₹399 Magnet Deals</span>
-          <span class="tab-count" id="countUnder399">0</span>
-        </button>
-        <button class="filter-tab diwali-tab" data-tab="diwali">
-          <span>🔥 Diwali Steals</span>
-          <span class="tab-count" id="countDiwali">0</span>
-        </button>
-
-        <button class="filter-tab loot-tab" data-tab="loot">
-          <span>🚨 Loot Alerts</span>
-          <span class="tab-count" id="countLoot">0</span>
-        </button>
-        <button class="filter-tab drop-tab" data-tab="drops">
-          <span>📉 All-Time Lows</span>
-          <span class="tab-count" id="countDrops">0</span>
-        </button>
-        <button class="filter-tab coupon-tab" data-tab="coupons">
-          <span>🎟️ Hidden Coupons</span>
-          <span class="tab-count" id="countCoupons">3</span>
-        </button>
-        <button class="filter-tab brand-tab" data-tab="tier1">
-          <span>🏆 Tier-1 Brands</span>
-          <span class="tab-count" id="countTier1">3</span>
-        </button>
-        <button class="filter-tab watchlist-tab" data-tab="watchlist">
-          <span>❤️ Saved Watchlist</span>
-          <span class="tab-count" id="countWatchlist">0</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Quick Price Store Buckets -->
-    <section class="price-buckets-section">
-      <div class="price-buckets-scroll">
-        <span class="bucket-label">Price Stores:</span>
-        <button class="price-pill" data-price="all">All Prices</button>
-        <button class="price-pill active" data-price="99">🪙 ₹99 Store</button>
-        <button class="price-pill" data-price="299">Under ₹299</button>
-        <button class="price-pill" data-price="under-399">⚡ Under ₹399 Magnet Deals</button>
-        <button class="price-pill" data-price="499">⚡ Under ₹499</button>
-        <button class="price-pill" data-price="999">Under ₹999</button>
-        <button class="price-pill" data-price="2499">Under ₹2,499</button>
-        <button class="price-pill" data-price="electronics">💎 Top Electronics</button>
-        <button class="price-pill" data-price="premium">💎 Premium (&gt;₹2,500)</button>
-      </div>
-    </section>
-
-    <!-- Secondary Controls: Categories & Sorting Toolbar -->
-    <section class="toolbar-section">
+    <!-- 1 Category Chip Row (Immediately Visible Above The Fold on Mobile) -->
+    <section class="toolbar-section toolbar-primary">
       <div class="category-pills" id="categoryPills">
         <button class="cat-pill active" data-category="all">All Categories</button>
-        <button class="cat-pill" data-category="Mobiles & Accessories">📱 Mobiles</button>
-        <button class="cat-pill" data-category="Electronics & Audio">⚡ Electronics</button>
-        <button class="cat-pill" data-category="Laptops & Computing">💻 Laptops</button>
-        <button class="cat-pill" data-category="Audio & Headphones">🎧 Audio</button>
         <button class="cat-pill" data-category="Home & Kitchen">🏠 Home & Kitchen</button>
-        <button class="cat-pill" data-category="Fashion & Footwear">👕 Fashion</button>
         <button class="cat-pill" data-category="Personal Care & Grocery">🧴 Beauty &amp; Essentials</button>
+        <button class="cat-pill" data-category="Fashion & Footwear">👕 Fashion</button>
+        <button class="cat-pill" data-category="Electronics & Audio">⚡ Electronics</button>
+        <button class="cat-pill" data-category="Audio & Headphones">🎧 Audio</button>
+      </div>
+      <button type="button" class="btn-toggle-filters" id="btnToggleFilters" aria-expanded="false" aria-controls="filtersDrawer">
+        <span>⚙️ Filters & Price Stores</span>
+        <span class="toggle-indicator">▾</span>
+      </button>
+    </section>
+
+    <!-- Collapsible Secondary Clutter Drawer (Hidden by default on mobile, always open on desktop) -->
+    <div id="filtersDrawer" class="filters-drawer collapsed">
+      <!-- Stats Bar -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card" id="statCardLiveDeals" role="button" tabindex="0" title="View all verified live deals">
+          <span class="stat-val" id="statLiveDeals">3</span>
+          <span class="stat-label">Verified Live Deals</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
+        <div class="stat-card loot-stat" id="statCardLoot" role="button" tabindex="0" title="Filter to Loot Alerts">
+          <span class="stat-val" id="statLootCount">0</span>
+          <span class="stat-label">🚨 Loot Alerts</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
+        <div class="stat-card" id="statCardMaxDiscount" role="button" tabindex="0" title="Sort by highest discount percentage">
+          <span class="stat-val" id="statMaxDiscount">40%</span>
+          <span class="stat-label">Max Discount</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
+        <div class="stat-card savings-stat" id="statCardSavings" role="button" tabindex="0" title="Sort by biggest rupee savings">
+          <span class="stat-val" id="statTotalSavings">₹0</span>
+          <span class="stat-label">Total Savings Live</span>
+          <span class="stat-hint">Click to view →</span>
+        </div>
       </div>
 
-      <div class="toolbar-controls">
-        <label class="hide-expired-toggle">
-          <input type="checkbox" id="hideExpiredCheck" checked>
-          <span>Hide Expired / Spiked</span>
-        </label>
-
-        <div class="sort-wrapper">
-          <span class="sort-icon">⇅</span>
-          <select id="sortSelect" class="sort-select" aria-label="Sort Deals">
-            <option value="score">🎯 Best AI Value Score</option>
-            <option value="newest">⏱️ Newest Deals First</option>
-            <option value="discount">📉 Highest Discount %</option>
-            <option value="price_asc">💰 Price: Low to High</option>
-            <option value="savings">💸 Biggest Rupee Savings (₹)</option>
-            <option value="rating">⭐ Highest Customer Rating</option>
-          </select>
-        </div>
-
-        <div class="view-mode-toggle" id="viewModeToggle" role="group" aria-label="View Layout">
-          <button type="button" class="btn-view-mode active" id="btnViewGrid" title="Grid View">⊞ Grid</button>
-          <button type="button" class="btn-view-mode" id="btnViewCompact" title="Compact List View">☰ Compact</button>
-        </div>
-
-        <div class="keyword-alerts-wrapper">
-          <button type="button" class="btn-keyword-alerts" id="btnKeywordAlerts" title="Custom Keyword Alerts">
-            <span>🔔 Alerts (<span id="keywordAlertsCount">0</span>)</span>
-          </button>
-          <div class="keyword-alerts-popover hidden" id="keywordAlertsPopover">
-            <div class="keyword-alerts-header">
-              <span>🔔 Custom Keyword Alerts</span>
-              <button type="button" class="keyword-popover-close" id="keywordAlertsClose">&times;</button>
-            </div>
-            <div class="keyword-alerts-body">
-              <p class="keyword-alerts-desc">Get highlighted deal cards and instant alerts whenever matching deals drop:</p>
-              <div class="keyword-input-row">
-                <input type="text" id="keywordAlertInput" placeholder="e.g. Sony, Earbuds, Air Fryer..." maxlength="30">
-                <button type="button" id="keywordAlertAddBtn" class="btn btn-primary">Add</button>
-              </div>
-              <div class="keyword-tags-container" id="keywordTagsContainer"></div>
-            </div>
+      <!-- Card Discount Mode Selector (Amazon Pay 5% Extra Off) -->
+      <section class="card-discount-section">
+        <div class="card-discount-toggle-wrap">
+          <span class="card-discount-label">💳 Card Offer:</span>
+          <div class="card-discount-buttons">
+            <button class="card-mode-btn active" id="btnPriceModeStd" data-mode="standard">Standard Price</button>
+            <button class="card-mode-btn" id="btnPriceModeCard" data-mode="card">
+              <span>💳 +Amazon Pay ICICI (Extra 5% Off)</span>
+              <span class="discount-pill-tag">5% Flat Cashback</span>
+            </button>
           </div>
         </div>
+      </section>
 
-        <button id="refreshBtn" class="btn-refresh" title="Refresh Live Deals">
-          <span class="refresh-icon">🔄</span>
-          <span class="refresh-text">Refresh</span>
-        </button>
-      </div>
-    </section>
+      <!-- Filter Tabs (Smart Deals Buckets) -->
+      <section class="filter-tabs-section">
+        <div class="filter-tabs-scroll">
+          <button class="filter-tab active" data-tab="all">
+            <span>🔥 All Live Deals</span>
+            <span class="tab-count" id="countAll">3</span>
+          </button>
+          <button class="filter-tab daily-tab" data-tab="daily_essentials">
+            <span>🧴 Daily Essentials &amp; Beauty Steals</span>
+            <span class="tab-count" id="countDaily">0</span>
+          </button>
+          <button class="filter-tab magnet-tab" data-tab="under_399">
+            <span>⚡ Under ₹399 Magnet Deals</span>
+            <span class="tab-count" id="countUnder399">0</span>
+          </button>
+          <button class="filter-tab drop-tab" data-tab="drops">
+            <span>⚡ Today's Price Drops</span>
+            <span class="tab-count" id="countDrops">0</span>
+          </button>
+          <button class="filter-tab loot-tab" data-tab="loot">
+            <span>🚨 Loot Alerts</span>
+            <span class="tab-count" id="countLoot">0</span>
+          </button>
+          <button class="filter-tab coupon-tab" data-tab="coupons">
+            <span>🎟️ Hidden Coupons</span>
+            <span class="tab-count" id="countCoupons">3</span>
+          </button>
+          <button class="filter-tab brand-tab" data-tab="tier1">
+            <span>🏆 Tier-1 Brands</span>
+            <span class="tab-count" id="countTier1">3</span>
+          </button>
+          <button class="filter-tab watchlist-tab" data-tab="watchlist">
+            <span>❤️ Saved Watchlist</span>
+            <span class="tab-count" id="countWatchlist">0</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Quick Price Store Buckets -->
+      <section class="price-buckets-section">
+        <div class="price-buckets-scroll">
+          <span class="bucket-label">Price Stores:</span>
+          <button class="price-pill" data-price="all">All Prices</button>
+          <button class="price-pill active" data-price="99">🪙 ₹99 Store</button>
+          <button class="price-pill" data-price="299">Under ₹299</button>
+          <button class="price-pill" data-price="under-399">⚡ Under ₹399 Magnet Deals</button>
+          <button class="price-pill" data-price="499">⚡ Under ₹499</button>
+          <button class="price-pill" data-price="999">Under ₹999</button>
+          <button class="price-pill" data-price="2499">Under ₹2,499</button>
+          <button class="price-pill" data-price="electronics">💎 Top Electronics</button>
+          <button class="price-pill" data-price="premium">💎 Premium (&gt;₹2,500)</button>
+        </div>
+      </section>
+
+      <!-- Secondary Controls & Keyword Alerts -->
+      <section class="toolbar-section toolbar-secondary">
+        <div class="toolbar-controls">
+          <label class="hide-expired-toggle">
+            <input type="checkbox" id="hideExpiredCheck" checked>
+            <span>Hide Expired / Spiked</span>
+          </label>
+
+          <div class="sort-wrapper">
+            <span class="sort-icon">⇅</span>
+            <select id="sortSelect" class="sort-select" aria-label="Sort Deals">
+              <option value="score">🎯 Best AI Value Score</option>
+              <option value="newest">⏱️ Newest Deals First</option>
+              <option value="discount">📉 Highest Discount %</option>
+              <option value="price_asc">💰 Price: Low to High</option>
+              <option value="savings">💸 Biggest Rupee Savings (₹)</option>
+              <option value="rating">⭐ Highest Customer Rating</option>
+            </select>
+          </div>
+
+          <div class="view-mode-toggle" id="viewModeToggle" role="group" aria-label="View Layout">
+            <button type="button" class="btn-view-mode active" id="btnViewGrid" title="Grid View">⊞ Grid</button>
+            <button type="button" class="btn-view-mode" id="btnViewCompact" title="Compact List View">☰ Compact</button>
+          </div>
+
+          <div class="keyword-alerts-wrapper">
+            <button type="button" class="btn-keyword-alerts" id="btnKeywordAlerts" title="Custom Keyword Alerts">
+              <span>🔔 Alerts (<span id="keywordAlertsCount">0</span>)</span>
+            </button>
+            <div class="keyword-alerts-popover hidden" id="keywordAlertsPopover">
+              <div class="keyword-alerts-header">
+                <span>🔔 Custom Keyword Alerts</span>
+                <button type="button" class="keyword-popover-close" id="keywordAlertsClose">&times;</button>
+              </div>
+              <div class="keyword-alerts-body">
+                <p class="keyword-alerts-desc">Get highlighted deal cards and instant alerts whenever matching deals drop:</p>
+                <div class="keyword-input-row">
+                  <input type="text" id="keywordAlertInput" placeholder="e.g. Sony, Earbuds, Air Fryer..." maxlength="30">
+                  <button type="button" id="keywordAlertAddBtn" class="btn btn-primary">Add</button>
+                </div>
+                <div class="keyword-tags-container" id="keywordTagsContainer"></div>
+              </div>
+            </div>
+          </div>
+
+          <button id="refreshBtn" class="btn-refresh" title="Refresh Live Deals">
+            <span class="refresh-icon">🔄</span>
+            <span class="refresh-text">Refresh</span>
+          </button>
+        </div>
+      </section>
+    </div>
 
     <!-- Main Deals Feed Section Title & Live Timestamp Banner -->
     <div class="feed-section-header">
@@ -1211,6 +1218,10 @@
     </div>
 
     <!-- Wirecutter-Style Today's Top 3 Must-Buy Picks Hero Spotlight Strip -->
+    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
+    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
+    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
+    <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
     <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
     <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
     <!-- Wirecutter-Style Top 3 Must-Buy Picks Hero Spotlight Strip -->
@@ -1490,10 +1501,10 @@
 
     <!-- Deals Grid Container -->
     <div id="dealsGrid" class="deals-grid" data-anchor="deals-grid">
-      <article class="deal-card " data-asin="B000000001">
+      <article class="deal-card " data-asin="B000000001" id="deal-1" data-reels-num="1">
         <div class="card-top">
           <div class="card-badges">
-            <span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
+            <span class="deal-reels-num" data-reels-num="1" title="Reel / Post #1">#1</span><span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
           </div>
           <div class="card-top-actions">
             <button class="btn-hotness-degree" data-asin="B000000001" data-base="229" title="Upvote deal hotness">🔥 <span class="degree-count">229°</span></button>
@@ -1527,6 +1538,7 @@
               
               <span class="discount-badge">40% OFF</span>
             </a>
+            
             
           </div>
 
@@ -1581,8 +1593,8 @@
         </div>
 
         <div class="card-footer">
-          <a href="/a/B000000001" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Diwali Deal on Amazon ↗</span>
+          <a href="https://www.amazon.in/dp/B000000001?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=web_col_under99" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+            <span>🛒 Check Live Price on Amazon ↗</span>
           </a>
           <a href="https://t.me/DealDash_ai_Bot?start=track_audio & head_1169_sony-product-1-audio" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
             <span>🔔 Track</span>
@@ -1595,10 +1607,10 @@
           </a>
         </div>
       </article>
-      <article class="deal-card " data-asin="B000000002">
+      <article class="deal-card " data-asin="B000000002" id="deal-2" data-reels-num="2">
         <div class="card-top">
           <div class="card-badges">
-            <span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
+            <span class="deal-reels-num" data-reels-num="2" title="Reel / Post #2">#2</span><span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
           </div>
           <div class="card-top-actions">
             <button class="btn-hotness-degree" data-asin="B000000002" data-base="229" title="Upvote deal hotness">🔥 <span class="degree-count">229°</span></button>
@@ -1632,6 +1644,7 @@
               
               <span class="discount-badge">40% OFF</span>
             </a>
+            
             
           </div>
 
@@ -1686,8 +1699,8 @@
         </div>
 
         <div class="card-footer">
-          <a href="/a/B000000002" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Diwali Deal on Amazon ↗</span>
+          <a href="https://www.amazon.in/dp/B000000002?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=web_col_under99" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+            <span>🛒 Check Live Price on Amazon ↗</span>
           </a>
           <a href="https://t.me/DealDash_ai_Bot?start=track_audio & head_1169_sony-product-2-audio" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
             <span>🔔 Track</span>
@@ -1700,10 +1713,10 @@
           </a>
         </div>
       </article>
-      <article class="deal-card " data-asin="B000000003">
+      <article class="deal-card " data-asin="B000000003" id="deal-3" data-reels-num="3">
         <div class="card-top">
           <div class="card-badges">
-            <span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
+            <span class="deal-reels-num" data-reels-num="3" title="Reel / Post #3">#3</span><span class="badge-tag badge-new">⚡ NEW</span><span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span><span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span><span class="badge-tag badge-telegram">📲 Featured on Telegram</span>
           </div>
           <div class="card-top-actions">
             <button class="btn-hotness-degree" data-asin="B000000003" data-base="229" title="Upvote deal hotness">🔥 <span class="degree-count">229°</span></button>
@@ -1737,6 +1750,7 @@
               
               <span class="discount-badge">40% OFF</span>
             </a>
+            
             
           </div>
 
@@ -1791,8 +1805,8 @@
         </div>
 
         <div class="card-footer">
-          <a href="/a/B000000003" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>🛒 Grab Diwali Deal on Amazon ↗</span>
+          <a href="https://www.amazon.in/dp/B000000003?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=web_col_under99" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+            <span>🛒 Check Live Price on Amazon ↗</span>
           </a>
           <a href="https://t.me/DealDash_ai_Bot?start=track_audio & head_1169_sony-product-3-audio" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
             <span>🔔 Track</span>
@@ -1819,6 +1833,10 @@
     <div id="olderDealsContainer" class="older-deals-container hidden"></div>
 
         <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
+    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
+    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
+    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
+    <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
     <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
     <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
     <!-- MySmartPrice-Style Top 5 Quick-Compare Table -->
@@ -2267,7 +2285,6 @@
           <a href="https://chat.whatsapp.com/GspHsCGTRm29orUszbuvh3?s=cl&p=a&mlu=4&ilr=4&iam=2" target="_blank" rel="noopener noreferrer" class="footer-link">💬 WhatsApp Deals</a>
           <a href="/deals.html" class="footer-link">🔥 Deals</a>
           <a href="/electronics.html" class="footer-link">💻 Electronics</a>
-          <a href="/mobiles.html" class="footer-link">📱 Mobiles</a>
           <a href="/home.html" class="footer-link">🏠 Home & Kitchen</a>
           <a href="/fashion.html" class="footer-link">👕 Fashion</a>
           <a href="/grocery.html" class="footer-link">🧴 Grocery</a>

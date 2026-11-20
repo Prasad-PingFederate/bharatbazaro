@@ -138,18 +138,6 @@ PAGE_CONFIGS = [
         "breadcrumb_name": "Loot Deals",
     },
     {
-        "filename": "mobiles.html",
-        "title": "Best Mobile Phone Deals Today in India — iPhone, Samsung, OnePlus Price Drops | BharatBazaro",
-        "canonical": "https://bharatbazaro.com/mobiles.html",
-        "meta_description": "Best smartphone and mobile phone deals today in India. Live price drops on iPhones, Samsung Galaxy, OnePlus, chargers, cases, and mobile accessories.",
-        "hero_title": 'Best Mobile Phone Deals & <span class="gradient-text">Smartphone Price Drops</span>',
-        "hero_subtitle": "Live automated price drops on iPhones, Samsung Galaxy, OnePlus, chargers, and mobile accessories.",
-        "category_slug": "mobiles",
-        "initial_filter": None,
-        "initial_max_price": None,
-        "breadcrumb_name": "Mobiles & Accessories",
-    },
-    {
         "filename": "electronics.html",
         "title": "Top Electronics, Headphones, Laptops & Smartwatch Price Drops Today | BharatBazaro",
         "canonical": "https://bharatbazaro.com/electronics.html",
@@ -484,11 +472,13 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
     track_telegram_url = f"https://t.me/{bot_username}?start=track_{cat_slug}_{target_price}_{kw_slug}"
 
     badges = []
+    reels_num = card_index + 1
+    badges.append(f'<span class="deal-reels-num" data-reels-num="{reels_num}" title="Reel / Post #{reels_num}">#{reels_num}</span>')
     if d.get("is_new") or (d.get("age_hours") is not None and d.get("age_hours") <= 2.0):
         badges.append('<span class="badge-tag badge-new">⚡ NEW</span>')
-    is_diwali_steal = bool(d.get("is_diwali_steal") or (savings_inr >= 1000 and disc_pct >= 25))
-    if is_diwali_steal:
-        badges.append('<span class="badge-tag badge-diwali">🔥 DIWALI STEAL</span>')
+    is_price_drop = bool(d.get("is_price_drop") or d.get("is_diwali_steal") or (savings_inr >= 1000 and disc_pct >= 25))
+    if is_price_drop:
+        badges.append('<span class="badge-tag badge-drop">⚡ TODAY\'S PRICE DROP</span>')
     if d.get("is_cookie_magnet"):
         badges.append('<span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span>')
     if disc_pct >= 35 or d.get("price_context") == "all_time_low" or d.get("lowest_badge") == "ALL-TIME LOW":
@@ -505,16 +495,19 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
         badges.append('<span class="badge-tag badge-telegram">📲 Featured on Telegram</span>')
     badges_html = "".join(badges)
 
-    updated_at = d.get("updated_at") or int(time.time())
+    updated_at = d.get("last_verified_at_epoch") or d.get("updated_at") or int(time.time())
     diff_sec = max(0, int(time.time() - updated_at))
-    if diff_sec < 60:
+    if diff_sec < 300:
         time_ago = "Just now"
     elif diff_sec < 3600:
-        time_ago = f"{diff_sec // 60}m ago"
+        time_ago = f"{max(1, diff_sec // 60)}m ago"
     elif diff_sec < 86400:
         time_ago = f"{diff_sec // 3600}h ago"
     else:
         time_ago = f"{diff_sec // 86400}d ago"
+
+    is_stale_price = diff_sec > 21600 or (d.get("age_hours") is not None and d.get("age_hours") > 6.0)
+    stale_price_note = '<div class="price-stale-note" style="font-size:0.75rem; color:#f59e0b; margin-top:2px;">Last checked price — Verify Live Price on Amazon ↗</div>' if is_stale_price else ''
 
     # HotUKDeals Degree Meter
     score_val = d.get("score") or 70
@@ -652,7 +645,7 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
     else:
         img_tag = f'<img src="{image_url}" alt="{title}" class="card-img" loading="lazy" decoding="async" width="220" height="220" onload="{img_fallback}" onerror="this.onerror=null;this.src=\'{svg_placeholder}\';">'
 
-    return f'''      <article class="deal-card {loot_class}" data-asin="{asin}">
+    return f'''      <article class="deal-card {loot_class}" data-asin="{asin}" id="deal-{reels_num}" data-reels-num="{reels_num}">
         <div class="card-top">
           <div class="card-badges">
             {badges_html}
@@ -690,6 +683,7 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
               {disc_html}
             </a>
             {savings_html}
+            {stale_price_note}
           </div>
 
           {price_range_html}
@@ -717,7 +711,7 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
 
         <div class="card-footer">
           <a href="{aff_btn_url}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
-            <span>{'🛒 Grab Daily Steal on Amazon ↗' if d.get('is_cookie_magnet') else ('🛒 Grab Diwali Deal on Amazon ↗' if (buy_conf >= 80 or d.get('is_diwali_steal') or eff_price >= 2000) else '🛒 Grab Deal on Amazon ↗')}</span>
+            <span>{'🛒 Grab Daily Steal on Amazon ↗' if d.get('is_cookie_magnet') else ('🛒 Check Live Price on Amazon ↗' if (buy_conf >= 80 or is_price_drop or eff_price >= 2000) else '🛒 Check Live Price on Amazon ↗')}</span>
           </a>
           <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
             <span>🔔 Track</span>
@@ -880,6 +874,47 @@ def visitor_rank(d: Dict[str, Any]) -> tuple:
     )
 
 
+_PHONE_ACC_ALLOW = re.compile(
+    r"\b(case|cover|back\s*cover|tempered|glass|screen\s*protector|charger|adapter|cable|cord|power\s*bank|holder|mount|stand|dock|earphone|headphone|buds|airpods)\b",
+    re.I,
+)
+_SMARTPHONE_BLOCK = re.compile(
+    r"\b(smartphone|5g\s*phone|mobile\s*phone|iphone\s*(1[1-9]|[6789]|se|pro|max|plus|air)|galaxy\s*(s[1-9]|z|a[0-9]|m[0-9]|f[0-9]|ultra|fe)|redmi\s*note|realme|poco|iqoo|oneplus\s*(1[0-9]|[6-9]|nord|ce)|pixel\s*[0-9]|vivo\s*[vtyx]|oppo\s*(reno|f|a))\b",
+    re.I,
+)
+_LAPTOP_BLOCK = re.compile(
+    r"\b(laptop|macbook|notebook|chromebook|thinkpad|ideapad|vivobook|zenbook|pavilion|inspiron|omen|tuf\s*gaming|legion)\b",
+    re.I,
+)
+
+def is_low_roi_or_zero_commission(d: Dict[str, Any]) -> bool:
+    """Filter out 0% commission smartphones and capped laptops > ₹35,000 so homepage prioritizes 5%-9% categories."""
+    title = str(d.get("title") or "")
+    cat = str(d.get("category") or "").lower()
+    price = d.get("effective_price") or d.get("list_price") or 0
+
+    # Laptops > 35,000 (0.2%-1% commission cap, terrible ROI)
+    if price > 35000 and ("laptop" in cat or "computing" in cat or _LAPTOP_BLOCK.search(title)):
+        return True
+
+    # 0% commission smartphones
+    if not _PHONE_ACC_ALLOW.search(title):
+        if cat in ("mobile", "mobiles", "smartphone", "smartphones") or "mobiles & accessories" in cat:
+            return True
+        if _SMARTPHONE_BLOCK.search(title):
+            return True
+
+    # Quarantine static fallback/seed items where hotness == 180 and low_price == current_price unless verified < 12h
+    hotness = d.get("hotness") or d.get("score")
+    hist_min = d.get("historical_min")
+    if hotness == 180 and hist_min and price == hist_min:
+        verified_epoch = d.get("last_verified_at_epoch") or d.get("updated_at") or 0
+        if (time.time() - verified_epoch) > (12 * 3600):
+            return True
+
+    return False
+
+
 def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Filter deals matching category, price threshold, or filter, backfilling so pages are never thin."""
     slug = page_cfg.get("category_slug")
@@ -887,52 +922,51 @@ def filter_deals_for_page(page_cfg: dict, all_deals: List[Dict[str, Any]]) -> Li
     max_price = page_cfg.get("initial_max_price")
 
     if filt == "loot":
-        loots = [d for d in all_deals if d.get("is_loot")]
-        steep = [d for d in all_deals if not d.get("is_loot") and (d.get("effective_discount_pct") or d.get("discount_pct") or 0) >= 50]
+        loots = [d for d in all_deals if d.get("is_loot") and not is_low_roi_or_zero_commission(d)]
+        steep = [d for d in all_deals if not d.get("is_loot") and not is_low_roi_or_zero_commission(d) and (d.get("effective_discount_pct") or d.get("discount_pct") or 0) >= 50]
         combined = loots + [d for d in steep if d not in loots]
         if len(combined) < 15:
-            combined += [d for d in all_deals if d not in combined]
+            combined += [d for d in all_deals if d not in combined and not is_low_roi_or_zero_commission(d)]
         combined.sort(key=visitor_rank, reverse=True)
         return combined[:30]
 
     if filt == "coupons":
         coupons = [
             d for d in all_deals
-            if (d.get("coupon_discount") and d.get("coupon_discount") > 0)
+            if not is_low_roi_or_zero_commission(d)
+            and ((d.get("coupon_discount") and d.get("coupon_discount") > 0)
             or d.get("coupon_text")
             or d.get("promo_code")
-            or d.get("bank_offer")
+            or d.get("bank_offer"))
         ]
         if len(coupons) < 10:
-            extra = [d for d in all_deals if d not in coupons and (d.get("effective_discount_pct") or d.get("discount_pct") or 0) >= 40]
+            extra = [d for d in all_deals if d not in coupons and not is_low_roi_or_zero_commission(d) and (d.get("effective_discount_pct") or d.get("discount_pct") or 0) >= 40]
             coupons += extra
         if len(coupons) < 10:
-            coupons += [d for d in all_deals if d not in coupons]
+            coupons += [d for d in all_deals if d not in coupons and not is_low_roi_or_zero_commission(d)]
         return coupons[:30]
 
     if max_price is not None:
-        matched = [d for d in all_deals if (d.get("effective_price") or d.get("list_price") or 0) <= max_price]
+        matched = [d for d in all_deals if not is_low_roi_or_zero_commission(d) and (d.get("effective_price") or d.get("list_price") or 0) <= max_price]
         if len(matched) < 6:
             # Backfill with nearest lowest price deals
-            sorted_all = sorted(all_deals, key=lambda x: (x.get("effective_price") or x.get("list_price") or 999999))
+            sorted_all = sorted([d for d in all_deals if not is_low_roi_or_zero_commission(d)], key=lambda x: (x.get("effective_price") or x.get("list_price") or 999999))
             matched = sorted_all[:max(6, len(matched))]
         else:
             matched.sort(key=lambda x: (x.get("effective_price") or x.get("list_price") or 999999))
         return matched[:30]
 
     if not slug or slug == "all":
-        ranked = sorted(all_deals, key=visitor_rank, reverse=True)
+        filtered = [d for d in all_deals if not is_low_roi_or_zero_commission(d)]
+        ranked = sorted(filtered or all_deals, key=visitor_rank, reverse=True)
         return ranked[:30]
 
     matched = []
     for d in all_deals:
         cat = (d.get("category") or "").lower()
         t = (d.get("title") or "").lower()
-        if slug == "mobiles":
-            if "mobile" in cat or any(w in t for w in ("phone", "iphone", "samsung", "oneplus", "mobile", "case", "charger", "power bank", "tempered glass")):
-                matched.append(d)
-        elif slug == "electronics":
-            if any(c in cat for c in ("electronic", "audio", "laptop", "computing")) or any(w in t for w in ("headphone", "earphone", "audio", "speaker", "soundbar", "laptop", "monitor", "keyboard", "mouse", "ssd", "smartwatch")):
+        if slug == "electronics":
+            if (any(c in cat for c in ("electronic", "audio", "laptop", "computing")) or any(w in t for w in ("headphone", "earphone", "audio", "speaker", "soundbar", "laptop", "monitor", "keyboard", "mouse", "ssd", "smartwatch"))) and not is_low_roi_or_zero_commission(d):
                 matched.append(d)
         elif slug == "home":
             if "home" in cat or "kitchen" in cat or any(w in t for w in ("cooker", "fryer", "air fryer", "pan", "bottle", "purifier", "mixer", "grinder", "kitchen", "kettle", "bedsheet", "curtain", "appliance", "blender", "iron", "toaster")):
@@ -1227,17 +1261,16 @@ def generate_page_html(
     init_max_price = page_cfg.get("initial_max_price")
 
     # Ensure Electronics pill exists
-    if 'data-category="Electronics & Audio"' not in html_out:
+    if 'data-category="Electronics & Audio"' not in html_out and '<button class="cat-pill active" data-category="all">All Categories</button>' in html_out:
         html_out = html_out.replace(
-            '<button class="cat-pill" data-category="Mobiles & Accessories">📱 Mobiles</button>',
-            '<button class="cat-pill" data-category="Mobiles & Accessories">📱 Mobiles</button>\n        <button class="cat-pill" data-category="Electronics & Audio">⚡ Electronics</button>'
+            '<button class="cat-pill active" data-category="all">All Categories</button>',
+            '<button class="cat-pill active" data-category="all">All Categories</button>\n        <button class="cat-pill" data-category="Home & Kitchen">🏠 Home & Kitchen</button>\n        <button class="cat-pill" data-category="Personal Care & Grocery">🧴 Beauty &amp; Essentials</button>\n        <button class="cat-pill" data-category="Fashion & Footwear">👕 Fashion</button>\n        <button class="cat-pill" data-category="Electronics & Audio">⚡ Electronics</button>'
         )
 
     # Reset active on category pills
     html_out = re.sub(r'class="cat-pill active"', 'class="cat-pill"', html_out)
     slug_to_cat = {
         "all": "all",
-        "mobiles": "Mobiles & Accessories",
         "electronics": "Electronics & Audio",
         "home": "Home & Kitchen",
         "fashion": "Fashion & Footwear",
@@ -1335,8 +1368,8 @@ def generate_page_html(
     # Ensure home.html is in footer links
     if '<a href="/home.html"' not in html_out:
         html_out = html_out.replace(
-            '<a href="/mobiles.html" class="footer-link">📱 Mobiles</a>',
-            '<a href="/mobiles.html" class="footer-link">📱 Mobiles</a>\n          <a href="/home.html" class="footer-link">🏠 Home & Kitchen</a>'
+            '<a href="/electronics.html" class="footer-link">⚡ Electronics</a>',
+            '<a href="/electronics.html" class="footer-link">⚡ Electronics</a>\n          <a href="/home.html" class="footer-link">🏠 Home & Kitchen</a>'
         )
     if '/beauty.html' not in html_out:
         html_out = html_out.replace(
@@ -1871,7 +1904,6 @@ def render_product_page_html(
           <a href="https://chat.whatsapp.com/GspHsCGTRm29orUszbuvh3?s=cl&p=a&mlu=4&ilr=4&iam=2" target="_blank" rel="noopener noreferrer" class="footer-link">💬 WhatsApp Deals</a>
           <a href="/deals.html" class="footer-link">🔥 Deals</a>
           <a href="/electronics.html" class="footer-link">⚡ Electronics</a>
-          <a href="/mobiles.html" class="footer-link">📱 Mobiles</a>
           <a href="/home.html" class="footer-link">🏠 Home & Kitchen</a>
           <a href="/fashion.html" class="footer-link">👗 Fashion</a>
           <a href="/grocery.html" class="footer-link">🛒 Grocery</a>
@@ -2053,7 +2085,6 @@ def update_sitemap_xml(root_dir: Path, deal_asins: Optional[List[str]] = None, e
         ("https://bharatbazaro.com/", today, "hourly", "1.0"),
         # 2. Category Pages
         ("https://bharatbazaro.com/deals.html", today, "hourly", "0.9"),
-        ("https://bharatbazaro.com/mobiles.html", today, "daily", "0.9"),
         ("https://bharatbazaro.com/electronics.html", today, "daily", "0.9"),
         ("https://bharatbazaro.com/home.html", today, "daily", "0.9"),
         ("https://bharatbazaro.com/fashion.html", today, "daily", "0.9"),
@@ -2172,13 +2203,8 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
             logger.error(f"Failed to pre-render product page for {asin}: {e}", exc_info=True)
 
     live_names = {f"{asin}.html" for asin in generated_asins}
-    removed = 0
-    for stale in deal_dir.glob("*.html"):
-        if stale.name not in live_names:
-            stale.unlink()
-            removed += 1
-    if removed:
-        logger.info(f"Removed {removed} expired deal pages from {deal_dir}")
+    # Retain all existing deal pages to maintain zero deletion invariant and evergreen historical URLs
+    pass
 
     logger.info(f"Generated {len(generated_asins)} programmatic product pages in {deal_dir}")
 

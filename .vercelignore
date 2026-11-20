@@ -1,0 +1,19 @@
+# Vercel Deployment Ignore Configuration
+# Ignore Python batch scripts and local test suites so Vercel treats BharatBazaro
+# strictly as a static website with Node.js serverless functions (in /api).
+requirements.txt
+pyproject.toml
+dealbot/
+tests/
+scripts/
+run_once.py
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.env
+.env.example
+data/*.sqlite3*
+data/*.db*
+data/*.flag
+reports/

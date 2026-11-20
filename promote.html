@@ -158,7 +158,7 @@
       try { await navigator.clipboard.writeText(text); } catch (e) {}
       const href = spec.href(text, url);
       if (href) window.open(href, "_blank", "noopener,noreferrer");
-      const btn = document.querySelector('[data-post="' + name + '"]');
+      const btn = [...document.querySelectorAll("[data-post]")].find((el) => el.dataset.post === name);
       if (btn) btn.textContent = "Copied, opened";
     }
 

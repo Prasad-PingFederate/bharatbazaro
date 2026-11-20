@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-20 00:09 IST",
-  "generated_at_epoch": 1795113561,
+  "generated_at_ist": "2026-11-20 06:43 IST",
+  "generated_at_epoch": 1795137239,
   "top_loot_summary": [
+    {
+      "asin": "B098FH5P3C",
+      "title": "Bose QuietComfort 45 Bluetooth Wireless Noise Cancelling Headphones",
+      "effective_price": 19900,
+      "mrp": 29900,
+      "discount_pct": 33,
+      "savings_inr": 10000,
+      "brand": "Bose",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B098FH5P3C?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B098FH5P3C.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0863TXGM3",
+      "title": "Sony WH-1000XM4 Industry Leading Wireless Noise Cancelling Headphones",
+      "effective_price": 19990,
+      "mrp": 29990,
+      "discount_pct": 33,
+      "savings_inr": 10000,
+      "brand": "Sony",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0863TXGM3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0863TXGM3.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09C63T5V3",
+      "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds (20H Battery, IPX4)",
+      "effective_price": 3990,
+      "mrp": 8990,
+      "discount_pct": 56,
+      "savings_inr": 5000,
+      "brand": "Sony",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09C63T5V3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09C63T5V3.html",
+      "coupon_text": null
+    },
     {
       "asin": "B09G3Z55TK",
       "title": "JBL Flip 6 Wireless Portable Bluetooth Speaker (IP67 Waterproof)",
@@ -26,45 +65,6 @@
       "category": "Electronics & Audio",
       "affiliate_url": "https://www.amazon.in/dp/B0BN8H1L7K?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BN8H1L7K.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BC8P3X64",
-      "title": "Amazfit GTR 4 Smart Watch with Bluetooth Calling, 150+ Sports Modes",
-      "effective_price": 14999,
-      "mrp": 23999,
-      "discount_pct": 38,
-      "savings_inr": 9000,
-      "brand": "Amazfit",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X64?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X64.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BF54979C",
-      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars and Juicer Jar",
-      "effective_price": 2899,
-      "mrp": 6195,
-      "discount_pct": 53,
-      "savings_inr": 3296,
-      "brand": "Prestige",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0BF54979C?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BF54979C.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B085Z1F1M6",
-      "title": "Cello Opalware Dazzle Tropical Lagoon Dinner Set 35 Pieces (White)",
-      "effective_price": 2199,
-      "mrp": 4990,
-      "discount_pct": 56,
-      "savings_inr": 2791,
-      "brand": "Cello",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B085Z1F1M6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B085Z1F1M6.html",
       "coupon_text": null
     }
   ],
@@ -113,10 +113,10 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 23.3,
-    "trending_score": 13.8,
+    "age_hours": 29.8,
+    "trending_score": 10.0,
     "is_new": false,
-    "is_fresh": true,
+    "is_fresh": false,
     "updated_at": 1795029794,
     "updated_at_ist": "2026-11-19 00:53 IST"
   },
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795113558,
-    "last_verified_at_epoch": 1795113558,
-    "last_verified_at_ist": "2026-11-20 00:09 IST",
+    "posted_at_epoch": 1795137228,
+    "last_verified_at_epoch": 1795137228,
+    "last_verified_at_ist": "2026-11-20 06:43 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795113558,
-    "updated_at_ist": "2026-11-20 00:09 IST"
+    "updated_at": 1795137228,
+    "updated_at_ist": "2026-11-20 06:43 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795113558,
-    "last_verified_at_epoch": 1795113558,
-    "last_verified_at_ist": "2026-11-20 00:09 IST",
+    "posted_at_epoch": 1795137228,
+    "last_verified_at_epoch": 1795137228,
+    "last_verified_at_ist": "2026-11-20 06:43 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795113558,
-    "updated_at_ist": "2026-11-20 00:09 IST"
+    "updated_at": 1795137228,
+    "updated_at_ist": "2026-11-20 06:43 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 160,
-    "loot_count": 21,
+    "total_deals": 155,
+    "loot_count": 19,
     "max_discount_pct": 89,
-    "total_savings_inr": 527628
+    "total_savings_inr": 489147
   }
 }

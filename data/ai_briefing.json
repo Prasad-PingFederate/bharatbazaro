@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-20 11:37 IST",
-  "generated_at_epoch": 1795154868,
+  "generated_at_ist": "2026-11-20 14:39 IST",
+  "generated_at_epoch": 1795165760,
   "top_loot_summary": [
+    {
+      "asin": "B09X7G2Z1D",
+      "title": "HP Smart Tank 580 All-in-One WiFi Colour Ink Tank Printer",
+      "effective_price": 12499,
+      "mrp": 18848,
+      "discount_pct": 34,
+      "savings_inr": 6349,
+      "brand": "HP",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B09X7G2Z1D?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09X7G2Z1D.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09NVPSCQT",
+      "title": "boAt Rockerz 255 Pro+ Bluetooth in Ear Neckband with 40H Playtime",
+      "effective_price": 999,
+      "mrp": 3990,
+      "discount_pct": 75,
+      "savings_inr": 2991,
+      "brand": "boAt",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09NVPSCQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09NVPSCQT.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0BSGTLXJ1",
+      "title": "Boult Audio Z40 True Wireless in Ear Earbuds (60H Playtime, ENC)",
+      "effective_price": 999,
+      "mrp": 4999,
+      "discount_pct": 80,
+      "savings_inr": 4000,
+      "brand": "Boult",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0BSGTLXJ1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BSGTLXJ1.html",
+      "coupon_text": null
+    },
     {
       "asin": "B07WGNKGYK",
       "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars & Juicer",
@@ -26,45 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B00B29VFR6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B00B29VFR6.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09XXWMS4Z",
-      "title": "Marshall Emberton II Portable Bluetooth Speaker (30+ Hours Playtime)",
-      "effective_price": 13999,
-      "mrp": 19999,
-      "discount_pct": 30,
-      "savings_inr": 6000,
-      "brand": "Marshall",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09XXWMS4Z?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09XXWMS4Z.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08B3Q1RQT",
-      "title": "LG 27-inch 4K UHD IPS Monitor (HDR 10, AMD FreeSync, Dual HDMI)",
-      "effective_price": 22999,
-      "mrp": 35000,
-      "discount_pct": 34,
-      "savings_inr": 12001,
-      "brand": "LG",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B08B3Q1RQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08B3Q1RQT.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B8NTZ24L",
-      "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
-      "effective_price": 1899,
-      "mrp": 4499,
-      "discount_pct": 58,
-      "savings_inr": 2600,
-      "brand": "Puma",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html",
       "coupon_text": null
     }
   ],
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 34.7,
+    "age_hours": 37.8,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795154862,
-    "last_verified_at_epoch": 1795154862,
-    "last_verified_at_ist": "2026-11-20 11:37 IST",
+    "posted_at_epoch": 1795165757,
+    "last_verified_at_epoch": 1795165757,
+    "last_verified_at_ist": "2026-11-20 14:39 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795154862,
-    "updated_at_ist": "2026-11-20 11:37 IST"
+    "updated_at": 1795165757,
+    "updated_at_ist": "2026-11-20 14:39 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795154862,
-    "last_verified_at_epoch": 1795154862,
-    "last_verified_at_ist": "2026-11-20 11:37 IST",
+    "posted_at_epoch": 1795165757,
+    "last_verified_at_epoch": 1795165757,
+    "last_verified_at_ist": "2026-11-20 14:39 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795154862,
-    "updated_at_ist": "2026-11-20 11:37 IST"
+    "updated_at": 1795165757,
+    "updated_at_ist": "2026-11-20 14:39 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 168,
-    "loot_count": 26,
+    "total_deals": 169,
+    "loot_count": 29,
     "max_discount_pct": 89,
-    "total_savings_inr": 545585
+    "total_savings_inr": 547685
   }
 }

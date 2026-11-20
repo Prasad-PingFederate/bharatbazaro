@@ -272,6 +272,59 @@ PAGE_CONFIGS = [
         "initial_max_price": None,
         "breadcrumb_name": "Hidden Coupons",
     },
+    # ── Curated Budget Collections (/collections/*) ──
+    {
+        "filename": "collections/under-99.html",
+        "title": "Amazon Deals Under ₹99 — Best Budget Loot & Cart Fillers India | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/collections/under-99",
+        "meta_description": "Curated Amazon India deals under ₹99. Mobile cables, kitchen gadgets, stationery, and daily essentials to activate free delivery.",
+        "hero_title": 'Curated Deals <span class="gradient-text">Under ₹99</span>',
+        "hero_subtitle": "Impulse cart fillers, mobile accessories, kitchen loots, and daily essentials under ₹99.",
+        "category_slug": None,
+        "initial_filter": None,
+        "initial_max_price": 99,
+        "breadcrumb_name": "Under ₹99 Collection",
+        "subtag": "web_col_under99",
+    },
+    {
+        "filename": "collections/under-199.html",
+        "title": "Best Deals Under ₹199 on Amazon India — Daily Steals & Cart Fillers | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/collections/under-199",
+        "meta_description": "Today's top Amazon India deals under ₹199. Hand-picked groceries, cables, grooming tools, and daily essentials with verified price drops.",
+        "hero_title": 'Top Curated Deals <span class="gradient-text">Under ₹199</span>',
+        "hero_subtitle": "Curated daily essentials, cables, grooming tools, and kitchen helpers under ₹199.",
+        "category_slug": None,
+        "initial_filter": None,
+        "initial_max_price": 199,
+        "breadcrumb_name": "Under ₹199 Collection",
+        "subtag": "web_col_under199",
+    },
+    {
+        "filename": "collections/under-499.html",
+        "title": "Top Deals Under ₹499 Today — Earbuds, Branded Fashion & Tech | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/collections/under-499",
+        "meta_description": "Top Amazon India loot deals under ₹499. 50%–85% off Bluetooth earbuds, watches, power banks, and branded accessories.",
+        "hero_title": 'Best Steals <span class="gradient-text">Under ₹499</span>',
+        "hero_subtitle": "High-value steals on Bluetooth earphones, smart accessories, home tools, and fashion under ₹499.",
+        "category_slug": None,
+        "initial_filter": None,
+        "initial_max_price": 499,
+        "breadcrumb_name": "Under ₹499 Collection",
+        "subtag": "web_col_under499",
+    },
+    {
+        "filename": "collections/loot-of-the-day.html",
+        "title": "Loot of the Day — 70%–90% Off Screaming Price Errors & Flash Deals | BharatBazaro",
+        "canonical": "https://bharatbazaro.com/collections/loot-of-the-day",
+        "meta_description": "Today's top viral loot deals and screaming price drops on Amazon India. 70% to 90% off deals updated live every 30 minutes.",
+        "hero_title": 'Loot of the Day <span class="gradient-text">(70%–90% Off)</span>',
+        "hero_subtitle": "Viral price drops, all-time lows, and screaming discounts verified live by AI Deal Radar.",
+        "category_slug": None,
+        "initial_filter": "loot",
+        "initial_max_price": None,
+        "breadcrumb_name": "Loot of the Day Collection",
+        "subtag": "web_col_loot",
+    },
 ]
 
 
@@ -1307,11 +1360,13 @@ def generate_page_html(
         injection_code = "  " + "\n  ".join(script_injections) + "\n  <script src=\"app.js\">"
         html_out = re.sub(r'\s*<script\s+src=["\']app\.js["\']>', f'\n{injection_code}', html_out, count=1)
 
-    # 11. Inject BazarAI Chat Widget
+    # 11. Inject BazarAI Chat Widget & Conversion Engine
+    if 'conversion_engine.js' not in html_out:
+        html_out = html_out.replace('</body>', '  <script src="/conversion_engine.js"></script>\n</body>')
     if 'id="bazaroAiWidget"' not in html_out:
         html_out = html_out.replace('</body>', f'''{BAZAR_WIDGET_HTML}\n</body>''')
     elif 'bazaro_ai.js' not in html_out:
-        html_out = html_out.replace('</body>', '  <script src="/bazaro_ai.js"></script>\n</body>')
+        html_out = html_out.replace('</body>', '  <script src="/bazaro_ai.js"></script>\n  <script src="/conversion_engine.js"></script>\n</body>')
 
     return html_out
 
@@ -1393,17 +1448,34 @@ def render_product_page_html(
         badges.append('<span class="badge-tag badge-telegram">📲 Featured on Telegram</span>')
     badges_html = " ".join(badges)
 
-    # Coupon Claim HTML
+    # Coupon Claim & Copy Coupon Button HTML
     coupon_claim_html = ""
-    coupon_disc = deal.get("coupon_discount")
-    coupon_text = deal.get("coupon_text")
-    if coupon_disc or coupon_text:
-        c_label = coupon_text or f"Apply ₹{coupon_disc:,} coupon"
+    promo_code = deal.get("promo_code") or deal.get("coupon_code")
+    copy_coupon_btn_html = ""
+    if promo_code and not is_expired:
+        clean_promo = html_lib.escape(str(promo_code))
+        copy_coupon_btn_html = f'''
+        <button class="btn-copy-coupon-fast" onclick="copyCouponAndOpen('{clean_promo}', '{affiliate_url}', '{asin}')" title="Click to copy promo code and open Amazon deal">
+          <span>✂️ COPY CODE & OPEN AMAZON/FLIPKART ↗</span>
+        </button>'''
         coupon_claim_html = f'''
-        <div class="coupon-claim-banner" style="margin: 16px 0; padding: 12px 16px; border-radius: 12px; background: rgba(16, 185, 129, 0.12); border: 1px dashed #10b981;">
-          <span style="font-size: 1.2rem;">☑️</span>
-          <span style="color: #34d399; font-weight: 600;">How to claim coupon: Tick <b>"{html_lib.escape(str(c_label))}"</b> checkbox on Amazon India product page before adding to cart.</span>
+        <div class="coupon-claim-banner" style="margin: 16px 0; padding: 12px 16px; border-radius: 12px; background: rgba(16, 185, 129, 0.12); border: 1px dashed #10b981; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.2rem;">🎟️</span>
+            <span style="color: #34d399; font-weight: 600;">Promo Code: <b style="font-family: var(--font-mono); font-size: 1.1rem; color: #fff; background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 4px;">{clean_promo}</b></span>
+          </div>
+          {copy_coupon_btn_html}
         </div>'''
+    else:
+        coupon_disc = deal.get("coupon_discount")
+        coupon_text = deal.get("coupon_text")
+        if coupon_disc or coupon_text:
+            c_label = coupon_text or f"Apply ₹{coupon_disc:,} coupon"
+            coupon_claim_html = f'''
+            <div class="coupon-claim-banner" style="margin: 16px 0; padding: 12px 16px; border-radius: 12px; background: rgba(16, 185, 129, 0.12); border: 1px dashed #10b981;">
+              <span style="font-size: 1.2rem;">☑️</span>
+              <span style="color: #34d399; font-weight: 600;">How to claim coupon: Tick <b>"{html_lib.escape(str(c_label))}"</b> checkbox on Amazon India product page before adding to cart.</span>
+            </div>'''
 
     # Structured Data (JSON-LD)
     schema_data = {
@@ -1633,14 +1705,26 @@ def render_product_page_html(
 
       <!-- Right: Product Information & CTAs -->
       <div class="product-info-col">
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-          <span class="brand-chip">{brand}</span>
-          <span style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">⭐ {rating} <span style="color: var(--text-muted); font-size: 0.8rem;">({review_count:,} reviews)</span></span>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="brand-chip">{brand}</span>
+            <span style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">⭐ {rating} <span style="color: var(--text-muted); font-size: 0.8rem;">({review_count:,} reviews)</span></span>
+          </div>
+          <div class="bb-live-viewers" data-seed="{asin}">
+            <span class="bb-pulse-dot"></span>
+            <span>👀 <b class="bb-viewers-count">14</b> people viewing this deal right now</span>
+          </div>
         </div>
 
         <h1 style="font-size: 1.6rem; font-weight: 800; line-height: 1.35; margin-bottom: 16px; color: var(--text-main);">
           {title}
         </h1>
+
+        <!-- Urgency Flash Sale Countdown Bar -->
+        <div class="bb-urgency-flash-bar">
+          <span>⏳ Flash Deal Ends in: <b class="bb-countdown-time">02h : 14m : 35s</b></span>
+          <span class="claim-pill">🔥 82% Claimed</span>
+        </div>
 
         <!-- Price Waterfall Card -->
         <div class="price-waterfall-box" style="margin-bottom: 20px; padding: 20px; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-card); border-radius: var(--radius-lg);">
@@ -1673,6 +1757,7 @@ def render_product_page_html(
 
         <!-- Primary CTA Buttons -->
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
+          {copy_coupon_btn_html}
           {primary_cta_html}
           <div style="display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap;">
             <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; text-decoration: none; padding: 10px 16px; border-color: #38bdf8; color: #38bdf8; font-weight: 700;">
@@ -1878,6 +1963,7 @@ def render_product_page_html(
   {mobile_sticky_bar_html}
 
   <script src="/bazaro_ai.js"></script>
+  <script src="/conversion_engine.js"></script>
 
 </body>
 </html>'''
@@ -2057,6 +2143,7 @@ def pre_render_all_pages(deals: List[Dict[str, Any]], stats: Dict[str, Any], roo
             page_deals = filter_deals_for_page(page_cfg, deals)
             page_html = generate_page_html(base_html, page_cfg, page_deals, deals, stats)
             dest_file = root_dir / page_cfg["filename"]
+            dest_file.parent.mkdir(parents=True, exist_ok=True)
             dest_file.write_text(page_html, encoding="utf-8")
             logger.info(f"Pre-rendered {len(page_deals)} deals into {dest_file} ({page_cfg['title'][:35]}...)")
         except Exception as e:

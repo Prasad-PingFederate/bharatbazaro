@@ -1209,7 +1209,22 @@
           ${grabonTrustHtml}
         </div>
 
-        <div class="card-footer">
+        ${(d.promo_code || d.coupon_code) ? `
+            <button class="btn-copy-coupon-fast" onclick="event.stopPropagation(); copyCouponAndOpen('${escapeHtml(d.promo_code || d.coupon_code)}', '${escapeHtml(affBtnUrl)}', '${escapeHtml(d.asin)}')">
+              <span>✂️ COPY CODE & OPEN AMAZON ↗</span>
+            </button>
+          ` : ''}
+          ${(d.is_loot || discPct >= 50) ? `
+            <div class="bb-urgency-flash-bar">
+              <span>⏳ Ends in: <b class="bb-countdown-time">02h : 14m : 35s</b></span>
+              <span class="claim-pill">🔥 82% Claimed</span>
+            </div>
+            <div class="bb-live-viewers" data-seed="${escapeHtml(d.asin)}">
+              <span class="bb-pulse-dot"></span>
+              <span>👀 <b class="bb-viewers-count">14</b> people viewing now</span>
+            </div>
+          ` : ''}
+          <div class="card-footer">
           <a href="${escapeHtml(affBtnUrl)}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
             <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : ((buyConf >= 80 || d.is_diwali_steal || effPrice >= 2000) ? '🛒 Grab Diwali Deal on Amazon ↗' : '🛒 Grab Deal on Amazon ↗')}</span>
           </a>
@@ -1881,9 +1896,10 @@
       else if (path.includes('home')) cat = 'home';
       else if (path.includes('fashion')) cat = 'fashion';
       else if (path.includes('grocery')) cat = 'grocery';
-      else if (path.includes('deals')) filter = 'loot';
+      else if (path.includes('deals') || path.includes('loot-of-the-day')) filter = 'loot';
       else if (path.includes('coupons')) filter = 'coupons';
       else if (path.includes('under-99')) maxPrice = '99';
+      else if (path.includes('under-199')) maxPrice = '199';
       else if (path.includes('under-299')) maxPrice = '299';
       else if (path.includes('under-499')) maxPrice = '499';
       else if (path.includes('under-999')) maxPrice = '999';

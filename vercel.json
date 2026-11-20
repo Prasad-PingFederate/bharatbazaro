@@ -2,6 +2,14 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/collections/under-99", "destination": "/collections/under-99.html" },
+    { "source": "/collections/under-199", "destination": "/collections/under-199.html" },
+    { "source": "/collections/under-499", "destination": "/collections/under-499.html" },
+    { "source": "/collections/loot-of-the-day", "destination": "/collections/loot-of-the-day.html" },
+    { "source": "/collections/(.*)", "destination": "/collections/$1.html" },
+    { "source": "/deal/(.*)", "destination": "/deal/$1.html" }
+  ],
   "headers": [
     {
       "source": "/data/(.*)",

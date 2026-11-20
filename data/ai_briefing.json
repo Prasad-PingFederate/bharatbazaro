@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-20 16:46 IST",
-  "generated_at_epoch": 1795173366,
+  "generated_at_ist": "2026-11-20 16:56 IST",
+  "generated_at_epoch": 1795174013,
   "top_loot_summary": [
+    {
+      "asin": "B0FN7WG5KB",
+      "title": "adidas Unisex-Adult Aerosurgestride Running Shoes",
+      "effective_price": 1919,
+      "mrp": 4799,
+      "discount_pct": 60,
+      "savings_inr": 2880,
+      "brand": "Adidas",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0FN7WG5KB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0FN7WG5KB.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0FLYDHYY4",
+      "title": "boAt Stone 1200 Pro, 60W Signature Sound, 76.2mm Drivers, TWS,7.5H Battery, Built-in Mic, Carry Strap,IPX6, Bluetooth Speaker, Wireless Speaker, Portable Speaker (Twilight Black)",
+      "effective_price": 1899,
+      "mrp": 14990,
+      "discount_pct": 70,
+      "savings_inr": 13091,
+      "brand": "boAt",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0FLYDHYY4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0FLYDHYY4.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0CJLWDVD1",
+      "title": "Crompton Versa Horizontal RHS 25L Storage Water Heater (Geyser) with Rust Proof Plastic body and Superior Glassline Coating, Fits under false ceilings, 8 Bar pressure rating and 7yr Tank warranty",
+      "effective_price": 9599,
+      "mrp": 13900,
+      "discount_pct": 20,
+      "savings_inr": 4301,
+      "brand": "Crompton",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0CJLWDVD1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CJLWDVD1.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0CHX24XGQ",
       "title": "Acer Nitro V Gaming Laptop 13th Gen Intel Core i5 (RTX 4050 6GB Graphics, 144Hz)",
@@ -26,45 +65,6 @@
       "category": "Laptops & Computing",
       "affiliate_url": "https://www.amazon.in/dp/B0C4ZGF7P6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0C4ZGF7P6.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0H6MJBCHN",
-      "title": "[ICICI / AXIS CC] Acer Chromebook, Intel Celeron- N4500 Processor, 4GB LPDDR4 RAM, 64GB eMMC, 29.46cm /11.6\" inch HD Display, Chrome OS, Intel UHD Graphics,WiFi 5, Black, 1.2 KG, CO731, Thin & Light Laptop",
-      "effective_price": 18990,
-      "mrp": 34999,
-      "discount_pct": 46,
-      "savings_inr": 16009,
-      "brand": "Acer",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0H6MJBCHN?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0H6MJBCHN.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B07X2F1W7G",
-      "title": "Safari Pentagon 55 cms Cabin Polypropylene Hard Sided Trolley Bag",
-      "effective_price": 1899,
-      "mrp": 7999,
-      "discount_pct": 76,
-      "savings_inr": 6100,
-      "brand": "Safari",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B07X2F1W7G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B07X2F1W7G.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B091CR2FXY",
-      "title": "AGARO Regency Air Fryer 12L 1800W with 9 Preset Menus & Rotisserie",
-      "effective_price": 7499,
-      "mrp": 15999,
-      "discount_pct": 53,
-      "savings_inr": 8500,
-      "brand": "Agaro",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
       "coupon_text": null
     }
   ],
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 39.9,
+    "age_hours": 40.1,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795173355,
-    "last_verified_at_epoch": 1795173355,
-    "last_verified_at_ist": "2026-11-20 16:45 IST",
+    "posted_at_epoch": 1795174003,
+    "last_verified_at_epoch": 1795174003,
+    "last_verified_at_ist": "2026-11-20 16:56 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795173355,
-    "updated_at_ist": "2026-11-20 16:45 IST"
+    "updated_at": 1795174003,
+    "updated_at_ist": "2026-11-20 16:56 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795173355,
-    "last_verified_at_epoch": 1795173355,
-    "last_verified_at_ist": "2026-11-20 16:45 IST",
+    "posted_at_epoch": 1795174003,
+    "last_verified_at_epoch": 1795174003,
+    "last_verified_at_ist": "2026-11-20 16:56 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795173355,
-    "updated_at_ist": "2026-11-20 16:45 IST"
+    "updated_at": 1795174003,
+    "updated_at_ist": "2026-11-20 16:56 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 183,
-    "loot_count": 36,
+    "total_deals": 198,
+    "loot_count": 39,
     "max_discount_pct": 89,
-    "total_savings_inr": 604931
+    "total_savings_inr": 670323
   }
 }

@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-20 15:36 IST",
-  "generated_at_epoch": 1795169209,
+  "generated_at_ist": "2026-11-20 15:42 IST",
+  "generated_at_epoch": 1795169566,
   "top_loot_summary": [
+    {
+      "asin": "B07X9X4M8L",
+      "title": "Levi's Mens 511 Slim Fit Stretch Jeans (Dark Indigo)",
+      "effective_price": 1499,
+      "mrp": 3299,
+      "discount_pct": 55,
+      "savings_inr": 1800,
+      "brand": "Levi'S",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B07X9X4M8L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B07X9X4M8L.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0CYQ4M4N4",
       "title": "HP 15s 12th Gen Intel Core i5 15.6 inch FHD Laptop (16GB RAM, 512GB SSD)",
@@ -53,19 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B0BSGTLXJ1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BSGTLXJ1.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B07WGNKGYK",
-      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars & Juicer",
-      "effective_price": 2899,
-      "mrp": 6295,
-      "discount_pct": 54,
-      "savings_inr": 3396,
-      "brand": "Prestige",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B07WGNKGYK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B07WGNKGYK.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": {
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 38.7,
+    "age_hours": 38.8,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795169195,
-    "last_verified_at_epoch": 1795169195,
-    "last_verified_at_ist": "2026-11-20 15:36 IST",
+    "posted_at_epoch": 1795169559,
+    "last_verified_at_epoch": 1795169559,
+    "last_verified_at_ist": "2026-11-20 15:42 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795169195,
-    "updated_at_ist": "2026-11-20 15:36 IST"
+    "updated_at": 1795169559,
+    "updated_at_ist": "2026-11-20 15:42 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795169195,
-    "last_verified_at_epoch": 1795169195,
-    "last_verified_at_ist": "2026-11-20 15:36 IST",
+    "posted_at_epoch": 1795169559,
+    "last_verified_at_epoch": 1795169559,
+    "last_verified_at_ist": "2026-11-20 15:42 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795169195,
-    "updated_at_ist": "2026-11-20 15:36 IST"
+    "updated_at": 1795169559,
+    "updated_at_ist": "2026-11-20 15:42 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -246,11 +246,11 @@
       "deal_url": "https://bharatbazaro.com/deal/B002MPPTB8.html"
     },
     "fashion": {
-      "asin": "B08V5Q4X1A",
-      "title": "Nike Mens Revolution 6 Running Shoes (Lightweight & Breathable)",
-      "effective_price": 2499,
-      "discount_pct": 37,
-      "deal_url": "https://bharatbazaro.com/deal/B08V5Q4X1A.html"
+      "asin": "B000LAKYW8",
+      "title": "Casio Vintage Digital Unisex Watch A168WA-1DF with Illuminator",
+      "effective_price": 1995,
+      "discount_pct": 26,
+      "deal_url": "https://bharatbazaro.com/deal/B000LAKYW8.html"
     },
     "grocery": {
       "asin": "B07V2QJ412",
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 162,
-    "loot_count": 27,
+    "total_deals": 167,
+    "loot_count": 28,
     "max_discount_pct": 89,
-    "total_savings_inr": 522437
+    "total_savings_inr": 524573
   }
 }

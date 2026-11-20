@@ -1,48 +1,59 @@
-// BharatBazaro Decision Models — client / serverless helper
-// Uses free OpenRouter decision models (Elephant-1, Mammoth-1, Perplexity Decider)
-// Falls back to local heuristic if no key or API fails.
+// BharatBazaro Decision Models — client / serverless (sales-optimized)
+// Free OpenRouter decision models + strong local heuristic
+// Goal: only promote deals that can actually convert to affiliate sales
 
 const FREE_MODELS = [
-  "baseten/elephant-1:free",
   "perplexity/pplx-decider-v1.3:free",
-  "baseten/mammoth-1:free",
+  "perplexity/pplx-decider-flash-v1.3:free",
+  "baseten/elephant-1:free",
 ];
 
 const OPENROUTER_DECISIONS = "https://openrouter.ai/api/alpha/decisions";
 
 function heuristic(deal) {
-  const price = Number(deal.price) || 0;
+  const price = Number(deal.effective_price || deal.price) || 0;
   const mrp = Number(deal.mrp) || price || 1;
   const rating = Number(deal.rating) || 0;
   const reviews = Number(deal.reviews) || 0;
-  const inStock = deal.inStock !== false;
-  const spike = !!deal.spike;
-  const coupon = Number(deal.couponValue) || 0;
+  const inStock = deal.inStock !== false && !deal.price_spiked;
+  const disc = Number(deal.effective_discount_pct || deal.discount_pct) || 0;
+  const hasCoupon = !!(deal.coupon_text || deal.promo_code || deal.couponValue);
+  const isATL = deal.price_context === "all_time_low";
+  const isLoot = !!deal.is_loot;
 
-  const effective = Math.max(price - coupon, 1);
-  const discount = Math.max(0, (mrp - effective) / mrp);
+  const discount = Math.max(0, (mrp - price) / mrp) || disc / 100;
 
   let score = 0;
-  score += Math.min(discount / 0.45, 1) * 0.35;
-  score += rating >= 4.3 ? 0.25 : rating >= 4.0 ? 0.15 : 0.05;
-  score += Math.min(reviews / 5000, 1) * 0.15;
-  score += inStock && !spike ? 0.15 : 0;
-  score += coupon > 0 ? 0.10 : 0;
+  score += Math.min(discount / 0.40, 1.2) * 0.42;
+  score += isATL ? 0.28 : deal.price_context === "real_drop" ? 0.15 : 0;
+  score += isLoot ? 0.12 : 0;
+  score += hasCoupon ? 0.10 : 0;
+  score += rating >= 4.2 && reviews >= 500 ? 0.18 : rating >= 4.0 ? 0.08 : 0;
+  score += inStock ? 0.12 : -0.3;
 
-  const promote = score >= 0.55 && inStock && !spike;
+  const promote = score >= 0.62 && inStock && discount >= 0.28;
   let verdict = "kill";
-  if (score >= 0.75 && discount >= 0.35) verdict = "frontpage";
-  else if (score >= 0.55) verdict = "test";
-  else if (score >= 0.35) verdict = "hold";
+  if (score >= 0.82 && (discount >= 0.40 || isATL)) verdict = "frontpage";
+  else if (score >= 0.62) verdict = "test";
+  else if (score >= 0.40) verdict = "hold";
+
+  let channel = "hold";
+  if (promote && (discount >= 0.35 || isATL || hasCoupon)) channel = "whatsapp";
+  else if (promote) channel = "telegram";
 
   return {
-    model: "heuristic",
+    model: "heuristic-sales",
     source: "heuristic",
     verdict,
     promote,
-    confidence: Math.min(score, 0.95),
-    best_channel: promote && discount >= 0.3 ? "whatsapp" : promote ? "telegram" : "hold",
-    reasons: { discount: +discount.toFixed(2), rating, score: +score.toFixed(2) },
+    confidence: Math.min(score, 0.96),
+    best_channel: channel,
+    reasons: {
+      discount: +discount.toFixed(2),
+      rating,
+      score: +score.toFixed(2),
+      atl: isATL ? 1 : 0,
+    },
   };
 }
 
@@ -50,68 +61,62 @@ function formatState(deal) {
   const lines = [
     `Title: ${deal.title || "Unknown"}`,
     `Brand: ${deal.brand || "Unknown"}`,
-    `Category: ${deal.category || "Unknown"}`,
-    `Price: ₹${deal.price || 0}`,
+    `Effective Price: ₹${deal.effective_price || deal.price || 0}`,
     `MRP: ₹${deal.mrp || 0}`,
+    `Discount: ${deal.effective_discount_pct || deal.discount_pct || 0}%`,
   ];
-  if (deal.couponValue) {
-    lines.push(`Coupon: ₹${deal.couponValue} off${deal.couponCode ? " code " + deal.couponCode : ""}`);
-  }
-  lines.push(`Rating: ${deal.rating || 0} stars from ${deal.reviews || 0} reviews`);
+  if (deal.coupon_text || deal.promo_code) lines.push(`Coupon: ${deal.coupon_text || deal.promo_code}`);
+  if (deal.price_context) lines.push(`Price context: ${deal.price_context}`);
+  if (deal.is_loot) lines.push("Flagged as loot");
+  lines.push(`Rating: ${deal.rating || 0} from ${deal.reviews || 0} reviews`);
   lines.push(`In stock: ${deal.inStock !== false}`);
-  if (deal.spike) lines.push("Warning: price spike detected");
+  if (deal.price_spiked) lines.push("Warning: price spike");
   return lines.join("\n");
 }
 
 async function decideDeal(deal, options = {}) {
   const model = options.model || FREE_MODELS[0];
-  const apiKey = options.apiKey || (typeof process !== "undefined" && process.env && process.env.OPENROUTER_API_KEY) || "";
+  const apiKey = options.apiKey || "";
 
   const questions = {
     promote: {
       type: "noul",
-      instructions: "Should this deal be promoted on BharatBazaro right now? Consider discount depth, rating, stock, and whether it looks like a real loot.",
+      instructions: "Should this deal be promoted right now to drive Amazon affiliate sales? Prefer deep discounts, all-time lows, coupons, and high ratings.",
     },
     quality: {
       type: "score",
-      instructions: "Rate the overall quality of this deal for Indian shoppers.",
+      instructions: "Rate conversion potential for Indian shoppers.",
       criteria: ["Poor", "Weak", "Average", "Good", "Excellent"],
     },
     channel: {
       type: "choice",
-      instructions: "Best primary channel to push this deal first.",
+      instructions: "Best primary channel for maximum sales.",
       criteria: {
-        whatsapp: "High-intent private groups, good for strong discounts",
-        telegram: "Public channel, good for daily deals",
-        x: "Twitter/X, good for viral or trending products",
-        reddit: "Reddit India, good for discussion deals",
-        hold: "Do not promote yet, needs more proof or stock",
+        whatsapp: "Highest conversion — private high-intent groups",
+        telegram: "Good for daily volume",
+        x: "For viral items",
+        reddit: "For discussion deals",
+        hold: "Do not promote",
       },
     },
     risk: {
       type: "noul",
-      instructions: "Is there high risk this deal is fake, out of stock soon, or poor quality?",
+      instructions: "High risk of no sale?",
     },
-  };
-
-  const payload = {
-    model,
-    state: formatState(deal),
-    questions,
   };
 
   try {
     const headers = {
       "Content-Type": "application/json",
       "HTTP-Referer": "https://bharatbazaro.com",
-      "X-Title": "BharatBazaro Decision Engine",
+      "X-Title": "BharatBazaro Sales Decision Engine",
     };
     if (apiKey) headers["Authorization"] = `Bearer ${apiKey}`;
 
     const res = await fetch(OPENROUTER_DECISIONS, {
       method: "POST",
       headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ model, state: formatState(deal), questions }),
     });
 
     if (res.ok) {
@@ -119,15 +124,15 @@ async function decideDeal(deal, options = {}) {
       const answers = data.answers || (data.result && data.result.answers) || {};
       const promoteProb = Number(answers.promote?.noul || 0);
       const riskProb = Number(answers.risk?.noul || 0);
-      const channel = answers.channel?.choice || "telegram";
+      const channel = answers.channel?.choice || "whatsapp";
       const conf = Number(answers.channel?.confidence || promoteProb);
       const quality = Number(answers.quality?.score || 0.5);
 
-      const promote = promoteProb > 0.62 && riskProb < 0.55;
+      const promote = promoteProb > 0.65 && riskProb < 0.5;
       let verdict = "kill";
-      if (promote && quality >= 0.7 && promoteProb > 0.75) verdict = "frontpage";
+      if (promote && quality >= 0.72 && promoteProb > 0.78) verdict = "frontpage";
       else if (promote) verdict = "test";
-      else if (promoteProb > 0.4) verdict = "hold";
+      else if (promoteProb > 0.45) verdict = "hold";
 
       return {
         model,
@@ -151,7 +156,6 @@ async function decideDeal(deal, options = {}) {
   return heuristic(deal);
 }
 
-// Export for Node / browser
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { decideDeal, heuristic, FREE_MODELS };
 }

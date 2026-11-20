@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-20 16:56 IST",
-  "generated_at_epoch": 1795174013,
+  "generated_at_ist": "2026-11-20 16:59 IST",
+  "generated_at_epoch": 1795174163,
   "top_loot_summary": [
+    {
+      "asin": "B0BRKMNZCS",
+      "title": "boAt Airdopes 141 Bluetooth Truly Wireless in Ear Earbuds with 42H Playtime & Beast Mode",
+      "effective_price": 999,
+      "mrp": 4490,
+      "discount_pct": 78,
+      "savings_inr": 3491,
+      "brand": "boAt",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B0BRKMNZCS?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BRKMNZCS.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B097RDVDL2",
+      "title": "Noise Buds VS102 Truly Wireless in-Ear Earbuds with 50H Playtime",
+      "effective_price": 899,
+      "mrp": 2999,
+      "discount_pct": 70,
+      "savings_inr": 2100,
+      "brand": "Noise",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B097RDVDL2?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B097RDVDL2.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09N3ZNHTY",
+      "title": "boAt Airdopes 141 Bluetooth Truly Wireless in Ear Earbuds (42H Playtime)",
+      "effective_price": 999,
+      "mrp": 4490,
+      "discount_pct": 78,
+      "savings_inr": 3491,
+      "brand": "boAt",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09N3ZNHTY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09N3ZNHTY.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0FN7WG5KB",
       "title": "adidas Unisex-Adult Aerosurgestride Running Shoes",
@@ -26,45 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B0FLYDHYY4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0FLYDHYY4.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0CJLWDVD1",
-      "title": "Crompton Versa Horizontal RHS 25L Storage Water Heater (Geyser) with Rust Proof Plastic body and Superior Glassline Coating, Fits under false ceilings, 8 Bar pressure rating and 7yr Tank warranty",
-      "effective_price": 9599,
-      "mrp": 13900,
-      "discount_pct": 20,
-      "savings_inr": 4301,
-      "brand": "Crompton",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0CJLWDVD1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CJLWDVD1.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0CHX24XGQ",
-      "title": "Acer Nitro V Gaming Laptop 13th Gen Intel Core i5 (RTX 4050 6GB Graphics, 144Hz)",
-      "effective_price": 69990,
-      "mrp": 92999,
-      "discount_pct": 25,
-      "savings_inr": 23009,
-      "brand": "Acer",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0CHX24XGQ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0CHX24XGQ.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0C4ZGF7P6",
-      "title": "ASUS Vivobook 16 (2023) Thin and Light Laptop (Intel Core i3-1215U, 8GB, 512GB SSD)",
-      "effective_price": 34990,
-      "mrp": 55990,
-      "discount_pct": 38,
-      "savings_inr": 21000,
-      "brand": "Asus",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0C4ZGF7P6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0C4ZGF7P6.html",
       "coupon_text": null
     }
   ],
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795174003,
-    "last_verified_at_epoch": 1795174003,
-    "last_verified_at_ist": "2026-11-20 16:56 IST",
+    "posted_at_epoch": 1795174145,
+    "last_verified_at_epoch": 1795174145,
+    "last_verified_at_ist": "2026-11-20 16:59 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795174003,
-    "updated_at_ist": "2026-11-20 16:56 IST"
+    "updated_at": 1795174145,
+    "updated_at_ist": "2026-11-20 16:59 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795174003,
-    "last_verified_at_epoch": 1795174003,
-    "last_verified_at_ist": "2026-11-20 16:56 IST",
+    "posted_at_epoch": 1795174145,
+    "last_verified_at_epoch": 1795174145,
+    "last_verified_at_ist": "2026-11-20 16:59 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795174003,
-    "updated_at_ist": "2026-11-20 16:56 IST"
+    "updated_at": 1795174145,
+    "updated_at_ist": "2026-11-20 16:59 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,8 +261,8 @@
     }
   },
   "market_stats": {
-    "total_deals": 198,
-    "loot_count": 39,
+    "total_deals": 199,
+    "loot_count": 42,
     "max_discount_pct": 89,
     "total_savings_inr": 670323
   }

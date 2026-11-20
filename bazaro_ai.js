@@ -165,6 +165,17 @@
     } catch (err) {
       console.warn('BazarAI: could not fetch live_deals.json', err);
     }
+    offerTodayBest();
+  }
+
+  function offerTodayBest() {
+    if (!liveDealsCache.length) return;
+    if (chatHistory.filter((m) => m.cards && m.cards.length).length) return;
+    const top = rankDeals(liveDealsCache.filter(isStrongOffer)).slice(0, 3);
+    if (!top.length) return;
+    addBotMessage("These are the strongest offers on the radar right now. Weak discounts are left out.", {
+      cards: top,
+    });
   }
 
   async function loadAiBriefing() {
@@ -188,7 +199,7 @@
     } catch (_) {}
 
     // Initial default greeting if no history
-    const welcomeText = "👋 Hi! I'm **BazarAI**, your 24/7 Discounts & Hidden Coupon Finder! Tell me any product or budget (e.g., *'earbuds under ₹999'*, *'today's top loot deals'*, or paste any Amazon link) and I'll find the lowest price for you!";
+    const welcomeText = "👋 I'm **BazarAI**. I only surface offers that are actually strong: all-time lows, 40%+ drops, and live coupons.\n\nTry *earbuds under ₹999*, *today's best loot*, or paste an Amazon link.";
     addBotMessage(welcomeText, { isGreeting: true });
   }
 
@@ -350,12 +361,7 @@
     const mrp = deal.mrp || 0;
     const discPct = deal.effective_discount_pct || deal.discount_pct || 0;
     const imgUrl = deal.image_url || `https://m.media-amazon.com/images/P/${asin}.jpg`;
-    let affUrl = deal.affiliate_url || `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}&linkCode=ll1`;
-    if (affUrl.includes('ascsubtag=')) {
-      affUrl = affUrl.replace(/ascsubtag=[^&]+/, 'ascsubtag=bb-bazarai');
-    } else {
-      affUrl += (affUrl.includes('?') ? '&' : '?') + 'ascsubtag=bb-bazarai';
-    }
+    let affUrl = `/a/${asin}`;
     const dealPageUrl = `/deal/${asin}.html`;
     const buyConf = deal.buy_confidence || 85;
 
@@ -374,10 +380,7 @@
             ${discPct > 0 ? `<span class="mini-card-disc">${discPct}% OFF</span>` : ''}
           </div>
           ${deal.coupon_text ? `<div class="mini-card-coupon">🎟️ ${escapeHtml(deal.coupon_text)}</div>` : ''}
-          <div class="mini-card-conf">
-            <span class="conf-dot">🟢</span>
-            <span>${buyConf}% Buy Confidence</span>
-          </div>
+          ${reasonLine(deal)}
         </div>
       </div>
       <div class="mini-card-actions">
@@ -424,7 +427,7 @@
     const card = document.createElement('div');
     card.className = 'bazar-keepa-card';
     const asin = keepaData.asin;
-    const affUrl = `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}&linkCode=ll1&ascsubtag=bb-bazarai`;
+    const affUrl = `/a/${asin}`;
     const chartUrl = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1&range=90`;
     const dealPageUrl = `/deal/${asin}.html`;
 
@@ -450,6 +453,68 @@
       </div>
     `;
     return card;
+  }
+
+  function reasonLine(deal) {
+    const bits = [];
+    if (deal.price_context === 'all_time_low') bits.push('All-time low');
+    else if (deal.price_context === 'real_drop') bits.push('Real drop');
+    if (deal.is_loot) bits.push('Loot');
+    if (deal.coupon_text || deal.promo_code) bits.push('Coupon on');
+    const disc = deal.effective_discount_pct || deal.discount_pct || 0;
+    if (disc >= 40) bits.push(disc + '% off');
+    if (!bits.length) bits.push((deal.buy_confidence || 0) + '% confidence');
+    return `<div class="mini-card-conf"><span class="conf-dot">🟢</span><span>${escapeHtml(bits.join(' · '))}</span></div>`;
+  }
+
+  function dealScore(d) {
+    if (!d || d.expired || d.price_spiked) return -1;
+    const price = d.effective_price || d.list_price || 0;
+    if (!price) return -1;
+    const disc = d.effective_discount_pct || d.discount_pct || 0;
+    let s = Math.min(disc, 75) * 0.9;
+    if (d.price_context === 'all_time_low') s += 46;
+    else if (d.price_context === 'real_drop') s += 26;
+    if (d.is_loot) s += 16;
+    if (d.is_further_drop) s += 8;
+    if (d.coupon_text || d.promo_code) s += 12;
+    if (d.bank_offer) s += 5;
+    s += (d.rating || 0) * 3;
+    s += (d.buy_confidence || 0) * 0.12;
+    if (disc < 25 && d.price_context === 'normal' && !d.is_loot && !d.coupon_text) s -= 30;
+    return s;
+  }
+
+  function isStrongOffer(d) {
+    if (!d || d.expired || d.price_spiked) return false;
+    const disc = d.effective_discount_pct || d.discount_pct || 0;
+    return disc >= 35 || d.price_context === 'all_time_low' || d.is_loot || !!(d.coupon_text || d.promo_code);
+  }
+
+  function rankDeals(list) {
+    return (list || []).filter((d) => dealScore(d) > 0).sort((a, b) => dealScore(b) - dealScore(a));
+  }
+
+  const SYNONYMS = {
+    earbuds: ['earbud', 'earphones', 'earphone', 'tws', 'buds', 'airdopes'],
+    earphones: ['earbuds', 'earbud', 'tws', 'neckband'],
+    headphones: ['headphone', 'headset'],
+    watch: ['smartwatch', 'watches'],
+    phone: ['mobile', 'smartphone'],
+    mouse: ['mice'],
+    laptop: ['notebook'],
+    trimmer: ['shaver', 'grooming'],
+    mixer: ['grinder', 'blender'],
+    tv: ['television', 'bravia'],
+  };
+
+  function expandWord(w) {
+    const out = [w];
+    Object.keys(SYNONYMS).forEach((key) => {
+      const group = [key].concat(SYNONYMS[key]);
+      if (group.indexOf(w) !== -1) group.forEach((g) => { if (out.indexOf(g) === -1) out.push(g); });
+    });
+    return out;
   }
 
   function escapeHtml(str) {
@@ -692,61 +757,37 @@
 
   // ── Intent 1 & 2 Helper: Deal Search & Custom Catalog Filter ──────────────
   function handleDealSearchIntent(rawText, lower) {
-    // 1. Parse budget constraints
     const budget = parseBudgetConstraints(lower);
-
-    // 2. Extract product search keywords
     const keywords = extractSearchKeywords(lower);
+    const wantBest = /top|best|loot|sasta|strong|really good|aaj/.test(lower);
+    const wantCoupon = /coupon|promo|hidden/.test(lower);
 
-    // 3. Search local liveDealsCache
-    const matchedDeals = filterLocalDeals(keywords, budget);
+    let pool = filterLocalDeals(keywords, budget);
+    if (wantCoupon) pool = pool.filter((d) => d.coupon_text || d.promo_code);
+    if (wantBest && !keywords.query) pool = liveDealsCache.filter(isStrongOffer);
 
-    if (matchedDeals.length >= 2) {
-      // Intent 1: We have 2+ exact matching deals!
-      const count = matchedDeals.length;
-      const budgetNote = budget.maxPrice ? ` under ₹${budget.maxPrice.toLocaleString('en-IN')}` : '';
-      const reply = `🔥 Found **${count} verified deals** matching **"${keywords.query || rawText}"**${budgetNote} with active price drops and coupons:`;
+    const ranked = rankDeals(pool);
+    const strong = ranked.filter(isStrongOffer);
+    const show = (strong.length ? strong : ranked).slice(0, 4);
 
-      addBotMessage(reply, {
-        cards: matchedDeals.slice(0, 4),
-      });
-
-      // Also append the 20-Crore catalog filter button if user wants to see the broader catalog
+    if (!show.length) {
       const customFilter = buildCustomAmazonFilter(keywords.query || rawText, budget.maxPrice);
-      addBotMessage(`💡 Want to explore more options across Amazon India? Here is a custom 4★+ deal filter:`, {
+      addBotMessage(`No strong live offer for **"${keywords.query || rawText}"**. I will not pad this with a weak discount. Here is a 4★, 25%+ Amazon filter instead:`, {
         customFilter: customFilter,
       });
       return;
     }
 
-    if (matchedDeals.length === 1) {
-      // 1 match + broad catalog filter
-      const reply = `🎯 Found **1 top verified deal** in our radar, plus I built a custom **4★+ Amazon Deal Filter** for you:`;
-      const customFilter = buildCustomAmazonFilter(keywords.query || rawText, budget.maxPrice);
-      addBotMessage(reply, {
-        cards: matchedDeals,
-        customFilter: customFilter,
+    const honest = strong.length
+      ? `These are real offers${budget.maxPrice ? ` under ₹${budget.maxPrice.toLocaleString('en-IN')}` : ''}. Ranked by drop, not by what was posted first.`
+      : `Nothing here is an all-time low or a 35%+ drop. These are the least-bad matches. Check the price chart before you buy.`;
+
+    addBotMessage(honest, { cards: show });
+    if (keywords.query) {
+      addBotMessage(`Wider Amazon search, 4★ and 25%+ only:`, {
+        customFilter: buildCustomAmazonFilter(keywords.query, budget.maxPrice),
       });
-      return;
     }
-
-    // 0 exact matches -> Intent 2: Custom Affiliate Filter Generator
-    const cleanQuery = keywords.query || rawText.replace(/(?:under|below|rs|deal|deals|loot)\s*\d*/gi, '').trim() || 'trending deals';
-    const customFilter = buildCustomAmazonFilter(cleanQuery, budget.maxPrice);
-
-    let reply = `🔍 Searching 20-crore Amazon India catalog for **"${cleanQuery}"**`;
-    if (budget.maxPrice) {
-      reply += ` under **₹${budget.maxPrice.toLocaleString('en-IN')}**`;
-    }
-    reply += `.\n\nI constructed a **Custom 4★+ & 25%+ Off Deal Link** tagged with our partner discount engine below:`;
-
-    // Suggest 2 related live deals from overall loot if available
-    const fallbackLoots = liveDealsCache.filter((d) => d.is_loot || (d.buy_confidence && d.buy_confidence >= 85)).slice(0, 2);
-
-    addBotMessage(reply, {
-      customFilter: customFilter,
-      cards: fallbackLoots.length > 0 ? fallbackLoots : null,
-    });
   }
 
   function parseBudgetConstraints(lower) {
@@ -789,6 +830,8 @@
       .replace(/(?:under|below|less\s+than|within|above|over|between)\s*(?:rs\.?|inr|₹)?\s*\d+/gi, '')
       .replace(/\d+\s*(?:rs|rupees|inr|bucks)/gi, '')
       .replace(/\b(?:deals?|loots?|offers?|price|drops?|discount|coupons?|show|me|best|top|find|give|get|buy)\b/gi, '')
+      .replace(/[^\w\s₹]/g, ' ')
+      .replace(/\s+/g, ' ')
       .trim();
 
     return {
@@ -799,31 +842,18 @@
 
   function filterLocalDeals(keywords, budget) {
     if (!liveDealsCache || liveDealsCache.length === 0) return [];
-    const q = keywords.query.toLowerCase();
+    const q = (keywords.query || '').toLowerCase();
+    const words = q.split(/\s+/).filter((w) => w.length > 2);
 
     return liveDealsCache.filter((d) => {
+      if (d.expired || d.price_spiked) return false;
       const price = d.effective_price || d.list_price || 0;
       if (budget.maxPrice && price > budget.maxPrice) return false;
       if (budget.minPrice && price < budget.minPrice) return false;
+      if (!words.length) return true;
 
-      if (!q) return true; // Budget only
-
-      const title = (d.title || '').toLowerCase();
-      const brand = (d.brand || '').toLowerCase();
-      const cat = (d.category || '').toLowerCase();
-      const asin = (d.asin || '').toLowerCase();
-
-      // Check query words
-      const words = q.split(/\s+/).filter((w) => w.length > 2);
-      if (words.length === 0) return true;
-
-      return words.some(
-        (w) =>
-          title.includes(w) ||
-          brand.includes(w) ||
-          cat.includes(w) ||
-          asin.includes(w)
-      );
+      const hay = [d.title, d.brand, d.category, d.asin].join(' ').toLowerCase();
+      return words.every((w) => expandWord(w).some((alt) => hay.includes(alt)));
     });
   }
 

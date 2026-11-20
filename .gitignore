@@ -18,3 +18,4 @@ credentials.json
 *.pem
 *.key
 *.local_test_bak
+mailmap.txt

@@ -369,6 +369,18 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-promote {
+  background: #ef6a1a;
+  color: #1a0d05;
+  box-shadow: 0 2px 8px rgba(239, 106, 26, 0.35);
+  font-weight: 700;
+}
+
+.btn-promote:hover {
+  background: #d85a12;
+  transform: translateY(-1px);
+}
+
 .telegram-icon,
 .whatsapp-icon {
   flex-shrink: 0;

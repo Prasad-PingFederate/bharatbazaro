@@ -116,7 +116,14 @@
       const price = inr(d.effective_price);
       const name = d.title;
       const bank = d.bank_offer ? "Bank: " + d.bank_offer : "Koi extra bank offer listed nahi.";
-      if (net === "X") return price + " · " + name + " (" + d.discount_pct + "% off)\n" + url;
+      if (net === "X") {
+        return [
+          price + " " + name + " — " + d.discount_pct + "% off",
+          "bharatbazaro.com",
+          "",
+          "#AmazonIndia #LootDeal #OnlineShopping #AmazonDeals"
+        ].join("\n");
+      }
       if (net === "Reddit" || net === "Forum") {
         return [price + " — " + name + " (" + d.discount_pct + "% off, MRP " + inr(d.mrp) + ")", "", bank, (d.rating || "?") + " stars.", "", url, "", "Affiliate: BharatBazaro is in Amazon Associates. Price is not marked up."].join("\n");
       }

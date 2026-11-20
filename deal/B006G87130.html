@@ -165,14 +165,26 @@
 
       <!-- Right: Product Information & CTAs -->
       <div class="product-info-col">
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-          <span class="brand-chip">Himalaya</span>
-          <span style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">⭐ 4.4 <span style="color: var(--text-muted); font-size: 0.8rem;">(118,000 reviews)</span></span>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="brand-chip">Himalaya</span>
+            <span style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">⭐ 4.4 <span style="color: var(--text-muted); font-size: 0.8rem;">(118,000 reviews)</span></span>
+          </div>
+          <div class="bb-live-viewers" data-seed="B006G87130">
+            <span class="bb-pulse-dot"></span>
+            <span>👀 <b class="bb-viewers-count">14</b> people viewing this deal right now</span>
+          </div>
         </div>
 
         <h1 style="font-size: 1.6rem; font-weight: 800; line-height: 1.35; margin-bottom: 16px; color: var(--text-main);">
           Himalaya Purifying Neem Face Wash 400ml with Turmeric for Pimples
         </h1>
+
+        <!-- Urgency Flash Sale Countdown Bar -->
+        <div class="bb-urgency-flash-bar">
+          <span>⏳ Flash Deal Ends in: <b class="bb-countdown-time">02h : 14m : 35s</b></span>
+          <span class="claim-pill">🔥 82% Claimed</span>
+        </div>
 
         <!-- Price Waterfall Card -->
         <div class="price-waterfall-box" style="margin-bottom: 20px; padding: 20px; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-card); border-radius: var(--radius-lg);">
@@ -205,6 +217,7 @@
 
         <!-- Primary CTA Buttons -->
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
+          
           <a href="https://www.amazon.in/dp/B006G87130?tag=dammaiprasad-21&amp;linkCode=ll1&amp;ascsubtag=bb-seo" target="_blank" rel="noopener noreferrer" onclick="if(navigator.sendBeacon){navigator.sendBeacon('/api/track-click', JSON.stringify({asin:'B006G87130', price:320}));}" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
             <span>🛒 Grab Deal on Amazon.in @ ₹320 ↗</span>
           </a>
@@ -497,7 +510,7 @@
           </div>
           <div class="card-top-actions">
             <button class="btn-hotness-degree" data-asin="B0B8NTZ24L" data-base="307" title="Upvote deal hotness">🔥 <span class="degree-count">307°</span></button>
-            <span class="time-ago">5m ago</span>
+            <span class="time-ago">1h ago</span>
             <button class="btn-watchlist" data-asin="B0B8NTZ24L" title="Save to Watchlist">
               🤍
             </button>
@@ -594,7 +607,7 @@
           </div>
           <div class="card-top-actions">
             <button class="btn-hotness-degree" data-asin="B0BC8P3X65" data-base="333" title="Upvote deal hotness">🔥 <span class="degree-count">333°</span></button>
-            <span class="time-ago">5m ago</span>
+            <span class="time-ago">1h ago</span>
             <button class="btn-watchlist" data-asin="B0BC8P3X65" title="Save to Watchlist">
               🤍
             </button>
@@ -691,7 +704,7 @@
           </div>
           <div class="card-top-actions">
             <button class="btn-hotness-degree" data-asin="B085Z1F1M6" data-base="316" title="Upvote deal hotness">🔥 <span class="degree-count">316°</span></button>
-            <span class="time-ago">11h ago</span>
+            <span class="time-ago">12h ago</span>
             <button class="btn-watchlist" data-asin="B085Z1F1M6" title="Save to Watchlist">
               🤍
             </button>
@@ -788,7 +801,7 @@
           </div>
           <div class="card-top-actions">
             <button class="btn-hotness-degree" data-asin="B0B551YGY3" data-base="331" title="Upvote deal hotness">🔥 <span class="degree-count">331°</span></button>
-            <span class="time-ago">12h ago</span>
+            <span class="time-ago">13h ago</span>
             <button class="btn-watchlist" data-asin="B0B551YGY3" title="Save to Watchlist">
               🤍
             </button>
@@ -1008,6 +1021,7 @@
   </aside>
 
   <script src="/bazaro_ai.js"></script>
+  <script src="/conversion_engine.js"></script>
 
 </body>
 </html>

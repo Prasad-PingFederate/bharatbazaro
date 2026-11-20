@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-20 10:19 IST",
-  "generated_at_epoch": 1795150193,
+  "generated_at_ist": "2026-11-20 11:37 IST",
+  "generated_at_epoch": 1795154868,
   "top_loot_summary": [
+    {
+      "asin": "B07WGNKGYK",
+      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars & Juicer",
+      "effective_price": 2899,
+      "mrp": 6295,
+      "discount_pct": 54,
+      "savings_inr": 3396,
+      "brand": "Prestige",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B07WGNKGYK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B07WGNKGYK.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B00B29VFR6",
+      "title": "Kent Grand RO Water Purifier 8L Storage with UV+UF+TDS Controller",
+      "effective_price": 13999,
+      "mrp": 20500,
+      "discount_pct": 32,
+      "savings_inr": 6501,
+      "brand": "Kent",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B00B29VFR6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B00B29VFR6.html",
+      "coupon_text": null
+    },
     {
       "asin": "B09XXWMS4Z",
       "title": "Marshall Emberton II Portable Bluetooth Speaker (30+ Hours Playtime)",
@@ -39,32 +65,6 @@
       "category": "Fashion & Footwear",
       "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24L.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BC8P3X65",
-      "title": "Puma Men Smashic Casual Sneaker Shoes White & Navy",
-      "effective_price": 1799,
-      "mrp": 4499,
-      "discount_pct": 60,
-      "savings_inr": 2700,
-      "brand": "Puma",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0BC8P3X65?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BC8P3X65.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BN8H1L7L",
-      "title": "Philips Air Fryer HD9200/90 4.1 Litre Rapid Air Technology with 90% Less Fat Cooking",
-      "effective_price": 5499,
-      "mrp": 9995,
-      "discount_pct": 45,
-      "savings_inr": 4496,
-      "brand": "Philips",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0BN8H1L7L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BN8H1L7L.html",
       "coupon_text": null
     }
   ],
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 33.4,
+    "age_hours": 34.7,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795150181,
-    "last_verified_at_epoch": 1795150181,
-    "last_verified_at_ist": "2026-11-20 10:19 IST",
+    "posted_at_epoch": 1795154862,
+    "last_verified_at_epoch": 1795154862,
+    "last_verified_at_ist": "2026-11-20 11:37 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795150181,
-    "updated_at_ist": "2026-11-20 10:19 IST"
+    "updated_at": 1795154862,
+    "updated_at_ist": "2026-11-20 11:37 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795150181,
-    "last_verified_at_epoch": 1795150181,
-    "last_verified_at_ist": "2026-11-20 10:19 IST",
+    "posted_at_epoch": 1795154862,
+    "last_verified_at_epoch": 1795154862,
+    "last_verified_at_ist": "2026-11-20 11:37 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795150181,
-    "updated_at_ist": "2026-11-20 10:19 IST"
+    "updated_at": 1795154862,
+    "updated_at_ist": "2026-11-20 11:37 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 166,
-    "loot_count": 24,
+    "total_deals": 168,
+    "loot_count": 26,
     "max_discount_pct": 89,
-    "total_savings_inr": 544982
+    "total_savings_inr": 545585
   }
 }

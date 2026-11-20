@@ -4744,3 +4744,11 @@ html[data-theme="light"] .stat-value,
 html[data-theme="light"] .stat-num {
   color: #18181b !important;
 }
+
+/* Mobile Sticky Bottom Buy Bar (Visible on mobile viewports < 769px) */
+@media (min-width: 769px) {
+  .mobile-sticky-buy-bar {
+    display: none !important;
+  }
+}
+

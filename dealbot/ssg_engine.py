@@ -422,6 +422,14 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
     is_loot = bool(d.get("is_loot"))
     deal_page_url = f"/deal/{asin}.html"
 
+    # 1-Click Web-to-Telegram Tracking URL
+    bot_username = os.getenv("TELEGRAM_BOT_USERNAME", "DealDash_ai_Bot").lstrip("@")
+    target_price = max(1, int(eff_price * 0.90))
+    raw_title_clean = re.sub(r"[^\w\s-]", "", str(d.get("title") or "deal")).strip()
+    kw_slug = "-".join(raw_title_clean.split()[:4]).lower() or "deal"
+    cat_slug = str(d.get("category") or "general").lower()[:12]
+    track_telegram_url = f"https://t.me/{bot_username}?start=track_{cat_slug}_{target_price}_{kw_slug}"
+
     badges = []
     if d.get("is_new") or (d.get("age_hours") is not None and d.get("age_hours") <= 2.0):
         badges.append('<span class="badge-tag badge-new">⚡ NEW</span>')
@@ -430,7 +438,9 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
         badges.append('<span class="badge-tag badge-diwali">🔥 DIWALI STEAL</span>')
     if d.get("is_cookie_magnet"):
         badges.append('<span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span>')
-    if is_loot:
+    if disc_pct >= 35 or d.get("price_context") == "all_time_low" or d.get("lowest_badge") == "ALL-TIME LOW":
+        badges.append('<span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span>')
+    elif is_loot:
         badges.append('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>')
     if d.get("price_context") == "all_time_low":
         badges.append('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>')
@@ -655,6 +665,9 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
         <div class="card-footer">
           <a href="{aff_btn_url}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
             <span>{'🛒 Grab Daily Steal on Amazon ↗' if d.get('is_cookie_magnet') else ('🛒 Grab Diwali Deal on Amazon ↗' if (buy_conf >= 80 or d.get('is_diwali_steal') or eff_price >= 2000) else '🛒 Grab Deal on Amazon ↗')}</span>
+          </a>
+          <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
+            <span>🔔 Track</span>
           </a>
           <button class="btn-card-share" data-asin="{asin}" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>
@@ -1333,6 +1346,14 @@ def render_product_page_html(
         raw_aff += ("&" if "?" in raw_aff else "?") + "ascsubtag=bb-seo"
     affiliate_url = html_lib.escape(raw_aff)
 
+    # 1-Click Web-to-Telegram Tracking URL
+    bot_username = os.getenv("TELEGRAM_BOT_USERNAME", "DealDash_ai_Bot").lstrip("@")
+    target_price = max(1, int(eff_price * 0.90))
+    raw_title_clean = re.sub(r"[^\w\s-]", "", str(deal.get("title") or "deal")).strip()
+    kw_slug = "-".join(raw_title_clean.split()[:4]).lower() or "deal"
+    cat_slug = str(deal.get("category") or "general").lower()[:12]
+    track_telegram_url = f"https://t.me/{bot_username}?start=track_{cat_slug}_{target_price}_{kw_slug}"
+
     image_url = html_lib.escape(str(deal.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
     canonical = f"https://bharatbazaro.com/deal/{asin}.html"
 
@@ -1358,7 +1379,9 @@ def render_product_page_html(
     badges = []
     if is_expired:
         badges.append('<span class="badge-tag badge-expired" style="background: #ef4444; color: #fff;">⚠️ EXPIRED</span>')
-    if deal.get("is_loot"):
+    if disc_pct >= 35 or deal.get("price_context") == "all_time_low" or deal.get("lowest_badge") == "ALL-TIME LOW":
+        badges.append('<span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span>')
+    elif deal.get("is_loot"):
         badges.append('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>')
     if deal.get("price_context") == "all_time_low":
         badges.append('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>')
@@ -1488,13 +1511,33 @@ def render_product_page_html(
         claim_btn_html = '''<a href="#alternatives" class="btn btn-secondary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: #475569; color: #fff;">
           <span>⚠️ Deal Expired — See Top Alternatives Below ↓</span>
         </a>'''
+        mobile_sticky_bar_html = ""
     else:
-        primary_cta_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
-            <span>🛒 Grab Diwali Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
+        primary_cta_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+            <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
           </a>'''
-        claim_btn_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
+        claim_btn_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
           <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
         </a>'''
+        mobile_sticky_bar_html = f'''
+  <!-- Mobile Sticky Bottom Buy Bar (85%+ Mobile Traffic) -->
+  <aside class="mobile-sticky-buy-bar" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.12); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 -4px 20px rgba(0,0,0,0.5);">
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; align-items: baseline; gap: 6px;">
+        <span style="font-size: 1.25rem; font-weight: 800; color: #34d399; font-family: var(--font-mono);">₹{eff_price:,}</span>
+        <span style="font-size: 0.8rem; text-decoration: line-through; color: var(--text-muted);">₹{mrp:,}</span>
+      </div>
+      <span style="font-size: 0.72rem; font-weight: 700; color: #f87171;">{disc_pct}% OFF</span>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-color: #38bdf8; color: #38bdf8; text-decoration: none; border-radius: 8px; white-space: nowrap;">
+        <span>🔔 Track</span>
+      </a>
+      <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-sm" style="padding: 10px 18px; font-size: 0.95rem; font-weight: 800; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; text-decoration: none; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4); white-space: nowrap;">
+        <span>🛒 Grab Deal on Amazon ↗</span>
+      </a>
+    </div>
+  </aside>'''
 
     return f'''<!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -1632,6 +1675,9 @@ def render_product_page_html(
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
           {primary_cta_html}
           <div style="display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap;">
+            <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; text-decoration: none; padding: 10px 16px; border-color: #38bdf8; color: #38bdf8; font-weight: 700;">
+              <span>🔔 Track on Telegram</span>
+            </a>
             <a href="https://api.whatsapp.com/send?text={html_lib.escape(f'🔥 Unbelievable Amazon Deal! {raw_title} at ₹{eff_price:,} ({disc_pct}% OFF): {canonical}')}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; text-decoration: none; padding: 10px 16px;">
               <span>💬 Share WhatsApp</span>
             </a>
@@ -1828,6 +1874,8 @@ def render_product_page_html(
       </form>
     </div>
   </div>
+
+  {mobile_sticky_bar_html}
 
   <script src="/bazaro_ai.js"></script>
 

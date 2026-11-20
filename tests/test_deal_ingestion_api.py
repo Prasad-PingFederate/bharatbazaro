@@ -230,3 +230,35 @@ def test_product_schema_and_expired_alternatives(tmp_path):
     assert "https://bharatbazaro.com/deal/B002.html" in sitemap_content
     assert "<loc>https://bharatbazaro.com/</loc>" in sitemap_content
 
+
+def test_web_to_telegram_tracking_and_mobile_sticky_bar():
+    from dealbot.ssg_engine import render_deal_card_html, render_product_page_html
+
+    loot_deal = {
+        "asin": "B0BS1QCFHX",
+        "title": "Sony WH-1000XM5 Wireless Headphones",
+        "effective_price": 19499.0,
+        "mrp": 29999.0,
+        "discount_pct": 35,
+        "category": "electronics",
+        "affiliate_url": "https://www.amazon.in/dp/B0BS1QCFHX?tag=dammaiprasad-21",
+        "image_url": "https://m.media-amazon.com/images/I/xyz.jpg",
+        "is_expired": False,
+        "price_context": "all_time_low",
+    }
+
+    # 1. Product Page
+    html = render_product_page_html(loot_deal, related_deals=[], stats={})
+    assert "mobile-sticky-buy-bar" in html
+    assert "sendBeacon('/api/track-click'" in html
+    assert "t.me/DealDash_ai_Bot?start=track_electronics_17549_sony-wh-1000xm5-wireless" in html
+    assert "🔔 Track on Telegram" in html
+    assert "🔥 LOOT / ALL-TIME LOW" in html
+
+    # 2. Deal Card
+    card_html = render_deal_card_html(loot_deal)
+    assert "btn-track-telegram" in card_html
+    assert "start=track_electronics_17549_sony-wh-1000xm5-wireless" in card_html
+    assert "🔥 LOOT / ALL-TIME LOW" in card_html
+
+

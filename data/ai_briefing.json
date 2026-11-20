@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-20 16:35 IST",
-  "generated_at_epoch": 1795172743,
+  "generated_at_ist": "2026-11-20 16:46 IST",
+  "generated_at_epoch": 1795173366,
   "top_loot_summary": [
+    {
+      "asin": "B0CHX24XGQ",
+      "title": "Acer Nitro V Gaming Laptop 13th Gen Intel Core i5 (RTX 4050 6GB Graphics, 144Hz)",
+      "effective_price": 69990,
+      "mrp": 92999,
+      "discount_pct": 25,
+      "savings_inr": 23009,
+      "brand": "Acer",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0CHX24XGQ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0CHX24XGQ.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0C4ZGF7P6",
+      "title": "ASUS Vivobook 16 (2023) Thin and Light Laptop (Intel Core i3-1215U, 8GB, 512GB SSD)",
+      "effective_price": 34990,
+      "mrp": 55990,
+      "discount_pct": 38,
+      "savings_inr": 21000,
+      "brand": "Asus",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0C4ZGF7P6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0C4ZGF7P6.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0H6MJBCHN",
       "title": "[ICICI / AXIS CC] Acer Chromebook, Intel Celeron- N4500 Processor, 4GB LPDDR4 RAM, 64GB eMMC, 29.46cm /11.6\" inch HD Display, Chrome OS, Intel UHD Graphics,WiFi 5, Black, 1.2 KG, CO731, Thin & Light Laptop",
@@ -39,32 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B091CR2FXY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B091CR2FXY.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08HMWZB8B",
-      "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
-      "effective_price": 3999,
-      "mrp": 9999,
-      "discount_pct": 60,
-      "savings_inr": 6000,
-      "brand": "Zebronics",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B08HMWZB8B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08HMWZB8B.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08HN6PCDJ",
-      "title": "Philips Digital Air Fryer HD9252/90 (4.1 Litre, 1400W Rapid Air Technology)",
-      "effective_price": 6999,
-      "mrp": 11995,
-      "discount_pct": 42,
-      "savings_inr": 4996,
-      "brand": "Philips",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B08HN6PCDJ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08HN6PCDJ.html",
       "coupon_text": null
     }
   ],
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 39.7,
+    "age_hours": 39.9,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795172730,
-    "last_verified_at_epoch": 1795172730,
-    "last_verified_at_ist": "2026-11-20 16:35 IST",
+    "posted_at_epoch": 1795173355,
+    "last_verified_at_epoch": 1795173355,
+    "last_verified_at_ist": "2026-11-20 16:45 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795172730,
-    "updated_at_ist": "2026-11-20 16:35 IST"
+    "updated_at": 1795173355,
+    "updated_at_ist": "2026-11-20 16:45 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795172730,
-    "last_verified_at_epoch": 1795172730,
-    "last_verified_at_ist": "2026-11-20 16:35 IST",
+    "posted_at_epoch": 1795173355,
+    "last_verified_at_epoch": 1795173355,
+    "last_verified_at_ist": "2026-11-20 16:45 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795172730,
-    "updated_at_ist": "2026-11-20 16:35 IST"
+    "updated_at": 1795173355,
+    "updated_at_ist": "2026-11-20 16:45 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 179,
-    "loot_count": 34,
+    "total_deals": 183,
+    "loot_count": 36,
     "max_discount_pct": 89,
-    "total_savings_inr": 571734
+    "total_savings_inr": 604931
   }
 }

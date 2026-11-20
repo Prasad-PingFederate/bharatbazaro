@@ -23,11 +23,14 @@ import requests
 OPENROUTER_DECISIONS_URL = "https://openrouter.ai/api/alpha/decisions"
 OPENROUTER_SYSTEMONE_URL = "https://openrouter.ai/api/v1/systemone"  # alternative
 
-# Free models ranked by practical usefulness for deals
+# Free models ranked by practical usefulness for deals (checked Nov 20, 2026)
+# Perplexity Decider v1.3 is the clear top free choice: extended free period,
+# #4 overall by request volume on OpenRouter decision rankings, strong accuracy.
 FREE_MODELS = [
-    "baseten/elephant-1:free",           # best free balance
-    "perplexity/pplx-decider-v1.3:free", # newer, good accuracy
-    "baseten/mammoth-1:free",            # highest ranked when available
+    "perplexity/pplx-decider-v1.3:free",       # current top free (high usage, extended free until ~Dec)
+    "perplexity/pplx-decider-flash-v1.3:free", # faster free sibling (~0.17s latency)
+    "baseten/elephant-1:free",                 # solid 9B free option (still free on OR)
+    # "baseten/mammoth-1" is now paid (~$0.10/M) — use only if you have credits
 ]
 
 
@@ -235,7 +238,7 @@ class DealDecisionEngine:
 
 
 # Convenience functions
-def decide_deal(deal: Dict, model: str = "baseten/elephant-1:free") -> DecisionResult:
+def decide_deal(deal: Dict, model: str = "perplexity/pplx-decider-v1.3:free") -> DecisionResult:
     engine = DealDecisionEngine(preferred_model=model)
     return engine.decide(deal)
 

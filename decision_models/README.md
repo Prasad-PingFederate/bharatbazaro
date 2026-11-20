@@ -2,15 +2,17 @@
 
 Free structured decision layer for deal promotion.
 
-## Top free models (Nov 2026)
+## Top free models (checked Nov 20, 2026)
 
 | Model | ID | Notes |
 |-------|-----|-------|
-| Elephant-1 | `baseten/elephant-1:free` | Best free balance (9B) |
-| Mammoth-1 | `baseten/mammoth-1:free` | Highest ranked open (27B) |
-| Perplexity Decider v1.3 | `perplexity/pplx-decider-v1.3:free` | Newer, locate support |
+| **Perplexity Decider v1.3** | `perplexity/pplx-decider-v1.3:free` | **Current best free**. #4 overall by request volume on OpenRouter decision rankings. Extended free period (another 3 weeks from Nov 19). Strong accuracy, 262K context, locate support. |
+| Perplexity Decider Flash v1.3 | `perplexity/pplx-decider-flash-v1.3:free` | Faster free sibling (~0.17s). Same API contract. |
+| Elephant-1 | `baseten/elephant-1:free` | Solid 9B free option still available. |
 
-These are **decision models** — they return calibrated probabilities for typed questions (yes/no, choice, score) instead of generating text. Fast and cheap/free on OpenRouter.
+These are **decision models** — they return calibrated probabilities for typed questions (yes/no, choice, score) instead of generating text. Fast and free on OpenRouter via the Decisions API (`POST /api/alpha/decisions`).
+
+Mammoth-1 is no longer free (now ~$0.10/M input). Jev models are paid leaders.
 
 ## Usage (Python)
 

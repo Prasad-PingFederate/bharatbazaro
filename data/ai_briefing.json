@@ -1,7 +1,33 @@
 {
-  "generated_at_ist": "2026-11-20 10:15 IST",
-  "generated_at_epoch": 1795149903,
+  "generated_at_ist": "2026-11-20 10:19 IST",
+  "generated_at_epoch": 1795150193,
   "top_loot_summary": [
+    {
+      "asin": "B09XXWMS4Z",
+      "title": "Marshall Emberton II Portable Bluetooth Speaker (30+ Hours Playtime)",
+      "effective_price": 13999,
+      "mrp": 19999,
+      "discount_pct": 30,
+      "savings_inr": 6000,
+      "brand": "Marshall",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09XXWMS4Z?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09XXWMS4Z.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B08B3Q1RQT",
+      "title": "LG 27-inch 4K UHD IPS Monitor (HDR 10, AMD FreeSync, Dual HDMI)",
+      "effective_price": 22999,
+      "mrp": 35000,
+      "discount_pct": 34,
+      "savings_inr": 12001,
+      "brand": "LG",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B08B3Q1RQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B08B3Q1RQT.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B8NTZ24L",
       "title": "Puma Unisex Smashic Casual Sneakers (White & Black)",
@@ -39,32 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B0BN8H1L7L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BN8H1L7L.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B098FH5P3C",
-      "title": "Bose QuietComfort 45 Bluetooth Wireless Noise Cancelling Headphones",
-      "effective_price": 19900,
-      "mrp": 29900,
-      "discount_pct": 33,
-      "savings_inr": 10000,
-      "brand": "Bose",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B098FH5P3C?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B098FH5P3C.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0863TXGM3",
-      "title": "Sony WH-1000XM4 Industry Leading Wireless Noise Cancelling Headphones",
-      "effective_price": 19990,
-      "mrp": 29990,
-      "discount_pct": 33,
-      "savings_inr": 10000,
-      "brand": "Sony",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0863TXGM3?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0863TXGM3.html",
       "coupon_text": null
     }
   ],
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795149894,
-    "last_verified_at_epoch": 1795149894,
-    "last_verified_at_ist": "2026-11-20 10:14 IST",
+    "posted_at_epoch": 1795150181,
+    "last_verified_at_epoch": 1795150181,
+    "last_verified_at_ist": "2026-11-20 10:19 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795149894,
-    "updated_at_ist": "2026-11-20 10:14 IST"
+    "updated_at": 1795150181,
+    "updated_at_ist": "2026-11-20 10:19 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795149894,
-    "last_verified_at_epoch": 1795149894,
-    "last_verified_at_ist": "2026-11-20 10:14 IST",
+    "posted_at_epoch": 1795150181,
+    "last_verified_at_epoch": 1795150181,
+    "last_verified_at_ist": "2026-11-20 10:19 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795149894,
-    "updated_at_ist": "2026-11-20 10:14 IST"
+    "updated_at": 1795150181,
+    "updated_at_ist": "2026-11-20 10:19 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 162,
-    "loot_count": 22,
+    "total_deals": 166,
+    "loot_count": 24,
     "max_discount_pct": 89,
-    "total_savings_inr": 494984
+    "total_savings_inr": 544982
   }
 }

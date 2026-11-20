@@ -1046,7 +1046,7 @@ def render_top5_quick_compare_table(deals: List[Dict[str, Any]]) -> str:
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
         conf = d.get("buy_confidence") or 80
-        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-table"
+        aff_url = f"/a/{asin}"
         deal_url = f"/deal/{asin}.html"
 
         rows.append(f"""          <tr style="border-bottom: 1px solid var(--border-card);">
@@ -1132,7 +1132,7 @@ def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
         img = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
-        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-top3"
+        aff_url = f"/a/{asin}"
         deal_url = f"/deal/{asin}.html"
 
         mrp_str = f'<span style="font-size:0.78rem; text-decoration:line-through; color:var(--text-muted);">₹{mrp:,}</span>' if (mrp and mrp > eff_price) else ""
@@ -1394,7 +1394,7 @@ def render_product_page_html(
     review_count = deal.get("review_count") or 150
     is_expired = bool(deal.get("is_expired") or deal.get("status") == "expired")
 
-    raw_aff = str(deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1")
+    raw_aff = f"/a/{asin}"
     if "ascsubtag=" in raw_aff:
         raw_aff = re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-seo", raw_aff)
     else:
@@ -1990,7 +1990,7 @@ def generate_rss_feed(deals: List[Dict[str, Any]], root_dir: Path) -> Path:
         eff_price = d.get("effective_price") or d.get("list_price") or 0
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
-        aff_url = d.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1"
+        aff_url = f"/a/{asin}"
         img_url = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
         deal_url = f"https://bharatbazaro.com/deal/{asin}.html"
 

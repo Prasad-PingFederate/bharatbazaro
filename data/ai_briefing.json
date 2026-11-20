@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-20 15:42 IST",
-  "generated_at_epoch": 1795169566,
+  "generated_at_ist": "2026-11-20 16:30 IST",
+  "generated_at_epoch": 1795172458,
   "top_loot_summary": [
+    {
+      "asin": "B08HMWZB8B",
+      "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
+      "effective_price": 3999,
+      "mrp": 9999,
+      "discount_pct": 60,
+      "savings_inr": 6000,
+      "brand": "Zebronics",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B08HMWZB8B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B08HMWZB8B.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B08HN6PCDJ",
+      "title": "Philips Digital Air Fryer HD9252/90 (4.1 Litre, 1400W Rapid Air Technology)",
+      "effective_price": 6999,
+      "mrp": 11995,
+      "discount_pct": 42,
+      "savings_inr": 4996,
+      "brand": "Philips",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B08HN6PCDJ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B08HN6PCDJ.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0B25L78CD",
+      "title": "Crucial P3 1TB PCIe 3.0 3D NAND NVMe M.2 SSD up to 3500MB/s",
+      "effective_price": 5299,
+      "mrp": 11000,
+      "discount_pct": 52,
+      "savings_inr": 5701,
+      "brand": "Crucial",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0B25L78CD?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B25L78CD.html",
+      "coupon_text": null
+    },
     {
       "asin": "B07X9X4M8L",
       "title": "Levi's Mens 511 Slim Fit Stretch Jeans (Dark Indigo)",
@@ -26,45 +65,6 @@
       "category": "Laptops & Computing",
       "affiliate_url": "https://www.amazon.in/dp/B0CYQ4M4N4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0CYQ4M4N4.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09X7G2Z1D",
-      "title": "HP Smart Tank 580 All-in-One WiFi Colour Ink Tank Printer",
-      "effective_price": 12499,
-      "mrp": 18848,
-      "discount_pct": 34,
-      "savings_inr": 6349,
-      "brand": "HP",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B09X7G2Z1D?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09X7G2Z1D.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09NVPSCQT",
-      "title": "boAt Rockerz 255 Pro+ Bluetooth in Ear Neckband with 40H Playtime",
-      "effective_price": 999,
-      "mrp": 3990,
-      "discount_pct": 75,
-      "savings_inr": 2991,
-      "brand": "boAt",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09NVPSCQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09NVPSCQT.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BSGTLXJ1",
-      "title": "Boult Audio Z40 True Wireless in Ear Earbuds (60H Playtime, ENC)",
-      "effective_price": 999,
-      "mrp": 4999,
-      "discount_pct": 80,
-      "savings_inr": 4000,
-      "brand": "Boult",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0BSGTLXJ1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BSGTLXJ1.html",
       "coupon_text": null
     }
   ],
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 38.8,
+    "age_hours": 39.6,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795169559,
-    "last_verified_at_epoch": 1795169559,
-    "last_verified_at_ist": "2026-11-20 15:42 IST",
+    "posted_at_epoch": 1795172450,
+    "last_verified_at_epoch": 1795172450,
+    "last_verified_at_ist": "2026-11-20 16:30 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795169559,
-    "updated_at_ist": "2026-11-20 15:42 IST"
+    "updated_at": 1795172450,
+    "updated_at_ist": "2026-11-20 16:30 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795169559,
-    "last_verified_at_epoch": 1795169559,
-    "last_verified_at_ist": "2026-11-20 15:42 IST",
+    "posted_at_epoch": 1795172450,
+    "last_verified_at_epoch": 1795172450,
+    "last_verified_at_ist": "2026-11-20 16:30 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795169559,
-    "updated_at_ist": "2026-11-20 15:42 IST"
+    "updated_at": 1795172450,
+    "updated_at_ist": "2026-11-20 16:30 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 167,
-    "loot_count": 28,
+    "total_deals": 176,
+    "loot_count": 31,
     "max_discount_pct": 89,
-    "total_savings_inr": 524573
+    "total_savings_inr": 554590
   }
 }

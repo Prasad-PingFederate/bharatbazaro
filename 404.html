@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BharatBazaro</title>
+  <script>
+    (function () {
+      var m = location.pathname.match(/\/a\/([A-Za-z0-9]{10})\/?$/);
+      if (!m) return;
+      var asin = m[1].toUpperCase();
+      location.replace(
+        "https://www.amazon.in/dp/" + asin +
+        "?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-short"
+      );
+    })();
+  </script>
+</head>
+<body style="font-family: system-ui, sans-serif; background:#0e0d0b; color:#f4efe6; padding:32px;">
+  <p id="msg">Page not found. <a href="/" style="color:#ef6a1a">Back to BharatBazaro</a></p>
+  <script>
+    if (/\/a\/[A-Za-z0-9]{10}/.test(location.pathname)) {
+      document.getElementById("msg").textContent = "Opening Amazon…";
+    }
+  </script>
+</body>
+</html>

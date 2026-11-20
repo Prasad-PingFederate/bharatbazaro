@@ -2,6 +2,13 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/a/:asin",
+      "destination": "https://www.amazon.in/dp/:asin?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-short",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/collections/under-99", "destination": "/collections/under-99.html" },
     { "source": "/collections/under-199", "destination": "/collections/under-199.html" },

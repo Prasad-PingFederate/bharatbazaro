@@ -1,7 +1,59 @@
 {
-  "generated_at_ist": "2026-11-20 16:59 IST",
-  "generated_at_epoch": 1795174163,
+  "generated_at_ist": "2026-11-20 17:05 IST",
+  "generated_at_epoch": 1795174521,
   "top_loot_summary": [
+    {
+      "asin": "B0C82PJH3S",
+      "title": "Orient Electric Aura Rapid Pro Geyser 5.9 Litre Instant Water Heater | 3000 W Powerful Heating | Suitable For Kitchen & Bathroom | 5 Year Inner Tank Warranty by Orient | High-rise Compatible| White",
+      "effective_price": 3549,
+      "mrp": 7990,
+      "discount_pct": 56,
+      "savings_inr": 4441,
+      "brand": "Orient",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B0C82PJH3S?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0C82PJH3S.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0GGHXCQSR",
+      "title": "Fire-Boltt Ninja Phantom Smart Watch 1.83” Display, Transparent Clear Body Design, Bluetooth Calling, 120+ Sports Modes, Voice Assistant, AI Outfit Watch Face Smartwatch for Men & Women Black Smoke",
+      "effective_price": 1499,
+      "mrp": 13627,
+      "discount_pct": 89,
+      "savings_inr": 12128,
+      "brand": "Fire-Boltt",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0GGHXCQSR?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0GGHXCQSR.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0B8NTZ24M",
+      "title": "Red Tape Mens Casual Sneaker Shoes with Memory Foam",
+      "effective_price": 1399,
+      "mrp": 5599,
+      "discount_pct": 75,
+      "savings_inr": 4200,
+      "brand": "Red",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24M?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24M.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0D1GB62XQ",
+      "title": "Realme Narzo 70 Pro 5G (Glass Green, 8GB RAM, 128GB Storage)",
+      "effective_price": 16999,
+      "mrp": 24999,
+      "discount_pct": 32,
+      "savings_inr": 8000,
+      "brand": "Realme",
+      "category": "Mobiles & Accessories",
+      "affiliate_url": "https://www.amazon.in/dp/B0D1GB62XQ?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0D1GB62XQ.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0BRKMNZCS",
       "title": "boAt Airdopes 141 Bluetooth Truly Wireless in Ear Earbuds with 42H Playtime & Beast Mode",
@@ -13,58 +65,6 @@
       "category": "Audio & Headphones",
       "affiliate_url": "https://www.amazon.in/dp/B0BRKMNZCS?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0BRKMNZCS.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B097RDVDL2",
-      "title": "Noise Buds VS102 Truly Wireless in-Ear Earbuds with 50H Playtime",
-      "effective_price": 899,
-      "mrp": 2999,
-      "discount_pct": 70,
-      "savings_inr": 2100,
-      "brand": "Noise",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B097RDVDL2?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B097RDVDL2.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09N3ZNHTY",
-      "title": "boAt Airdopes 141 Bluetooth Truly Wireless in Ear Earbuds (42H Playtime)",
-      "effective_price": 999,
-      "mrp": 4490,
-      "discount_pct": 78,
-      "savings_inr": 3491,
-      "brand": "boAt",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09N3ZNHTY?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09N3ZNHTY.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0FN7WG5KB",
-      "title": "adidas Unisex-Adult Aerosurgestride Running Shoes",
-      "effective_price": 1919,
-      "mrp": 4799,
-      "discount_pct": 60,
-      "savings_inr": 2880,
-      "brand": "Adidas",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0FN7WG5KB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0FN7WG5KB.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0FLYDHYY4",
-      "title": "boAt Stone 1200 Pro, 60W Signature Sound, 76.2mm Drivers, TWS,7.5H Battery, Built-in Mic, Carry Strap,IPX6, Bluetooth Speaker, Wireless Speaker, Portable Speaker (Twilight Black)",
-      "effective_price": 1899,
-      "mrp": 14990,
-      "discount_pct": 70,
-      "savings_inr": 13091,
-      "brand": "boAt",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0FLYDHYY4?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0FLYDHYY4.html",
       "coupon_text": null
     }
   ],
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 40.1,
+    "age_hours": 40.2,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795174145,
-    "last_verified_at_epoch": 1795174145,
-    "last_verified_at_ist": "2026-11-20 16:59 IST",
+    "posted_at_epoch": 1795174509,
+    "last_verified_at_epoch": 1795174509,
+    "last_verified_at_ist": "2026-11-20 17:05 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795174145,
-    "updated_at_ist": "2026-11-20 16:59 IST"
+    "updated_at": 1795174509,
+    "updated_at_ist": "2026-11-20 17:05 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795174145,
-    "last_verified_at_epoch": 1795174145,
-    "last_verified_at_ist": "2026-11-20 16:59 IST",
+    "posted_at_epoch": 1795174509,
+    "last_verified_at_epoch": 1795174509,
+    "last_verified_at_ist": "2026-11-20 17:05 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795174145,
-    "updated_at_ist": "2026-11-20 16:59 IST"
+    "updated_at": 1795174509,
+    "updated_at_ist": "2026-11-20 17:05 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 199,
-    "loot_count": 42,
+    "total_deals": 213,
+    "loot_count": 46,
     "max_discount_pct": 89,
-    "total_savings_inr": 670323
+    "total_savings_inr": 707215
   }
 }

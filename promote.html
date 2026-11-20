@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Post a deal — BharatBazaro</title>
+  <meta name="description" content="Copy a live BharatBazaro deal and open WhatsApp, Telegram, X, Reddit or Facebook already logged in on this browser.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0e0d0b;
+      color: #f4efe6;
+      font: 16px/1.5 ui-sans-serif, system-ui, sans-serif;
+    }
+    a { color: #ef6a1a; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+    h1 { font-family: Georgia, "Iowan Old Style", serif; font-weight: 500; font-size: 2.4rem; line-height: 1.1; margin: 8px 0 12px; }
+    h2 { font-family: Georgia, "Iowan Old Style", serif; font-weight: 500; font-size: 1.4rem; margin: 0; }
+    .kicker { color: #ef6a1a; font-size: 0.85rem; margin: 0; }
+    .note { color: #a39888; max-width: 38rem; }
+    select, input, button {
+      font: inherit;
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid #3a342c;
+      background: #171512;
+      color: #f4efe6;
+    }
+    button { cursor: pointer; }
+    .deal { display: grid; gap: 12px; margin: 24px 0; }
+    @media (min-width: 640px) { .deal { grid-template-columns: 1fr auto; align-items: end; } }
+    label { display: block; color: #a39888; font-size: 0.9rem; }
+    select, input { width: 100%; margin-top: 4px; padding: 0 12px; }
+    .price { font-family: Georgia, serif; font-size: 2rem; margin: 0; }
+    .card { border: 1px solid #3a342c; background: #171512; border-radius: 10px; padding: 16px; margin: 0 0 10px; }
+    .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    .net { color: #ef6a1a; font-size: 0.8rem; margin: 0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .post {
+      background: #ef6a1a;
+      color: #1a0d05;
+      border: 0;
+      padding: 0 14px;
+      font-weight: 650;
+    }
+    .ghost { background: transparent; color: #a39888; padding: 0 12px; }
+    .ghost.on { background: #ef6a1a; color: #1a0d05; border-color: #ef6a1a; }
+    .add { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .add input, .add select { width: auto; flex: 1; min-width: 140px; }
+    .err { color: #e7b3a2; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="kicker">BharatBazaro</p>
+    <h1>Post this deal where you are already logged in.</h1>
+    <p class="note">
+      One click copies the text and opens WhatsApp Web, Telegram, X, Reddit or Facebook in this browser.
+      If that account is logged in, the box is filled. You still press Send.
+      Those sites do not let another website press Send for you.
+    </p>
+    <p class="note" id="status">Loading today's deals…</p>
+
+    <div class="deal">
+      <label>Deal
+        <select id="deal"></select>
+      </label>
+      <p class="price" id="price"></p>
+    </div>
+
+    <div id="doors"></div>
+
+    <section class="card">
+      <h2>A group only you can post in</h2>
+      <p class="note">Paste the group link if you have one. The tool will not join it.</p>
+      <div class="add">
+        <input id="gname" placeholder="Group name" />
+        <select id="gnet">
+          <option>WhatsApp</option>
+          <option>Telegram</option>
+          <option>Facebook</option>
+          <option>Reddit</option>
+          <option>X</option>
+          <option>Instagram</option>
+        </select>
+        <input id="glink" placeholder="https:// optional group link" />
+        <button class="post" id="add" type="button">Add</button>
+      </div>
+    </section>
+    <p class="note"><a href="/">Back to deals</a></p>
+  </main>
+  <script>
+    const CHANNELS = {
+      "WhatsApp Web": { net: "WhatsApp", href: (t) => phone() ? "https://wa.me/?text=" + q(t) : "https://web.whatsapp.com/send?text=" + q(t), note: "Opens WhatsApp Web if this browser is logged in. Pick the group, then Send." },
+      "Flash Deals channel": { net: "Telegram", href: () => "https://t.me/Flash_Deals_Flipkart_Amazon", note: "Your channel. Text is copied. Paste it and send." },
+      "Telegram chats": { net: "Telegram", href: (t, u) => "https://t.me/share/url?url=" + q(u) + "&text=" + q(t), note: "Share sheet. Send into chats you already have." },
+      "X": { net: "X", href: (t) => "https://x.com/intent/post?text=" + q(t), note: "Compose opens. If @PrasadDammai is logged in, press Post." },
+      "r/Indiashopping": { net: "Reddit", href: (t, u) => "https://www.reddit.com/r/Indiashopping/submit?title=" + q(t.split("\n")[0]) + "&url=" + q(u), note: "Title and link are filled when you are logged in." },
+      "r/dealsforindia": { net: "Reddit", href: (t, u) => "https://www.reddit.com/r/dealsforindia/submit?title=" + q(t.split("\n")[0]) + "&url=" + q(u), note: "Same deal, second sub. Do not post both in the same hour." },
+      "Facebook": { net: "Facebook", href: (t, u) => "https://www.facebook.com/sharer/sharer.php?u=" + q(u), note: "Share dialog if Facebook is logged in. For a group, open the group link you saved and paste." },
+      "Instagram": { net: "Instagram", href: () => "https://www.instagram.com/", note: "Instagram will not accept a prefilled caption. The caption is copied. Paste it." },
+      "DesiDime": { net: "Forum", href: () => "https://www.desidime.com/", note: "Paste the text. They check price history." }
+    };
+
+    function q(s) { return encodeURIComponent(s); }
+    function phone() { return /Android|iPhone|iPad/i.test(navigator.userAgent); }
+    function inr(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
+    function page(d) { return "https://bharatbazaro.com/deal/" + d.asin + ".html"; }
+
+    function blurb(d, net) {
+      const url = page(d);
+      const price = inr(d.effective_price);
+      const name = d.title;
+      const bank = d.bank_offer ? "Bank: " + d.bank_offer : "Koi extra bank offer listed nahi.";
+      if (net === "X") return price + " · " + name + " (" + d.discount_pct + "% off)\n" + url;
+      if (net === "Reddit" || net === "Forum") {
+        return [price + " — " + name + " (" + d.discount_pct + "% off, MRP " + inr(d.mrp) + ")", "", bank, (d.rating || "?") + " stars.", "", url, "", "Affiliate: BharatBazaro is in Amazon Associates. Price is not marked up."].join("\n");
+      }
+      return [price + " mein " + name + ".", "", "MRP " + inr(d.mrp) + ". " + d.discount_pct + "% off.", bank, "", "Yahan se kholo:", url].join("\n");
+    }
+
+    const postedKey = "bb-promote-posted";
+    const groupsKey = "bb-promote-groups";
+    const posted = new Set(JSON.parse(localStorage.getItem(postedKey) || "[]"));
+    let groups = JSON.parse(localStorage.getItem(groupsKey) || "[]");
+    let deals = [];
+
+    function savePosted() { localStorage.setItem(postedKey, JSON.stringify([...posted])); }
+    function saveGroups() { localStorage.setItem(groupsKey, JSON.stringify(groups)); }
+
+    function groupDoor(g) {
+      return {
+        net: g.net,
+        custom: true,
+        note: g.link ? "Opens your link and copies the text." : "Copies the text. Paste it into that app.",
+        href: function (t, u) {
+          if (g.link) return g.link;
+          if (g.net === "WhatsApp") return phone() ? "https://wa.me/?text=" + q(t) : "https://web.whatsapp.com/send?text=" + q(t);
+          if (g.net === "X") return "https://x.com/intent/post?text=" + q(t);
+          if (g.net === "Telegram") return "https://t.me/share/url?url=" + q(u) + "&text=" + q(t);
+          if (g.net === "Facebook") return "https://www.facebook.com/sharer/sharer.php?u=" + q(u);
+          if (g.net === "Instagram") return "https://www.instagram.com/";
+          return "https://www.reddit.com/submit?title=" + q(firstLine(t)) + "&url=" + q(u);
+        }
+      };
+    }
+
+    function firstLine(t) { return t.split("\n")[0]; }
+
+    async function post(name, spec, deal) {
+      const net = spec.net;
+      const text = blurb(deal, net);
+      const url = page(deal);
+      try { await navigator.clipboard.writeText(text); } catch (e) {}
+      const href = spec.href(text, url);
+      if (href) window.open(href, "_blank", "noopener,noreferrer");
+      const btn = document.querySelector('[data-post="' + name + '"]');
+      if (btn) btn.textContent = "Copied, opened";
+    }
+
+    function render(deal) {
+      const box = document.getElementById("doors");
+      box.innerHTML = "";
+      const doors = Object.entries(CHANNELS).concat(groups.map((g) => [g.name, groupDoor(g)]));
+      for (const [name, spec] of doors) {
+        const id = deal.asin + ":" + name;
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = '<div class="row"><div><p class="net"></p><h2></h2><p class="note"></p></div><div class="actions"></div></div>';
+        card.querySelector(".net").textContent = spec.net;
+        card.querySelector("h2").textContent = name;
+        card.querySelector(".note").textContent = spec.note || "Opens your link. Text is on the clipboard.";
+        const actions = card.querySelector(".actions");
+        const go = document.createElement("button");
+        go.className = "post";
+        go.type = "button";
+        go.dataset.post = name;
+        go.textContent = "Post";
+        go.addEventListener("click", () => post(name, spec, deal));
+        const mark = document.createElement("button");
+        mark.className = "ghost" + (posted.has(id) ? " on" : "");
+        mark.type = "button";
+        mark.textContent = posted.has(id) ? "Posted" : "Mark posted";
+        mark.addEventListener("click", () => {
+          if (posted.has(id)) posted.delete(id); else posted.add(id);
+          savePosted();
+          render(deal);
+        });
+        actions.append(go, mark);
+        if (spec.custom) {
+          const rm = document.createElement("button");
+          rm.className = "ghost";
+          rm.type = "button";
+          rm.textContent = "Remove";
+          rm.addEventListener("click", () => {
+            groups = groups.filter((g) => g.name !== name);
+            saveGroups();
+            render(deal);
+          });
+          actions.append(rm);
+        }
+        box.append(card);
+      }
+      document.getElementById("price").textContent = inr(deal.effective_price);
+    }
+
+    function current() {
+      const asin = document.getElementById("deal").value;
+      return deals.find((d) => d.asin === asin) || deals[0];
+    }
+
+    document.getElementById("deal").addEventListener("change", () => render(current()));
+    document.getElementById("add").addEventListener("click", () => {
+      const name = document.getElementById("gname").value.trim();
+      const net = document.getElementById("gnet").value;
+      const link = document.getElementById("glink").value.trim();
+      if (!name) return;
+      groups.push({ name, net, link });
+      saveGroups();
+      document.getElementById("gname").value = "";
+      document.getElementById("glink").value = "";
+      render(current());
+    });
+
+    fetch("/data/live_deals.json")
+      .then((r) => { if (!r.ok) throw new Error("deals file missing"); return r.json(); })
+      .then((rows) => {
+        deals = rows.filter((d) => d && !d.expired && !d.price_spiked && d.effective_price > 0 && d.asin)
+          .sort((a, b) => (b.score || 0) - (a.score || 0))
+          .slice(0, 40);
+        if (!deals.length) throw new Error("no live deals");
+        const sel = document.getElementById("deal");
+        for (const d of deals) {
+          const opt = document.createElement("option");
+          opt.value = d.asin;
+          opt.textContent = inr(d.effective_price) + " · " + d.title.slice(0, 80);
+          sel.append(opt);
+        }
+        document.getElementById("status").textContent = deals.length + " live deals. The link goes to the BharatBazaro page, not straight to Amazon.";
+        render(deals[0]);
+      })
+      .catch((err) => {
+        document.getElementById("status").className = "err";
+        document.getElementById("status").textContent = "Could not load live deals (" + err.message + "). Refresh in a minute.";
+      });
+  </script>
+</body>
+</html>

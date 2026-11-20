@@ -43,7 +43,7 @@
   function getAffiliateUrlWithSubtag(deal, subtag = 'bb-grid') {
     const asin = typeof deal === 'string' ? deal : (deal.asin || '');
     if (asin && /^[A-Z0-9]{10}$/i.test(asin)) {
-      return `https://www.amazon.in/dp/${asin.toUpperCase()}?tag=${AMAZON_TAG}&linkCode=ll1&ascsubtag=${subtag}`;
+      return `/a/${asin.toUpperCase()}`;
     }
     let base = (deal && deal.affiliate_url) ? deal.affiliate_url : `https://www.amazon.in/?tag=${AMAZON_TAG}&linkCode=ll1`;
     if (base.includes('ascsubtag=')) {

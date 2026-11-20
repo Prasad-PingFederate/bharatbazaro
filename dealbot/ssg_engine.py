@@ -464,12 +464,12 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
     brand_chip = html_lib.escape(str(d.get("brand") or d.get("category") or "Amazon"))
 
     card_subtag = subtag or "bb-grid"
-    raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}"
+    raw_aff = f"/a/{asin}"
     aff_btn_url = html_lib.escape(raw_aff)
-    aff_img_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}")
-    aff_title_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}")
-    aff_price_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}")
-    aff_coupon_url = html_lib.escape(f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}")
+    aff_img_url = html_lib.escape(f"/a/{asin}")
+    aff_title_url = html_lib.escape(f"/a/{asin}")
+    aff_price_url = html_lib.escape(f"/a/{asin}")
+    aff_coupon_url = html_lib.escape(f"/a/{asin}")
 
     image_url = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
     is_loot = bool(d.get("is_loot"))
@@ -795,7 +795,7 @@ def build_structured_data(page_cfg: dict, page_deals: list) -> str:
             continue
         asin = d.get("asin") or ""
         subtag = page_cfg.get("subtag") or "bb-grid"
-        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={subtag}"
+        aff_url = f"/a/{asin}"
         img_url = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
         title = d.get("title") or "Amazon Deal"
         brand = d.get("brand") or "Amazon"

@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-20 14:39 IST",
-  "generated_at_epoch": 1795165760,
+  "generated_at_ist": "2026-11-20 15:15 IST",
+  "generated_at_epoch": 1795167909,
   "top_loot_summary": [
     {
       "asin": "B09X7G2Z1D",
@@ -113,7 +113,7 @@
     "posted_at_epoch": 1793181629,
     "last_verified_at_epoch": 1795029794,
     "last_verified_at_ist": "2026-11-19 00:53 IST",
-    "age_hours": 37.8,
+    "age_hours": 38.4,
     "trending_score": 10.0,
     "is_new": false,
     "is_fresh": false,
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795165757,
-    "last_verified_at_epoch": 1795165757,
-    "last_verified_at_ist": "2026-11-20 14:39 IST",
+    "posted_at_epoch": 1795167903,
+    "last_verified_at_epoch": 1795167903,
+    "last_verified_at_ist": "2026-11-20 15:15 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795165757,
-    "updated_at_ist": "2026-11-20 14:39 IST"
+    "updated_at": 1795167903,
+    "updated_at_ist": "2026-11-20 15:15 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0C46DW3KH",
@@ -213,15 +213,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795165757,
-    "last_verified_at_epoch": 1795165757,
-    "last_verified_at_ist": "2026-11-20 14:39 IST",
+    "posted_at_epoch": 1795167903,
+    "last_verified_at_epoch": 1795167903,
+    "last_verified_at_ist": "2026-11-20 15:15 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795165757,
-    "updated_at_ist": "2026-11-20 14:39 IST"
+    "updated_at": 1795167903,
+    "updated_at_ist": "2026-11-20 15:15 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -261,9 +261,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 169,
-    "loot_count": 29,
+    "total_deals": 161,
+    "loot_count": 26,
     "max_discount_pct": 89,
-    "total_savings_inr": 547685
+    "total_savings_inr": 521187
   }
 }

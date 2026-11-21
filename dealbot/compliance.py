@@ -173,7 +173,7 @@ def to_bharatbazaro_schema(
         "rating": float(raw.get("rating") or 4.0),
         "review_count": int(raw.get("review_count") or 100),
         "score": int(raw.get("score") or 75),
-        "buy_confidence": int(raw.get("buy_confidence") or 90),
+        "buy_confidence": int(raw.get("buy_confidence") or (84 if discount < 25 else 90)),
         "is_loot": bool(raw.get("is_loot", False)),
         "is_fresh": True,
         "verified_at": verified_at,

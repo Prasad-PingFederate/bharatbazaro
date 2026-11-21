@@ -16,7 +16,8 @@
     { "source": "/collections/loot-of-the-day", "destination": "/collections/loot-of-the-day.html" },
     { "source": "/collections/(.*)", "destination": "/collections/$1.html" },
     { "source": "/deal/(.*)", "destination": "/deal/$1.html" },
-    { "source": "/go/(.*)", "destination": "/api/go.py?asin=$1" }
+    { "source": "/go/(.*)", "destination": "/api/go.py?asin=$1" },
+    { "source": "/a/(.*)", "destination": "/api/a.js?asin=$1" }
   ],
   "headers": [
     {

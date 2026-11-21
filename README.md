@@ -42,7 +42,7 @@ Pre-renders crawlable, schema-rich static HTML pages with zero JavaScript depend
 ### 4. Global Affiliate Giants CRO Mechanics
 Benchmarked against Wirecutter, Slickdeals, BuyHatke, HotUKDeals, GrabOn, and DesiDime:
 - **Honey / GrabOn Rule:** Every card element (thumbnail image, title, price waterfall, and coupon checkbox pill) opens the verified Amazon affiliate link in a new tab.
-- **Wirecutter-Style "⚡ Today's Top 3 Must-Buy Picks":** Dynamic hero spotlight strip highlighting the #1 Overall Screamer, #1 Budget Cookie-Dropper, and #1 Hidden Coupon deal.
+- **Wirecutter-Style "⚡ Today's Top 3 Must-Buy Picks":** Dynamic hero spotlight strip highlighting the #1 Overall Screamer, #1 Steal Under ₹199, and #1 Hidden Coupon deal.
 - **BuyHatke-Style Price Range Slider Bar:** Visual gradient slider showing where current deal price sits between historical all-time low and MRP.
 - **HotUKDeals / DesiDime Hotness Meter (`🔥 ${degrees}°`):** Deterministic temperature rating with 1-click community upvoting persisted to `localStorage`.
 - **GrabOn Trust Line:** `✓ Verified Live on Amazon • 💡 Why Buy: ${hook}`.

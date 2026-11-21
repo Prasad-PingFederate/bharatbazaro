@@ -25,6 +25,15 @@
           }));
         } catch (_) {}
       }
+      if (typeof gtag === 'function') {
+        try {
+          gtag('event', 'affiliate_click', {
+            event_category: 'shortlink_redirect',
+            asin: asin,
+            subtag: subtag
+          });
+        } catch (_) {}
+      }
 
       location.replace(
         "https://www.amazon.in/dp/" + asin +

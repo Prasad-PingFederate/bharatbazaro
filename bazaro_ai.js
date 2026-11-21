@@ -127,6 +127,16 @@
             timestamp: new Date().toISOString()
           }));
         } catch (_) {}
+        if (typeof window.gtag === 'function') {
+          try {
+            window.gtag('event', 'affiliate_click', {
+              event_category: 'outbound',
+              event_label: href,
+              asin: asin,
+              subtag: 'bb-bazarai'
+            });
+          } catch (_) {}
+        }
       }
       const waBtn = e.target.closest('.bazar-btn-share-wa');
       if (waBtn && navigator.sendBeacon) {

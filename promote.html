@@ -94,6 +94,18 @@
       </div>
     </div>
 
+    <!-- WhatsApp Link Mode Toggle -->
+    <div style="margin: 0 0 16px; padding: 12px 16px; background: #171512; border: 1.5px solid #22c55e; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <span style="font-size: 0.9rem; font-weight: 700; color: #4ade80;">🔗 WhatsApp Link Output Mode:</span>
+        <div style="font-size: 0.8rem; color: #a39888; margin-top: 2px;">Direct Amazon links trigger native Amazon App launch + rich WhatsApp image previews.</div>
+      </div>
+      <label style="font-size: 0.88rem; color: #f4efe6; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+        <input type="checkbox" id="directAmazonLinkToggle" checked style="width: 18px; height: 18px; min-height: auto; margin: 0; accent-color: #22c55e;">
+        Direct Amazon Link (Best for WhatsApp)
+      </label>
+    </div>
+
     <div id="doors"></div>
 
     <section class="card">
@@ -173,6 +185,16 @@
       return "https://bharatbazaro.com/a/" + d.asin + "?subtag=" + encodeURIComponent(sub);
     }
 
+    function getPromoteLink(d, ch, net) {
+      const directToggle = document.getElementById("directAmazonLinkToggle");
+      const useDirect = directToggle ? directToggle.checked : true;
+      const sub = ch || "bb-promote";
+      if (useDirect && net === "WhatsApp") {
+        return `https://www.amazon.in/dp/${d.asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=${encodeURIComponent(sub)}`;
+      }
+      return shortLink(d, sub);
+    }
+
     function blurb(d, net) {
       const price = inr(d.effective_price);
       const name = d.title;
@@ -184,7 +206,7 @@
       const bank = d.bank_offer;
 
       if (net === "WhatsApp") {
-        const waLink = shortLink(d, "bb-wa");
+        const waLink = getPromoteLink(d, "bb-wa", "WhatsApp");
         const lines = [
           `🔥 *LOOT DEAL: ${disc} OFF on Amazon!*`,
           `📦 *${name}*`,
@@ -296,7 +318,7 @@
       const net = spec.net;
       const text = blurb(deal, net);
       const subtag = "bb-" + (net === "WhatsApp" ? "wa" : net === "Telegram" ? "tg" : net === "X" ? "x" : "promote").toLowerCase();
-      const url = shortLink(deal, subtag);
+      const url = getPromoteLink(deal, subtag, net);
 
       try { await navigator.clipboard.writeText(text); } catch (e) {}
 
@@ -310,6 +332,18 @@
             price: deal.effective_price || 0,
             timestamp: new Date().toISOString()
           }));
+        } catch (_) {}
+      }
+
+      if (typeof window.gtag === 'function') {
+        try {
+          window.gtag('event', 'affiliate_click', {
+            event_category: 'promote',
+            event_label: net,
+            asin: deal.asin,
+            subtag: subtag,
+            value: deal.effective_price || 0
+          });
         } catch (_) {}
       }
 
@@ -388,6 +422,10 @@
     }
 
     document.getElementById("deal").addEventListener("change", () => render(current()));
+    const directToggle = document.getElementById("directAmazonLinkToggle");
+    if (directToggle) {
+      directToggle.addEventListener("change", () => render(current()));
+    }
     document.getElementById("add").addEventListener("click", () => {
       const name = document.getElementById("gname").value.trim();
       const net = document.getElementById("gnet").value;

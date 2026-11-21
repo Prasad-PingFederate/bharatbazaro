@@ -48,8 +48,8 @@ CAMPAIGNS = [
         "id": "diwali",
         "start": "2026-10-15T00:00:00+05:30",
         "end": "2026-11-12T23:59:59+05:30",
-        "badge": "DIWALI STEAL",
-        "cta": "Grab Diwali Deal on Amazon",
+        "badge": "Verified Drop",
+        "cta": "Check Price on Amazon",
     },
 ]
 

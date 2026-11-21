@@ -248,6 +248,12 @@ def compute_buy_confidence(deal: Deal, score: int) -> int:
         conf += 2
     if getattr(deal, "source_count", 1) >= 2:
         conf += 3
+
+    # Guard: Require real discount (>= 25%) to qualify as a screaming 90%+ deal
+    disc = getattr(deal, "effective_discount_pct", None) or getattr(deal, "discount_percent", None) or getattr(deal, "discount_pct", 0) or 0
+    if disc < 25 and conf >= 90:
+        conf = 84
+
     return min(99, max(60, conf))
 
 

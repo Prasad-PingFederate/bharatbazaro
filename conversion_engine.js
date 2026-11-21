@@ -96,6 +96,16 @@
         timestamp: new Date().toISOString()
       }));
     }
+    if (typeof window.gtag === 'function') {
+      try {
+        window.gtag('event', 'affiliate_click', {
+          event_category: 'coupon_copy',
+          asin: asin || '',
+          coupon_code: cleanCode,
+          subtag: 'bb-coupon'
+        });
+      } catch (_) {}
+    }
 
     if (targetUrl) {
       setTimeout(() => {

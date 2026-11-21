@@ -157,6 +157,7 @@
     inspectorPhBtn: document.getElementById('inspectorPhBtn'),
     btnToggleFilters: document.getElementById('btnToggleFilters'),
     filtersDrawer: document.getElementById('filtersDrawer'),
+    watchlistTotalCount: document.getElementById('watchlistTotalCount'),
     countDiwali: document.getElementById('countDiwali'),
     countDaily: document.getElementById('countDaily'),
     countUnder399: document.getElementById('countUnder399'),
@@ -468,6 +469,7 @@
     const totalSavings = freshDeals.reduce((sum, d) => sum + (d.savings_inr || 0), 0);
 
     if (el.statLiveDeals) el.statLiveDeals.textContent = freshCount;
+    if (el.watchlistTotalCount) el.watchlistTotalCount.textContent = freshCount;
     if (el.statLootCount) el.statLootCount.textContent = state.stats.loot_count || lootCount;
     if (el.statMaxDiscount) el.statMaxDiscount.textContent = `${state.stats.max_discount_pct || maxDiscount}%`;
     if (el.statTotalSavings) {
@@ -835,18 +837,54 @@
           const bFresh = (b.is_fresh !== false && (b.age_hours === undefined || b.age_hours <= 24.0)) ? 1 : 0;
           if (bFresh !== aFresh) return bFresh - aFresh;
 
-          // Priority Boost for High-Commission (5%-9%) Impulse Categories:
+          // 1. Evaluate BBDecision.heuristic (sales-first decision engine)
+          const decA = (window.BBDecision && typeof window.BBDecision.heuristic === 'function')
+            ? window.BBDecision.heuristic(a)
+            : null;
+          const decB = (window.BBDecision && typeof window.BBDecision.heuristic === 'function')
+            ? window.BBDecision.heuristic(b)
+            : null;
+
+          // Rank frontpage > test > hold > kill
+          const verdictRanks = { frontpage: 4, test: 3, hold: 2, kill: 1 };
+          const aVerdict = decA ? (verdictRanks[decA.verdict] || 1) : 2;
+          const bVerdict = decB ? (verdictRanks[decB.verdict] || 1) : 2;
+          if (bVerdict !== aVerdict) return bVerdict - aVerdict;
+
+          // 2. Severe penalty for 0%-commission mobiles and laptops > Rs 35,000 to bottom rows
+          const getZeroRoiPenalty = (d) => {
+            const cat = (d.category || '').toLowerCase();
+            const t = (d.title || '').toLowerCase();
+            const price = d.effective_price || d.list_price || 0;
+            if (cat.includes('smartphone') || cat.includes('mobile') || /\b(smartphone|mobile phone|iphone|oneplus|realme|redmi|galaxy s|iqoo|poco)\b/i.test(t)) {
+              return 10;
+            }
+            if (price > 35000 && (cat.includes('laptop') || /\b(laptop|macbook|gaming pc|notebook)\b/i.test(t))) {
+              return 8;
+            }
+            return 0;
+          };
+          const aPenalty = getZeroRoiPenalty(a);
+          const bPenalty = getZeroRoiPenalty(b);
+          if (aPenalty !== bPenalty) return aPenalty - bPenalty;
+
+          // 3. Priority Boost for High-Commission (5%-9%) Impulse Categories & sweet-spot impulse deals (Rs 99-999)
           // Home & Kitchen, Small Appliances (geysers, kettles, air fryers), Personal Care/Beauty, Daily Essentials/Grocery
           const isHighCommissionImpulse = (d) => {
             const cat = (d.category || '').toLowerCase();
             const t = (d.title || '').toLowerCase();
+            const price = d.effective_price || d.list_price || 999999;
+            let score = 0;
             if (cat.includes('home') || cat.includes('kitchen') || cat.includes('beauty') || cat.includes('personal care') || cat.includes('grocery')) {
-              return 1;
+              score += 3;
             }
             if (/\b(geyser|kettle|air fryer|mixer|grinder|cooker|pan|blender|iron|toaster|purifier|skincare|shampoo|serum|sunscreen|facewash|moisturizer|cream|detergent|dry fruit|chocolate|dove|nivea|colgate|surf excel|ariel|vim|comfort|harpic|lizol)\b/i.test(t)) {
-              return 1;
+              score += 3;
             }
-            return 0;
+            if (price >= 99 && price <= 999) {
+              score += 2;
+            }
+            return score;
           };
 
           const aImpulse = isHighCommissionImpulse(a);
@@ -863,6 +901,11 @@
           const aMag = isTopMagnet(a) ? 1 : 0;
           const bMag = isTopMagnet(b) ? 1 : 0;
           if (aMag !== bMag) return bMag - aMag;
+
+          // Decision confidence / heuristic score
+          const aScore = decA ? (decA.reasons?.score || decA.confidence || 0) : (a.trending_score || a.score || 0);
+          const bScore = decB ? (decB.reasons?.score || decB.confidence || 0) : (b.trending_score || b.score || 0);
+          if (Math.abs(bScore - aScore) > 0.05) return bScore - aScore;
 
           return (getDealRecency(b) - getDealRecency(a)) || ((b.trending_score || b.score || 0) - (a.trending_score || a.score || 0));
         });
@@ -1222,6 +1265,7 @@
     if (effPrice <= 0) return '';
     const discPct = d.effective_discount_pct || d.discount_pct || 0;
     const realDealScore = computeDynamicDealScore(d);
+    const buyConf = (discPct < 25 && (d.buy_confidence || 0) >= 90) ? 84 : (d.buy_confidence || realDealScore || 75);
     const strictATL = isStrictAllTimeLow(d);
 
     // Affiliate link tracking with ascsubtag placement
@@ -1503,7 +1547,7 @@
           ` : ''}
           <div class="card-footer">
           <a href="${escapeHtml(affBtnUrl)}" target="_blank" rel="sponsored noopener" class="btn-buy-deal">
-            <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : ((buyConf >= 80 || d.is_price_drop || effPrice >= 2000) ? '🛒 Check Live Price on Amazon ↗' : '🛒 Check Live Price on Amazon ↗')}</span>
+            <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : '🛒 Check Live Price on Amazon ↗'}</span>
           </a>
           <button class="btn-card-share" data-asin="${escapeHtml(d.asin)}" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>
@@ -1598,7 +1642,9 @@
 
   function renderModalAiVerdict(deal, effPrice) {
     if (!el.modalVerdictBox || !el.modalVerdictText) return;
-    const buyConf = deal.buy_confidence || 75;
+    const discPct = deal.effective_discount_pct || deal.discount_pct || 0;
+    const rawConf = deal.buy_confidence || 75;
+    const buyConf = (discPct < 25 && rawConf >= 90) ? 84 : rawConf;
     const isAllTimeLow = deal.price_context === 'all_time_low' || (deal.historical_min && effPrice <= deal.historical_min);
     const belowAvg = deal.historical_avg && effPrice < deal.historical_avg;
 
@@ -2374,6 +2420,16 @@
               timestamp: new Date().toISOString()
             }));
           } catch (_) {}
+          if (typeof window.gtag === 'function') {
+            try {
+              window.gtag('event', 'affiliate_click', {
+                event_category: 'outbound',
+                event_label: href,
+                asin,
+                subtag
+              });
+            } catch (_) {}
+          }
         }
       }
     });

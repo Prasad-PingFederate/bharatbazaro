@@ -26,8 +26,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing input or url parameter' });
   }
 
-  // 1. Direct 10-char ASIN check
-  if (/^[A-Z0-9]{10}$/i.test(rawInput)) {
+  // 1. Direct genuine 10-char ASIN check (e.g. B0... or ISBN-10)
+  if (/^(?:B0[A-Z0-9]{8}|[0-9]{9}[0-9X]|B[A-Z0-9]{9})$/i.test(rawInput) && /\d/.test(rawInput)) {
     const asin = rawInput.toUpperCase();
     return res.status(200).json(payload(asin, subtag));
   }

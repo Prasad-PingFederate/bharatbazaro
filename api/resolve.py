@@ -52,9 +52,9 @@ class handler(BaseHTTPRequestHandler):
         if not raw_input:
             return self._respond(400, {"error": "Missing input or url parameter"})
 
-        # 1. Check if raw input already has a direct 10-char ASIN
-        direct_asin = re.fullmatch(r"[A-Z0-9]{10}", raw_input, re.I)
-        if direct_asin:
+        # 1. Check if raw input already has a direct genuine 10-char ASIN (e.g. B0... or ISBN-10)
+        direct_asin = re.fullmatch(r"(?:B0[A-Z0-9]{8}|[0-9]{9}[0-9X]|B[A-Z0-9]{9})", raw_input, re.I)
+        if direct_asin and re.search(r"\d", raw_input):
             return self._respond(200, self._payload(direct_asin.group(0).upper(), subtag))
 
         # Check if ASIN pattern exists in raw input string
@@ -93,23 +93,29 @@ class handler(BaseHTTPRequestHandler):
                         return self._respond(200, self._payload(m_final.group(1).upper(), subtag, final_url))
                     return self._respond(422, {"error": "Could not extract ASIN from redirected page", "resolved_url": final_url})
             except urllib.error.HTTPError as e:
+                loc_hdr = e.headers.get("Location") if e.headers else None
+                status_code = e.code
+                try:
+                    e.close()
+                except Exception:
+                    pass
+
                 # 1. Did the custom redirect handler extract the ASIN from 301/302 Location header?
                 if redirect_handler.extracted_asin:
                     return self._respond(200, self._payload(redirect_handler.extracted_asin, subtag, redirect_handler.location_url or ""))
 
                 # 2. Inspect Location header of the HTTPError directly
-                loc = e.headers.get("Location") if e.headers else None
-                if loc:
-                    m_loc = ASIN_REGEX.search(loc)
+                if loc_hdr:
+                    m_loc = ASIN_REGEX.search(loc_hdr)
                     if m_loc:
-                        return self._respond(200, self._payload(m_loc.group(1).upper(), subtag, loc))
+                        return self._respond(200, self._payload(m_loc.group(1).upper(), subtag, loc_hdr))
 
                 if redirect_handler.location_url:
                     m_loc = ASIN_REGEX.search(redirect_handler.location_url)
                     if m_loc:
                         return self._respond(200, self._payload(m_loc.group(1).upper(), subtag, redirect_handler.location_url))
 
-                return self._respond(502, {"error": f"Redirect resolution HTTP error: {e.code}"})
+                return self._respond(502, {"error": f"Redirect resolution HTTP error: {status_code}"})
         except Exception as e:
             if redirect_handler.extracted_asin:
                 return self._respond(200, self._payload(redirect_handler.extracted_asin, subtag, redirect_handler.location_url or ""))

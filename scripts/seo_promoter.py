@@ -32,9 +32,9 @@ def ensure_indexnow_key_file(root_dir: Path) -> str:
     """Host the key at /{key}.txt. Bing rejects a differently named key file."""
     key = INDEXNOW_KEY
     key_file = root_dir / f"{key}.txt"
-    key_file.write_text(key + "\n", encoding="utf-8")
+    key_file.write_text(key, encoding="utf-8")
     legacy = root_dir / "bharatbazaro-indexnow-key.txt"
-    legacy.write_text(key + "\n", encoding="utf-8")
+    legacy.write_text(key, encoding="utf-8")
     logger.info(f"IndexNow key file ready at {key_file.name}")
     return key
 
@@ -88,8 +88,13 @@ def submit_to_indexnow(urls: List[str], key: str, timeout: float = 6.0) -> Dict[
                 results[ep] = {"status": "success", "code": code}
                 logger.info(f"IndexNow submitted {len(urls)} URLs to {ep} (HTTP {code})")
         except urllib.error.HTTPError as e:
-            results[ep] = {"status": "http_error", "code": e.code}
-            logger.warning(f"IndexNow HTTP error on {ep}: {e.code}")
+            code = e.code
+            try:
+                e.close()
+            except Exception:
+                pass
+            results[ep] = {"status": "http_error", "code": code}
+            logger.warning(f"IndexNow HTTP error on {ep}: {code}")
         except Exception as e:
             results[ep] = {"status": "error", "error": str(e)}
             logger.debug(f"IndexNow request skipped or network timeout on {ep}: {e}")

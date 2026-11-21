@@ -35,6 +35,13 @@ def test_resolve_direct_asin():
     assert headers["Access-Control-Allow-Origin"] == "*"
 
 
+def test_resolve_plain_word_not_asin():
+    # 10-char English words must not be falsely treated as ASINs
+    status, data, _ = simulate_request("/api/resolve?input=smartwatch")
+    assert status == 400
+    assert "error" in data
+
+
 def test_resolve_with_custom_subtag():
     status, data, headers = simulate_request("/api/resolve?input=B08WRBG3XW&subtag=my-custom-tag")
     assert status == 200

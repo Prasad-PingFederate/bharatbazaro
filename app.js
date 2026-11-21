@@ -46,9 +46,9 @@
     if (!urlOrAsin) return `https://www.amazon.in/?tag=${BB_TAG}&ascsubtag=${subtag}`;
 
     const raw = String(urlOrAsin).trim();
-    const exactAsin = raw.match(/^[A-Z0-9]{10}$/i);
-    const pathAsin = raw.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/)([A-Z0-9]{10})/i);
-    const asin = exactAsin ? exactAsin[0].toUpperCase() : (pathAsin ? pathAsin[1].toUpperCase() : null);
+    const isStandaloneAsin = (/^(?:B0[A-Z0-9]{8}|[0-9]{9}[0-9X]|B[A-Z0-9]{9})$/i.test(raw) && /\d/.test(raw));
+    const pathAsin = raw.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/|\/asin\/|\/d\/)([A-Z0-9]{10})/i);
+    const asin = isStandaloneAsin ? raw.toUpperCase() : (pathAsin ? pathAsin[1].toUpperCase() : null);
 
     // Cleanest URL format for Android/iOS Amazon Shopping App Universal Links:
     if (asin) {
@@ -69,14 +69,26 @@
 
   // 2. Resolve pasted text/shortlinks (amzn.in/d/...) in Unified Search + Analyzer Bar
   async function resolveUserPastedAmazonInput(rawInput, subtag = 'bb-analyzer') {
-    const directMatch = rawInput.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/|^)([A-Z0-9]{10})(?:[/?&\s]|$)/i);
-    if (directMatch) {
-      const asin = directMatch[1].toUpperCase();
+    if (!rawInput) return null;
+    const raw = String(rawInput).trim();
+
+    // 1. Direct standalone genuine ASIN check (e.g. B0... or ISBN-10)
+    if (/^(?:B0[A-Z0-9]{8}|[0-9]{9}[0-9X]|B[A-Z0-9]{9})$/i.test(raw) && /\d/.test(raw)) {
+      const asin = raw.toUpperCase();
       return { asin, affiliate_url: toSafeAffiliateUrl(asin, subtag) };
     }
-    if (/(amzn\.in|amzn\.to|amzn\.eu|amazon\.in)/i.test(rawInput)) {
+
+    // 2. Amazon URL with standard product path (/dp/, /gp/product/, /d/, /asin/)
+    const pathMatch = raw.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/|\/asin\/|\/d\/)([A-Z0-9]{10})/i);
+    if (pathMatch) {
+      const asin = pathMatch[1].toUpperCase();
+      return { asin, affiliate_url: toSafeAffiliateUrl(asin, subtag) };
+    }
+
+    // 3. Shortlink or domain redirect
+    if (/(amzn\.in|amzn\.to|amzn\.eu|amazon\.in)/i.test(raw)) {
       try {
-        const res = await fetch(`/api/resolve?input=${encodeURIComponent(rawInput)}&subtag=${encodeURIComponent(subtag)}`);
+        const res = await fetch(`/api/resolve?input=${encodeURIComponent(raw)}&subtag=${encodeURIComponent(subtag)}`);
         if (res.ok) return await res.json();
       } catch (e) {
         console.warn("API resolve network error:", e);

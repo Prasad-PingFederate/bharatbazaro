@@ -38,18 +38,69 @@
   };
 
   const AMAZON_TAG = 'dammaiprasad-21';
+  const BB_TAG = 'dammaiprasad-21';
   const DEFAULT_TELEGRAM_URL = 'https://t.me/Flash_Deals_Flipkart_Amazon';
 
+  // 1. Canonicalize ANY Amazon URL so cookies/tags are never dropped
+  function toSafeAffiliateUrl(urlOrAsin, subtag = 'bb-grid') {
+    if (!urlOrAsin) return `https://www.amazon.in/?tag=${BB_TAG}&ascsubtag=${subtag}`;
+
+    const raw = String(urlOrAsin).trim();
+    const exactAsin = raw.match(/^[A-Z0-9]{10}$/i);
+    const pathAsin = raw.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/)([A-Z0-9]{10})/i);
+    const asin = exactAsin ? exactAsin[0].toUpperCase() : (pathAsin ? pathAsin[1].toUpperCase() : null);
+
+    // Cleanest URL format for Android/iOS Amazon Shopping App Universal Links:
+    if (asin) {
+      return `https://www.amazon.in/dp/${asin}?tag=${BB_TAG}&linkCode=ll1&ascsubtag=${encodeURIComponent(subtag)}`;
+    }
+
+    // Fallback for search/category URLs: strip any competing tag/ref params properly
+    try {
+      const u = new URL(raw.startsWith('http') ? raw : `https://www.amazon.in/${raw}`);
+      ['tag', 'ascsubtag', 'linkCode', 'ref', 'ref_'].forEach(p => u.searchParams.delete(p));
+      u.searchParams.set('tag', BB_TAG);
+      u.searchParams.set('ascsubtag', subtag);
+      return u.toString();
+    } catch {
+      return `https://www.amazon.in/?tag=${BB_TAG}&ascsubtag=${subtag}`;
+    }
+  }
+
+  // 2. Resolve pasted text/shortlinks (amzn.in/d/...) in Unified Search + Analyzer Bar
+  async function resolveUserPastedAmazonInput(rawInput, subtag = 'bb-analyzer') {
+    const directMatch = rawInput.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/|^)([A-Z0-9]{10})(?:[/?&\s]|$)/i);
+    if (directMatch) {
+      const asin = directMatch[1].toUpperCase();
+      return { asin, affiliate_url: toSafeAffiliateUrl(asin, subtag) };
+    }
+    if (/(amzn\.in|amzn\.to|amzn\.eu|amazon\.in)/i.test(rawInput)) {
+      try {
+        const res = await fetch(`/api/resolve?input=${encodeURIComponent(rawInput)}&subtag=${encodeURIComponent(subtag)}`);
+        if (res.ok) return await res.json();
+      } catch (e) {
+        console.warn("API resolve network error:", e);
+      }
+    }
+    return null;
+  }
+
+  // 3. Detect Instagram/Facebook In-App Browser (where Amazon cookies die)
+  function isLockedInAppWebView() {
+    const ua = navigator.userAgent || '';
+    return /Instagram|FBAN|FBAV/i.test(ua);
+  }
+
+  function checkInAppWebView() {
+    if (isLockedInAppWebView()) {
+      const banner = document.getElementById('inAppBrowserBanner');
+      if (banner) banner.classList.remove('hidden');
+    }
+  }
+
   function getAffiliateUrlWithSubtag(deal, subtag = 'bb-grid') {
-    const asin = typeof deal === 'string' ? deal : (deal.asin || '');
-    if (asin && /^[A-Z0-9]{10}$/i.test(asin)) {
-      return `/a/${asin.toUpperCase()}`;
-    }
-    let base = (deal && deal.affiliate_url) ? deal.affiliate_url : `https://www.amazon.in/?tag=${AMAZON_TAG}&linkCode=ll1`;
-    if (base.includes('ascsubtag=')) {
-      return base.replace(/ascsubtag=[^&]+/, `ascsubtag=${subtag}`);
-    }
-    return base + (base.includes('?') ? '&' : '?') + `ascsubtag=${subtag}`;
+    const asin = typeof deal === 'string' ? deal : (deal.asin || (deal.affiliate_url ? deal.affiliate_url : ''));
+    return toSafeAffiliateUrl(asin, subtag);
   }
 
   // ── 2. DOM ELEMENT REFERENCES ──────────────────────────────────────────────
@@ -148,6 +199,7 @@
 
   // ── 3. INITIALIZATION ──────────────────────────────────────────────────────
   function init() {
+    checkInAppWebView();
     initTheme();
     initAlertsUI();
     initViewMode();
@@ -480,11 +532,11 @@
   }
 
   // ── 8. SEARCH & ASIN INSPECTOR ─────────────────────────────────────────────
-  function handleSearchInput(query) {
+  async function handleSearchInput(query) {
     const q = (query || '').trim();
     state.filters.search = q;
 
-    // Reels / Short-form quick-number jump: e.g. #14 or #1 or 14
+    // Reels / Short-form quick-number jump: e.g. #14 or #1
     if (/^#(\d+)$/.test(q)) {
       const reelsNum = parseInt(q.replace(/^#/, ''), 10);
       const targetCard = document.getElementById(`deal-${reelsNum}`) || document.querySelector(`[data-reels-num="${reelsNum}"]`);
@@ -501,29 +553,16 @@
       }
     }
 
-    const extractedAsin = extractAsinFromQuery(q);
-    if (extractedAsin) {
-      showAsinInspector(extractedAsin);
-    } else {
-      // Check for shortened mobile amzn.in / amzn.to link
-      if (/(?:amzn\.in|amzn\.to)\/[a-zA-Z0-9_\/-]+/i.test(q)) {
-        const matchUrl = q.match(/https?:\/\/(?:amzn\.in|amzn\.to)\/[a-zA-Z0-9_\/-]+/i) || [q];
-        const targetUrl = matchUrl[0];
-        fetch(`/api/resolve-url?url=${encodeURIComponent(targetUrl)}`)
-          .then(res => res.json())
-          .then(data => {
-            if (data && data.asin) {
-              showAsinInspector(data.asin);
-            } else if (data && data.resolved_url) {
-              const resAsin = extractAsinFromQuery(data.resolved_url);
-              if (resAsin) showAsinInspector(resAsin);
-            }
-          })
-          .catch(() => {});
+    if (q) {
+      const resolved = await resolveUserPastedAmazonInput(q, 'bb-analyzer');
+      if (resolved && resolved.asin) {
+        showAsinInspector(resolved.asin, resolved.affiliate_url);
+        renderDeals();
+        return;
       }
-      hideAsinInspector();
     }
 
+    hideAsinInspector();
     renderDeals();
   }
 
@@ -538,7 +577,7 @@
     return null;
   }
 
-  function showAsinInspector(asin) {
+  function showAsinInspector(asin, customAffiliateUrl) {
     if (!el.asinInspectorCard) return;
     const deal = state.allDeals.find(d => d.asin === asin);
 
@@ -549,12 +588,14 @@
 
     updateInspectorChart(asin, state.activeInspectorRange);
 
-    const partnerUrl = `https://www.amazon.in/dp/${asin}?tag=${AMAZON_TAG}&linkCode=ll1&ascsubtag=link_analyzer`;
+    const partnerUrl = customAffiliateUrl || toSafeAffiliateUrl(asin, 'bb-analyzer');
     if (el.inspectorBuyBtn) {
       el.inspectorBuyBtn.href = partnerUrl;
-      el.inspectorBuyBtn.textContent = '🛒 Buy on Amazon with Deal Tracking ↗';
+      el.inspectorBuyBtn.textContent = 'Open in Amazon App (Activate Deal) ↗';
+      el.inspectorBuyBtn.setAttribute('rel', 'sponsored noopener');
     }
     if (el.inspectorCopyBtn) {
+      el.inspectorCopyBtn.textContent = '📋 Copy Tracked Link';
       el.inspectorCopyBtn.onclick = () => {
         navigator.clipboard.writeText(partnerUrl).then(() => {
           const prev = el.inspectorCopyBtn.textContent;
@@ -567,13 +608,20 @@
       };
     }
     if (el.inspectorWhatsAppBtn) {
+      el.inspectorWhatsAppBtn.textContent = '📲 Share to WhatsApp';
       el.inspectorWhatsAppBtn.onclick = () => {
-        const text = `Check out this verified Amazon deal: ${partnerUrl}`;
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+        const text = `🔥 Check out this verified Amazon deal: ${partnerUrl}`;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
       };
     }
-    if (el.inspectorKeepaBtn) el.inspectorKeepaBtn.href = `https://keepa.com/#!product/10-${asin}`;
-    if (el.inspectorPhBtn) el.inspectorPhBtn.href = `https://keepa.com/#!product/10-${asin}`;
+    if (el.inspectorKeepaBtn) {
+      el.inspectorKeepaBtn.href = `https://keepa.com/#!product/10-${asin}`;
+      el.inspectorKeepaBtn.setAttribute('rel', 'noopener');
+    }
+    if (el.inspectorPhBtn) {
+      el.inspectorPhBtn.href = `https://keepa.com/#!product/10-${asin}`;
+      el.inspectorPhBtn.setAttribute('rel', 'noopener');
+    }
 
     el.asinInspectorCard.classList.remove('hidden');
   }
@@ -807,16 +855,16 @@
           </div>
         </div>
         <div class="unlocker-actions">
-          <a href="${allUrl}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-all">
+          <a href="${allUrl}" target="_blank" rel="sponsored noopener" class="amazon-unlocker-btn unlocker-btn-all">
             <span>🛒 All 4★+ "${escapeHtml(query)}" Deals ↗</span>
           </a>
-          <a href="${u499Url}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-499">
+          <a href="${u499Url}" target="_blank" rel="sponsored noopener" class="amazon-unlocker-btn unlocker-btn-499">
             <span>🪙 "${escapeHtml(query)}" Under ₹499 ↗</span>
           </a>
-          <a href="${u999Url}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-999">
+          <a href="${u999Url}" target="_blank" rel="sponsored noopener" class="amazon-unlocker-btn unlocker-btn-999">
             <span>💰 "${escapeHtml(query)}" Under ₹999 ↗</span>
           </a>
-          <a href="${halfOffUrl}" target="_blank" rel="noopener noreferrer" class="amazon-unlocker-btn unlocker-btn-50">
+          <a href="${halfOffUrl}" target="_blank" rel="sponsored noopener" class="amazon-unlocker-btn unlocker-btn-50">
             <span>🔥 50%+ OFF "${escapeHtml(query)}" Loots ↗</span>
           </a>
         </div>
@@ -882,11 +930,11 @@
         <div class="spotlight-mini-card">
           <div class="spotlight-ribbon">${ribbon}</div>
           <div style="display:flex; gap:12px; align-items:center; margin-bottom:10px;">
-            <a href="${escapeHtml(affUrl)}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid var(--border-card);">
+            <a href="${escapeHtml(affUrl)}" target="_blank" rel="sponsored noopener" style="flex-shrink:0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid var(--border-card);">
               <img src="${escapeHtml(deal.image_url)}" alt="${escapeHtml(deal.title)}" style="max-height:60px; max-width:60px; object-fit:contain;" loading="lazy" onerror="this.src='${svgPlaceholder}';">
             </a>
             <div style="flex:1; min-width:0;">
-              <a href="${escapeHtml(affUrl)}" target="_blank" rel="noopener noreferrer" style="font-size:0.86rem; font-weight:700; color:var(--text-main); text-decoration:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3; margin-bottom:4px;">
+              <a href="${escapeHtml(affUrl)}" target="_blank" rel="sponsored noopener" style="font-size:0.86rem; font-weight:700; color:var(--text-main); text-decoration:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3; margin-bottom:4px;">
                 ${escapeHtml(deal.title)}
               </a>
               <div style="display:flex; align-items:baseline; gap:6px; flex-wrap:wrap;">
@@ -897,7 +945,7 @@
             </div>
           </div>
           <div style="display:flex; gap:8px;">
-            <a href="${escapeHtml(affUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex:1; text-align:center; padding:7px 10px; font-size:0.82rem; font-weight:700; border-radius:var(--radius-full); text-decoration:none;">🛒 Grab Now ↗</a>
+            <a href="${escapeHtml(affUrl)}" target="_blank" rel="sponsored noopener" class="btn btn-primary" style="flex:1; text-align:center; padding:7px 10px; font-size:0.82rem; font-weight:700; border-radius:var(--radius-full); text-decoration:none;">🛒 Grab Now ↗</a>
             <button class="btn-chart-deal btn-open-modal" data-asin="${escapeHtml(deal.asin)}" style="padding:7px 10px; font-size:0.82rem; font-weight:600; border-radius:var(--radius-full); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-card); cursor:pointer;">📈</button>
           </div>
         </div>
@@ -1261,7 +1309,7 @@
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <a href="${escapeHtml(affImgUrl)}" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
+            <a href="${escapeHtml(affImgUrl)}" target="_blank" rel="sponsored noopener" class="card-img-anchor" title="View Deal on Amazon.in">
               <img src="${escapeHtml(d.image_url)}" alt="${escapeHtml(d.title)}" class="card-img" ${imgAttr} onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.onload=null;this.src='${svgPlaceholder}';}" onerror="this.onerror=null;this.src='${svgPlaceholder}';">
             </a>
           </div>
@@ -1277,13 +1325,13 @@
         </div>
 
         <div class="card-content">
-          <a href="${escapeHtml(affTitleUrl)}" target="_blank" rel="noopener noreferrer" class="card-title" title="${escapeHtml(d.title)}">
+          <a href="${escapeHtml(affTitleUrl)}" target="_blank" rel="sponsored noopener" class="card-title" title="${escapeHtml(d.title)}">
             ${escapeHtml(d.title)}
           </a>
 
           <!-- Price Waterfall -->
           <div class="price-waterfall-box">
-            <a href="${escapeHtml(affPriceUrl)}" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
+            <a href="${escapeHtml(affPriceUrl)}" target="_blank" rel="sponsored noopener" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
               <span class="effective-price">₹${formatNumber(effPrice)}</span>
               ${d.mrp && d.mrp > effPrice ? `<span class="original-mrp">₹${formatNumber(d.mrp)}</span>` : ''}
               ${discPct ? `<span class="discount-badge">${discPct}% OFF</span>` : ''}
@@ -1332,7 +1380,7 @@
             </div>
           ` : ''}
           <div class="card-footer">
-          <a href="${escapeHtml(affBtnUrl)}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+          <a href="${escapeHtml(affBtnUrl)}" target="_blank" rel="sponsored noopener" class="btn-buy-deal">
             <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : ((buyConf >= 80 || d.is_price_drop || d.is_diwali_steal || effPrice >= 2000) ? '🛒 Check Live Price on Amazon ↗' : '🛒 Check Live Price on Amazon ↗')}</span>
           </a>
           <button class="btn-card-share" data-asin="${escapeHtml(d.asin)}" title="Share Deal via WhatsApp / Copy Link">
@@ -1396,7 +1444,10 @@
       el.modalClaimBox.style.display = 'block';
     }
 
-    if (el.modalBuyBtn) el.modalBuyBtn.href = deal.affiliate_url;
+    if (el.modalBuyBtn) {
+      el.modalBuyBtn.href = toSafeAffiliateUrl(deal.asin || deal.affiliate_url, 'bb-modal');
+      el.modalBuyBtn.setAttribute('rel', 'sponsored noopener');
+    }
 
     if (el.chartModal) el.chartModal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
@@ -2129,8 +2180,7 @@
     const p = topDeal.effective_price || topDeal.list_price || 0;
     const mrp = topDeal.mrp || topDeal.original_price;
     const disc = topDeal.effective_discount_pct || topDeal.discount_pct || 0;
-    const tag = 'dammaiprasad-21';
-    const affUrl = `https://www.amazon.in/dp/${topDeal.asin}?tag=${tag}&linkCode=ll1`;
+    const affUrl = toSafeAffiliateUrl(topDeal.asin, 'bb-exit-modal');
     const svgPlaceholder = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZmFmYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UyZThmMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYmcpIiByeD0iMTYiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjUwIiBmaWxsPSIjZmVmM2M3Ii8+PHRleHQgeD0iMTUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvKaITwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMTcyYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFtYXpvbiBWZXJpZmllZCBEZWFsPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjIyIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjNjQ3NDhiIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+Q2xpY2sgdG8gZmluZCBvbiBBbWF6b24g4oaXPC90ZXh0Pjwvc3ZnPg==";
 
     container.innerHTML = `
@@ -2150,7 +2200,7 @@
         </div>
       </div>
       <div class="exit-modal-ctas">
-        <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="btn-exit-buy" id="exitModalBuyBtn">
+        <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="btn-exit-buy" id="exitModalBuyBtn">
           <span>🛒 Grab This Deal on Amazon @ ₹${formatNumber(p)} ↗</span>
         </a>
         <a href="https://t.me/Flash_Deals_Flipkart_Amazon" target="_blank" rel="noopener noreferrer" class="btn-exit-tg">

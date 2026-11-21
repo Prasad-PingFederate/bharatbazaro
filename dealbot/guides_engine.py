@@ -220,11 +220,11 @@ def render_guide_html(spec: Dict[str, Any], deals: List[Dict[str, Any]], root_di
         <article class="deal-card" style="border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 14px; background: var(--bg-card); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="height: 180px; display: flex; align-items: center; justify-content: center; background: #ffffff; border-radius: var(--radius-sm); margin-bottom: 12px; overflow: hidden;">
-              <a href="{aff_url}" target="_blank" rel="noopener noreferrer" title="{title}">
+              <a href="{aff_url}" target="_blank" rel="sponsored noopener" title="{title}">
                 <img src="{img}" alt="{title}" style="max-height: 160px; max-width: 100%; object-fit: contain;" {img_attr} onload="if(this.naturalWidth<=1||this.naturalHeight<=1){{this.src='{svg_placeholder}';}}" onerror="this.src='{svg_placeholder}';">
               </a>
             </div>
-            <a href="{aff_url}" target="_blank" rel="noopener noreferrer" style="font-size: 0.92rem; font-weight: 700; color: var(--text-main); text-decoration: none; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;">
+            <a href="{aff_url}" target="_blank" rel="sponsored noopener" style="font-size: 0.92rem; font-weight: 700; color: var(--text-main); text-decoration: none; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;">
               {title}
             </a>
             <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px;">
@@ -234,7 +234,7 @@ def render_guide_html(spec: Dict[str, Any], deals: List[Dict[str, Any]], root_di
             </div>
           </div>
           <div style="display: flex; gap: 8px; margin-top: 10px;">
-            <a href="{aff_url}" target="_blank" rel="noopener noreferrer" style="flex: 1; text-align: center; background: #f59e0b; color: #090d16; padding: 8px; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; text-decoration: none;">🛒 Grab on Amazon</a>
+            <a href="{aff_url}" target="_blank" rel="sponsored noopener" style="flex: 1; text-align: center; background: #f59e0b; color: #090d16; padding: 8px; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; text-decoration: none;">🛒 Grab on Amazon</a>
             <a href="/deal/{asin}.html" style="padding: 8px 12px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-card); border-radius: var(--radius-full); font-size: 0.85rem; text-decoration: none; font-weight: 600;">Chart</a>
           </div>
         </article>

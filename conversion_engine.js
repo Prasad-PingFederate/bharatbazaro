@@ -7,6 +7,28 @@
 (function () {
   'use strict';
 
+  const BB_TAG = 'dammaiprasad-21';
+
+  function toSafeAffiliateUrl(urlOrAsin, subtag = 'bb-coupon') {
+    if (!urlOrAsin) return `https://www.amazon.in/?tag=${BB_TAG}&ascsubtag=${subtag}`;
+    const raw = String(urlOrAsin).trim();
+    const exactAsin = raw.match(/^[A-Z0-9]{10}$/i);
+    const pathAsin = raw.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/)([A-Z0-9]{10})/i);
+    const asin = exactAsin ? exactAsin[0].toUpperCase() : (pathAsin ? pathAsin[1].toUpperCase() : null);
+    if (asin) {
+      return `https://www.amazon.in/dp/${asin}?tag=${BB_TAG}&linkCode=ll1&ascsubtag=${encodeURIComponent(subtag)}`;
+    }
+    try {
+      const u = new URL(raw.startsWith('http') ? raw : `https://www.amazon.in/${raw}`);
+      ['tag', 'ascsubtag', 'linkCode', 'ref', 'ref_'].forEach(p => u.searchParams.delete(p));
+      u.searchParams.set('tag', BB_TAG);
+      u.searchParams.set('ascsubtag', subtag);
+      return u.toString();
+    } catch {
+      return `https://www.amazon.in/?tag=${BB_TAG}&ascsubtag=${subtag}`;
+    }
+  }
+
   // 1. Toast Notification Manager
   function showToast(message, type = 'success') {
     let container = document.getElementById('bbToastContainer');
@@ -33,8 +55,9 @@
 
   // 2. 1-Click Copy Coupon & Open Store
   window.copyCouponAndOpen = function (code, affUrl, asin) {
+    const targetUrl = toSafeAffiliateUrl(affUrl || asin, 'bb-coupon');
     if (!code) {
-      if (affUrl) window.open(affUrl, '_blank', 'noopener,noreferrer');
+      if (targetUrl) window.open(targetUrl, '_blank', 'noopener');
       return;
     }
 
@@ -72,9 +95,9 @@
       }));
     }
 
-    if (affUrl) {
+    if (targetUrl) {
       setTimeout(() => {
-        window.open(affUrl, '_blank', 'noopener,noreferrer');
+        window.open(targetUrl, '_blank', 'noopener');
       }, 150);
     }
   };

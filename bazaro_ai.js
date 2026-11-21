@@ -14,6 +14,26 @@
 
   const AFFILIATE_TAG = 'dammaiprasad-21';
 
+  function toSafeAffiliateUrl(urlOrAsin, subtag = 'bb-bazarai') {
+    if (!urlOrAsin) return `https://www.amazon.in/?tag=${AFFILIATE_TAG}&ascsubtag=${subtag}`;
+    const raw = String(urlOrAsin).trim();
+    const exactAsin = raw.match(/^[A-Z0-9]{10}$/i);
+    const pathAsin = raw.match(/(?:\/dp\/|\/gp\/product\/|\/gp\/aw\/d\/)([A-Z0-9]{10})/i);
+    const asin = exactAsin ? exactAsin[0].toUpperCase() : (pathAsin ? pathAsin[1].toUpperCase() : null);
+    if (asin) {
+      return `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}&linkCode=ll1&ascsubtag=${encodeURIComponent(subtag)}`;
+    }
+    try {
+      const u = new URL(raw.startsWith('http') ? raw : `https://www.amazon.in/${raw}`);
+      ['tag', 'ascsubtag', 'linkCode', 'ref', 'ref_'].forEach(p => u.searchParams.delete(p));
+      u.searchParams.set('tag', AFFILIATE_TAG);
+      u.searchParams.set('ascsubtag', subtag);
+      return u.toString();
+    } catch {
+      return `https://www.amazon.in/?tag=${AFFILIATE_TAG}&ascsubtag=${subtag}`;
+    }
+  }
+
   // ── State ──────────────────────────────────────────────────────────────────
   let chatHistory = [];
   let liveDealsCache = [];
@@ -361,7 +381,7 @@
     const mrp = deal.mrp || 0;
     const discPct = deal.effective_discount_pct || deal.discount_pct || 0;
     const imgUrl = deal.image_url || `https://m.media-amazon.com/images/P/${asin}.jpg`;
-    let affUrl = `/a/${asin}`;
+    let affUrl = toSafeAffiliateUrl(asin, 'bb-bazarai');
     const dealPageUrl = `/deal/${asin}.html`;
     const buyConf = deal.buy_confidence || 85;
 
@@ -369,11 +389,11 @@
     card.className = 'bazar-mini-card';
     card.innerHTML = `
       <div class="mini-card-top">
-        <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="mini-card-img-link" title="Open Deal on Amazon.in">
+        <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="mini-card-img-link" title="Open Deal on Amazon.in">
           <img src="${imgUrl}" alt="${escapeHtml(title)}" class="mini-card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'200\\' viewBox=\\'0 0 200 200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23f1f5f9\\'/><text x=\\'50%\\' y=\\'45%\\' font-size=\\'48\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'>⚡</text><text x=\\'50%\\' y=\\'72%\\' font-size=\\'13\\' font-weight=\\'bold\\' fill=\\'%2364748b\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'200\\' viewBox=\\'0 0 200 200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23f1f5f9\\'/><text x=\\'50%\\' y=\\'45%\\' font-size=\\'48\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'>⚡</text><text x=\\'50%\\' y=\\'72%\\' font-size=\\'13\\' font-weight=\\'bold\\' fill=\\'%2364748b\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\'>Amazon Verified Deal</text></svg>';">
         </a>
         <div class="mini-card-details">
-          <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="mini-card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</a>
+          <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="mini-card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</a>
           <div class="mini-card-price-row">
             <span class="mini-card-price">₹${effPrice.toLocaleString('en-IN')}</span>
             ${mrp > effPrice ? `<span class="mini-card-mrp">₹${mrp.toLocaleString('en-IN')}</span>` : ''}
@@ -384,7 +404,7 @@
         </div>
       </div>
       <div class="mini-card-actions">
-        <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="bazar-btn-buy">
+        <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="bazar-btn-buy">
           <span>🛒 Buy on Amazon ↗</span>
         </a>
         <a href="${dealPageUrl}" class="bazar-btn-chart" title="View Keepa Chart & 90-Day Price History">
@@ -412,10 +432,10 @@
         <p class="filter-desc">We constructed an instant filtered Amazon discount portal with real-time stock & seller ratings:</p>
       </div>
       <div class="filter-card-actions">
-        <a href="${filterData.amazonUrl}" target="_blank" rel="noopener noreferrer" class="bazar-filter-btn primary">
+        <a href="${filterData.amazonUrl}" target="_blank" rel="sponsored noopener" class="bazar-filter-btn primary">
           <span>🛒 View "${escapeHtml(filterData.query)}" Deals on Amazon.in ↗</span>
         </a>
-        <a href="${filterData.steepDiscountUrl}" target="_blank" rel="noopener noreferrer" class="bazar-filter-btn secondary">
+        <a href="${filterData.steepDiscountUrl}" target="_blank" rel="sponsored noopener" class="bazar-filter-btn secondary">
           <span>🔥 View 50%+ Off Deals Only ↗</span>
         </a>
       </div>
@@ -427,7 +447,7 @@
     const card = document.createElement('div');
     card.className = 'bazar-keepa-card';
     const asin = keepaData.asin;
-    const affUrl = `/a/${asin}`;
+    const affUrl = toSafeAffiliateUrl(asin, 'bb-bazarai');
     const chartUrl = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1&range=90`;
     const dealPageUrl = `/deal/${asin}.html`;
 
@@ -444,7 +464,7 @@
         <div class="verdict-desc">${escapeHtml(keepaData.verdictText || 'Compare current price against the 90-day chart above before purchasing.')}</div>
       </div>
       <div class="keepa-actions">
-        <a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="bazar-btn-buy">
+        <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="bazar-btn-buy">
           <span>🛒 Check Live Price on Amazon.in ↗</span>
         </a>
         <a href="${dealPageUrl}" class="bazar-btn-chart">

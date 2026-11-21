@@ -11,6 +11,15 @@ on:
     paths-ignore:
       - 'data/**'
       - 'reports/**'
+      - 'deal/**'
+      - 'deals/**'
+      - 'brand/**'
+      - 'guides/**'
+      - '*.html'
+      - 'feed.xml'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'llms.txt'
       - '**.md'
 
   workflow_dispatch:
@@ -95,8 +104,12 @@ jobs:
             git add *.html feed.xml sitemap.xml robots.txt llms.txt og-banner.png *.txt 2>/dev/null || true
             if ! git diff --staged --quiet; then
               git pull --rebase -X theirs origin main || true
-              git commit -m "chore(radar): update live deals, programmatic SEO pages and sitemap [skip ci]" || true
+              git commit -m "chore(radar): update live deals, programmatic SEO pages and sitemap" || true
               git push origin main || git push origin HEAD:main || true
+              if [ -n "${{ secrets.VERCEL_DEPLOY_HOOK }}" ]; then
+                echo "Triggering Vercel Deploy Hook..."
+                curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}" || true
+              fi
             else
               echo "Feed data and SEO pages unchanged."
             fi

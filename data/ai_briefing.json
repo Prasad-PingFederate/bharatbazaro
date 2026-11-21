@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-21 05:28 IST",
-  "generated_at_epoch": 1795219109,
+  "generated_at_ist": "2026-11-21 08:09 IST",
+  "generated_at_epoch": 1795228796,
   "top_loot_summary": [
     {
       "asin": "B0GKDFR8YS",
@@ -113,9 +113,9 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1795219065,
     "last_verified_at_ist": "2026-11-21 05:27 IST",
-    "age_hours": 0.0,
-    "trending_score": 87.0,
-    "is_new": true,
+    "age_hours": 2.7,
+    "trending_score": 85.2,
+    "is_new": false,
     "is_fresh": true,
     "updated_at": 1795219065,
     "updated_at_ist": "2026-11-21 05:27 IST"
@@ -161,15 +161,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795219101,
-    "last_verified_at_epoch": 1795219101,
-    "last_verified_at_ist": "2026-11-21 05:28 IST",
+    "posted_at_epoch": 1795228783,
+    "last_verified_at_epoch": 1795228783,
+    "last_verified_at_ist": "2026-11-21 08:09 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795219101,
-    "updated_at_ist": "2026-11-21 05:28 IST"
+    "updated_at": 1795228783,
+    "updated_at_ist": "2026-11-21 08:09 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B002MPPTB8",
@@ -212,15 +212,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795219101,
-    "last_verified_at_epoch": 1795219101,
-    "last_verified_at_ist": "2026-11-21 05:28 IST",
+    "posted_at_epoch": 1795228783,
+    "last_verified_at_epoch": 1795228783,
+    "last_verified_at_ist": "2026-11-21 08:09 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795219101,
-    "updated_at_ist": "2026-11-21 05:28 IST"
+    "updated_at": 1795228783,
+    "updated_at_ist": "2026-11-21 08:09 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -260,9 +260,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 131,
-    "loot_count": 17,
+    "total_deals": 124,
+    "loot_count": 14,
     "max_discount_pct": 88,
-    "total_savings_inr": 323820
+    "total_savings_inr": 297379
   }
 }

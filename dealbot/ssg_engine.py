@@ -452,12 +452,12 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
     brand_chip = html_lib.escape(str(d.get("brand") or d.get("category") or "Amazon"))
 
     card_subtag = subtag or "bb-grid"
-    raw_aff = f"/a/{asin}"
+    raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}"
     aff_btn_url = html_lib.escape(raw_aff)
-    aff_img_url = html_lib.escape(f"/a/{asin}")
-    aff_title_url = html_lib.escape(f"/a/{asin}")
-    aff_price_url = html_lib.escape(f"/a/{asin}")
-    aff_coupon_url = html_lib.escape(f"/a/{asin}")
+    aff_img_url = html_lib.escape(raw_aff)
+    aff_title_url = html_lib.escape(raw_aff)
+    aff_price_url = html_lib.escape(raw_aff)
+    aff_coupon_url = html_lib.escape(raw_aff)
 
     image_url = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
     is_loot = bool(d.get("is_loot"))
@@ -661,7 +661,7 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
 
         <div class="card-media">
           <div class="card-image-wrap">
-            <a href="{aff_img_url}" target="_blank" rel="noopener noreferrer" class="card-img-anchor" title="View Deal on Amazon.in">
+            <a href="{aff_img_url}" target="_blank" rel="sponsored noopener" class="card-img-anchor" title="View Deal on Amazon.in">
               {img_tag}
             </a>
           </div>
@@ -671,13 +671,13 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
         </div>
 
         <div class="card-content">
-          <a href="{aff_title_url}" target="_blank" rel="noopener noreferrer" class="card-title" title="{title}">
+          <a href="{aff_title_url}" target="_blank" rel="sponsored noopener" class="card-title" title="{title}">
             {title}
           </a>
 
           <!-- Price Waterfall -->
           <div class="price-waterfall-box">
-            <a href="{aff_price_url}" target="_blank" rel="noopener noreferrer" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
+            <a href="{aff_price_url}" target="_blank" rel="sponsored noopener" class="price-main-row-link" title="Grab at this price on Amazon" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:8px;">
               <span class="effective-price">₹{eff_price:,}</span>
               {mrp_html}
               {disc_html}
@@ -710,7 +710,7 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
         </div>
 
         <div class="card-footer">
-          <a href="{aff_btn_url}" target="_blank" rel="noopener noreferrer" class="btn-buy-deal">
+          <a href="{aff_btn_url}" target="_blank" rel="sponsored noopener" class="btn-buy-deal">
             <span>{'🛒 Grab Daily Steal on Amazon ↗' if d.get('is_cookie_magnet') else ('🛒 Check Live Price on Amazon ↗' if (buy_conf >= 80 or is_price_drop or eff_price >= 2000) else '🛒 Check Live Price on Amazon ↗')}</span>
           </a>
           <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn-track-telegram" title="Track Price Drop on Telegram" style="padding: 8px 12px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #38bdf8; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(56, 189, 248, 0.08); white-space: nowrap;">
@@ -789,7 +789,7 @@ def build_structured_data(page_cfg: dict, page_deals: list) -> str:
             continue
         asin = d.get("asin") or ""
         subtag = page_cfg.get("subtag") or "bb-grid"
-        aff_url = f"/a/{asin}"
+        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={subtag}"
         img_url = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
         title = d.get("title") or "Amazon Deal"
         brand = d.get("brand") or "Amazon"
@@ -1080,7 +1080,7 @@ def render_top5_quick_compare_table(deals: List[Dict[str, Any]]) -> str:
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
         conf = d.get("buy_confidence") or 80
-        aff_url = f"/a/{asin}"
+        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-top5"
         deal_url = f"/deal/{asin}.html"
 
         rows.append(f"""          <tr style="border-bottom: 1px solid var(--border-card);">
@@ -1092,7 +1092,7 @@ def render_top5_quick_compare_table(deals: List[Dict[str, Any]]) -> str:
             <td style="padding: 10px; font-weight:700; color:#ef4444; white-space:nowrap;">{disc}% OFF</td>
             <td style="padding: 10px; white-space:nowrap;"><span style="color:#10b981; font-weight:700;">🟢 {conf}%</span></td>
             <td style="padding: 10px; text-align:center; white-space:nowrap;">
-              <a href="{aff_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
+              <a href="{aff_url}" target="_blank" rel="sponsored noopener" class="btn btn-primary" style="padding:5px 12px; font-size:0.8rem; border-radius:14px; text-decoration:none; display:inline-block; font-weight:700;">🛒 View Deal ↗</a>
             </td>
           </tr>""")
 
@@ -1166,7 +1166,7 @@ def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
         img = html_lib.escape(str(d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"))
-        aff_url = f"/a/{asin}"
+        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-top3"
         deal_url = f"/deal/{asin}.html"
 
         mrp_str = f'<span style="font-size:0.78rem; text-decoration:line-through; color:var(--text-muted);">₹{mrp:,}</span>' if (mrp and mrp > eff_price) else ""
@@ -1175,11 +1175,11 @@ def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
         cards_html.append(f'''        <div class="spotlight-mini-card">
           <div class="spotlight-ribbon">{ribbon}</div>
           <div style="display:flex; gap:12px; align-items:center; margin-bottom:10px;">
-            <a href="{aff_url}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid var(--border-card);">
+            <a href="{aff_url}" target="_blank" rel="sponsored noopener" style="flex-shrink:0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid var(--border-card);">
               <img src="{img}" alt="{title}" style="max-height:60px; max-width:60px; object-fit:contain;" loading="lazy" onerror="this.src=\'{svg_placeholder}\';">
             </a>
             <div style="flex:1; min-width:0;">
-              <a href="{aff_url}" target="_blank" rel="noopener noreferrer" style="font-size:0.86rem; font-weight:700; color:var(--text-main); text-decoration:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3; margin-bottom:4px;">
+              <a href="{aff_url}" target="_blank" rel="sponsored noopener" style="font-size:0.86rem; font-weight:700; color:var(--text-main); text-decoration:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3; margin-bottom:4px;">
                 {title}
               </a>
               <div style="display:flex; align-items:baseline; gap:6px; flex-wrap:wrap;">
@@ -1190,7 +1190,7 @@ def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
             </div>
           </div>
           <div style="display:flex; gap:8px;">
-            <a href="{aff_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex:1; text-align:center; padding:7px 10px; font-size:0.82rem; font-weight:700; border-radius:var(--radius-full); text-decoration:none;">🛒 Grab Now ↗</a>
+            <a href="{aff_url}" target="_blank" rel="sponsored noopener" class="btn btn-primary" style="flex:1; text-align:center; padding:7px 10px; font-size:0.82rem; font-weight:700; border-radius:var(--radius-full); text-decoration:none;">🛒 Grab Now ↗</a>
             <a href="{deal_url}" style="padding:7px 10px; font-size:0.82rem; font-weight:600; border-radius:var(--radius-full); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-card); text-decoration:none;">📈</a>
           </div>
         </div>''')
@@ -1311,8 +1311,8 @@ def generate_page_html(
         top3_html = render_top3_spotlight_strip(all_deals or page_deals)
         if '<section id="top3SpotlightStrip"' in html_out:
             html_out = re.sub(
-                r'<section\s+id=["\']top3SpotlightStrip["\'][^>]*>.*?</section>',
-                top3_html.strip(),
+                r'(?:\s*<!--\s*Wirecutter-Style[^\n]*-->)*\s*<section\s+id=["\']top3SpotlightStrip["\'][^>]*>.*?</section>',
+                f'\n    {top3_html.strip()}',
                 html_out,
                 count=1,
                 flags=re.DOTALL
@@ -1427,11 +1427,13 @@ def render_product_page_html(
     review_count = deal.get("review_count") or 150
     is_expired = bool(deal.get("is_expired") or deal.get("status") == "expired")
 
-    raw_aff = f"/a/{asin}"
+    raw_aff = deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-seo"
     if "ascsubtag=" in raw_aff:
         raw_aff = re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-seo", raw_aff)
-    else:
+    elif "tag=" in raw_aff:
         raw_aff += ("&" if "?" in raw_aff else "?") + "ascsubtag=bb-seo"
+    else:
+        raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-seo"
     affiliate_url = html_lib.escape(raw_aff)
 
     # 1-Click Web-to-Telegram Tracking URL
@@ -1618,10 +1620,10 @@ def render_product_page_html(
         </a>'''
         mobile_sticky_bar_html = ""
     else:
-        primary_cta_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+        primary_cta_html = f'''<a href="{affiliate_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
             <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
           </a>'''
-        claim_btn_html = f'''<a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
+        claim_btn_html = f'''<a href="{affiliate_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
           <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
         </a>'''
         mobile_sticky_bar_html = f'''
@@ -1638,7 +1640,7 @@ def render_product_page_html(
       <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-color: #38bdf8; color: #38bdf8; text-decoration: none; border-radius: 8px; white-space: nowrap;">
         <span>🔔 Track</span>
       </a>
-      <a href="{affiliate_url}" target="_blank" rel="noopener noreferrer" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-sm" style="padding: 10px 18px; font-size: 0.95rem; font-weight: 800; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; text-decoration: none; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4); white-space: nowrap;">
+      <a href="{affiliate_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-sm" style="padding: 10px 18px; font-size: 0.95rem; font-weight: 800; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; text-decoration: none; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4); white-space: nowrap;">
         <span>🛒 Grab Deal on Amazon ↗</span>
       </a>
     </div>
@@ -2022,7 +2024,7 @@ def generate_rss_feed(deals: List[Dict[str, Any]], root_dir: Path) -> Path:
         eff_price = d.get("effective_price") or d.get("list_price") or 0
         mrp = d.get("mrp") or 0
         disc = d.get("effective_discount_pct") or d.get("discount_pct") or 0
-        aff_url = f"/a/{asin}"
+        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-rss"
         img_url = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
         deal_url = f"https://bharatbazaro.com/deal/{asin}.html"
 

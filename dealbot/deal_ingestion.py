@@ -304,7 +304,7 @@ class DealIngestionEngine:
             )
             web_affiliate_url = monetize_res.monetized_url
         else:
-            web_affiliate_url = f"https://www.amazon.in/dp/{clean_id}?tag=dammaiprasad-21&ascsubtag={web_subid}"
+            web_affiliate_url = f"https://www.amazon.in/dp/{clean_id}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={web_subid}"
 
         # 2. Canonical Web URL for BharatBazaro storefront
         base_domain = os.getenv("BHARATBAZARO_BASE_URL", "https://bharatbazaro.com").rstrip("/")

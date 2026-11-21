@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-21 17:52 IST",
-  "generated_at_epoch": 1795263733,
+  "generated_at_ist": "2026-11-21 20:48 IST",
+  "generated_at_epoch": 1795274289,
   "top_loot_summary": [
+    {
+      "asin": "B07X9X4M8L",
+      "title": "Levi's Mens 511 Slim Fit Stretch Jeans (Dark Indigo)",
+      "effective_price": 1499,
+      "mrp": 3299,
+      "discount_pct": 55,
+      "savings_inr": 1800,
+      "brand": "Levi'S",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B07X9X4M8L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B07X9X4M8L.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0H5CT3NR9",
       "title": "Milton Electric Kettle Multipurpose 1.2L | 600W Multi Cooker Kessel | 4-in-1 with Idli Stand (2 Plates), Steamer With Stainless Steel Stand, Egg Boiler | 1 Year Warranty Rs.1424 @ Amazon",
@@ -53,19 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B0CJLWDVD1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0CJLWDVD1.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B0BBWH1R8H",
-      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
-      "effective_price": 5499,
-      "mrp": 10500,
-      "discount_pct": 48,
-      "savings_inr": 5001,
-      "brand": "Kingston",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": {
@@ -114,8 +114,8 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1795219065,
     "last_verified_at_ist": "2026-11-21 05:27 IST",
-    "age_hours": 12.4,
-    "trending_score": 61.0,
+    "age_hours": 15.3,
+    "trending_score": 53.8,
     "is_new": false,
     "is_fresh": true,
     "updated_at": 1795219065,
@@ -163,15 +163,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795263721,
-    "last_verified_at_epoch": 1795263721,
-    "last_verified_at_ist": "2026-11-21 17:52 IST",
+    "posted_at_epoch": 1795274285,
+    "last_verified_at_epoch": 1795274285,
+    "last_verified_at_ist": "2026-11-21 20:48 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795263721,
-    "updated_at_ist": "2026-11-21 17:52 IST"
+    "updated_at": 1795274285,
+    "updated_at_ist": "2026-11-21 20:48 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B002MPPTB8",
@@ -215,15 +215,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795263721,
-    "last_verified_at_epoch": 1795263721,
-    "last_verified_at_ist": "2026-11-21 17:52 IST",
+    "posted_at_epoch": 1795274285,
+    "last_verified_at_epoch": 1795274285,
+    "last_verified_at_ist": "2026-11-21 20:48 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795263721,
-    "updated_at_ist": "2026-11-21 17:52 IST"
+    "updated_at": 1795274285,
+    "updated_at_ist": "2026-11-21 20:48 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -263,9 +263,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 121,
-    "loot_count": 19,
+    "total_deals": 115,
+    "loot_count": 16,
     "max_discount_pct": 83,
-    "total_savings_inr": 299317
+    "total_savings_inr": 273208
   }
 }

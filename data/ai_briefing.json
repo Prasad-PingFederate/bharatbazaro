@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-21 10:08 IST",
-  "generated_at_epoch": 1795235906,
+  "generated_at_ist": "2026-11-21 10:11 IST",
+  "generated_at_epoch": 1795236114,
   "top_loot_summary": [
+    {
+      "asin": "B09NVPSCQT",
+      "title": "boAt Rockerz 255 Pro+ Bluetooth in Ear Neckband with 40H Playtime",
+      "effective_price": 999,
+      "mrp": 3990,
+      "discount_pct": 75,
+      "savings_inr": 2991,
+      "brand": "boAt",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09NVPSCQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09NVPSCQT.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0B8NTZ24P",
       "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
@@ -52,19 +65,6 @@
       "category": "Laptops & Computing",
       "affiliate_url": "https://www.amazon.in/dp/B09X7G2Z1D?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B09X7G2Z1D.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0C4ZHYX58",
-      "title": "boAt EnergyShroom PB400 20000mAh Power Bank (22.5W Fast Charging)",
-      "effective_price": 1299,
-      "mrp": 3999,
-      "discount_pct": 68,
-      "savings_inr": 2700,
-      "brand": "boAt",
-      "category": "Mobiles & Accessories",
-      "affiliate_url": "https://www.amazon.in/dp/B0C4ZHYX58?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0C4ZHYX58.html",
       "coupon_text": null
     }
   ],
@@ -163,15 +163,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795235896,
-    "last_verified_at_epoch": 1795235896,
-    "last_verified_at_ist": "2026-11-21 10:08 IST",
+    "posted_at_epoch": 1795236103,
+    "last_verified_at_epoch": 1795236103,
+    "last_verified_at_ist": "2026-11-21 10:11 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795235896,
-    "updated_at_ist": "2026-11-21 10:08 IST"
+    "updated_at": 1795236103,
+    "updated_at_ist": "2026-11-21 10:11 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B002MPPTB8",
@@ -215,15 +215,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795235896,
-    "last_verified_at_epoch": 1795235896,
-    "last_verified_at_ist": "2026-11-21 10:08 IST",
+    "posted_at_epoch": 1795236103,
+    "last_verified_at_epoch": 1795236103,
+    "last_verified_at_ist": "2026-11-21 10:11 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795235896,
-    "updated_at_ist": "2026-11-21 10:08 IST"
+    "updated_at": 1795236103,
+    "updated_at_ist": "2026-11-21 10:11 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -263,9 +263,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 127,
-    "loot_count": 16,
+    "total_deals": 128,
+    "loot_count": 17,
     "max_discount_pct": 88,
-    "total_savings_inr": 304140
+    "total_savings_inr": 304316
   }
 }

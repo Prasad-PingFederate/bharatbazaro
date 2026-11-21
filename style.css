@@ -4375,6 +4375,7 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
 }
 
 
+.badge-drop,
 .badge-diwali {
   background: linear-gradient(135deg, #f59e0b, #ef4444);
   color: #ffffff;
@@ -4382,15 +4383,18 @@ html[data-theme="light"] .bazaro-ai-tooltip::after {
   box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
 }
 
+.filter-tab.drop-tab,
 .filter-tab.diwali-tab {
   border-color: rgba(245, 158, 11, 0.4);
   color: #f59e0b;
 }
 
+.filter-tab.drop-tab:hover,
 .filter-tab.diwali-tab:hover {
   border-color: #f59e0b;
 }
 
+.filter-tab.active.drop-tab,
 .filter-tab.active.diwali-tab {
   background: linear-gradient(135deg, #d97706, #b45309);
   color: #ffffff;
@@ -4916,9 +4920,39 @@ html[data-theme="light"] .stat-num {
   transform: rotate(180deg);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  /* Mobile UX Optimization (<768px): Top Sticky Header -> Search Bar -> 1 Scrollable Category Chip Row -> Deal Cards */
+  .hero-section {
+    display: none !important;
+  }
+  .search-section {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
+  .category-pills {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    gap: 6px;
+  }
+  .category-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-pill {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+  }
   .btn-toggle-filters {
     display: flex;
+    margin: 4px 0 10px 0;
+    padding: 8px 14px;
+    font-size: 0.85rem;
   }
   .filters-drawer.collapsed {
     display: none !important;
@@ -4932,7 +4966,7 @@ html[data-theme="light"] .stat-num {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .btn-toggle-filters {
     display: none !important;
   }

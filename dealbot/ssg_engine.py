@@ -495,18 +495,22 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
         badges.append('<span class="badge-tag badge-telegram">📲 Featured on Telegram</span>')
     badges_html = "".join(badges)
 
-    updated_at = d.get("last_verified_at_epoch") or d.get("updated_at") or int(time.time())
-    diff_sec = max(0, int(time.time() - updated_at))
-    if diff_sec < 300:
-        time_ago = "Just now"
-    elif diff_sec < 3600:
-        time_ago = f"{max(1, diff_sec // 60)}m ago"
-    elif diff_sec < 86400:
-        time_ago = f"{diff_sec // 3600}h ago"
+    updated_at = d.get("last_verified_at_epoch") or d.get("updated_at")
+    if updated_at:
+        diff_sec = max(0, int(time.time() - updated_at))
+        if diff_sec < 300:
+            time_ago = "Just now"
+        elif diff_sec < 3600:
+            time_ago = f"{max(1, diff_sec // 60)}m ago"
+        elif diff_sec < 86400:
+            time_ago = f"{diff_sec // 3600}h ago"
+        else:
+            time_ago = f"{diff_sec // 86400}d ago"
+        is_stale_price = diff_sec > 21600 or (d.get("age_hours") is not None and d.get("age_hours") > 6.0)
     else:
-        time_ago = f"{diff_sec // 86400}d ago"
+        time_ago = "Checked recently"
+        is_stale_price = True
 
-    is_stale_price = diff_sec > 21600 or (d.get("age_hours") is not None and d.get("age_hours") > 6.0)
     stale_price_note = '<div class="price-stale-note" style="font-size:0.75rem; color:#f59e0b; margin-top:2px;">Last checked price — Verify Live Price on Amazon ↗</div>' if is_stale_price else ''
 
     # HotUKDeals Degree Meter
@@ -855,16 +859,36 @@ def _savings(d: Dict[str, Any]) -> float:
         return 0.0
 
 
+def is_high_commission_impulse(d: Dict[str, Any]) -> int:
+    """Prioritize high-commission (5%-9%) impulse categories on homepage:
+    Home & Kitchen, Small Appliances (geysers, kettles, air fryers, mixers),
+    Personal Care / Beauty, and Daily Essentials / Grocery."""
+    cat = str(d.get("category") or "").lower()
+    t = str(d.get("title") or "").lower()
+    if any(c in cat for c in ("home", "kitchen", "beauty", "personal care", "grocery", "daily essential")):
+        return 1
+    if any(w in t for w in (
+        "geyser", "kettle", "air fryer", "mixer", "grinder", "cooker", "pan", "blender",
+        "iron", "toaster", "purifier", "skincare", "shampoo", "serum", "sunscreen",
+        "facewash", "moisturizer", "cream", "detergent", "dry fruit", "chocolate", "dove",
+        "nivea", "colgate", "surf excel", "ariel", "vim", "comfort", "harpic", "lizol"
+    )):
+        return 1
+    return 0
+
+
 def visitor_rank(d: Dict[str, Any]) -> tuple:
-    """Higher tuple sorts first. Loot and deep discounts outrank a 12% 'tier-1' phone."""
+    """Higher tuple sorts first. High commission impulse categories, Loot, and deep discounts outrank low-ROI gear."""
     disc = _disc(d)
     loot = 1 if d.get("is_loot") else 0
     coupon = 1 if ((d.get("coupon_discount") or 0) > 0 or d.get("coupon_text")) else 0
     shareable = 1 if loot or disc >= 40 else 0
+    impulse_boost = is_high_commission_impulse(d)
     # Anything under 25% off is a normal price unless it was explicitly flagged as loot.
     not_weak = 0 if (disc < 25 and not loot) else 1
     return (
         not_weak,
+        impulse_boost,
         loot,
         shareable,
         coupon,

@@ -483,7 +483,7 @@
     if (!state.allDeals) return;
     const freshDeals = state.allDeals.filter(d => (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
     const all = state.stats.fresh_deals_count !== undefined ? state.stats.fresh_deals_count : freshDeals.length;
-    const priceDrops = freshDeals.filter(d => d.is_price_drop || d.is_diwali_steal || (d.savings_inr && d.savings_inr >= 1000)).length;
+    const priceDrops = freshDeals.filter(d => d.is_price_drop || (d.savings_inr && d.savings_inr >= 1000)).length;
     const daily = freshDeals.filter(d => d.is_daily_essential || d.is_cookie_magnet || (d.category && (d.category.includes('Personal Care') || d.category.includes('Grocery') || d.category.includes('Beauty'))) || /dove|nivea|pears|cetaphil|minimalist|derma co|plum|l'oreal|tresemme|vaseline|lakme|beardo|colgate|dettol|savlon|listerine|whisper|surf excel|ariel|vim|comfort|harpic|lizol|presto|cadbury|ferrero|happilo|sampann|nescafe|davidoff/i.test(d.title || '')).length;
     const under399 = freshDeals.filter(d => (d.effective_price || d.list_price || 999999) <= 399).length;
     const loot = freshDeals.filter(d => d.is_loot).length;
@@ -797,6 +797,24 @@
           const aFresh = (a.is_fresh !== false && (a.age_hours === undefined || a.age_hours <= 24.0)) ? 1 : 0;
           const bFresh = (b.is_fresh !== false && (b.age_hours === undefined || b.age_hours <= 24.0)) ? 1 : 0;
           if (bFresh !== aFresh) return bFresh - aFresh;
+
+          // Priority Boost for High-Commission (5%-9%) Impulse Categories:
+          // Home & Kitchen, Small Appliances (geysers, kettles, air fryers), Personal Care/Beauty, Daily Essentials/Grocery
+          const isHighCommissionImpulse = (d) => {
+            const cat = (d.category || '').toLowerCase();
+            const t = (d.title || '').toLowerCase();
+            if (cat.includes('home') || cat.includes('kitchen') || cat.includes('beauty') || cat.includes('personal care') || cat.includes('grocery')) {
+              return 1;
+            }
+            if (/\b(geyser|kettle|air fryer|mixer|grinder|cooker|pan|blender|iron|toaster|purifier|skincare|shampoo|serum|sunscreen|facewash|moisturizer|cream|detergent|dry fruit|chocolate|dove|nivea|colgate|surf excel|ariel|vim|comfort|harpic|lizol)\b/i.test(t)) {
+              return 1;
+            }
+            return 0;
+          };
+
+          const aImpulse = isHighCommissionImpulse(a);
+          const bImpulse = isHighCommissionImpulse(b);
+          if (bImpulse !== aImpulse) return bImpulse - aImpulse;
 
           // Priority Boost for Cookie-Magnet FMCG & Daily Essentials (Dove, Surf Excel, Colgate, Nivea under ₹499 with >=40% off)
           const isTopMagnet = (d) => {
@@ -1132,7 +1150,7 @@
     if (d.is_new || (d.age_hours !== undefined && d.age_hours <= 2.0)) {
       badgesHtml.push('<span class="badge-tag badge-new">⚡ NEW</span>');
     }
-    if (d.is_price_drop || d.is_diwali_steal || (d.savings_inr && d.savings_inr >= 1000 && discPct >= 25)) {
+    if (d.is_price_drop || (d.savings_inr && d.savings_inr >= 1000 && discPct >= 25)) {
       badgesHtml.push('<span class="badge-tag badge-drop">⚡ TODAY\'S PRICE DROP</span>');
     }
     if (d.is_cookie_magnet) {
@@ -1381,7 +1399,7 @@
           ` : ''}
           <div class="card-footer">
           <a href="${escapeHtml(affBtnUrl)}" target="_blank" rel="sponsored noopener" class="btn-buy-deal">
-            <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : ((buyConf >= 80 || d.is_price_drop || d.is_diwali_steal || effPrice >= 2000) ? '🛒 Check Live Price on Amazon ↗' : '🛒 Check Live Price on Amazon ↗')}</span>
+            <span>${(d.is_cookie_magnet) ? '🛒 Grab Daily Steal on Amazon ↗' : ((buyConf >= 80 || d.is_price_drop || effPrice >= 2000) ? '🛒 Check Live Price on Amazon ↗' : '🛒 Check Live Price on Amazon ↗')}</span>
           </a>
           <button class="btn-card-share" data-asin="${escapeHtml(d.asin)}" title="Share Deal via WhatsApp / Copy Link">
             <span>📤 Share</span>

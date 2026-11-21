@@ -1,6 +1,7 @@
 import io
 import json
 from unittest.mock import patch, MagicMock
+import urllib.error
 from api.resolve import handler
 
 
@@ -78,7 +79,10 @@ def test_resolve_shortlink_redirect_success():
     mock_resp.geturl.return_value = "https://www.amazon.in/boAt-Rockerz-450-Bluetooth-Headphones/dp/B08WRBG3XW/ref=sr_1_1"
     mock_resp.__enter__.return_value = mock_resp
 
-    with patch("urllib.request.urlopen", return_value=mock_resp):
+    mock_opener = MagicMock()
+    mock_opener.open.return_value = mock_resp
+
+    with patch("urllib.request.build_opener", return_value=mock_opener):
         status, data, _ = simulate_request("/api/resolve?input=https://amzn.in/d/xyz123")
         assert status == 200
         assert data["asin"] == "B08WRBG3XW"
@@ -86,19 +90,45 @@ def test_resolve_shortlink_redirect_success():
         assert data["resolved_url"] == mock_resp.geturl.return_value
 
 
+def test_resolve_shortlink_redirect_location_header_bypass_waf():
+    """Verify that when amzn.in returns 301/302, ASIN is extracted from Location header without hitting Amazon WAF."""
+    mock_opener = MagicMock()
+    # Simulate HTTPError 302 with Location header pointing to Amazon product page
+    error = urllib.error.HTTPError(
+        url="https://amzn.in/d/xyz123",
+        code=302,
+        msg="Found",
+        hdrs={"Location": "https://www.amazon.in/boAt-Rockerz-450-Bluetooth-Headphones/dp/B08WRBG3XW?ref_=cm_sw_r_cp_ud_dp"},
+        fp=None
+    )
+    mock_opener.open.side_effect = error
+
+    with patch("urllib.request.build_opener", return_value=mock_opener):
+        status, data, _ = simulate_request("/api/resolve?input=https://amzn.in/d/xyz123")
+        assert status == 200
+        assert data["asin"] == "B08WRBG3XW"
+        assert "tag=dammaiprasad-21" in data["affiliate_url"]
+
+
 def test_resolve_shortlink_redirect_no_asin():
     mock_resp = MagicMock()
     mock_resp.geturl.return_value = "https://www.amazon.in/not-a-product-page"
     mock_resp.__enter__.return_value = mock_resp
 
-    with patch("urllib.request.urlopen", return_value=mock_resp):
+    mock_opener = MagicMock()
+    mock_opener.open.return_value = mock_resp
+
+    with patch("urllib.request.build_opener", return_value=mock_opener):
         status, data, _ = simulate_request("/api/resolve?input=https://amzn.in/d/invalid")
         assert status == 422
         assert "Could not extract ASIN" in data["error"]
 
 
 def test_resolve_shortlink_network_failure():
-    with patch("urllib.request.urlopen", side_effect=Exception("Connection timed out")):
+    mock_opener = MagicMock()
+    mock_opener.open.side_effect = Exception("Connection timed out")
+
+    with patch("urllib.request.build_opener", return_value=mock_opener):
         status, data, _ = simulate_request("/api/resolve?input=https://amzn.in/d/timeout")
         assert status == 502
         assert "Redirect resolution failed" in data["error"]

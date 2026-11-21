@@ -662,7 +662,7 @@ def deal_to_web_json(
         or (getattr(deal, "is_loot", False) and score >= 82 and (eff_disc_pct or 0) >= 40)
     )
 
-    # High-converting Diwali Steal check (Requirement 3):
+    # High-converting Price Drop check:
     is_diwali_steal = bool(
         savings_inr >= 1000
         or (eff_p >= 2500 and (eff_disc_pct or 0) >= 25)
@@ -752,6 +752,7 @@ def deal_to_web_json(
         "historical_avg": h_avg,
         "historical_max": h_max,
         "is_loot": is_loot,
+        "is_price_drop": getattr(deal, "is_price_drop", False) or is_diwali_steal,
         "is_diwali_steal": is_diwali_steal,
         "is_cookie_magnet": is_cookie_magnet,
         "is_daily_essential": is_fmcg,

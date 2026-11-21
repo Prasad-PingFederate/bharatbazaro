@@ -1,6 +1,7 @@
 /**
  * BharatBazaro URL & Shortlink Resolver API
  * Resolves shortened Amazon India URLs (amzn.in, amzn.to), mobile share strings, or direct ASINs
+ * Inspects 301/302 Location headers without following all the way to amazon.in to avoid WAF/503 blocks.
  * Returns canonical affiliate URL with tag=dammaiprasad-21&linkCode=ll1&ascsubtag={subtag}
  */
 
@@ -50,22 +51,45 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Only Amazon links are supported' });
   }
 
-  // 4. Follow short-link redirect server-side to extract real ASIN
+  // 4. Follow short-link redirect server-side with Location inspection
   try {
-    const resp = await fetch(targetUrl, {
-      method: 'GET',
-      redirect: 'follow',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-      }
-    });
+    let currentUrl = targetUrl;
+    let finalUrl = targetUrl;
+    let extractedAsin = null;
 
-    const finalUrl = resp.url || targetUrl;
-    const finalMatch = finalUrl.match(ASIN_REGEX);
-    if (finalMatch) {
-      const asin = finalMatch[1].toUpperCase();
-      return res.status(200).json(payload(asin, subtag, finalUrl));
+    for (let hop = 0; hop < 5; hop++) {
+      const resp = await fetch(currentUrl, {
+        method: 'GET',
+        redirect: 'manual',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+        }
+      });
+
+      const loc = resp.headers.get('location');
+      if (loc) {
+        const fullLoc = new URL(loc, currentUrl).href;
+        finalUrl = fullLoc;
+        const locMatch = fullLoc.match(ASIN_REGEX);
+        if (locMatch) {
+          extractedAsin = locMatch[1].toUpperCase();
+          break; // ASIN extracted from 301/302 Location header; stop immediately to avoid WAF
+        }
+        currentUrl = fullLoc;
+        continue;
+      }
+
+      finalUrl = resp.url || currentUrl;
+      const finalMatch = finalUrl.match(ASIN_REGEX);
+      if (finalMatch) {
+        extractedAsin = finalMatch[1].toUpperCase();
+      }
+      break;
+    }
+
+    if (extractedAsin) {
+      return res.status(200).json(payload(extractedAsin, subtag, finalUrl));
     }
 
     return res.status(422).json({

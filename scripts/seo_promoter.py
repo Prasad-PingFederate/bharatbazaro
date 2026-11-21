@@ -46,7 +46,7 @@ def extract_sitemap_urls(root_dir: Path) -> List[str]:
         return [
             f"https://{HOST}/",
             f"https://{HOST}/deals.html",
-            f"https://{HOST}/mobiles.html",
+            f"https://{HOST}/home.html",
             f"https://{HOST}/electronics.html",
             f"https://{HOST}/under-99.html",
             f"https://{HOST}/under-299.html",
@@ -172,9 +172,9 @@ def generate_llms_txt(root_dir: Path, deals: List[Dict[str, Any]]) -> Path:
 
 ## High-Intent Deal Categories
 - [All Live Deals](https://{HOST}/deals.html)
-- [Mobiles & 5G Smartphones](https://{HOST}/mobiles.html)
-- [Electronics & Laptops](https://{HOST}/electronics.html)
 - [Home & Kitchen Appliances](https://{HOST}/home.html)
+- [Beauty & Personal Care](https://{HOST}/beauty.html)
+- [Electronics & Laptops](https://{HOST}/electronics.html)
 - [Fashion & Footwear](https://{HOST}/fashion.html)
 - [Personal Care & Grocery](https://{HOST}/grocery.html)
 

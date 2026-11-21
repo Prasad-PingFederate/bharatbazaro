@@ -4,8 +4,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/mobiles.html", "destination": "/deals.html", "permanent": true },
-    { "source": "/mobiles", "destination": "/deals.html", "permanent": true }
+    { "source": "/mobiles.html", "destination": "/home.html", "permanent": true },
+    { "source": "/mobiles", "destination": "/home.html", "permanent": true }
   ],
   "rewrites": [
     { "source": "/api/resolve-url", "destination": "/api/resolve.py" },

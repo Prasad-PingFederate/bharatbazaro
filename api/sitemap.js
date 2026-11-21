@@ -23,9 +23,8 @@ module.exports = (req, res) => {
   const coreUrls = [
     'https://bharatbazaro.com/',
     'https://bharatbazaro.com/deals.html',
-    'https://bharatbazaro.com/mobiles.html',
-    'https://bharatbazaro.com/electronics.html',
     'https://bharatbazaro.com/home.html',
+    'https://bharatbazaro.com/electronics.html',
     'https://bharatbazaro.com/fashion.html',
     'https://bharatbazaro.com/grocery.html',
     'https://bharatbazaro.com/beauty.html',

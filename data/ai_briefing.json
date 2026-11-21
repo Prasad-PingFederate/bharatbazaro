@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-21 08:09 IST",
-  "generated_at_epoch": 1795228796,
+  "generated_at_ist": "2026-11-21 09:26 IST",
+  "generated_at_epoch": 1795233406,
   "top_loot_summary": [
     {
       "asin": "B0GKDFR8YS",
@@ -96,6 +96,7 @@
     "historical_avg": null,
     "historical_max": null,
     "is_loot": true,
+    "is_price_drop": true,
     "is_diwali_steal": true,
     "is_cookie_magnet": false,
     "is_daily_essential": false,
@@ -113,8 +114,8 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1795219065,
     "last_verified_at_ist": "2026-11-21 05:27 IST",
-    "age_hours": 2.7,
-    "trending_score": 85.2,
+    "age_hours": 4.0,
+    "trending_score": 82.0,
     "is_new": false,
     "is_fresh": true,
     "updated_at": 1795219065,
@@ -148,6 +149,7 @@
     "historical_avg": null,
     "historical_max": null,
     "is_loot": false,
+    "is_price_drop": false,
     "is_diwali_steal": false,
     "is_cookie_magnet": false,
     "is_daily_essential": true,
@@ -161,15 +163,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795228783,
-    "last_verified_at_epoch": 1795228783,
-    "last_verified_at_ist": "2026-11-21 08:09 IST",
+    "posted_at_epoch": 1795233380,
+    "last_verified_at_epoch": 1795233380,
+    "last_verified_at_ist": "2026-11-21 09:26 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795228783,
-    "updated_at_ist": "2026-11-21 08:09 IST"
+    "updated_at": 1795233380,
+    "updated_at_ist": "2026-11-21 09:26 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B002MPPTB8",
@@ -199,6 +201,7 @@
     "historical_avg": null,
     "historical_max": null,
     "is_loot": false,
+    "is_price_drop": false,
     "is_diwali_steal": false,
     "is_cookie_magnet": false,
     "is_daily_essential": false,
@@ -212,15 +215,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795228783,
-    "last_verified_at_epoch": 1795228783,
-    "last_verified_at_ist": "2026-11-21 08:09 IST",
+    "posted_at_epoch": 1795233380,
+    "last_verified_at_epoch": 1795233380,
+    "last_verified_at_ist": "2026-11-21 09:26 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795228783,
-    "updated_at_ist": "2026-11-21 08:09 IST"
+    "updated_at": 1795233380,
+    "updated_at_ist": "2026-11-21 09:26 IST"
   },
   "category_highlights": {
     "mobiles": {

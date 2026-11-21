@@ -478,6 +478,7 @@ def render_guide_html(spec: Dict[str, Any], deals: List[Dict[str, Any]], root_di
     </div>
   </div>
 
+  <script src="/decision_models/decision.js" defer></script>
   <script src="/bazaro_ai.js" defer></script>
 </body>
 </html>

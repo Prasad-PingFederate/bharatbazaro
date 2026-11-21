@@ -10,9 +10,25 @@
       var m = location.pathname.match(/\/a\/([A-Za-z0-9]{10})\/?$/);
       if (!m) return;
       var asin = m[1].toUpperCase();
+      var params = new URLSearchParams(location.search);
+      var rawSub = params.get('subtag') || (params.get('channel') ? 'bb-' + params.get('channel') : 'bb-short');
+      var subtag = encodeURIComponent(rawSub.replace(/[^a-zA-Z0-9_\-]/g, '').slice(0, 50) || 'bb-short');
+
+      if (navigator.sendBeacon) {
+        try {
+          navigator.sendBeacon('/api/track-click', JSON.stringify({
+            asin: asin,
+            subtag: subtag,
+            source: 'shortlink_redirect',
+            ref: document.referrer || '',
+            timestamp: new Date().toISOString()
+          }));
+        } catch (_) {}
+      }
+
       location.replace(
         "https://www.amazon.in/dp/" + asin +
-        "?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-short"
+        "?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=" + subtag
       );
     })();
   </script>

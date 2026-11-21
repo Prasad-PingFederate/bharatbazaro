@@ -111,3 +111,81 @@ def test_render_deal_card_subtag():
     }
     card_html = render_deal_card_html(deal, card_index=0, subtag="web_col_under99")
     assert "ascsubtag=web_col_under99" in card_html
+
+
+def test_decision_engine_sales_first_heuristic():
+    """Verify DealDecisionEngine heuristic handles sales-first scoring and None safety."""
+    from decision_models.engine import heuristic
+
+    # 1. High-converting impulse deal
+    impulse_deal = {
+        "asin": "B0TESTIMPULSE",
+        "title": "Milton Stainless Steel Water Bottle 1L",
+        "effective_price": 299,
+        "mrp": 799,
+        "effective_discount_pct": 62,
+        "rating": 4.3,
+        "review_count": 1500,
+        "price_context": "all_time_low",
+        "is_loot": True,
+        "category": "Home & Kitchen",
+    }
+    res = heuristic(impulse_deal)
+    assert res.verdict == "frontpage"
+    assert res.promote is True
+    assert res.best_channel == "whatsapp"
+    assert res.confidence >= 0.80
+
+    # 2. None safety check (real data scenario where fields can be None)
+    none_deal = {
+        "asin": "B0TESTNONE",
+        "title": "Sample Product With Missing Meta",
+        "effective_price": None,
+        "price": 499,
+        "mrp": None,
+        "rating": None,
+        "reviews": None,
+        "review_count": None,
+        "discount_pct": 30,
+        "effective_discount_pct": None,
+        "price_context": None,
+    }
+    res_none = heuristic(none_deal)
+    assert res_none.model == "heuristic-sales"
+
+    # 3. Mobile category penalty (0% commission)
+    mobile_deal = {
+        "asin": "B0TESTPHONE",
+        "title": "Budget Smartphone 5G",
+        "effective_price": 12999,
+        "mrp": 15999,
+        "discount_pct": 18,
+        "category": "Smartphones & Mobile Phones",
+    }
+    res_mobile = heuristic(mobile_deal)
+    assert res_mobile.verdict in ("hold", "kill")
+
+
+def test_404_subtag_preservation_and_hygiene():
+    """Verify 404.html short link handler parses subtag query params and preserves affiliate hygiene."""
+    with open("404.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "URLSearchParams" in html
+    assert "subtag" in html
+    assert "tag=dammaiprasad-21" in html
+    assert "linkCode=ll1" in html
+    assert "ascsubtag=" in html
+
+
+def test_promote_page_shortlinks_and_decision_model():
+    """Verify promote.html integrates decision models, short /a/ links, and WhatsApp-first CTAs."""
+    with open("promote.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "decision_models/decision.js" in html
+    assert "/a/" in html
+    assert "bb-wa" in html
+    assert "whatsapp-card" in html
+    assert "#AmazonIndia" in html
+    assert "#LootDeal" in html

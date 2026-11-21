@@ -79,16 +79,17 @@ class DealDecisionEngine:
         }
 
     def _heuristic(self, deal: Dict) -> DecisionResult:
-        price = float(deal.get("price", deal.get("effective_price", 0)))
-        mrp = float(deal.get("mrp", price or 1))
-        rating = float(deal.get("rating", 0))
-        reviews = int(deal.get("reviews", 0))
+        price = float(deal.get("price") or deal.get("effective_price") or 0)
+        mrp = float(deal.get("mrp") or price or 1)
+        rating = float(deal.get("rating") or 0)
+        reviews = int(deal.get("reviews") or deal.get("review_count") or 0)
         in_stock = bool(deal.get("inStock", True))
         spike = bool(deal.get("spike", deal.get("price_spiked", False)))
-        coupon = float(deal.get("couponValue", 0)) or (1 if deal.get("coupon_text") or deal.get("promo_code") else 0)
-        disc_pct = float(deal.get("effective_discount_pct", deal.get("discount_pct", 0)))
-        context = deal.get("price_context", "")
+        coupon = float(deal.get("couponValue") or 0) or (1 if deal.get("coupon_text") or deal.get("promo_code") else 0)
+        disc_pct = float(deal.get("effective_discount_pct") or deal.get("discount_pct") or 0)
+        context = str(deal.get("price_context") or "")
         is_loot = bool(deal.get("is_loot"))
+        category = str(deal.get("category") or "").lower()
 
         effective = max(price - (coupon if coupon > 10 else 0), 1)
         discount = max(0, (mrp - effective) / mrp) if mrp else disc_pct / 100
@@ -101,6 +102,18 @@ class DealDecisionEngine:
         score += 0.18 if rating >= 4.2 and reviews >= 500 else 0.08 if rating >= 4.0 else 0
         score += 0.12 if in_stock and not spike else -0.3
 
+        # Impulse sweet spots for WhatsApp sales conversion
+        if 0 < price <= 499:
+            score += 0.12
+        elif 0 < price <= 999:
+            score += 0.08
+        elif price > 25000 and context != "all_time_low":
+            score -= 0.15
+
+        # Penalty on 0% commission categories
+        if "smartphone" in category or "mobile" in category:
+            score -= 0.40
+
         promote = score >= 0.62 and in_stock and not spike and discount >= 0.28
         if score >= 0.82 and (discount >= 0.40 or context == "all_time_low"):
             verdict = "frontpage"
@@ -112,7 +125,7 @@ class DealDecisionEngine:
             verdict = "kill"
 
         # Prefer WhatsApp for high-conversion deals
-        if promote and (discount >= 0.35 or context == "all_time_low" or coupon):
+        if promote and (discount >= 0.35 or context == "all_time_low" or coupon or price <= 999):
             channel = "whatsapp"
         elif promote:
             channel = "telegram"
@@ -219,6 +232,10 @@ class DealDecisionEngine:
             results.append(self.decide(d, model=model))
             time.sleep(0.4)
         return results
+
+
+def heuristic(deal: Dict) -> DecisionResult:
+    return DealDecisionEngine()._heuristic(deal)
 
 
 def decide_deal(deal: Dict, model: str = "perplexity/pplx-decider-v1.3:free") -> DecisionResult:

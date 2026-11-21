@@ -109,6 +109,38 @@
         closeDrawer();
       }
     });
+
+    // Deal click and WhatsApp share telemetry
+    document.addEventListener('click', (e) => {
+      const buyBtn = e.target.closest('.bazar-btn-buy, .mini-card-img-link, .mini-card-title');
+      if (buyBtn && navigator.sendBeacon) {
+        const href = buyBtn.getAttribute('href') || '';
+        const m = href.match(/\/a\/([A-Z0-9]{10})/i) || href.match(/\/dp\/([A-Z0-9]{10})/i);
+        const asin = m ? m[1].toUpperCase() : '';
+        try {
+          navigator.sendBeacon('/api/track-click', JSON.stringify({
+            asin: asin,
+            subtag: 'bb-bazarai',
+            channel: 'bazarai',
+            action: 'click_buy',
+            source: 'bazarai_mini_card',
+            timestamp: new Date().toISOString()
+          }));
+        } catch (_) {}
+      }
+      const waBtn = e.target.closest('.bazar-btn-share-wa');
+      if (waBtn && navigator.sendBeacon) {
+        try {
+          navigator.sendBeacon('/api/track-click', JSON.stringify({
+            subtag: 'bb-wa',
+            channel: 'whatsapp',
+            action: 'share_whatsapp',
+            source: 'bazarai_share',
+            timestamp: new Date().toISOString()
+          }));
+        } catch (_) {}
+      }
+    });
   }
 
   // ── 2. TOOLTIP & DRAWER CONTROLS ───────────────────────────────────────────
@@ -191,9 +223,13 @@
   function offerTodayBest() {
     if (!liveDealsCache.length) return;
     if (chatHistory.filter((m) => m.cards && m.cards.length).length) return;
-    const top = rankDeals(liveDealsCache.filter(isStrongOffer)).slice(0, 3);
+    const strongDeals = liveDealsCache.filter((d) => {
+      const dec = getDealDecision(d);
+      return (dec.verdict === 'frontpage' || dec.verdict === 'test') && isStrongOffer(d);
+    });
+    const top = rankDeals(strongDeals).slice(0, 3);
     if (!top.length) return;
-    addBotMessage("These are the strongest offers on the radar right now. Weak discounts are left out.", {
+    addBotMessage("🔥 **Today's Highest-Converting Amazon Offers**\n\nVerified 40%+ drops, all-time lows, and live clip-on coupons. Weak or zero-commission items are left out.", {
       cards: top,
     });
   }
@@ -381,19 +417,29 @@
     const mrp = deal.mrp || 0;
     const discPct = deal.effective_discount_pct || deal.discount_pct || 0;
     const imgUrl = deal.image_url || `https://m.media-amazon.com/images/P/${asin}.jpg`;
-    let affUrl = toSafeAffiliateUrl(asin, 'bb-bazarai');
+    const shortAffUrl = asin ? `https://bharatbazaro.com/a/${asin}?subtag=bb-bazarai` : toSafeAffiliateUrl(asin, 'bb-bazarai');
     const dealPageUrl = `/deal/${asin}.html`;
     const buyConf = deal.buy_confidence || 85;
+
+    const waShareText = encodeURIComponent(
+      `🔥 *LOOT DEAL: ${discPct}% OFF on Amazon!*\n` +
+      `📦 *${title}*\n\n` +
+      `💰 Deal Price: *₹${effPrice.toLocaleString('en-IN')}* (MRP ~₹${mrp.toLocaleString('en-IN')}~)\n` +
+      `📉 Discount: *${discPct}% OFF*\n` +
+      (deal.coupon_text ? `🎟️ Coupon: *${deal.coupon_text}*\n` : '') +
+      `🛒 *Order on Amazon:* https://bharatbazaro.com/a/${asin}?subtag=bb-wa`
+    );
+    const waUrl = `https://api.whatsapp.com/send?text=${waShareText}`;
 
     const card = document.createElement('div');
     card.className = 'bazar-mini-card';
     card.innerHTML = `
       <div class="mini-card-top">
-        <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="mini-card-img-link" title="Open Deal on Amazon.in">
+        <a href="${shortAffUrl}" target="_blank" rel="sponsored noopener" class="mini-card-img-link" title="Open Deal on Amazon.in">
           <img src="${imgUrl}" alt="${escapeHtml(title)}" class="mini-card-img" loading="lazy" onload="if(this.naturalWidth<=1||this.naturalHeight<=1){this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'200\\' viewBox=\\'0 0 200 200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23f1f5f9\\'/><text x=\\'50%\\' y=\\'45%\\' font-size=\\'48\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'>⚡</text><text x=\\'50%\\' y=\\'72%\\' font-size=\\'13\\' font-weight=\\'bold\\' fill=\\'%2364748b\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\'>Amazon Verified Deal</text></svg>';}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'200\\' viewBox=\\'0 0 200 200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23f1f5f9\\'/><text x=\\'50%\\' y=\\'45%\\' font-size=\\'48\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'>⚡</text><text x=\\'50%\\' y=\\'72%\\' font-size=\\'13\\' font-weight=\\'bold\\' fill=\\'%2364748b\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\'>Amazon Verified Deal</text></svg>';">
         </a>
         <div class="mini-card-details">
-          <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="mini-card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</a>
+          <a href="${shortAffUrl}" target="_blank" rel="sponsored noopener" class="mini-card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</a>
           <div class="mini-card-price-row">
             <span class="mini-card-price">₹${effPrice.toLocaleString('en-IN')}</span>
             ${mrp > effPrice ? `<span class="mini-card-mrp">₹${mrp.toLocaleString('en-IN')}</span>` : ''}
@@ -404,8 +450,11 @@
         </div>
       </div>
       <div class="mini-card-actions">
-        <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="bazar-btn-buy">
+        <a href="${shortAffUrl}" target="_blank" rel="sponsored noopener" class="bazar-btn-buy" title="Open on Amazon with Deal Tracking">
           <span>🛒 Buy on Amazon ↗</span>
+        </a>
+        <a href="${waUrl}" target="_blank" rel="noopener" class="bazar-btn-share-wa" title="Share Deal on WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;background:#15803d;color:#ffffff;border-radius:6px;padding:6px 10px;font-size:12px;font-weight:700;text-decoration:none;">
+          <span>💬 WhatsApp</span>
         </a>
         <a href="${dealPageUrl}" class="bazar-btn-chart" title="View Keepa Chart & 90-Day Price History">
           <span>📈 Price Graph</span>
@@ -447,7 +496,7 @@
     const card = document.createElement('div');
     card.className = 'bazar-keepa-card';
     const asin = keepaData.asin;
-    const affUrl = toSafeAffiliateUrl(asin, 'bb-bazarai');
+    const shortAffUrl = asin ? `https://bharatbazaro.com/a/${asin}?subtag=bb-bazarai` : toSafeAffiliateUrl(asin, 'bb-bazarai');
     const chartUrl = `https://graph.keepa.com/pricehistory.png?asin=${asin}&domain=in&salesrank=1&range=90`;
     const dealPageUrl = `/deal/${asin}.html`;
 
@@ -464,7 +513,7 @@
         <div class="verdict-desc">${escapeHtml(keepaData.verdictText || 'Compare current price against the 90-day chart above before purchasing.')}</div>
       </div>
       <div class="keepa-actions">
-        <a href="${affUrl}" target="_blank" rel="sponsored noopener" class="bazar-btn-buy">
+        <a href="${shortAffUrl}" target="_blank" rel="sponsored noopener" class="bazar-btn-buy">
           <span>🛒 Check Live Price on Amazon.in ↗</span>
         </a>
         <a href="${dealPageUrl}" class="bazar-btn-chart">
@@ -475,40 +524,157 @@
     return card;
   }
 
+  function getDealDecision(deal) {
+    if (typeof window !== 'undefined' && window.BBDecision && typeof window.BBDecision.heuristic === 'function') {
+      try {
+        return window.BBDecision.heuristic(deal);
+      } catch (_) {}
+    }
+    const price = Number(deal.effective_price || deal.price || deal.list_price) || 0;
+    const mrp = Number(deal.mrp) || price || 1;
+    const rating = Number(deal.rating) || 0;
+    const reviews = Number(deal.reviews || deal.review_count) || 0;
+    const inStock = deal.inStock !== false && !deal.price_spiked;
+    const disc = Number(deal.effective_discount_pct || deal.discount_pct) || 0;
+    const hasCoupon = !!(deal.coupon_text || deal.promo_code || deal.couponValue);
+    const isATL = deal.price_context === "all_time_low";
+    const isLoot = !!deal.is_loot;
+    const category = String(deal.category || "").toLowerCase();
+
+    const discount = Math.max(0, (mrp - price) / mrp) || disc / 100;
+    let score = 0;
+    score += Math.min(discount / 0.40, 1.2) * 0.42;
+    score += isATL ? 0.28 : deal.price_context === "real_drop" ? 0.15 : 0;
+    score += isLoot ? 0.12 : 0;
+    score += hasCoupon ? 0.10 : 0;
+    score += rating >= 4.2 && reviews >= 500 ? 0.18 : rating >= 4.0 ? 0.08 : 0;
+    score += inStock ? 0.12 : -0.3;
+
+    if (price > 0 && price <= 499) score += 0.12;
+    else if (price > 0 && price <= 999) score += 0.08;
+    else if (price > 25000 && !isATL) score -= 0.15;
+    if (category.includes('smartphone') || category.includes('mobile')) score -= 0.40;
+
+    const promote = score >= 0.62 && inStock && discount >= 0.28;
+    let verdict = "kill";
+    if (score >= 0.82 && (discount >= 0.40 || isATL)) verdict = "frontpage";
+    else if (score >= 0.62) verdict = "test";
+    else if (score >= 0.40) verdict = "hold";
+
+    let channel = "hold";
+    if (promote && (discount >= 0.35 || isATL || hasCoupon || price <= 999)) channel = "whatsapp";
+    else if (promote) channel = "telegram";
+
+    return {
+      model: "heuristic-sales",
+      source: "heuristic",
+      verdict,
+      promote,
+      confidence: Math.min(score, 0.96),
+      best_channel: channel,
+    };
+  }
+
   function reasonLine(deal) {
     const bits = [];
+    const dec = getDealDecision(deal);
+    if (dec.best_channel === 'whatsapp' || dec.verdict === 'frontpage') {
+      bits.push('🔥 WhatsApp Hot Pick');
+    }
     if (deal.price_context === 'all_time_low') bits.push('All-time low');
     else if (deal.price_context === 'real_drop') bits.push('Real drop');
     if (deal.is_loot) bits.push('Loot');
-    if (deal.coupon_text || deal.promo_code) bits.push('Coupon on');
+    if (deal.coupon_text || deal.promo_code) bits.push('Coupon active');
     const disc = deal.effective_discount_pct || deal.discount_pct || 0;
     if (disc >= 40) bits.push(disc + '% off');
-    if (!bits.length) bits.push((deal.buy_confidence || 0) + '% confidence');
+    const price = Number(deal.effective_price || deal.list_price || 0);
+    if (price > 0 && price <= 499) bits.push('Under ₹499');
+    else if (price > 0 && price <= 999) bits.push('Under ₹999');
+    if (!bits.length) bits.push((deal.buy_confidence || 85) + '% confidence');
     return `<div class="mini-card-conf"><span class="conf-dot">🟢</span><span>${escapeHtml(bits.join(' · '))}</span></div>`;
   }
 
   function dealScore(d) {
     if (!d || d.expired || d.price_spiked) return -1;
-    const price = d.effective_price || d.list_price || 0;
-    if (!price) return -1;
-    const disc = d.effective_discount_pct || d.discount_pct || 0;
-    let s = Math.min(disc, 75) * 0.9;
-    if (d.price_context === 'all_time_low') s += 46;
-    else if (d.price_context === 'real_drop') s += 26;
-    if (d.is_loot) s += 16;
-    if (d.is_further_drop) s += 8;
-    if (d.coupon_text || d.promo_code) s += 12;
-    if (d.bank_offer) s += 5;
-    s += (d.rating || 0) * 3;
-    s += (d.buy_confidence || 0) * 0.12;
-    if (disc < 25 && d.price_context === 'normal' && !d.is_loot && !d.coupon_text) s -= 30;
+    const price = Number(d.effective_price || d.list_price || 0);
+    if (!price || price <= 0) return -1;
+
+    const dec = getDealDecision(d);
+    if (dec.verdict === 'kill') return -1;
+
+    const disc = Number(d.effective_discount_pct || d.discount_pct || 0);
+    const isATL = d.price_context === 'all_time_low';
+    const isRealDrop = d.price_context === 'real_drop';
+    const hasCoupon = !!(d.coupon_text || d.promo_code);
+    const category = String(d.category || '').toLowerCase();
+    const title = String(d.title || '').toLowerCase();
+
+    let s = (dec.confidence || 0) * 50;
+
+    // Deep discounts convert highest on WhatsApp & web
+    if (disc >= 60) s += 40;
+    else if (disc >= 45) s += 30;
+    else if (disc >= 35) s += 20;
+    else if (disc < 20 && !isATL && !hasCoupon) s -= 35;
+
+    if (isATL) s += 35;
+    else if (isRealDrop) s += 18;
+    if (d.is_loot) s += 20;
+    if (hasCoupon) s += 22;
+
+    const rating = Number(d.rating) || 0;
+    const reviews = Number(d.reviews || d.review_count) || 0;
+    if (rating >= 4.2 && reviews >= 200) s += 18;
+    else if (rating >= 4.0) s += 10;
+    else if (rating > 0 && rating < 3.8) s -= 25;
+
+    // Sweet-spot impulse pricing for WhatsApp / Indian shoppers
+    if (price <= 499) s += 25;
+    else if (price <= 999) s += 18;
+    else if (price <= 2499) s += 8;
+    else if (price > 25000 && !isATL) s -= 30;
+
+    // Priority for high-commission impulse categories
+    const isHighComm = /kitchen|home|cookware|appliance|beauty|grooming|personal|skincare|hair|fashion|footwear|essential|grocery|snack|stationery|cable|charger|tool/.test(category + ' ' + title);
+    if (isHighComm) s += 18;
+
+    // Penalty on 0% commission categories
+    if (category.includes('smartphone') || category.includes('mobile') || title.includes('smartphone')) {
+      s -= 60;
+    }
+
+    if (dec.verdict === 'frontpage') s += 35;
+    else if (dec.verdict === 'test') s += 15;
+    else if (dec.verdict === 'hold') s -= 20;
+
+    if (dec.best_channel === 'whatsapp') s += 15;
+
     return s;
   }
 
   function isStrongOffer(d) {
     if (!d || d.expired || d.price_spiked) return false;
-    const disc = d.effective_discount_pct || d.discount_pct || 0;
-    return disc >= 35 || d.price_context === 'all_time_low' || d.is_loot || !!(d.coupon_text || d.promo_code);
+    const price = Number(d.effective_price || d.list_price || 0);
+    if (!price || price <= 0) return false;
+
+    const category = String(d.category || '').toLowerCase();
+    if (category.includes('smartphone') || category.includes('mobile')) return false;
+
+    const dec = getDealDecision(d);
+    if (dec.verdict !== 'frontpage' && dec.verdict !== 'test') return false;
+
+    const disc = Number(d.effective_discount_pct || d.discount_pct || 0);
+    const isATL = d.price_context === 'all_time_low';
+    const hasCoupon = !!(d.coupon_text || d.promo_code);
+    const rating = Number(d.rating) || 0;
+
+    const hasDeepDiscount = disc >= 40 && (rating >= 3.8 || rating === 0);
+    const hasAllTimeLow = isATL && disc >= 25;
+    const hasStrongCoupon = hasCoupon && disc >= 30;
+    const isLoot = !!d.is_loot && disc >= 35;
+    const isImpulseLoot = price <= 999 && disc >= 35 && (rating >= 3.8 || rating === 0);
+
+    return hasDeepDiscount || hasAllTimeLow || hasStrongCoupon || isLoot || isImpulseLoot;
   }
 
   function rankDeals(list) {

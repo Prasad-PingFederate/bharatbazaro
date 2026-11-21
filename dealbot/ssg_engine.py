@@ -66,6 +66,7 @@ BAZAR_WIDGET_HTML = '''
     </div>
   </div>
 
+  <script src="/decision_models/decision.js"></script>
   <script src="/bazaro_ai.js"></script>
 '''
 
@@ -1423,7 +1424,7 @@ def generate_page_html(
     if 'id="bazaroAiWidget"' not in html_out:
         html_out = html_out.replace('</body>', f'''{BAZAR_WIDGET_HTML}\n</body>''')
     elif 'bazaro_ai.js' not in html_out:
-        html_out = html_out.replace('</body>', '  <script src="/bazaro_ai.js"></script>\n  <script src="/conversion_engine.js"></script>\n</body>')
+        html_out = html_out.replace('</body>', '  <script src="/decision_models/decision.js"></script>\n  <script src="/bazaro_ai.js"></script>\n  <script src="/conversion_engine.js"></script>\n</body>')
 
     return html_out
 
@@ -2023,6 +2024,7 @@ def render_product_page_html(
 
   {mobile_sticky_bar_html}
 
+  <script src="/decision_models/decision.js"></script>
   <script src="/bazaro_ai.js"></script>
   <script src="/conversion_engine.js"></script>
 

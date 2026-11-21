@@ -2265,6 +2265,24 @@
         e.target.classList.add('hidden');
       } else if (e.target.closest('.btn-buy-deal, .btn-chart-deal, .amazon-unlocker-btn, #exitModalBuyBtn')) {
         sessionStorage.setItem('bb_clicked_deal', '1');
+        const link = e.target.closest('a');
+        if (link && navigator.sendBeacon) {
+          const href = link.getAttribute('href') || '';
+          const m = href.match(/\/dp\/([A-Z0-9]{10})/i) || href.match(/\/a\/([A-Z0-9]{10})/i);
+          const asin = m ? m[1].toUpperCase() : '';
+          const subMatch = href.match(/ascsubtag=([a-zA-Z0-9_\-]+)/i) || href.match(/subtag=([a-zA-Z0-9_\-]+)/i);
+          const subtag = subMatch ? subMatch[1] : 'bb-grid';
+          try {
+            navigator.sendBeacon('/api/track-click', JSON.stringify({
+              asin,
+              subtag,
+              channel: 'web',
+              action: 'click_deal',
+              source: 'web_grid',
+              timestamp: new Date().toISOString()
+            }));
+          } catch (_) {}
+        }
       }
     });
   }

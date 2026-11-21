@@ -14,12 +14,13 @@ function heuristic(deal) {
   const price = Number(deal.effective_price || deal.price) || 0;
   const mrp = Number(deal.mrp) || price || 1;
   const rating = Number(deal.rating) || 0;
-  const reviews = Number(deal.reviews) || 0;
+  const reviews = Number(deal.reviews || deal.review_count) || 0;
   const inStock = deal.inStock !== false && !deal.price_spiked;
   const disc = Number(deal.effective_discount_pct || deal.discount_pct) || 0;
   const hasCoupon = !!(deal.coupon_text || deal.promo_code || deal.couponValue);
   const isATL = deal.price_context === "all_time_low";
   const isLoot = !!deal.is_loot;
+  const category = String(deal.category || "").toLowerCase();
 
   const discount = Math.max(0, (mrp - price) / mrp) || disc / 100;
 
@@ -31,6 +32,14 @@ function heuristic(deal) {
   score += rating >= 4.2 && reviews >= 500 ? 0.18 : rating >= 4.0 ? 0.08 : 0;
   score += inStock ? 0.12 : -0.3;
 
+  // Impulse sweet spots for WhatsApp conversion
+  if (price > 0 && price <= 499) score += 0.12;
+  else if (price > 0 && price <= 999) score += 0.08;
+  else if (price > 25000 && !isATL) score -= 0.15;
+
+  // Penalty on low/zero commission categories
+  if (category.includes('smartphone') || category.includes('mobile')) score -= 0.40;
+
   const promote = score >= 0.62 && inStock && discount >= 0.28;
   let verdict = "kill";
   if (score >= 0.82 && (discount >= 0.40 || isATL)) verdict = "frontpage";
@@ -38,7 +47,7 @@ function heuristic(deal) {
   else if (score >= 0.40) verdict = "hold";
 
   let channel = "hold";
-  if (promote && (discount >= 0.35 || isATL || hasCoupon)) channel = "whatsapp";
+  if (promote && (discount >= 0.35 || isATL || hasCoupon || price <= 999)) channel = "whatsapp";
   else if (promote) channel = "telegram";
 
   return {

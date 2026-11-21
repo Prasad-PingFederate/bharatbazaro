@@ -7,6 +7,7 @@
   <title>Post a deal — BharatBazaro</title>
   <meta name="description" content="Copy a live BharatBazaro deal and open WhatsApp, Telegram, X, Reddit or Facebook already logged in on this browser.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="/decision_models/decision.js"></script>
   <style>
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
@@ -35,8 +36,26 @@
     @media (min-width: 640px) { .deal { grid-template-columns: 1fr auto; align-items: end; } }
     label { display: block; color: #a39888; font-size: 0.9rem; }
     select, input { width: 100%; margin-top: 4px; padding: 0 12px; }
+    .price-wrap { display: flex; flex-direction: column; align-items: flex-end; }
     .price { font-family: Georgia, serif; font-size: 2rem; margin: 0; }
-    .card { border: 1px solid #3a342c; background: #171512; border-radius: 10px; padding: 16px; margin: 0 0 10px; }
+    .badge-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .badge { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+    .badge-frontpage { background: #b91c1c; color: #fff; }
+    .badge-test { background: #0369a1; color: #fff; }
+    .badge-wa { background: #15803d; color: #fff; }
+    .badge-atl { background: #7c2d12; color: #ffedd5; }
+    .card { border: 1px solid #3a342c; background: #171512; border-radius: 10px; padding: 16px; margin: 0 0 10px; transition: border-color 0.2s; }
+    .card.whatsapp-card {
+      border: 1.5px solid #22c55e;
+      background: linear-gradient(180deg, #0d2818 0%, #171512 100%);
+    }
+    .whatsapp-card .net { color: #4ade80; font-weight: 700; }
+    .whatsapp-card .post {
+      background: #22c55e;
+      color: #052e16;
+      font-size: 0.95rem;
+      padding: 0 18px;
+    }
     .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
     .net { color: #ef6a1a; font-size: 0.8rem; margin: 0; }
     .actions { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -69,7 +88,10 @@
       <label>Deal
         <select id="deal"></select>
       </label>
-      <p class="price" id="price"></p>
+      <div class="price-wrap">
+        <p class="price" id="price"></p>
+        <div class="badge-bar" id="badges"></div>
+      </div>
     </div>
 
     <div id="doors"></div>
@@ -95,44 +117,151 @@
   </main>
   <script>
     const CHANNELS = {
-      "WhatsApp Web": { net: "WhatsApp", href: (t) => phone() ? "https://wa.me/?text=" + q(t) : "https://web.whatsapp.com/send?text=" + q(t), note: "Opens WhatsApp Web if this browser is logged in. Pick the group, then Send." },
-      "Flash Deals channel": { net: "Telegram", href: () => "https://t.me/Flash_Deals_Flipkart_Amazon", note: "Your channel. Text is copied. Paste it and send." },
-      "Telegram chats": { net: "Telegram", href: (t, u) => "https://t.me/share/url?url=" + q(u) + "&text=" + q(t), note: "Share sheet. Send into chats you already have." },
-      "X": { net: "X", href: (t) => "https://x.com/intent/post?text=" + q(t), note: "Compose opens. If @PrasadDammai is logged in, press Post." },
-      "r/Indiashopping": { net: "Reddit", href: (t, u) => "https://www.reddit.com/r/Indiashopping/submit?title=" + q(t.split("\n")[0]) + "&url=" + q(u), note: "Title and link are filled when you are logged in." },
-      "r/dealsforindia": { net: "Reddit", href: (t, u) => "https://www.reddit.com/r/dealsforindia/submit?title=" + q(t.split("\n")[0]) + "&url=" + q(u), note: "Same deal, second sub. Do not post both in the same hour." },
-      "Facebook": { net: "Facebook", href: (t, u) => "https://www.facebook.com/sharer/sharer.php?u=" + q(u), note: "Share dialog if Facebook is logged in. For a group, open the group link you saved and paste." },
-      "Instagram": { net: "Instagram", href: () => "https://www.instagram.com/", note: "Instagram will not accept a prefilled caption. The caption is copied. Paste it." },
-      "DesiDime": { net: "Forum", href: () => "https://www.desidime.com/", note: "Paste the text. They check price history." }
+      "WhatsApp (Highest Conversion)": {
+        net: "WhatsApp",
+        href: (t) => phone() ? "https://api.whatsapp.com/send?text=" + q(t) : "https://web.whatsapp.com/send?text=" + q(t),
+        note: "🔥 Primary conversion channel. 1-click copies high-converting WhatsApp message and opens chat/web."
+      },
+      "Flash Deals channel": {
+        net: "Telegram",
+        href: () => "https://t.me/Flash_Deals_Flipkart_Amazon",
+        note: "Your Telegram channel. Formatted text with short link is copied. Paste and send."
+      },
+      "Telegram chats": {
+        net: "Telegram",
+        href: (t, u) => "https://t.me/share/url?url=" + q(u) + "&text=" + q(t),
+        note: "Telegram share sheet into your private chats & broadcast groups."
+      },
+      "X (Twitter)": {
+        net: "X",
+        href: (t) => "https://x.com/intent/post?text=" + q(t),
+        note: "Compose opens with trending shopping hashtags & 1-tap short link. Press Post."
+      },
+      "r/Indiashopping": {
+        net: "Reddit",
+        href: (t, u) => "https://www.reddit.com/r/Indiashopping/submit?title=" + q(t.split("\n")[0]) + "&url=" + q(u),
+        note: "Title and tracked short link filled when logged in."
+      },
+      "r/dealsforindia": {
+        net: "Reddit",
+        href: (t, u) => "https://www.reddit.com/r/dealsforindia/submit?title=" + q(t.split("\n")[0]) + "&url=" + q(u),
+        note: "Second Indian deals sub. Do not cross-post within the same hour."
+      },
+      "Facebook": {
+        net: "Facebook",
+        href: (t, u) => "https://www.facebook.com/sharer/sharer.php?u=" + q(u),
+        note: "Share dialog with direct short link."
+      },
+      "Instagram": {
+        net: "Instagram",
+        href: () => "https://www.instagram.com/",
+        note: "Caption is copied. Paste into Instagram Story, Broadcast Channel or DM."
+      },
+      "DesiDime": {
+        net: "Forum",
+        href: () => "https://www.desidime.com/",
+        note: "Copies deal blurb. Check Keepa chart on DesiDime before posting."
+      }
     };
 
     function q(s) { return encodeURIComponent(s); }
     function phone() { return /Android|iPhone|iPad/i.test(navigator.userAgent); }
     function inr(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
     function page(d) { return "https://bharatbazaro.com/deal/" + d.asin + ".html"; }
-    function buy(d) {
-      return "https://www.amazon.in/dp/" + d.asin + "?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-promote";
+    function shortLink(d, ch) {
+      const sub = ch || "bb-promote";
+      return "https://bharatbazaro.com/a/" + d.asin + "?subtag=" + encodeURIComponent(sub);
     }
-    function shortLink(d) { return "https://bharatbazaro.com/a/" + d.asin; }
 
     function blurb(d, net) {
-      const url = page(d);
-      const buyUrl = buy(d);
       const price = inr(d.effective_price);
       const name = d.title;
-      const bank = d.bank_offer ? "Bank: " + d.bank_offer : "Koi extra bank offer listed nahi.";
+      const mrp = inr(d.mrp);
+      const disc = (d.effective_discount_pct || d.discount_pct || 0) + "%";
+      const isATL = d.price_context === "all_time_low";
+      const isLoot = !!d.is_loot;
+      const coupon = d.coupon_text || d.promo_code;
+      const bank = d.bank_offer;
+
+      if (net === "WhatsApp") {
+        const waLink = shortLink(d, "bb-wa");
+        const lines = [
+          `🔥 *LOOT DEAL: ${disc} OFF on Amazon!*`,
+          `📦 *${name}*`,
+          ``,
+          `💰 Deal Price: *${price}* (MRP ~${mrp}~)`,
+          `📉 Discount: *${disc} OFF*`,
+        ];
+        if (coupon) lines.push(`🎟️ Coupon: *${coupon}* (Apply on page)`);
+        if (bank) lines.push(`💳 Bank Offer: *${bank}*`);
+        if (d.rating) lines.push(`⭐ Rating: *${d.rating}★* (${d.reviews || d.review_count || 100}+ reviews)`);
+        if (isATL) lines.push(`⚡ *ALL-TIME LOWEST PRICE RECORDED!*`);
+        else if (isLoot) lines.push(`🚨 *RARE PRICE DROP / LOOT OFFER!*`);
+        lines.push(``);
+        lines.push(`🛒 *1-Tap Buy on Amazon:*`);
+        lines.push(waLink);
+        lines.push(``);
+        lines.push(`⏱️ *Hurry! Price or stock may change soon.*`);
+        return lines.join("\n");
+      }
+
+      if (net === "Telegram") {
+        const tgLink = shortLink(d, "bb-tg");
+        const lines = [
+          `🔥 **${disc} OFF — ${name}**`,
+          ``,
+          `💰 Deal Price: **${price}** ~(${mrp})~`,
+          `📉 Discount: **${disc} OFF**`,
+        ];
+        if (coupon) lines.push(`🎟️ Coupon: **${coupon}**`);
+        if (bank) lines.push(`💳 Bank: ${bank}`);
+        if (isATL) lines.push(`⚡ **ALL-TIME LOWEST PRICE RECORDED!**`);
+        lines.push(``);
+        lines.push(`🛒 **Buy on Amazon ↗:**`);
+        lines.push(tgLink);
+        lines.push(``);
+        lines.push(`#AmazonDeals #Loot #PriceDrop #AmazonIndia`);
+        return lines.join("\n");
+      }
+
       if (net === "X") {
-        return [
-          price + " " + name + " — " + d.discount_pct + "% off",
-          shortLink(d),
-          "",
-          "#AmazonIndia #LootDeal #OnlineShopping #AmazonDeals"
-        ].join("\n");
+        const xLink = shortLink(d, "bb-x");
+        const lines = [
+          `🚨 Amazon Price Drop: ${price} (${disc} off, MRP ${mrp})`,
+          `${name.slice(0, 95)}...`,
+          ``,
+        ];
+        if (coupon) lines.push(`🎟️ ${coupon}`);
+        if (isATL) lines.push(`⚡ Lowest price recorded!`);
+        lines.push(`🛒 Buy on Amazon: ${xLink}`);
+        lines.push(``);
+        lines.push(`#AmazonIndia #LootDeal #OnlineShopping #AmazonDeals #PriceDrop #DealsOfTheDay`);
+        return lines.join("\n");
       }
+
       if (net === "Reddit" || net === "Forum") {
-        return [price + " — " + name + " (" + d.discount_pct + "% off, MRP " + inr(d.mrp) + ")", "", bank, (d.rating || "?") + " stars.", "", buyUrl, "", "Affiliate: BharatBazaro is in Amazon Associates. Price is not marked up."].join("\n");
+        const rLink = shortLink(d, "bb-reddit");
+        return [
+          `${price} — ${name} (${disc} off, MRP ${mrp})`,
+          ``,
+          bank ? `Bank: ${bank}` : ``,
+          coupon ? `Coupon: ${coupon}` : ``,
+          isATL ? `All-time lowest price recorded on tracker.` : ``,
+          d.rating ? `Rating: ${d.rating} stars.` : ``,
+          ``,
+          `Direct Amazon Deal Link: ${rLink}`,
+          ``,
+          `#AmazonIndia #LootDeal #OnlineShopping`
+        ].filter(Boolean).join("\n");
       }
-      return [price + " mein " + name + ".", "", "MRP " + inr(d.mrp) + ". " + d.discount_pct + "% off.", bank, "", "Seedha Amazon, 24 ghante ka cookie:", buyUrl].join("\n");
+
+      const defaultLink = shortLink(d, "bb-promote");
+      return [
+        `🔥 ${price} mein ${name} (${disc} off, MRP ${mrp}).`,
+        coupon ? `Coupon: ${coupon}` : ``,
+        `Direct 1-tap Amazon deal link:`,
+        defaultLink
+      ].filter(Boolean).join("\n");
     }
 
     const postedKey = "bb-promote-posted";
@@ -151,7 +280,7 @@
         note: g.link ? "Opens your link and copies the text." : "Copies the text. Paste it into that app.",
         href: function (t, u) {
           if (g.link) return g.link;
-          if (g.net === "WhatsApp") return phone() ? "https://wa.me/?text=" + q(t) : "https://web.whatsapp.com/send?text=" + q(t);
+          if (g.net === "WhatsApp") return phone() ? "https://api.whatsapp.com/send?text=" + q(t) : "https://web.whatsapp.com/send?text=" + q(t);
           if (g.net === "X") return "https://x.com/intent/post?text=" + q(t);
           if (g.net === "Telegram") return "https://t.me/share/url?url=" + q(u) + "&text=" + q(t);
           if (g.net === "Facebook") return "https://www.facebook.com/sharer/sharer.php?u=" + q(u);
@@ -166,8 +295,24 @@
     async function post(name, spec, deal) {
       const net = spec.net;
       const text = blurb(deal, net);
-      const url = page(deal);
+      const subtag = "bb-" + (net === "WhatsApp" ? "wa" : net === "Telegram" ? "tg" : net === "X" ? "x" : "promote").toLowerCase();
+      const url = shortLink(deal, subtag);
+
       try { await navigator.clipboard.writeText(text); } catch (e) {}
+
+      if (navigator.sendBeacon) {
+        try {
+          navigator.sendBeacon('/api/track-click', JSON.stringify({
+            asin: deal.asin,
+            subtag: subtag,
+            channel: net.toLowerCase(),
+            action: 'promote_post',
+            price: deal.effective_price || 0,
+            timestamp: new Date().toISOString()
+          }));
+        } catch (_) {}
+      }
+
       const href = spec.href(text, url);
       if (href) window.open(href, "_blank", "noopener,noreferrer");
       const btn = [...document.querySelectorAll("[data-post]")].find((el) => el.dataset.post === name);
@@ -181,9 +326,9 @@
       for (const [name, spec] of doors) {
         const id = deal.asin + ":" + name;
         const card = document.createElement("article");
-        card.className = "card";
+        card.className = "card" + (spec.net === "WhatsApp" ? " whatsapp-card" : "");
         card.innerHTML = '<div class="row"><div><p class="net"></p><h2></h2><p class="note"></p></div><div class="actions"></div></div>';
-        card.querySelector(".net").textContent = spec.net;
+        card.querySelector(".net").textContent = spec.net + (spec.net === "WhatsApp" ? " 🔥 (RECOMMENDED CHANNEL)" : "");
         card.querySelector("h2").textContent = name;
         card.querySelector(".note").textContent = spec.note || "Opens your link. Text is on the clipboard.";
         const actions = card.querySelector(".actions");
@@ -191,7 +336,7 @@
         go.className = "post";
         go.type = "button";
         go.dataset.post = name;
-        go.textContent = "Post";
+        go.textContent = spec.net === "WhatsApp" ? "💬 Copy & Open WhatsApp" : "Post";
         go.addEventListener("click", () => post(name, spec, deal));
         const mark = document.createElement("button");
         mark.className = "ghost" + (posted.has(id) ? " on" : "");
@@ -218,6 +363,23 @@
         box.append(card);
       }
       document.getElementById("price").textContent = inr(deal.effective_price);
+
+      const badgesEl = document.getElementById("badges");
+      if (badgesEl) {
+        badgesEl.innerHTML = "";
+        const dec = deal._dec || (window.BBDecision && window.BBDecision.heuristic ? window.BBDecision.heuristic(deal) : { verdict: "frontpage" });
+        if (dec.verdict === "frontpage") {
+          badgesEl.innerHTML += '<span class="badge badge-frontpage">🔥 Frontpage Pick</span>';
+        } else if (dec.verdict === "test") {
+          badgesEl.innerHTML += '<span class="badge badge-test">✨ Test Offer</span>';
+        }
+        if (dec.best_channel === "whatsapp") {
+          badgesEl.innerHTML += '<span class="badge badge-wa">🟢 WhatsApp Hot Pick</span>';
+        }
+        if (deal.price_context === "all_time_low") {
+          badgesEl.innerHTML += '<span class="badge badge-atl">⚡ All-Time Low</span>';
+        }
+      }
     }
 
     function current() {
@@ -238,21 +400,43 @@
       render(current());
     });
 
+    function getDecision(deal) {
+      if (window.BBDecision && typeof window.BBDecision.heuristic === "function") {
+        try { return window.BBDecision.heuristic(deal); } catch (_) {}
+      }
+      return { verdict: "test", confidence: 0.7, best_channel: "whatsapp" };
+    }
+
+    const verdictWeight = { frontpage: 4, test: 3, hold: 2, kill: 1 };
+
     fetch("/data/live_deals.json")
       .then((r) => { if (!r.ok) throw new Error("deals file missing"); return r.json(); })
       .then((rows) => {
         deals = rows.filter((d) => d && !d.expired && !d.price_spiked && d.effective_price > 0 && d.asin)
-          .sort((a, b) => (b.score || 0) - (a.score || 0))
-          .slice(0, 40);
+          .map((d) => {
+            d._dec = getDecision(d);
+            return d;
+          })
+          .sort((a, b) => {
+            const vDiff = (verdictWeight[b._dec.verdict] || 0) - (verdictWeight[a._dec.verdict] || 0);
+            if (vDiff !== 0) return vDiff;
+            if (b._dec.best_channel === "whatsapp" && a._dec.best_channel !== "whatsapp") return 1;
+            if (a._dec.best_channel === "whatsapp" && b._dec.best_channel !== "whatsapp") return -1;
+            return (b._dec.confidence || 0) - (a._dec.confidence || 0);
+          })
+          .slice(0, 60);
+
         if (!deals.length) throw new Error("no live deals");
         const sel = document.getElementById("deal");
         for (const d of deals) {
           const opt = document.createElement("option");
           opt.value = d.asin;
-          opt.textContent = inr(d.effective_price) + " · " + d.title.slice(0, 80);
+          const vBadge = d._dec.verdict === "frontpage" ? "🔥 [Frontpage]" : d._dec.verdict === "test" ? "✨ [Test]" : "⏳ [Hold]";
+          const chBadge = d._dec.best_channel === "whatsapp" ? "🟢 WA" : "🔵 TG";
+          opt.textContent = `${vBadge} ${chBadge} ${inr(d.effective_price)} (${d.effective_discount_pct || d.discount_pct}% OFF) · ${d.title.slice(0, 60)}`;
           sel.append(opt);
         }
-        document.getElementById("status").textContent = deals.length + " live deals. The link goes to the BharatBazaro page, not straight to Amazon.";
+        document.getElementById("status").textContent = deals.length + " high-conversion deals ranked by Decision Model. Direct 1-tap Amazon short links with tag=dammaiprasad-21 & channel subtag attribution.";
         render(deals[0]);
       })
       .catch((err) => {

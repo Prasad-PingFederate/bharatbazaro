@@ -91,6 +91,8 @@
         asin: asin || '',
         action: 'copy_coupon',
         code: cleanCode,
+        subtag: 'bb-coupon',
+        channel: 'web',
         timestamp: new Date().toISOString()
       }));
     }

@@ -3,6 +3,45 @@
   "generated_at_epoch": 1795256884,
   "top_loot_summary": [
     {
+      "asin": "B0H6MJBCHN",
+      "title": "[ICICI / AXIS CC] Acer Chromebook, Intel Celeron- N4500 Processor, 4GB LPDDR4 RAM, 64GB eMMC, 29.46cm /11.6\" inch HD Display, Chrome OS, Intel UHD Graphics,WiFi 5, Black, 1.2 KG, CO731, Thin & Light Laptop",
+      "effective_price": 18990,
+      "mrp": 34999,
+      "discount_pct": 46,
+      "savings_inr": 16009,
+      "brand": "Acer",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0H6MJBCHN?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0H6MJBCHN.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B0C4ZGF7P6",
+      "title": "ASUS Vivobook 16 (2023) Thin and Light Laptop (Intel Core i3-1215U, 8GB, 512GB SSD)",
+      "effective_price": 34990,
+      "mrp": 55990,
+      "discount_pct": 38,
+      "savings_inr": 21000,
+      "brand": "Asus",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0C4ZGF7P6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0C4ZGF7P6.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09NVPSCQT",
+      "title": "boAt Rockerz 255 Pro+ Bluetooth in Ear Neckband with 40H Playtime",
+      "effective_price": 999,
+      "mrp": 3990,
+      "discount_pct": 75,
+      "savings_inr": 2991,
+      "brand": "boAt",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B09NVPSCQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09NVPSCQT.html",
+      "coupon_text": null
+    },
+    {
       "asin": "B0B8NTZ24P",
       "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
       "effective_price": 1199,
@@ -26,45 +65,6 @@
       "category": "Home & Kitchen",
       "affiliate_url": "https://www.amazon.in/dp/B07WGNKGYK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B07WGNKGYK.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0GKDFR8YS",
-      "title": "Havells 2000W Hexo EZ HEAT Infrared Induction Cooctop with Digital Display| TC-20 with Grill| 6kV Surge Protection| Cool Touch Body| Fast Heating | 1 Year Door Step Warranty By Havells",
-      "effective_price": 3542,
-      "mrp": 7955,
-      "discount_pct": 40,
-      "savings_inr": 4413,
-      "brand": "Havells",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0GKDFR8YS?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0GKDFR8YS.html",
-      "coupon_text": "Apply 20% coupon"
-    },
-    {
-      "asin": "B09X7G2Z1D",
-      "title": "HP Smart Tank 580 All-in-One WiFi Colour Ink Tank Printer",
-      "effective_price": 12499,
-      "mrp": 18848,
-      "discount_pct": 34,
-      "savings_inr": 6349,
-      "brand": "HP",
-      "category": "Laptops & Computing",
-      "affiliate_url": "https://www.amazon.in/dp/B09X7G2Z1D?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09X7G2Z1D.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0C4ZHYX58",
-      "title": "boAt EnergyShroom PB400 20000mAh Power Bank (22.5W Fast Charging)",
-      "effective_price": 1299,
-      "mrp": 3999,
-      "discount_pct": 68,
-      "savings_inr": 2700,
-      "brand": "boAt",
-      "category": "Mobiles & Accessories",
-      "affiliate_url": "https://www.amazon.in/dp/B0C4ZHYX58?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0C4ZHYX58.html",
       "coupon_text": null
     }
   ],
@@ -227,11 +227,11 @@
   },
   "category_highlights": {
     "mobiles": {
-      "asin": "B0BNVFXCQ8",
-      "title": "Samsung 25W USB-C Fast Travel Charging Adapter (Black)",
-      "effective_price": 999,
-      "discount_pct": 41,
-      "deal_url": "https://bharatbazaro.com/deal/B0BNVFXCQ8.html"
+      "asin": "B0BZV8RF78",
+      "title": "OnePlus Nord Buds 2 TWS in Ear Earbuds with 25dB ANC",
+      "effective_price": 2199,
+      "discount_pct": 33,
+      "deal_url": "https://bharatbazaro.com/deal/B0BZV8RF78.html"
     },
     "electronics": {
       "asin": "B083W7V3YB",

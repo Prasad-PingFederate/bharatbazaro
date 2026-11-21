@@ -1,7 +1,46 @@
 {
-  "generated_at_ist": "2026-11-21 15:58 IST",
-  "generated_at_epoch": 1795256884,
+  "generated_at_ist": "2026-11-21 16:02 IST",
+  "generated_at_epoch": 1795257172,
   "top_loot_summary": [
+    {
+      "asin": "B0BBWH1R8H",
+      "title": "Kingston NV2 1TB M.2 2280 NVMe Internal SSD (PCIe 4.0 Gen 4x4)",
+      "effective_price": 5499,
+      "mrp": 10500,
+      "discount_pct": 48,
+      "savings_inr": 5001,
+      "brand": "Kingston",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B0BBWH1R8H?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0BBWH1R8H.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B09WDP4MMK",
+      "title": "Samsung 24-inch FHD Flat IPS Monitor (75Hz, AMD FreeSync, Borderless Design)",
+      "effective_price": 7999,
+      "mrp": 16100,
+      "discount_pct": 50,
+      "savings_inr": 8101,
+      "brand": "Samsung",
+      "category": "Laptops & Computing",
+      "affiliate_url": "https://www.amazon.in/dp/B09WDP4MMK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B09WDP4MMK.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B083W7V3YB",
+      "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
+      "effective_price": 6990,
+      "mrp": 14990,
+      "discount_pct": 53,
+      "savings_inr": 8000,
+      "brand": "Sennheiser",
+      "category": "Audio & Headphones",
+      "affiliate_url": "https://www.amazon.in/dp/B083W7V3YB?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0H6MJBCHN",
       "title": "[ICICI / AXIS CC] Acer Chromebook, Intel Celeron- N4500 Processor, 4GB LPDDR4 RAM, 64GB eMMC, 29.46cm /11.6\" inch HD Display, Chrome OS, Intel UHD Graphics,WiFi 5, Black, 1.2 KG, CO731, Thin & Light Laptop",
@@ -26,45 +65,6 @@
       "category": "Laptops & Computing",
       "affiliate_url": "https://www.amazon.in/dp/B0C4ZGF7P6?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0C4ZGF7P6.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B09NVPSCQT",
-      "title": "boAt Rockerz 255 Pro+ Bluetooth in Ear Neckband with 40H Playtime",
-      "effective_price": 999,
-      "mrp": 3990,
-      "discount_pct": 75,
-      "savings_inr": 2991,
-      "brand": "boAt",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B09NVPSCQT?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B09NVPSCQT.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0B8NTZ24P",
-      "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
-      "effective_price": 1199,
-      "mrp": 6990,
-      "discount_pct": 83,
-      "savings_inr": 5791,
-      "brand": "boAt",
-      "category": "Fashion & Footwear",
-      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24P.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B07WGNKGYK",
-      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars & Juicer",
-      "effective_price": 2899,
-      "mrp": 6295,
-      "discount_pct": 54,
-      "savings_inr": 3396,
-      "brand": "Prestige",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B07WGNKGYK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B07WGNKGYK.html",
       "coupon_text": null
     }
   ],
@@ -114,8 +114,8 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1795219065,
     "last_verified_at_ist": "2026-11-21 05:27 IST",
-    "age_hours": 10.5,
-    "trending_score": 65.8,
+    "age_hours": 10.6,
+    "trending_score": 65.5,
     "is_new": false,
     "is_fresh": true,
     "updated_at": 1795219065,
@@ -163,15 +163,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795256859,
-    "last_verified_at_epoch": 1795256859,
-    "last_verified_at_ist": "2026-11-21 15:57 IST",
+    "posted_at_epoch": 1795257162,
+    "last_verified_at_epoch": 1795257162,
+    "last_verified_at_ist": "2026-11-21 16:02 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795256859,
-    "updated_at_ist": "2026-11-21 15:57 IST"
+    "updated_at": 1795257162,
+    "updated_at_ist": "2026-11-21 16:02 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B002MPPTB8",
@@ -215,15 +215,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795256859,
-    "last_verified_at_epoch": 1795256859,
-    "last_verified_at_ist": "2026-11-21 15:57 IST",
+    "posted_at_epoch": 1795257162,
+    "last_verified_at_epoch": 1795257162,
+    "last_verified_at_ist": "2026-11-21 16:02 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795256859,
-    "updated_at_ist": "2026-11-21 15:57 IST"
+    "updated_at": 1795257162,
+    "updated_at_ist": "2026-11-21 16:02 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -234,11 +234,11 @@
       "deal_url": "https://bharatbazaro.com/deal/B0BZV8RF78.html"
     },
     "electronics": {
-      "asin": "B083W7V3YB",
-      "title": "Sennheiser HD 450SE Bluetooth 5.0 Wireless Over Ear Headphones with ANC",
-      "effective_price": 6990,
-      "discount_pct": 53,
-      "deal_url": "https://bharatbazaro.com/deal/B083W7V3YB.html"
+      "asin": "B0BRKMNZCR",
+      "title": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones (50H Battery)",
+      "effective_price": 3990,
+      "discount_pct": 20,
+      "deal_url": "https://bharatbazaro.com/deal/B0BRKMNZCR.html"
     },
     "home": {
       "asin": "B002MPPTB8",
@@ -263,9 +263,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 116,
-    "loot_count": 11,
+    "total_deals": 121,
+    "loot_count": 17,
     "max_discount_pct": 83,
-    "total_savings_inr": 274775
+    "total_savings_inr": 293296
   }
 }

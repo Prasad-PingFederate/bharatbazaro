@@ -111,6 +111,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from dealbot.dynamic_scorer import calculate_dynamic_deal_score, is_strict_all_time_low
+
 logger = logging.getLogger(__name__)
 
 PAGE_CONFIGS = [
@@ -472,6 +474,9 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
     cat_slug = str(d.get("category") or "general").lower()[:12]
     track_telegram_url = f"https://t.me/{bot_username}?start=track_{cat_slug}_{target_price}_{kw_slug}"
 
+    real_deal_score = calculate_dynamic_deal_score(d)
+    strict_atl = is_strict_all_time_low(d)
+
     badges = []
     reels_num = card_index + 1
     badges.append(f'<span class="deal-reels-num" data-reels-num="{reels_num}" title="Reel / Post #{reels_num}">#{reels_num}</span>')
@@ -482,12 +487,12 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
         badges.append('<span class="badge-tag badge-drop">⚡ TODAY\'S PRICE DROP</span>')
     if d.get("is_cookie_magnet"):
         badges.append('<span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span>')
-    if disc_pct >= 35 or d.get("price_context") == "all_time_low" or d.get("lowest_badge") == "ALL-TIME LOW":
+    if strict_atl and (disc_pct >= 35 or d.get("is_loot") or d.get("lowest_badge") == "ALL-TIME LOW"):
         badges.append('<span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span>')
+    elif strict_atl:
+        badges.append('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>')
     elif is_loot:
         badges.append('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>')
-    if d.get("price_context") == "all_time_low":
-        badges.append('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>')
     elif d.get("is_further_drop"):
         badges.append('<span class="badge-tag badge-further">🔥 FURTHER DROP</span>')
     if d.get("brand_tier") == "tier1":
@@ -578,17 +583,21 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
           </div>''')
     callouts_html = f'<div class="callouts-list">{"".join(callouts)}</div>' if callouts else ""
 
-    if buy_conf >= 90:
+    if real_deal_score >= 85:
         conf_class = "high"
-        conf_text = "Screaming Deal, Buy Now!"
+        conf_text = "Exceptional Steal"
         conf_icon = "🟢"
-    elif buy_conf >= 80:
+    elif real_deal_score >= 70:
         conf_class = "medium"
         conf_text = "Strong Price Drop"
         conf_icon = "🟢"
-    else:
+    elif real_deal_score >= 55:
         conf_class = "normal"
         conf_text = "Good Value"
+        conf_icon = "🟡"
+    else:
+        conf_class = "normal"
+        conf_text = "Verified Deal"
         conf_icon = "🟡"
 
     hist_avg = d.get("historical_avg")
@@ -703,10 +712,10 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
                 <span>{conf_icon}</span>
                 <span>{conf_text}</span>
               </span>
-              <span class="confidence-pct">{buy_conf}% Confidence</span>
+              <span class="confidence-pct">Score: {real_deal_score}/100</span>
             </div>
             <div class="confidence-bar-bg">
-              <div class="confidence-bar-fill {conf_class}" style="width: {buy_conf}%"></div>
+              <div class="confidence-bar-fill {conf_class}" style="width: {real_deal_score}%"></div>
             </div>
             {trajectory_html}
           </div>
@@ -1176,8 +1185,8 @@ def render_top3_spotlight_strip(deals: List[Dict[str, Any]]) -> str:
         pick3 = sorted(rem2, key=lambda d: (d.get("effective_discount_pct") or 0), reverse=True)[0] if rem2 else deals[0]
 
     picks = [
-        ("🏆 #1 OVERALL SCREAMER", pick1),
-        ("🪙 #1 BUDGET COOKIE-DROPPER", pick2),
+        ("🏆 #1 TOP VALUE DEAL", pick1),
+        ("🪙 #1 Steal Under ₹199", pick2),
         ("🎟️ #1 HIDDEN COUPON PICK", pick3),
     ]
 
@@ -1490,16 +1499,20 @@ def render_product_page_html(
       <p style="color: #cbd5e1; margin-top: 4px; font-size: 0.95rem;">This deal has ended or sold out. See top active alternatives below ranked by Expected Profit!</p>
     </div>'''
 
+    # Strict All-Time Low Gatekeeping
+    real_deal_score = calculate_dynamic_deal_score(deal)
+    strict_atl = is_strict_all_time_low(deal)
+
     # Badges
     badges = []
     if is_expired:
         badges.append('<span class="badge-tag badge-expired" style="background: #ef4444; color: #fff;">⚠️ EXPIRED</span>')
-    if disc_pct >= 35 or deal.get("price_context") == "all_time_low" or deal.get("lowest_badge") == "ALL-TIME LOW":
+    if strict_atl and (disc_pct >= 35 or deal.get("is_loot") or deal.get("lowest_badge") == "ALL-TIME LOW"):
         badges.append('<span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 LOOT / ALL-TIME LOW</span>')
+    elif strict_atl:
+        badges.append('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>')
     elif deal.get("is_loot"):
         badges.append('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>')
-    if deal.get("price_context") == "all_time_low":
-        badges.append('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>')
     elif deal.get("is_further_drop"):
         badges.append('<span class="badge-tag badge-further">🔥 FURTHER DROP</span>')
     if deal.get("brand_tier") == "tier1":
@@ -1645,10 +1658,12 @@ def render_product_page_html(
         </a>'''
         mobile_sticky_bar_html = ""
     else:
-        primary_cta_html = f'''<a href="{affiliate_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+        go_url = f"/go/{asin}?channel=deal_page"
+        go_sticky_url = f"/go/{asin}?channel=deal_page_sticky"
+        primary_cta_html = f'''<a href="{go_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}, subtag:'bb-deal-page'}}));}}" class="btn btn-primary btn-lg" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 800; padding: 18px 24px; text-decoration: none; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
             <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
           </a>'''
-        claim_btn_html = f'''<a href="{affiliate_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
+        claim_btn_html = f'''<a href="{go_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}, subtag:'bb-deal-page'}}));}}" class="btn btn-primary btn-lg" style="display: inline-block; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; text-decoration: none; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
           <span>🛒 Grab Deal on Amazon.in @ ₹{eff_price:,} ↗</span>
         </a>'''
         mobile_sticky_bar_html = f'''
@@ -1665,7 +1680,7 @@ def render_product_page_html(
       <a href="{track_telegram_url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-color: #38bdf8; color: #38bdf8; text-decoration: none; border-radius: 8px; white-space: nowrap;">
         <span>🔔 Track</span>
       </a>
-      <a href="{affiliate_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}}}));}}" class="btn btn-primary btn-sm" style="padding: 10px 18px; font-size: 0.95rem; font-weight: 800; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; text-decoration: none; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4); white-space: nowrap;">
+      <a href="{go_sticky_url}" target="_blank" rel="sponsored noopener" onclick="if(navigator.sendBeacon){{navigator.sendBeacon('/api/track-click', JSON.stringify({{asin:'{asin}', price:{eff_price}, subtag:'bb-sticky'}}));}}" class="btn btn-primary btn-sm" style="padding: 10px 18px; font-size: 0.95rem; font-weight: 800; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; text-decoration: none; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4); white-space: nowrap;">
         <span>🛒 Grab Deal on Amazon ↗</span>
       </a>
     </div>

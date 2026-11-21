@@ -7,7 +7,7 @@
   <title>BharatBazaro</title>
   <script>
     (function () {
-      var m = location.pathname.match(/\/a\/([A-Za-z0-9]{10})\/?$/);
+      var m = location.pathname.match(/\/(?:a|go)\/([A-Za-z0-9]{10})\/?$/);
       if (!m) return;
       var asin = m[1].toUpperCase();
       var params = new URLSearchParams(location.search);
@@ -36,7 +36,7 @@
 <body style="font-family: system-ui, sans-serif; background:#0e0d0b; color:#f4efe6; padding:32px;">
   <p id="msg">Page not found. <a href="/" style="color:#ef6a1a">Back to BharatBazaro</a></p>
   <script>
-    if (/\/a\/[A-Za-z0-9]{10}/.test(location.pathname)) {
+    if (/\/(?:a|go)\/[A-Za-z0-9]{10}/.test(location.pathname)) {
       document.getElementById("msg").textContent = "Opening Amazon…";
     }
   </script>

@@ -491,10 +491,33 @@
     });
   }
 
+  function deduplicateDeals(dealList) {
+    const seenAsins = new Set();
+    const seenTitles = new Set();
+    return (dealList || []).filter(d => {
+      if (!d || !d.asin) return false;
+      const asin = String(d.asin).trim().toUpperCase();
+      if (seenAsins.has(asin)) return false;
+      seenAsins.add(asin);
+
+      const normTitle = String(d.title || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 45);
+      if (normTitle && seenTitles.has(normTitle)) return false;
+      if (normTitle) seenTitles.add(normTitle);
+
+      return true;
+    });
+  }
+
   function updateTabCounts() {
     if (!state.allDeals) return;
-    const freshDeals = state.allDeals.filter(d => (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
-    const all = state.stats.fresh_deals_count !== undefined ? state.stats.fresh_deals_count : freshDeals.length;
+    const dedupedAll = deduplicateDeals(state.allDeals);
+    const freshDeals = dedupedAll.filter(d => (d.is_fresh !== false && (d.age_hours === undefined || d.age_hours <= 24.0)));
+    const all = freshDeals.length;
     const priceDrops = freshDeals.filter(d => d.is_price_drop || (d.savings_inr && d.savings_inr >= 1000)).length;
     const daily = freshDeals.filter(d => d.is_daily_essential || d.is_cookie_magnet || (d.category && (d.category.includes('Personal Care') || d.category.includes('Grocery') || d.category.includes('Beauty'))) || /dove|nivea|pears|cetaphil|minimalist|derma co|plum|l'oreal|tresemme|vaseline|lakme|beardo|colgate|dettol|savlon|listerine|whisper|surf excel|ariel|vim|comfort|harpic|lizol|presto|cadbury|ferrero|happilo|sampann|nescafe|davidoff/i.test(d.title || '')).length;
     const under399 = freshDeals.filter(d => (d.effective_price || d.list_price || 999999) <= 399).length;
@@ -505,6 +528,8 @@
     const watchlist = state.watchlist.size;
 
     if (el.countAll) el.countAll.textContent = all;
+    const statLive = document.getElementById('statLiveDeals');
+    if (statLive) statLive.textContent = all;
     if (el.countDiwali) el.countDiwali.textContent = priceDrops;
     if (el.countDrops) el.countDrops.textContent = drops || priceDrops;
     if (el.countDaily) el.countDaily.textContent = daily;
@@ -689,7 +714,7 @@
   }
 
   function getFilteredDeals() {
-    let result = [...state.allDeals];
+    let result = deduplicateDeals(state.allDeals);
 
     // 0. Filter non-positive deals and prioritize 5%-9% categories on homepage
     result = result.filter(d => (d.effective_price || d.list_price || 0) > 0);
@@ -942,8 +967,8 @@
     }
 
     const picks = [
-      { ribbon: '🏆 #1 OVERALL SCREAMER', deal: pick1 },
-      { ribbon: '🪙 #1 BUDGET COOKIE-DROPPER', deal: pick2 },
+      { ribbon: '🏆 #1 TOP VALUE DEAL', deal: pick1 },
+      { ribbon: '🪙 #1 Steal Under ₹199', deal: pick2 },
       { ribbon: '🎟️ #1 HIDDEN COUPON PICK', deal: pick3 },
     ];
 
@@ -1133,12 +1158,71 @@
     updateWatchlistBanner();
   }
 
+  function isStrictAllTimeLow(d) {
+    const effPrice = Number(d.effective_price || d.list_price || d.price) || 0;
+    const histLow = Number(d.historical_min || effPrice);
+    if (effPrice <= 0 || histLow <= 0) return false;
+    return effPrice <= (histLow * 1.03);
+  }
+
+  function computeDynamicDealScore(d) {
+    const effPrice = Number(d.effective_price || d.list_price || d.price) || 0;
+    const mrp = Number(d.mrp) || effPrice || 1;
+    const discPct = Math.min(100, Math.max(0, Number(d.effective_discount_pct || d.discount_pct || ((mrp - effPrice) / mrp) * 100)));
+    const histLow = Number(d.historical_min || effPrice);
+    const histAvg = Number(d.historical_avg || 0);
+    const rating = Number(d.rating) || 4.0;
+    const reviews = Number(d.reviews || d.review_count) || 0;
+    const brandTier = String(d.brand_tier || '').toLowerCase();
+    const category = String(d.category || '').toLowerCase();
+    const title = String(d.title || '').toLowerCase();
+
+    // 1. Discount Percentage (0 - 40 pts, heavy weight on >=40%)
+    let scoreDisc = 0;
+    if (discPct >= 60) scoreDisc = 40;
+    else if (discPct >= 45) scoreDisc = 34;
+    else if (discPct >= 40) scoreDisc = 28;
+    else if (discPct >= 25) scoreDisc = 16;
+    else scoreDisc = Math.max(0, (discPct / 25) * 10);
+
+    // 2. Historical Low Proximity (0 - 25 pts)
+    let scoreHist = 0;
+    if (effPrice > 0 && effPrice <= histLow * 1.03) scoreHist = 25;
+    else if (effPrice > 0 && effPrice <= histLow * 1.10) scoreHist = 16;
+    else if (histAvg > 0 && effPrice < histAvg * 0.90) scoreHist = 10;
+
+    // 3. Rating & Reviews (0 - 15 pts)
+    let scoreRating = 0;
+    if (rating >= 4.2 && reviews >= 500) scoreRating = 15;
+    else if (rating >= 4.0 && reviews >= 100) scoreRating = 10;
+    else if (rating >= 3.8) scoreRating = 6;
+    else if (rating > 0 && rating < 3.6) scoreRating = -10;
+
+    // 4. Brand Tier & Reliability (0 - 10 pts)
+    let scoreBrand = 4;
+    if (brandTier === 'tier1' || brandTier === 'top') scoreBrand = 10;
+    else if (brandTier === 'tier2' || brandTier === 'standard') scoreBrand = 7;
+
+    // 5. WhatsApp Conversion Boost (Sweet spot impulse buys: Home, Kitchen, Beauty, Personal Care, Under Rs 499/999) (0 - 10 pts)
+    let scoreWa = 0;
+    if (effPrice > 0 && effPrice <= 499) scoreWa += 6;
+    else if (effPrice > 0 && effPrice <= 999) scoreWa += 4;
+    const isHighComm = /kitchen|home|cookware|appliance|beauty|grooming|personal|skincare|hair|fashion|footwear|essential|grocery|snack|stationery|cable|charger|tool/.test(category + ' ' + title);
+    if (isHighComm) scoreWa += 4;
+    if (category.includes('smartphone') || category.includes('mobile') || title.includes('smartphone')) scoreWa -= 35;
+    else if (effPrice > 35000 && category.includes('laptop')) scoreWa -= 25;
+
+    const couponBonus = (d.coupon_text || d.promo_code || d.coupon_discount) ? 4 : 0;
+    return Math.max(5, Math.min(99, Math.round(scoreDisc + scoreHist + scoreRating + scoreBrand + scoreWa + couponBonus)));
+  }
+
   function createDealCardHtml(d, cardIndex = 0, isOlder = false) {
     const isSaved = state.watchlist.has(d.asin);
     const effPrice = d.effective_price || d.list_price || 0;
     if (effPrice <= 0) return '';
     const discPct = d.effective_discount_pct || d.discount_pct || 0;
-    const buyConf = d.buy_confidence || 75;
+    const realDealScore = computeDynamicDealScore(d);
+    const strictATL = isStrictAllTimeLow(d);
 
     // Affiliate link tracking with ascsubtag placement
     const affBtnUrl = getAffiliateUrlWithSubtag(d, 'bb-grid');
@@ -1168,13 +1252,14 @@
     if (d.is_cookie_magnet) {
       badgesHtml.push('<span class="badge-tag badge-magnet">⚡ VIRAL DAILY STEAL</span>');
     }
-    if (d.is_loot) {
-      badgesHtml.push('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>');
-    }
-    if (d.price_context === 'all_time_low') {
+    if (strictATL && discPct >= 40) {
+      badgesHtml.push('<span class="badge-tag badge-loot" style="background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800;">🔥 ALL-TIME LOW LOOT</span>');
+    } else if (strictATL) {
       badgesHtml.push('<span class="badge-tag badge-drop">📉 ALL-TIME LOW</span>');
-    } else if (d.is_further_drop) {
-      badgesHtml.push('<span class="badge-tag badge-further">🔥 FURTHER DROP</span>');
+    } else if (d.is_loot) {
+      badgesHtml.push('<span class="badge-tag badge-loot">🚨 LOOT ALERT</span>');
+    } else if (d.is_further_drop || (d.historical_avg && effPrice <= d.historical_avg * 0.90)) {
+      badgesHtml.push('<span class="badge-tag badge-further">🔥 PRICE DROP</span>');
     }
     if (d.brand_tier === 'tier1') {
       badgesHtml.push('<span class="badge-tag badge-tier1">🏆 TIER-1 BRAND</span>');
@@ -1244,15 +1329,22 @@
       `;
     }
 
-    // Buy Confidence Bar
+    // Dynamic Deal Score Bar
     let confClass = 'normal';
-    let confText = 'Good Value';
-    if (buyConf >= 90) {
+    let confText = 'Verified Deal';
+    let confIcon = '🟡';
+    if (realDealScore >= 85) {
       confClass = 'high';
-      confText = 'Screaming Deal, Buy Now!';
-    } else if (buyConf >= 80) {
+      confText = 'Exceptional Steal';
+      confIcon = '🟢';
+    } else if (realDealScore >= 70) {
       confClass = 'medium';
       confText = 'Strong Price Drop';
+      confIcon = '🟢';
+    } else if (realDealScore >= 55) {
+      confClass = 'normal';
+      confText = 'Good Value';
+      confIcon = '🟡';
     }
 
     // Historical comparison line
@@ -1376,17 +1468,17 @@
           ${extraOffersHtml}
           ${calloutsHtml.length ? `<div class="callouts-list">${calloutsHtml.join('')}</div>` : ''}
 
-          <!-- Buy Confidence Meter -->
+          <!-- Buy Confidence Meter / Dynamic Deal Score -->
           <div class="confidence-meter-box">
             <div class="confidence-header">
               <span class="confidence-label">
-                <span>${buyConf >= 80 ? '🟢' : '🟡'}</span>
+                <span>${confIcon}</span>
                 <span>${confText}</span>
               </span>
-              <span class="confidence-pct">${buyConf}% Confidence</span>
+              <span class="confidence-pct">Score: ${realDealScore}/100</span>
             </div>
             <div class="confidence-bar-bg">
-              <div class="confidence-bar-fill ${confClass}" style="width: ${buyConf}%"></div>
+              <div class="confidence-bar-fill ${confClass}" style="width: ${realDealScore}%"></div>
             </div>
             ${trajectoryHtml}
           </div>

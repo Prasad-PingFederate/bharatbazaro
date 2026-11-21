@@ -3,6 +3,32 @@
   "generated_at_epoch": 1795235768,
   "top_loot_summary": [
     {
+      "asin": "B0B8NTZ24P",
+      "title": "boAt Wave Call 2 Smart Watch with 1.83 inch HD Display & Bluetooth Calling",
+      "effective_price": 1199,
+      "mrp": 6990,
+      "discount_pct": 83,
+      "savings_inr": 5791,
+      "brand": "boAt",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B0B8NTZ24P?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B0B8NTZ24P.html",
+      "coupon_text": null
+    },
+    {
+      "asin": "B07WGNKGYK",
+      "title": "Prestige Iris 750 Watt Mixer Grinder with 3 Stainless Steel Jars & Juicer",
+      "effective_price": 2899,
+      "mrp": 6295,
+      "discount_pct": 54,
+      "savings_inr": 3396,
+      "brand": "Prestige",
+      "category": "Home & Kitchen",
+      "affiliate_url": "https://www.amazon.in/dp/B07WGNKGYK?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B07WGNKGYK.html",
+      "coupon_text": null
+    },
+    {
       "asin": "B0GKDFR8YS",
       "title": "Havells 2000W Hexo EZ HEAT Infrared Induction Cooctop with Digital Display| TC-20 with Grill| 6kV Surge Protection| Cool Touch Body| Fast Heating | 1 Year Door Step Warranty By Havells",
       "effective_price": 3542,
@@ -39,32 +65,6 @@
       "category": "Mobiles & Accessories",
       "affiliate_url": "https://www.amazon.in/dp/B0C4ZHYX58?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B0C4ZHYX58.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B0BSGTLXJ1",
-      "title": "Boult Audio Z40 True Wireless in Ear Earbuds (60H Playtime, ENC)",
-      "effective_price": 999,
-      "mrp": 4999,
-      "discount_pct": 80,
-      "savings_inr": 4000,
-      "brand": "Boult",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B0BSGTLXJ1?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0BSGTLXJ1.html",
-      "coupon_text": null
-    },
-    {
-      "asin": "B08HMWZB8B",
-      "title": "Zebronics Zeb-Sound Feast 500 70W Bluetooth Party Speaker with RGB",
-      "effective_price": 3999,
-      "mrp": 9999,
-      "discount_pct": 60,
-      "savings_inr": 6000,
-      "brand": "Zebronics",
-      "category": "Audio & Headphones",
-      "affiliate_url": "https://www.amazon.in/dp/B08HMWZB8B?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B08HMWZB8B.html",
       "coupon_text": null
     }
   ],
@@ -263,9 +263,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 124,
-    "loot_count": 14,
+    "total_deals": 127,
+    "loot_count": 16,
     "max_discount_pct": 88,
-    "total_savings_inr": 297379
+    "total_savings_inr": 304140
   }
 }

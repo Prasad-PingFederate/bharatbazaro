@@ -1,7 +1,20 @@
 {
-  "generated_at_ist": "2026-11-22 02:36 IST",
-  "generated_at_epoch": 1795295218,
+  "generated_at_ist": "2026-11-22 06:44 IST",
+  "generated_at_epoch": 1795310097,
   "top_loot_summary": [
+    {
+      "asin": "B008A2796G",
+      "title": "Fossil Grant Chronograph Dark Brown Leather Strap Mens Watch",
+      "effective_price": 6995,
+      "mrp": 13995,
+      "discount_pct": 50,
+      "savings_inr": 7000,
+      "brand": "Fossil",
+      "category": "Fashion & Footwear",
+      "affiliate_url": "https://www.amazon.in/dp/B008A2796G?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
+      "deal_url": "https://bharatbazaro.com/deal/B008A2796G.html",
+      "coupon_text": null
+    },
     {
       "asin": "B0BNVFXCQ9",
       "title": "Sony WF-C500 Truly Wireless Bluetooth Earbuds with 20H Battery & Fast Charge",
@@ -53,19 +66,6 @@
       "affiliate_url": "https://www.amazon.in/dp/B07X9X4M8L?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
       "deal_url": "https://bharatbazaro.com/deal/B07X9X4M8L.html",
       "coupon_text": null
-    },
-    {
-      "asin": "B0H5CT3NR9",
-      "title": "Milton Electric Kettle Multipurpose 1.2L | 600W Multi Cooker Kessel | 4-in-1 with Idli Stand (2 Plates), Steamer With Stainless Steel Stand, Egg Boiler | 1 Year Warranty Rs.1424 @ Amazon",
-      "effective_price": 1499,
-      "mrp": 3455,
-      "discount_pct": 57,
-      "savings_inr": 1956,
-      "brand": "Milton",
-      "category": "Home & Kitchen",
-      "affiliate_url": "https://www.amazon.in/dp/B0H5CT3NR9?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-grid",
-      "deal_url": "https://bharatbazaro.com/deal/B0H5CT3NR9.html",
-      "coupon_text": null
     }
   ],
   "best_coupon_deal": {
@@ -114,10 +114,10 @@
     "posted_at_epoch": 1793277265,
     "last_verified_at_epoch": 1795219065,
     "last_verified_at_ist": "2026-11-21 05:27 IST",
-    "age_hours": 21.1,
-    "trending_score": 39.2,
+    "age_hours": 25.3,
+    "trending_score": 28.8,
     "is_new": false,
-    "is_fresh": true,
+    "is_fresh": false,
     "updated_at": 1795219065,
     "updated_at_ist": "2026-11-21 05:27 IST"
   },
@@ -163,15 +163,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795295204,
-    "last_verified_at_epoch": 1795295204,
-    "last_verified_at_ist": "2026-11-22 02:36 IST",
+    "posted_at_epoch": 1795310081,
+    "last_verified_at_epoch": 1795310081,
+    "last_verified_at_ist": "2026-11-22 06:44 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795295204,
-    "updated_at_ist": "2026-11-22 02:36 IST"
+    "updated_at": 1795310081,
+    "updated_at_ist": "2026-11-22 06:44 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B002MPPTB8",
@@ -215,15 +215,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": false,
-    "posted_at_epoch": 1795295204,
-    "last_verified_at_epoch": 1795295204,
-    "last_verified_at_ist": "2026-11-22 02:36 IST",
+    "posted_at_epoch": 1795310081,
+    "last_verified_at_epoch": 1795310081,
+    "last_verified_at_ist": "2026-11-22 06:44 IST",
     "age_hours": 0.0,
     "trending_score": 75.0,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": 1795295204,
-    "updated_at_ist": "2026-11-22 02:36 IST"
+    "updated_at": 1795310081,
+    "updated_at_ist": "2026-11-22 06:44 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -263,9 +263,9 @@
     }
   },
   "market_stats": {
-    "total_deals": 140,
-    "loot_count": 17,
+    "total_deals": 133,
+    "loot_count": 15,
     "max_discount_pct": 89,
-    "total_savings_inr": 399809
+    "total_savings_inr": 356109
   }
 }

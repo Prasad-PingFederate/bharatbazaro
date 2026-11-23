@@ -1,13 +1,13 @@
 {
-  "timestamp_ist": "2026-11-22 16:23:00 IST",
-  "timestamp_epoch": 1795344780,
+  "timestamp_ist": "2026-11-23 17:28:42 IST",
+  "timestamp_epoch": 1795435122,
   "overall_status": "DEGRADED",
   "checks": [
     {
       "name": "Gemini API",
       "status": "failed",
       "model": "gemini-2.5-flash",
-      "latency_ms": 115,
+      "latency_ms": 107,
       "detail": "HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. "
     },
     {
@@ -33,40 +33,40 @@
     },
     {
       "name": "Deal Discovery Feeds",
-      "status": "warning",
-      "candidate_count": 0,
-      "latency_ms": 406,
-      "detail": "Feeds reachable but 0 candidates qualified discount filter"
+      "status": "ok",
+      "candidate_count": 34,
+      "latency_ms": 1200,
+      "detail": "Discovered 34 candidates across live feeds"
     },
     {
       "name": "Amazon.in Scraper",
       "status": "warning",
       "stock_status": "unknown",
       "live_price": "N/A",
-      "latency_ms": 229,
+      "latency_ms": 129,
       "detail": "Status: unknown, Price: \u20b9N/A"
     },
     {
       "name": "SQLite Integrity",
       "status": "ok",
-      "active_deals": 296,
+      "active_deals": 295,
       "integrity": "ok",
-      "latency_ms": 6,
-      "detail": "PRAGMA: ok, Active Deals: 296"
+      "latency_ms": 10,
+      "detail": "PRAGMA: ok, Active Deals: 295"
     },
     {
       "name": "BharatBazaro Live",
       "status": "ok",
-      "live_deals": 138,
-      "feed_age_min": 125,
-      "latency_ms": 81,
-      "detail": "138 live deals online (synced 125m ago)"
+      "live_deals": 141,
+      "feed_age_min": 533,
+      "latency_ms": 51,
+      "detail": "141 live deals online (synced 533m ago)"
     },
     {
       "name": "Telegram Bot API",
       "status": "ok",
       "bot_username": "DealDash_ai_Bot",
-      "latency_ms": 311,
+      "latency_ms": 250,
       "detail": "@DealDash_ai_Bot -> Flash Deals 24/7"
     }
   ]

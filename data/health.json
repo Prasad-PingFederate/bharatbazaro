@@ -1,13 +1,13 @@
 {
-  "timestamp_ist": "2026-11-23 17:28:42 IST",
-  "timestamp_epoch": 1795435122,
+  "timestamp_ist": "2026-11-24 18:55:00 IST",
+  "timestamp_epoch": 1795526700,
   "overall_status": "DEGRADED",
   "checks": [
     {
       "name": "Gemini API",
       "status": "failed",
       "model": "gemini-2.5-flash",
-      "latency_ms": 107,
+      "latency_ms": 213,
       "detail": "HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. "
     },
     {
@@ -35,7 +35,7 @@
       "name": "Deal Discovery Feeds",
       "status": "ok",
       "candidate_count": 34,
-      "latency_ms": 1200,
+      "latency_ms": 1097,
       "detail": "Discovered 34 candidates across live feeds"
     },
     {
@@ -43,30 +43,30 @@
       "status": "warning",
       "stock_status": "unknown",
       "live_price": "N/A",
-      "latency_ms": 129,
+      "latency_ms": 583,
       "detail": "Status: unknown, Price: \u20b9N/A"
     },
     {
       "name": "SQLite Integrity",
       "status": "ok",
-      "active_deals": 295,
+      "active_deals": 297,
       "integrity": "ok",
-      "latency_ms": 10,
-      "detail": "PRAGMA: ok, Active Deals: 295"
+      "latency_ms": 3,
+      "detail": "PRAGMA: ok, Active Deals: 297"
     },
     {
       "name": "BharatBazaro Live",
       "status": "ok",
-      "live_deals": 141,
-      "feed_age_min": 533,
-      "latency_ms": 51,
-      "detail": "141 live deals online (synced 533m ago)"
+      "live_deals": 250,
+      "feed_age_min": 181,
+      "latency_ms": 333,
+      "detail": "250 live deals online (synced 181m ago)"
     },
     {
       "name": "Telegram Bot API",
       "status": "ok",
       "bot_username": "DealDash_ai_Bot",
-      "latency_ms": 250,
+      "latency_ms": 397,
       "detail": "@DealDash_ai_Bot -> Flash Deals 24/7"
     }
   ]

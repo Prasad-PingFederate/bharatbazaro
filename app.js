@@ -837,6 +837,11 @@
           const bFresh = (b.is_fresh !== false && (b.age_hours === undefined || b.age_hours <= 24.0)) ? 1 : 0;
           if (bFresh !== aFresh) return bFresh - aFresh;
 
+          // 0. Prioritize highest EPC score from DealDash canonical feed
+          const aEpc = Number(a.epc_score || 0);
+          const bEpc = Number(b.epc_score || 0);
+          if (bEpc !== aEpc) return bEpc - aEpc;
+
           // 1. Evaluate BBDecision.heuristic (sales-first decision engine)
           const decA = (window.BBDecision && typeof window.BBDecision.heuristic === 'function')
             ? window.BBDecision.heuristic(a)

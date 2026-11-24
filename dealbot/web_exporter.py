@@ -1,4 +1,5 @@
 import html
+import urllib.parse
 from dealbot.ssg_engine import (
     ensure_og_banner,
     pre_render_all_pages,
@@ -297,6 +298,208 @@ def sync_live_deals_json_from_dealdash(output_dir: Path, timeout: float = 6.0) -
     except Exception as e:
         logger.debug(f"Could not sync live_deals.json from DealDash: {e}")
     return 0
+
+
+def append_ascsubtag(base_url: Optional[str], asin: str, subtag: str = "bb-grid") -> str:
+    """Cleanly append or replace ascsubtag on base affiliate URL."""
+    tag = (os.getenv("AMAZON_AFFILIATE_TAG") or os.getenv("AMAZON_PARTNER_TAG") or "dammaiprasad-21").strip()
+    if base_url and ("amazon." in base_url or "amzn." in base_url):
+        try:
+            parsed = urllib.parse.urlsplit(str(base_url))
+            query_dict = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
+            flat_qs = {k: v[0] if isinstance(v, list) and len(v) == 1 else v for k, v in query_dict.items()}
+            flat_qs["ascsubtag"] = subtag
+            if "tag" not in flat_qs or not flat_qs["tag"]:
+                flat_qs["tag"] = tag
+            new_query = urllib.parse.urlencode(flat_qs, doseq=True)
+            return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, new_query, parsed.fragment))
+        except Exception:
+            clean = re.sub(r"([?&])ascsubtag=[^&]*", r"\1", str(base_url)).rstrip("?&")
+            sep = "&" if "?" in clean else "?"
+            return f"{clean}{sep}ascsubtag={subtag}"
+    return f"https://www.amazon.in/dp/{asin}?tag={tag}&linkCode=ll1&ascsubtag={subtag}"
+
+
+def fetch_remote_dealdash_feed(
+    feed_url: Optional[str] = None,
+    timeout: float = 10.0
+) -> Optional[List[Dict[str, Any]]]:
+    """Fetch deals_feed.json directly from DealDash_ai_Bot on GitHub.
+
+    Controlled by USE_REMOTE_FEED=true and DEALDASH_FEED_URL.
+    Returns None on failure to trigger automatic fallback to local ingestion.
+    """
+    if os.getenv("USE_REMOTE_FEED", "false").lower() != "true":
+        return None
+
+    url = (
+        feed_url
+        or os.getenv("DEALDASH_FEED_URL")
+        or "https://raw.githubusercontent.com/Prasad-PingFederate/DealDash_ai_Bot/main/data/deals_feed.json"
+    ).strip()
+
+    logger.info("USE_REMOTE_FEED is active. Fetching canonical deals feed from %s", url)
+
+    # 1. Local file path / mock handling for tests and offline builds
+    try:
+        clean_path = url.replace("file://", "")
+        if os.path.exists(clean_path):
+            with open(clean_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list) and data:
+                    logger.info("Successfully loaded %d remote deals from local feed file: %s", len(data), clean_path)
+                    return data
+    except Exception as e:
+        logger.debug("Local path check for remote feed bypassed: %s", e)
+
+    # 2. Remote HTTP fetch from DealDash_ai_Bot
+    try:
+        import urllib.request
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "BharatBazaro-RemoteFeedIngest/1.0",
+                "Accept": "application/json",
+            }
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            if resp.status == 200:
+                raw_text = resp.read().decode("utf-8")
+                data = json.loads(raw_text)
+                if isinstance(data, list) and data:
+                    logger.info("Successfully fetched %d deals from %s", len(data), url)
+                    return data
+                logger.warning("Remote feed at %s was empty or invalid JSON array.", url)
+            else:
+                logger.warning("Remote feed HTTP status %s from %s", resp.status, url)
+    except Exception as e:
+        logger.warning("Failed to fetch remote feed from %s (%s). Falling back to existing ingestion logic.", url, e)
+
+    return None
+
+
+def process_remote_deals_feed(
+    remote_deals: List[Dict[str, Any]],
+    max_items: int = 250
+) -> List[Dict[str, Any]]:
+    """Transform canonical deals_feed.json into BharatBazaro live_deals format, prioritizing highest-EPC deals."""
+    processed_deals: List[Dict[str, Any]] = []
+    seen_asins = set()
+    now_ist = datetime.now(timezone(timedelta(hours=5, minutes=30)))
+    now_utc_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    now_ist_str = now_ist.strftime("%Y-%m-%d %H:%M IST")
+
+    for item in remote_deals:
+        asin = extract_asin(item.get("asin") or item.get("id")) or str(item.get("asin") or "").strip().upper()
+        if not asin or asin in seen_asins:
+            continue
+        seen_asins.add(asin)
+
+        title = str(item.get("title") or f"Amazon Deal {asin}").strip()
+        category = map_ui_category(str(item.get("category") or "General"), title)
+        brand = detect_brand(title) or "Amazon"
+        b_tier_int = get_brand_tier(title)
+        tier_map = {1: "tier1", 2: "tier2", 0: "unbranded"}
+        brand_tier = tier_map.get(b_tier_int, "unbranded")
+
+        mrp = int(round(float(item.get("mrp") or 0)))
+        live_price = int(round(float(item.get("live_price") or item.get("effective_price") or 0)))
+        eff_price = int(round(float(item.get("effective_price") or live_price or 0)))
+        if eff_price <= 0:
+            continue
+        if mrp < eff_price:
+            mrp = eff_price
+
+        coupon_disc = int(round(float(item.get("coupon_discount") or 0))) if item.get("coupon_discount") else None
+
+        disc_pct = int(round(float(item.get("discount_pct") or 0)))
+        if disc_pct <= 0 and mrp > live_price > 0:
+            disc_pct = int(round(((mrp - live_price) / mrp) * 100))
+
+        eff_disc_pct = int(round(float(item.get("effective_discount_pct") or 0)))
+        if eff_disc_pct <= 0 and mrp > eff_price > 0:
+            eff_disc_pct = int(round(((mrp - eff_price) / mrp) * 100))
+
+        savings = int(round(float(item.get("savings_inr") or max(0, mrp - eff_price))))
+        rating = float(item.get("rating") or 4.2)
+        reviews = int(item.get("review_count") or 1500)
+        epc = float(item.get("epc_score") or 0.0)
+
+        # Base affiliate URL with preserved subtag placements
+        base_url = str(item.get("base_affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21").strip()
+        aff_url_grid = append_ascsubtag(base_url, asin, "bb-grid")
+        aff_url_seo = append_ascsubtag(base_url, asin, "bb-seo")
+        aff_url_bazarai = append_ascsubtag(base_url, asin, "bb-bazarai")
+        aff_url_shorts = append_ascsubtag(base_url, asin, "bb-shorts")
+
+        # Map EPC directly to score and trending_score so grid and BazarAI prioritize it
+        score = epc
+        trending_score = epc
+        buy_conf = int(min(99, max(75, int(75 + epc / 15))))
+
+        is_loot = bool(item.get("is_loot") or eff_disc_pct >= 50 or epc >= 200)
+        price_ctx = "all_time_low" if (epc >= 100 or eff_disc_pct >= 40) else "real_drop"
+
+        d = {
+            "id": f"amazon:{asin}",
+            "asin": asin,
+            "title": title,
+            "brand": brand,
+            "brand_tier": brand_tier,
+            "category": category,
+            "image_url": item.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg",
+            "base_affiliate_url": base_url,
+            "affiliate_url": aff_url_grid,
+            "affiliate_url_grid": aff_url_grid,
+            "affiliate_url_seo": aff_url_seo,
+            "affiliate_url_bazarai": aff_url_bazarai,
+            "affiliate_url_shorts": aff_url_shorts,
+            "mrp": mrp,
+            "list_price": live_price,
+            "effective_price": eff_price,
+            "coupon_discount": coupon_disc,
+            "coupon_text": f"Apply ₹{coupon_disc:,} coupon" if coupon_disc else None,
+            "promo_code": None,
+            "bank_offer": "Instant Card Discount Available",
+            "discount_pct": disc_pct,
+            "effective_discount_pct": eff_disc_pct,
+            "savings_inr": savings,
+            "rating": rating,
+            "review_count": reviews,
+            "epc_score": epc,
+            "score": score,
+            "trending_score": trending_score,
+            "buy_confidence": buy_conf,
+            "price_context": price_ctx,
+            "historical_min": eff_price,
+            "historical_avg": mrp,
+            "historical_max": mrp,
+            "is_loot": is_loot,
+            "is_diwali_steal": False,
+            "is_cookie_magnet": bool(eff_price <= 499),
+            "is_daily_essential": bool(category in ("Home & Kitchen", "Personal Care & Grocery")),
+            "is_further_drop": False,
+            "source_count": 1,
+            "extra_offers": [],
+            "claim_steps": ["Click affiliate link", "Add to Amazon cart", "Complete purchase"],
+            "expired": False,
+            "price_spiked": False,
+            "posted_to_telegram": True,
+            "video_eligible": bool(item.get("video_eligible")),
+            "posted_at_epoch": int(time.time()),
+            "last_verified_at_epoch": int(time.time()),
+            "last_verified_at_ist": now_ist_str,
+            "age_hours": 0.5,
+            "is_new": True,
+            "is_fresh": True,
+            "updated_at": item.get("updated_at") or now_utc_str,
+            "updated_at_ist": now_ist_str,
+        }
+        processed_deals.append(d)
+
+    # Sort strictly by epc_score descending so homepage grid and BazarAI prioritize highest-EPC deals
+    processed_deals.sort(key=lambda x: (float(x.get("epc_score") or 0.0), float(x.get("score") or 0.0)), reverse=True)
+    return processed_deals[:max_items]
 
 
 def extract_asin(deal_or_url: Union[str, Deal]) -> Optional[str]:
@@ -909,24 +1112,105 @@ def export_ai_briefing(
 
 
 def export_web_feed(
-    store,
+    store: Optional[Any] = None,
     current_cycle_deals: Optional[List[Deal]] = None,
     output_dir: Optional[Union[str, Path]] = None,
     max_items: int = 250,
 ) -> Dict[str, Any]:
     """Export current live verified deals to live_deals.json and stats.json."""
     root_dir = Path(__file__).resolve().parent.parent
-    try:
-        sync_telegram_deals_from_dealdash(root_dir)
-        sync_live_deals_json_from_dealdash(root_dir / "data")
-    except Exception as e:
-        logger.warning(f"sync_telegram_deals_from_dealdash error: {e}")
 
     if output_dir is None:
         output_dir = root_dir / "data"
     else:
         output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    # ==============================================================================
+    # 0. Feature-Flagged Remote Feed Ingestion (USE_REMOTE_FEED=true)
+    # ==============================================================================
+    if os.getenv("USE_REMOTE_FEED", "false").lower() == "true":
+        logger.info("USE_REMOTE_FEED is active. Attempting to ingest canonical deals_feed.json...")
+        remote_data = fetch_remote_dealdash_feed()
+        if remote_data:
+            try:
+                processed_deals = process_remote_deals_feed(remote_data, max_items=max_items)
+                if processed_deals:
+                    final_deals = processed_deals
+
+                    # Write data/live_deals.json
+                    live_deals_path = output_dir / "live_deals.json"
+                    with open(live_deals_path, "w", encoding="utf-8") as f:
+                        json.dump(final_deals, f, indent=2, ensure_ascii=False)
+                    logger.info("Exported %d canonical remote deals to %s (sorted by epc_score)", len(final_deals), live_deals_path)
+
+                    # Compute statistics
+                    now_ist = datetime.now(timezone(timedelta(hours=5, minutes=30)))
+                    tg_url = resolve_telegram_url()
+                    fresh_deals = [d for d in final_deals if d.get("is_fresh", True)]
+                    older_deals = [d for d in final_deals if not d.get("is_fresh", True)]
+                    stats = {
+                        "last_updated_ist": now_ist.strftime("%Y-%m-%d %H:%M IST"),
+                        "last_updated_epoch": int(time.time()),
+                        "total_live_deals": len(fresh_deals),
+                        "total_all_deals": len(final_deals),
+                        "fresh_deals_count": len(fresh_deals),
+                        "older_deals_count": len(older_deals),
+                        "loot_count": sum(1 for d in fresh_deals if d.get("is_loot")),
+                        "coupon_deals_count": sum(1 for d in fresh_deals if (d.get("coupon_discount") or d.get("coupon_text") or d.get("promo_code") or d.get("bank_offer"))),
+                        "all_time_lows_count": sum(1 for d in fresh_deals if (d.get("price_context") in ("all_time_low", "real_drop") or d.get("is_further_drop"))),
+                        "max_discount_pct": max((d.get("effective_discount_pct") or d.get("discount_pct") or 0 for d in fresh_deals), default=0),
+                        "total_savings_available": sum(d.get("savings_inr") or 0 for d in fresh_deals),
+                        "telegram_url": tg_url,
+                    }
+
+                    stats_path = output_dir / "stats.json"
+                    with open(stats_path, "w", encoding="utf-8") as f:
+                        json.dump(stats, f, indent=2, ensure_ascii=False)
+                    logger.info("Exported stats to %s", stats_path)
+
+                    # Export hourly AI market briefing for BazarAI prioritizing highest-EPC deals
+                    try:
+                        export_ai_briefing(final_deals, stats, output_dir=output_dir)
+                    except Exception as e:
+                        logger.error(f"Error exporting AI briefing: {e}", exc_info=True)
+
+                    # SSG Pre-rendering of index.html and all standalone category landing pages
+                    try:
+                        ensure_og_banner(root_dir)
+                        pre_render_all_pages(final_deals, stats, root_dir=root_dir)
+                    except Exception as e:
+                        logger.error(f"Error pre-rendering SSG HTML pages: {e}", exc_info=True)
+
+                    return {"deals_count": len(final_deals), "stats": stats, "source": "remote_feed"}
+            except Exception as e:
+                logger.warning("Error processing remote deals feed (%s). Falling back to existing ingestion logic.", e)
+        else:
+            logger.warning("Remote feed fetch returned no data. Falling back to existing Telegram/SQLite ingestion logic.")
+
+    if store is None:
+        try:
+            from dealbot.publisher import StateStore
+            from dealbot.session import database_path
+            db_p = database_path()
+            if not db_p.exists():
+                alt_p = root_dir / "data" / "deals.db"
+                if alt_p.exists():
+                    db_p = alt_p
+                else:
+                    alt_p2 = root_dir / "data" / "state.sqlite3"
+                    if alt_p2.exists():
+                        db_p = alt_p2
+            store = StateStore(str(db_p))
+        except Exception as e:
+            logger.warning(f"Failed to initialize StateStore in export_web_feed fallback: {e}")
+            store = None
+
+    try:
+        sync_telegram_deals_from_dealdash(root_dir)
+        sync_live_deals_json_from_dealdash(root_dir / "data")
+    except Exception as e:
+        logger.warning(f"sync_telegram_deals_from_dealdash error: {e}")
 
     try:
         sync_live_deals_json_from_dealdash(output_dir)
@@ -941,15 +1225,16 @@ def export_web_feed(
 
     # Backfill and load price sightings for historical stats lookup
     sightings: Dict[str, Dict[str, Any]] = {}
-    with store._connect() as conn:
-        sync_price_sightings_cache(conn)
-        conn.row_factory = sqlite3.Row
-        try:
-            cur = conn.execute("SELECT canonical_id, min_price, max_price, avg_price FROM price_sightings")
-            for row in cur.fetchall():
-                sightings[row["canonical_id"]] = dict(row)
-        except sqlite3.OperationalError:
-            pass
+    if store is not None:
+        with store._connect() as conn:
+            sync_price_sightings_cache(conn)
+            conn.row_factory = sqlite3.Row
+            try:
+                cur = conn.execute("SELECT canonical_id, min_price, max_price, avg_price FROM price_sightings")
+                for row in cur.fetchall():
+                    sightings[row["canonical_id"]] = dict(row)
+            except sqlite3.OperationalError:
+                pass
 
     deals_by_asin: Dict[str, Dict[str, Any]] = {}
 

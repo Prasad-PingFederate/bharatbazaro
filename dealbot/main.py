@@ -421,6 +421,22 @@ def run_once() -> int:
     else:
         logger.info("AI Copywriter not configured. Using the caption template.")
 
+    # Feature-Flagged Remote Deal Feed Ingestion from DealDash_ai_Bot
+    if os.getenv("USE_REMOTE_FEED", "false").lower() == "true":
+        logger.info("USE_REMOTE_FEED is active. Ingesting canonical deals feed from DealDash_ai_Bot...")
+        try:
+            from dealbot.web_exporter import export_web_data
+            result = export_web_data(store)
+            if result and result.get("deals_count", 0) > 0 and result.get("source") == "remote_feed":
+                logger.info(
+                    "Successfully ingested and exported %d deals from remote canonical feed.",
+                    result["deals_count"],
+                )
+                return result["deals_count"]
+            logger.warning("Remote feed ingestion returned no deals. Falling back to local collect_all_deals().")
+        except Exception as e:
+            logger.warning("Remote feed ingestion failed (%s). Falling back to local collect_all_deals().", e)
+
     deals = collect_all_deals()
     logger.info(f"Fetched {len(deals)} active deals from sources.")
     for deal in deals:

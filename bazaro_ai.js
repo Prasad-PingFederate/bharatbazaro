@@ -620,6 +620,7 @@
     const title = String(d.title || '').toLowerCase();
 
     let s = (dec.confidence || 0) * 50;
+    if (d.epc_score) s += Number(d.epc_score) * 2;
 
     // Deep discounts convert highest on WhatsApp & web
     if (disc >= 60) s += 40;
@@ -688,7 +689,12 @@
   }
 
   function rankDeals(list) {
-    return (list || []).filter((d) => dealScore(d) > 0).sort((a, b) => dealScore(b) - dealScore(a));
+    return (list || []).filter((d) => dealScore(d) > 0).sort((a, b) => {
+      const aEpc = Number(a.epc_score || 0);
+      const bEpc = Number(b.epc_score || 0);
+      if (bEpc !== aEpc) return bEpc - aEpc;
+      return dealScore(b) - dealScore(a);
+    });
   }
 
   const SYNONYMS = {

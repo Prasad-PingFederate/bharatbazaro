@@ -455,7 +455,20 @@ def render_deal_card_html(d: Dict[str, Any], card_index: int = 0, subtag: Option
     brand_chip = html_lib.escape(str(d.get("brand") or d.get("category") or "Amazon"))
 
     card_subtag = subtag or "bb-grid"
-    raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}"
+    if card_subtag == "bb-grid" and d.get("affiliate_url_grid"):
+        raw_aff = d.get("affiliate_url_grid")
+    elif d.get("base_affiliate_url"):
+        base_u = d.get("base_affiliate_url")
+        clean = re.sub(r"([?&])ascsubtag=[^&]*", r"\1", str(base_u)).rstrip("?&")
+        sep = "&" if "?" in clean else "?"
+        raw_aff = f"{clean}{sep}ascsubtag={card_subtag}"
+    elif d.get("affiliate_url"):
+        base_u = d.get("affiliate_url")
+        clean = re.sub(r"([?&])ascsubtag=[^&]*", r"\1", str(base_u)).rstrip("?&")
+        sep = "&" if "?" in clean else "?"
+        raw_aff = f"{clean}{sep}ascsubtag={card_subtag}"
+    else:
+        raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={card_subtag}"
     aff_btn_url = html_lib.escape(raw_aff)
     aff_img_url = html_lib.escape(raw_aff)
     aff_title_url = html_lib.escape(raw_aff)
@@ -803,7 +816,15 @@ def build_structured_data(page_cfg: dict, page_deals: list) -> str:
             continue
         asin = d.get("asin") or ""
         subtag = page_cfg.get("subtag") or "bb-grid"
-        aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={subtag}"
+        if d.get("base_affiliate_url"):
+            base_u = d.get("base_affiliate_url")
+            clean = re.sub(r"([?&])ascsubtag=[^&]*", r"\1", str(base_u)).rstrip("?&")
+            sep = "&" if "?" in clean else "?"
+            aff_url = f"{clean}{sep}ascsubtag={subtag}"
+        elif d.get("affiliate_url_seo") and subtag == "bb-seo":
+            aff_url = d.get("affiliate_url_seo")
+        else:
+            aff_url = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag={subtag}"
         img_url = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
         title = d.get("title") or "Amazon Deal"
         brand = d.get("brand") or "Amazon"
@@ -1461,13 +1482,21 @@ def render_product_page_html(
     review_count = deal.get("review_count") or 150
     is_expired = bool(deal.get("is_expired") or deal.get("status") == "expired")
 
-    raw_aff = deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-seo"
-    if "ascsubtag=" in raw_aff:
-        raw_aff = re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-seo", raw_aff)
-    elif "tag=" in raw_aff:
-        raw_aff += ("&" if "?" in raw_aff else "?") + "ascsubtag=bb-seo"
+    if deal.get("base_affiliate_url"):
+        base_u = deal.get("base_affiliate_url")
+        clean = re.sub(r"([?&])ascsubtag=[^&]*", r"\1", str(base_u)).rstrip("?&")
+        sep = "&" if "?" in clean else "?"
+        raw_aff = f"{clean}{sep}ascsubtag=bb-seo"
+    elif deal.get("affiliate_url_seo"):
+        raw_aff = deal.get("affiliate_url_seo")
     else:
-        raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-seo"
+        raw_aff = deal.get("affiliate_url") or f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-seo"
+        if "ascsubtag=" in raw_aff:
+            raw_aff = re.sub(r"ascsubtag=[^&]+", "ascsubtag=bb-seo", raw_aff)
+        elif "tag=" in raw_aff:
+            raw_aff += ("&" if "?" in raw_aff else "?") + "ascsubtag=bb-seo"
+        else:
+            raw_aff = f"https://www.amazon.in/dp/{asin}?tag=dammaiprasad-21&linkCode=ll1&ascsubtag=bb-seo"
     affiliate_url = html_lib.escape(raw_aff)
 
     # 1-Click Web-to-Telegram Tracking URL
@@ -2069,7 +2098,18 @@ def generate_rss_feed(deals: List[Dict[str, Any]], root_dir: Path) -> Path:
         img_url = d.get("image_url") or f"https://m.media-amazon.com/images/P/{asin}.jpg"
         deal_url = f"https://bharatbazaro.com/deal/{asin}.html"
 
-        post_epoch = d.get("updated_at") or int(time.time())
+        post_epoch = d.get("posted_at_epoch") or d.get("updated_at_epoch")
+        if not post_epoch or not isinstance(post_epoch, (int, float)):
+            try:
+                raw_up = d.get("updated_at")
+                if raw_up and isinstance(raw_up, (int, float)):
+                    post_epoch = float(raw_up)
+                elif raw_up and isinstance(raw_up, str):
+                    post_epoch = datetime.fromisoformat(raw_up.replace("Z", "+00:00")).timestamp()
+                else:
+                    post_epoch = time.time()
+            except Exception:
+                post_epoch = time.time()
         item_pub_date = datetime.fromtimestamp(post_epoch, tz=timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
 
         coupon_note = f" (Includes {d['coupon_text']})" if d.get("coupon_text") else ""

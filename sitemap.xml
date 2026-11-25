@@ -786,6 +786,11 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>  <url>
+    <loc>https://bharatbazaro.com/deal/B094RYJQ1K.html</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>  <url>
     <loc>https://bharatbazaro.com/deal/B09575J9P6.html</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>daily</changefreq>
@@ -1740,17 +1745,5 @@
     <lastmod>2026-11-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/privacy-policy</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://bharatbazaro.com/terms-of-service</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
 </urlset>

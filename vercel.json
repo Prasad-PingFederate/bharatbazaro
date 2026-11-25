@@ -8,6 +8,8 @@
     { "source": "/mobiles", "destination": "/home.html", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/privacy", "destination": "/privacy-policy.html" },
+    { "source": "/terms", "destination": "/terms-of-service.html" },
     { "source": "/api/resolve-url", "destination": "/api/resolve.py" },
     { "source": "/api/resolve", "destination": "/api/resolve.py" },
     { "source": "/collections/under-99", "destination": "/collections/under-99.html" },

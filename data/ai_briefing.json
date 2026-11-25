@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-25 18:23 IST",
-  "generated_at_epoch": 1795611200,
+  "generated_at_ist": "2026-11-25 19:45 IST",
+  "generated_at_epoch": 1795616158,
   "top_loot_summary": [
     {
       "asin": "B0H8P1NCMN",
@@ -84,22 +84,22 @@
     "affiliate_url_shorts": "https://www.amazon.in/dp/B0GYX5TFJ5?tag=dammaiprasad-21&ascsubtag=bb-shorts",
     "mrp": 6790,
     "list_price": 2592,
-    "effective_price": 2110,
+    "effective_price": 1702,
     "coupon_discount": 890,
     "coupon_text": "Apply ₹890 coupon",
     "promo_code": null,
     "bank_offer": "Instant Card Discount Available",
     "discount_pct": 62,
-    "effective_discount_pct": 69,
-    "savings_inr": 4680,
+    "effective_discount_pct": 75,
+    "savings_inr": 5088,
     "rating": 4.2,
     "review_count": 1500,
-    "epc_score": 25.48,
-    "score": 25.48,
-    "trending_score": 25.48,
-    "buy_confidence": 76,
+    "epc_score": 82.21,
+    "score": 82.21,
+    "trending_score": 82.21,
+    "buy_confidence": 80,
     "price_context": "all_time_low",
-    "historical_min": 2110,
+    "historical_min": 1702,
     "historical_avg": 6790,
     "historical_max": 6790,
     "is_loot": true,
@@ -118,14 +118,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": true,
-    "posted_at_epoch": 1795611200,
-    "last_verified_at_epoch": 1795611200,
-    "last_verified_at_ist": "2026-11-25 18:23 IST",
+    "posted_at_epoch": 1795616158,
+    "last_verified_at_epoch": 1795616158,
+    "last_verified_at_ist": "2026-11-25 19:45 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": "2026-11-25T12:52:48Z",
-    "updated_at_ist": "2026-11-25 18:23 IST"
+    "updated_at": "2026-11-25T13:37:30Z",
+    "updated_at_ist": "2026-11-25 19:45 IST"
   },
   "best_under_299": {
     "id": "amazon:B081VGBCYY",
@@ -177,14 +177,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": false,
-    "posted_at_epoch": 1795611200,
-    "last_verified_at_epoch": 1795611200,
-    "last_verified_at_ist": "2026-11-25 18:23 IST",
+    "posted_at_epoch": 1795616158,
+    "last_verified_at_epoch": 1795616158,
+    "last_verified_at_ist": "2026-11-25 19:45 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": "2026-11-25T12:52:48Z",
-    "updated_at_ist": "2026-11-25 18:23 IST"
+    "updated_at": "2026-11-25T13:37:30Z",
+    "updated_at_ist": "2026-11-25 19:45 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CYQ4M4N5",
@@ -236,14 +236,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": false,
-    "posted_at_epoch": 1795611200,
-    "last_verified_at_epoch": 1795611200,
-    "last_verified_at_ist": "2026-11-25 18:23 IST",
+    "posted_at_epoch": 1795616158,
+    "last_verified_at_epoch": 1795616158,
+    "last_verified_at_ist": "2026-11-25 19:45 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": "2026-11-25T12:52:48Z",
-    "updated_at_ist": "2026-11-25 18:23 IST"
+    "updated_at": "2026-11-25T13:37:30Z",
+    "updated_at_ist": "2026-11-25 19:45 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -286,6 +286,6 @@
     "total_deals": 250,
     "loot_count": 114,
     "max_discount_pct": 89,
-    "total_savings_inr": 1011565
+    "total_savings_inr": 1011973
   }
 }

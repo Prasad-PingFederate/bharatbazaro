@@ -17,3 +17,4 @@ data/*.sqlite3*
 data/*.db*
 data/*.flag
 reports/
+api/go.js

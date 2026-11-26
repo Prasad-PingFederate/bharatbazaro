@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-26 10:55 IST",
-  "generated_at_epoch": 1795670709,
+  "generated_at_ist": "2026-11-26 20:48 IST",
+  "generated_at_epoch": 1795706287,
   "top_loot_summary": [
     {
       "asin": "B0H8P1NCMN",
@@ -117,15 +117,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "video_eligible": true,
-    "posted_at_epoch": 1795670708,
-    "last_verified_at_epoch": 1795670708,
-    "last_verified_at_ist": "2026-11-26 10:55 IST",
+    "video_eligible": false,
+    "posted_at_epoch": 1795706286,
+    "last_verified_at_epoch": 1795706286,
+    "last_verified_at_ist": "2026-11-26 20:48 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": "2026-11-25T15:47:40Z",
-    "updated_at_ist": "2026-11-26 10:55 IST"
+    "updated_at": "2026-11-26T15:17:45Z",
+    "updated_at_ist": "2026-11-26 20:48 IST"
   },
   "best_under_299": {
     "id": "amazon:B00WUDU4FG",
@@ -177,14 +177,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": false,
-    "posted_at_epoch": 1795670708,
-    "last_verified_at_epoch": 1795670708,
-    "last_verified_at_ist": "2026-11-26 10:55 IST",
+    "posted_at_epoch": 1795706286,
+    "last_verified_at_epoch": 1795706286,
+    "last_verified_at_ist": "2026-11-26 20:48 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": "2026-11-25T15:47:40Z",
-    "updated_at_ist": "2026-11-26 10:55 IST"
+    "updated_at": "2026-11-26T15:17:45Z",
+    "updated_at_ist": "2026-11-26 20:48 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CYQ4M4N5",
@@ -235,15 +235,15 @@
     "expired": false,
     "price_spiked": false,
     "posted_to_telegram": true,
-    "video_eligible": true,
-    "posted_at_epoch": 1795670708,
-    "last_verified_at_epoch": 1795670708,
-    "last_verified_at_ist": "2026-11-26 10:55 IST",
+    "video_eligible": false,
+    "posted_at_epoch": 1795706286,
+    "last_verified_at_epoch": 1795706286,
+    "last_verified_at_ist": "2026-11-26 20:48 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
-    "updated_at": "2026-11-25T15:47:40Z",
-    "updated_at_ist": "2026-11-26 10:55 IST"
+    "updated_at": "2026-11-26T15:17:45Z",
+    "updated_at_ist": "2026-11-26 20:48 IST"
   },
   "category_highlights": {
     "mobiles": {
@@ -284,8 +284,8 @@
   },
   "market_stats": {
     "total_deals": 250,
-    "loot_count": 113,
+    "loot_count": 112,
     "max_discount_pct": 89,
-    "total_savings_inr": 1011710
+    "total_savings_inr": 1010969
   }
 }

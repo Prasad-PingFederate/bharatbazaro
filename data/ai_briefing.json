@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-27 04:04 IST",
-  "generated_at_epoch": 1795732468,
+  "generated_at_ist": "2026-11-27 06:01 IST",
+  "generated_at_epoch": 1795739510,
   "top_loot_summary": [
     {
       "asin": "B0H8P1NCMN",
@@ -118,14 +118,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": false,
-    "posted_at_epoch": 1795732467,
-    "last_verified_at_epoch": 1795732467,
-    "last_verified_at_ist": "2026-11-27 04:04 IST",
+    "posted_at_epoch": 1795739510,
+    "last_verified_at_epoch": 1795739510,
+    "last_verified_at_ist": "2026-11-27 06:01 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
     "updated_at": "2026-11-26T15:17:45Z",
-    "updated_at_ist": "2026-11-27 04:04 IST"
+    "updated_at_ist": "2026-11-27 06:01 IST"
   },
   "best_under_299": {
     "id": "amazon:B00WUDU4FG",
@@ -177,14 +177,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": false,
-    "posted_at_epoch": 1795732467,
-    "last_verified_at_epoch": 1795732467,
-    "last_verified_at_ist": "2026-11-27 04:04 IST",
+    "posted_at_epoch": 1795739510,
+    "last_verified_at_epoch": 1795739510,
+    "last_verified_at_ist": "2026-11-27 06:01 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
     "updated_at": "2026-11-26T15:17:45Z",
-    "updated_at_ist": "2026-11-27 04:04 IST"
+    "updated_at_ist": "2026-11-27 06:01 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CYQ4M4N5",
@@ -236,14 +236,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": false,
-    "posted_at_epoch": 1795732467,
-    "last_verified_at_epoch": 1795732467,
-    "last_verified_at_ist": "2026-11-27 04:04 IST",
+    "posted_at_epoch": 1795739510,
+    "last_verified_at_epoch": 1795739510,
+    "last_verified_at_ist": "2026-11-27 06:01 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
     "updated_at": "2026-11-26T15:17:45Z",
-    "updated_at_ist": "2026-11-27 04:04 IST"
+    "updated_at_ist": "2026-11-27 06:01 IST"
   },
   "category_highlights": {
     "mobiles": {

@@ -1,6 +1,6 @@
 {
-  "generated_at_ist": "2026-11-28 03:49 IST",
-  "generated_at_epoch": 1795817983,
+  "generated_at_ist": "2026-11-28 07:24 IST",
+  "generated_at_epoch": 1795830891,
   "top_loot_summary": [
     {
       "asin": "B0H8P1NCMN",
@@ -119,14 +119,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": false,
-    "posted_at_epoch": 1795817982,
-    "last_verified_at_epoch": 1795817982,
-    "last_verified_at_ist": "2026-11-28 03:49 IST",
+    "posted_at_epoch": 1795830890,
+    "last_verified_at_epoch": 1795830890,
+    "last_verified_at_ist": "2026-11-28 07:24 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
     "updated_at": "2026-11-27T15:15:57Z",
-    "updated_at_ist": "2026-11-28 03:49 IST"
+    "updated_at_ist": "2026-11-28 07:24 IST"
   },
   "best_tier1_deal": {
     "id": "amazon:B0CYQ4M4N5",
@@ -178,14 +178,14 @@
     "price_spiked": false,
     "posted_to_telegram": true,
     "video_eligible": true,
-    "posted_at_epoch": 1795817982,
-    "last_verified_at_epoch": 1795817982,
-    "last_verified_at_ist": "2026-11-28 03:49 IST",
+    "posted_at_epoch": 1795830890,
+    "last_verified_at_epoch": 1795830890,
+    "last_verified_at_ist": "2026-11-28 07:24 IST",
     "age_hours": 0.5,
     "is_new": true,
     "is_fresh": true,
     "updated_at": "2026-11-27T15:15:57Z",
-    "updated_at_ist": "2026-11-28 03:49 IST"
+    "updated_at_ist": "2026-11-28 07:24 IST"
   },
   "category_highlights": {
     "mobiles": {
